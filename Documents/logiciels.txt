@@ -1,0 +1,1 @@
+Pour visionner une table SQLite : http://sqlitebrowser.org/
