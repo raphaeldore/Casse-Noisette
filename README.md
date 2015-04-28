@@ -1,4 +1,4 @@
-![Casse-Noisette Banner](http://i.imgur.com/Dq3vOPD.png)
+![Casse-Noisette Banner](https://github.com/440-H15/EQ16-TP3/blob/master/Documents/banner.png)
 
 # Casse-Noisette
 
@@ -38,9 +38,9 @@ Fonctions de hachage (MD5, SHA-256, SHA-512, ...)
 
 TODO : Description Crypto
 
-### PasswordCracking
+### CrackingEngine
 
-TODO : Description PasswordCracking
+TODO : Description CrackingEngine
 
 ### UnitTests + IntegrationTests
 
