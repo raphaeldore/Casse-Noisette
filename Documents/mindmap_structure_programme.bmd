@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<document type="BLUMIND" editor_version="3.2.902.24361" document_version="3.0.0.0">
+  <!--Create by Blumind, you can download it free from http://www.blumind.org-->
+  <information>
+    <author>Raphael</author>
+    <company>
+    </company>
+    <version>3.0</version>
+    <description>
+    </description>
+  </information>
+  <attributes>
+    <item name="editor_show_sidebar">True</item>
+  </attributes>
+  <charts active_chart="0">
+    <chart name="TP3 Structure" type="MindMap">
+      <remark>
+      </remark>
+      <layout>MIND_MAP</layout>
+      <style>
+        <back_color>Window</back_color>
+        <fore_color>WindowText</fore_color>
+        <line_color>ControlDarkDark</line_color>
+        <border_color>ControlDark</border_color>
+        <node_back_color>Control</node_back_color>
+        <node_fore_color>ControlText</node_fore_color>
+        <select_color>Highlight</select_color>
+        <hover_color>HotTrack</hover_color>
+        <link_line_color>ActiveCaption</link_line_color>
+        <widget_margin>1</widget_margin>
+        <picture_thumb_size>100, 100</picture_thumb_size>
+      </style>
+      <nodes>
+        <node id="1" text="TP3" x="1082" y="374" width="49" height="42" text_b="12, 12, 25, 18">
+          <style>
+            <back_color>ActiveCaption</back_color>
+            <fore_color>ActiveCaptionText</fore_color>
+            <border_color>GradientActiveCaption</border_color>
+            <padding>12</padding>
+          </style>
+          <nodes>
+            <node id="6" text="CrackEngine" x="926" y="297" width="76" height="18" text_b="2, 2, 72, 14" fold_btn_b="912, 300, 13, 13">
+              <style>
+                <font font_family="Microsoft Sans Serif" size="8,25" style="Bold" />
+              </style>
+              <nodes>
+                <node id="18" text="CrackEngineFactory" x="731" y="183" width="115" height="22" text_b="2, 2, 111, 18" fold_btn_b="717, 188, 13, 13">
+                  <nodes>
+                    <node id="19" text="Enum: CrackEngineType" x="512" y="183" width="139" height="22" text_b="2, 2, 135, 18" fold_btn_b="498, 188, 13, 13">
+                      <nodes>
+                        <node id="20" text="Brute" x="394" y="151" width="38" height="22" text_b="2, 2, 34, 18" />
+                        <node id="21" text="Dictionary" x="368" y="183" width="64" height="22" text_b="2, 2, 60, 18" />
+                        <node id="22" text="Rainbow" x="376" y="215" width="56" height="22" text_b="2, 2, 52, 18" />
+                      </nodes>
+                      <lines>
+                        <line target="20" begin_side="Left" end_side="Right" begin_rect="499, 183, 152, 22" end_rect="394, 151, 38, 22" />
+                        <line target="21" begin_side="Left" end_side="Right" begin_rect="499, 183, 152, 22" end_rect="368, 183, 64, 22" />
+                        <line target="22" begin_side="Left" end_side="Right" begin_rect="499, 183, 152, 22" end_rect="376, 215, 56, 22" />
+                      </lines>
+                    </node>
+                  </nodes>
+                  <lines>
+                    <line target="19" begin_side="Left" end_side="Right" begin_rect="718, 183, 128, 22" end_rect="512, 183, 139, 22" />
+                  </lines>
+                </node>
+                <node id="14" text="ICrackEngine" x="767" y="343" width="79" height="22" text_b="2, 2, 75, 18" fold_btn_b="753, 348, 13, 13">
+                  <links>
+                    <link x="0" y="0" width="2" height="566" target="36" cp1_length="35" cp1_angle="86" cp2_length="198" cp2_angle="185" line_style="Dot" start_cap="None" end_cap="Arrow" text="" hyperlink="" />
+                    <link x="0" y="0" width="2" height="518" target="37" cp1_length="35" cp1_angle="89" cp2_length="35" cp2_angle="269" line_style="Dot" start_cap="None" end_cap="Arrow" text="" hyperlink="" />
+                  </links>
+                  <nodes>
+                    <node id="17" text="Brute Force" x="616" y="311" width="71" height="22" text_b="2, 2, 67, 18" fold_btn_b="602, 316, 13, 13">
+                      <nodes>
+                        <node id="24" text="Enum: Charset" x="449" y="311" width="87" height="22" text_b="2, 2, 83, 18" fold_btn_b="435, 316, 13, 13">
+                          <nodes>
+                            <node id="25" text="space" x="330" y="247" width="39" height="22" text_b="2, 2, 35, 18" fold_btn_b="316, 252, 13, 13">
+                              <nodes>
+                                <node id="26" text=" " x="230" y="247" width="20" height="22" text_b="2, 2, 16, 18" />
+                              </nodes>
+                              <lines>
+                                <line target="26" begin_side="Left" end_side="Right" begin_rect="317, 247, 52, 22" end_rect="230, 247, 20, 22" />
+                              </lines>
+                            </node>
+                            <node id="27" text="numeric" x="316" y="279" width="53" height="22" text_b="2, 2, 49, 18" fold_btn_b="302, 284, 13, 13">
+                              <nodes>
+                                <node id="28" text="1,2,3,4,5,6,7,8,9" x="146" y="279" width="90" height="22" text_b="2, 2, 86, 18" />
+                              </nodes>
+                              <lines>
+                                <line target="28" begin_side="Left" end_side="Right" begin_rect="303, 279, 66, 22" end_rect="146, 279, 90, 22" />
+                              </lines>
+                            </node>
+                            <node id="29" text="special" x="324" y="311" width="45" height="22" text_b="2, 2, 41, 18" fold_btn_b="310, 316, 13, 13">
+                              <nodes>
+                                <node id="30" text="!@#$%^&amp;*()-_+=" x="138" y="311" width="106" height="22" text_b="2, 2, 102, 18" />
+                              </nodes>
+                              <lines>
+                                <line target="30" begin_side="Left" end_side="Right" begin_rect="311, 311, 58, 22" end_rect="138, 311, 106, 22" />
+                              </lines>
+                            </node>
+                            <node id="31" text="loweralpha" x="301" y="343" width="68" height="22" text_b="2, 2, 64, 18" fold_btn_b="287, 348, 13, 13">
+                              <nodes>
+                                <node id="32" text="abcdefghijklmnopqrstuvwxyz" x="54" y="343" width="167" height="22" text_b="2, 2, 163, 18" />
+                              </nodes>
+                              <lines>
+                                <line target="32" begin_side="Left" end_side="Right" begin_rect="288, 343, 81, 22" end_rect="54, 343, 167, 22" />
+                              </lines>
+                            </node>
+                            <node id="33" text="upperalpha" x="298" y="375" width="71" height="22" text_b="2, 2, 67, 18" fold_btn_b="284, 380, 13, 13">
+                              <nodes>
+                                <node id="34" text="ABCDEFGHIJKLMNOPQRSTUWXYZ" x="20" y="375" width="198" height="22" text_b="2, 2, 194, 18" />
+                              </nodes>
+                              <lines>
+                                <line target="34" begin_side="Left" end_side="Right" begin_rect="285, 375, 84, 22" end_rect="20, 375, 198, 22" />
+                              </lines>
+                            </node>
+                          </nodes>
+                          <lines>
+                            <line target="25" begin_side="Left" end_side="Right" begin_rect="436, 311, 100, 22" end_rect="330, 247, 39, 22" />
+                            <line target="27" begin_side="Left" end_side="Right" begin_rect="436, 311, 100, 22" end_rect="316, 279, 53, 22" />
+                            <line target="29" begin_side="Left" end_side="Right" begin_rect="436, 311, 100, 22" end_rect="324, 311, 45, 22" />
+                            <line target="31" begin_side="Left" end_side="Right" begin_rect="436, 311, 100, 22" end_rect="301, 343, 68, 22" />
+                            <line target="33" begin_side="Left" end_side="Right" begin_rect="436, 311, 100, 22" end_rect="298, 375, 71, 22" />
+                          </lines>
+                        </node>
+                      </nodes>
+                      <lines>
+                        <line target="24" begin_side="Left" end_side="Right" begin_rect="603, 311, 84, 22" end_rect="449, 311, 87, 22" />
+                      </lines>
+                    </node>
+                    <node id="16" text="Dictionary" x="623" y="407" width="64" height="22" text_b="2, 2, 60, 18">
+                      <links>
+                        <link x="0" y="0" width="2" height="634" target="39" cp1_length="212" cp1_angle="172" cp2_length="139" cp2_angle="180" line_style="Dot" start_cap="None" end_cap="Arrow" text="" hyperlink="" />
+                      </links>
+                    </node>
+                    <node id="15" text="Rainbow" x="631" y="439" width="56" height="22" text_b="2, 2, 52, 18">
+                      <links>
+                        <link x="0" y="0" width="2" height="599" target="38" cp1_length="105" cp1_angle="148" cp2_length="68" cp2_angle="182" line_style="Dot" start_cap="None" end_cap="Arrow" text="" hyperlink="" />
+                      </links>
+                    </node>
+                  </nodes>
+                  <lines>
+                    <line target="17" begin_side="Left" end_side="Right" begin_rect="754, 343, 92, 22" end_rect="616, 311, 71, 22" />
+                    <line target="16" begin_side="Left" end_side="Right" begin_rect="754, 343, 92, 22" end_rect="623, 407, 64, 22" />
+                    <line target="15" begin_side="Left" end_side="Right" begin_rect="754, 343, 92, 22" end_rect="631, 439, 56, 22" />
+                  </lines>
+                </node>
+              </nodes>
+              <lines>
+                <line target="18" begin_side="Left" end_side="Right" begin_rect="913, 297, 89, 18" end_rect="731, 183, 115, 22" />
+                <line target="14" begin_side="Left" end_side="Right" begin_rect="913, 297, 89, 18" end_rect="767, 343, 79, 22" />
+              </lines>
+            </node>
+            <node id="35" text="DataLayer" x="939" y="569" width="63" height="22" text_b="2, 2, 59, 18" fold_btn_b="925, 574, 13, 13">
+              <nodes>
+                <node id="37" text="loadPasswordFile" x="757" y="521" width="102" height="22" text_b="2, 2, 98, 18" />
+                <node id="36" text="saveResultFile" x="775" y="553" width="84" height="22" text_b="2, 2, 80, 18" />
+                <node id="38" text="loadSqliteRainbowTable" x="720" y="585" width="139" height="22" text_b="2, 2, 135, 18" />
+                <node id="39" text="loadDictionary" x="771" y="617" width="88" height="22" text_b="2, 2, 84, 18" />
+              </nodes>
+              <lines>
+                <line target="37" begin_side="Left" end_side="Right" begin_rect="926, 569, 76, 22" end_rect="757, 521, 102, 22" />
+                <line target="36" begin_side="Left" end_side="Right" begin_rect="926, 569, 76, 22" end_rect="775, 553, 84, 22" />
+                <line target="38" begin_side="Left" end_side="Right" begin_rect="926, 569, 76, 22" end_rect="720, 585, 139, 22" />
+                <line target="39" begin_side="Left" end_side="Right" begin_rect="926, 569, 76, 22" end_rect="771, 617, 88, 22" />
+              </lines>
+            </node>
+            <node id="3" text="CasseNoisette" x="1211" y="264" width="85" height="18" text_b="2, 2, 81, 14" fold_btn_b="1297, 267, 13, 13">
+              <style>
+                <font font_family="Microsoft Sans Serif" size="8,25" style="Bold" />
+              </style>
+              <nodes>
+                <node id="12" text="Interface Graphique" x="1376" y="246" width="116" height="22" text_b="2, 2, 112, 18" />
+                <node id="4" text="Entrées et sorties de l'utilisateur" x="1376" y="278" width="181" height="22" text_b="2, 2, 177, 18">
+                  <links>
+                    <link text="Instanciation d'un ICrackEngine à l'aide de&#xD;&#xA; la CrackEngineFactory (On passe dans une map la&#xD;&#xA; liste des options que l'utilisateur a choisi). " x="0" y="0" width="2" height="295" target="6" cp1_length="211" cp1_angle="338" cp2_length="208" cp2_angle="282" line_style="Dot" start_cap="None" end_cap="Arrow" hyperlink="" />
+                  </links>
+                </node>
+              </nodes>
+              <lines>
+                <line target="12" begin_side="Right" end_side="Left" begin_rect="1211, 264, 98, 18" end_rect="1376, 246, 116, 22" />
+                <line target="4" begin_side="Right" end_side="Left" begin_rect="1211, 264, 98, 18" end_rect="1376, 278, 181, 22" />
+              </lines>
+            </node>
+            <node id="2" text="Crypto" x="1211" y="444" width="43" height="18" text_b="2, 2, 39, 14" fold_btn_b="1255, 447, 13, 13">
+              <style>
+                <font font_family="Microsoft Sans Serif" size="8,25" style="Bold" />
+              </style>
+              <nodes>
+                <node id="13" text="HashFactory" x="1334" y="362" width="76" height="22" text_b="2, 2, 72, 18" />
+                <node id="5" text="IHash" x="1334" y="458" width="39" height="22" text_b="2, 2, 35, 18" fold_btn_b="1374, 463, 13, 13">
+                  <nodes>
+                    <node id="7" text="..." x="1453" y="394" width="20" height="22" text_b="2, 2, 16, 18" />
+                    <node id="8" text="SHA-512" x="1453" y="426" width="57" height="22" text_b="2, 2, 53, 18" />
+                    <node id="9" text="SHA-256" x="1453" y="458" width="57" height="22" text_b="2, 2, 53, 18" />
+                    <node id="10" text="SHA-1" x="1453" y="490" width="43" height="22" text_b="2, 2, 39, 18" />
+                    <node id="11" text="MD5" x="1453" y="522" width="35" height="22" text_b="2, 2, 31, 18" />
+                  </nodes>
+                  <lines>
+                    <line target="7" begin_side="Right" end_side="Left" begin_rect="1334, 458, 52, 22" end_rect="1453, 394, 20, 22" />
+                    <line target="8" begin_side="Right" end_side="Left" begin_rect="1334, 458, 52, 22" end_rect="1453, 426, 57, 22" />
+                    <line target="9" begin_side="Right" end_side="Left" begin_rect="1334, 458, 52, 22" end_rect="1453, 458, 57, 22" />
+                    <line target="10" begin_side="Right" end_side="Left" begin_rect="1334, 458, 52, 22" end_rect="1453, 490, 43, 22" />
+                    <line target="11" begin_side="Right" end_side="Left" begin_rect="1334, 458, 52, 22" end_rect="1453, 522, 35, 22" />
+                  </lines>
+                </node>
+              </nodes>
+              <lines>
+                <line target="13" begin_side="Right" end_side="Left" begin_rect="1211, 444, 56, 18" end_rect="1334, 362, 76, 22" />
+                <line target="5" begin_side="Right" end_side="Left" begin_rect="1211, 444, 56, 18" end_rect="1334, 458, 39, 22" />
+              </lines>
+            </node>
+          </nodes>
+          <lines>
+            <line target="6" begin_side="Left" end_side="Right" begin_rect="1082, 374, 49, 42" end_rect="926, 297, 76, 18" />
+            <line target="35" begin_side="Left" end_side="Right" begin_rect="1082, 374, 49, 42" end_rect="939, 569, 63, 22" />
+            <line target="3" begin_side="Right" end_side="Left" begin_rect="1082, 374, 49, 42" end_rect="1211, 264, 85, 18" />
+            <line target="2" begin_side="Right" end_side="Left" begin_rect="1082, 374, 49, 42" end_rect="1211, 444, 43, 18" />
+          </lines>
+        </node>
+      </nodes>
+    </chart>
+  </charts>
+</document>
