@@ -3,7 +3,7 @@
 
 using namespace CustomCrypto;
 
-map<string, unique_ptr<IHash>> HashFactory::hashFunctions_map;
+map<string, unique_ptr<IHash>> HashFactory::hashAlgorithms_map;
 
 HashFactory::HashFactory()
 {
@@ -26,16 +26,16 @@ HashFactory * HashFactory::GetHashFactory()
 
 void HashFactory::Register(const string _hashName, unique_ptr<IHash> _hashFunction)
 {
-	if (hashFunctions_map.find(_hashName) == hashFunctions_map.end())
+	if (hashAlgorithms_map.find(_hashName) == hashAlgorithms_map.end())
 	{
-		hashFunctions_map[_hashName] = move(_hashFunction);
+		hashAlgorithms_map[_hashName] = move(_hashFunction);
 	}
 }
 
 IHash * HashFactory::CreateHashAlgorithm(const string& _hashName) const
 {
-	if (hashFunctions_map.find(_hashName) == hashFunctions_map.end())
+	if (hashAlgorithms_map.find(_hashName) == hashAlgorithms_map.end())
 		throw invalid_argument(string(__FUNCTION__) + ": unknown hash algorithm");
 
-	return hashFunctions_map.at(_hashName).get();
+	return hashAlgorithms_map.at(_hashName).get();
 }

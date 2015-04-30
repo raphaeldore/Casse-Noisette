@@ -14,11 +14,10 @@ namespace CustomCrypto
 		virtual ~HashFactory();
 
 		static HashFactory * GetHashFactory();
-
 		static void Register(const string _hashName, unique_ptr<IHash> _hashFunction);
 		IHash * CreateHashAlgorithm(const string & _hashName) const;
 
 	private:
-		static map<string, unique_ptr<IHash>> hashFunctions_map;
+		static map<string, unique_ptr<IHash>> hashAlgorithms_map;
 	};
 }
