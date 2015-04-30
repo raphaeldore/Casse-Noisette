@@ -300,9 +300,9 @@ MD5::uint4 MD5::Rotate_left(uint4 x, uint4 n)
 {
 	// Les n derniers bits sont mis à l'avant
 	// ex: Si x = 00001101
-	//     rotate_left(x, 3) donnerait: 10100001;
+	//     Rotate_left(x, 3) donnerait: 10100001;
 
-	return (x << n) | (n >> (INT_BITS - n));
+	return (x << n) | (x >> (INT_BITS - n));
 }
 
 MD5::uint4 MD5::F(uint4 x, uint4 y, uint4 z)
