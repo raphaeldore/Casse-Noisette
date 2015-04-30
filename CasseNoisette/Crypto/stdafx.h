@@ -11,7 +11,10 @@
 
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme
 #include <string>
-#include "HashFactory.h"
+#include <map>
+#include <memory>
+
+// #include "HashFactory.h"
 #include "IHash.h"
 #include "MD5.h"
 #include "SHA1.h"

@@ -18,6 +18,11 @@ namespace CustomCrypto
 		IHash * CreateHashAlgorithm(const string & _hashName) const;
 
 	private:
+		// On veut empêcher les copies.
+		HashFactory(const HashFactory &) { }
+		// On renvoit toujours une référence vers l'instance originale
+		HashFactory &operator=(const HashFactory &) { return *this; }
+
 		static map<string, unique_ptr<IHash>> hashAlgorithms_map;
 	};
 }
