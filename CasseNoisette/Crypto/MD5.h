@@ -12,10 +12,6 @@ RFC 1321 (https://www.ietf.org/rfc/rfc1321.txt)
 
 namespace CustomCrypto
 {
-	// Utilisation:
-	//    1)
-	//    2)
-	//    3)
 	class MD5 : public IHash
 	{
 	public:

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "MD5.h"
-#include <sstream>
+//#include <sstream>
 
 // Nombre de bits dans un int
 #define INT_BITS 32
@@ -35,7 +35,7 @@ namespace
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 	};
 
-	ostringstream ostringstreamBuffer;
+	//ostringstream ostringstreamBuffer;
 };
 
 MD5::MD5()
@@ -68,7 +68,7 @@ void MD5::MD5Init()
 	state[3] = 0x10325476;
 
 	count[0] = 0;
-	count[0] = 0;
+	count[1] = 0;
 }
 
 void MD5::MD5Update(const unsigned char* _input, unsigned int _length)
@@ -88,7 +88,7 @@ void MD5::MD5Update(const unsigned char* _input, unsigned int _length)
 	count[1] += (_length >> 29);
 
 	// Nombre d'octets qu'on doit mettre dans le tampon
-	unsigned int partLength  = BLOCKSIZE - index;
+	unsigned int partLength = BLOCKSIZE - index;
 
 	unsigned int i;
 
@@ -106,7 +106,8 @@ void MD5::MD5Update(const unsigned char* _input, unsigned int _length)
 		}
 
 		index = 0;
-	} else
+	}
+	else
 	{
 		i = 0;
 	}
@@ -138,7 +139,6 @@ void MD5::MD5Finalization()
 	// On reset les arrays (on les vide)
 	memset(buffer, 0, sizeof buffer);
 	memset(count, 0, sizeof count);
-
 }
 
 string MD5::MD5HexDigest() const
@@ -146,23 +146,16 @@ string MD5::MD5HexDigest() const
 	// Tableau qui va contenir les caractères du hash
 	char charBuffer[33];
 
-	string stringToReturn;
-
 	// On convertit les charactères en hexadecimal 
-	for (unsigned int i = 0; i<16; i++)
+	for (unsigned int i = 0; i < 16; i++)
 	{
-
-	#pragma warning(push)
-	#pragma warning(disable: 4996) //4996 for _CRT_SECURE_NO_WARNINGS equivalent
+		// Pas le choix vraiment de mettre ça. Sinon Visual Studio ne me laisse
+		// pas utiliser sprintf. Et sprintf c'est la manière la plus rapide
+		// de convertir des char en hex.
+#pragma warning(push)
+#pragma warning(disable: 4996) // Équivalent à _CRT_SECURE_NO_WARNINGS
 		sprintf(charBuffer + i * 2, "%02x", digest[i]);
-	#pragma warning(pop)
-
-		//sprintf(charBuffer + i * 2, "%02x", digest[i]);
-		//sprintf_s(charBuffer + i * 2, )
-		//sprintf_s(charBuffer + i * 2, sizeof charBuffer, "%02x", digest[i]);
-
-		// char dest, format
-		//sprintf(charBuffer, "0", )
+#pragma warning(pop)
 	}
 
 	charBuffer[32] = 0;
@@ -258,9 +251,9 @@ void MD5::Decode(uint4 output[], const uint1 _input[], unsigned int _len)
 {
 	unsigned int i, j;
 
-	for (i = 0, j = 0; j < _len; i++, j += 4)
+	for (i = 0 , j = 0; j < _len; i++ , j += 4)
 		output[i] = uint4(_input[j]) | (uint4(_input[j + 1]) << 8) |
-		(uint4(_input[j + 2]) << 16) | (uint4(_input[j + 3]) << 24);
+			(uint4(_input[j + 2]) << 16) | (uint4(_input[j + 3]) << 24);
 }
 
 void MD5::Encode(uint1 _output[], const uint4 _input[], unsigned int _len)
@@ -293,8 +286,8 @@ void MD5::Encode(uint1 _output[], const uint4 _input[], unsigned int _len)
 	*/
 
 	unsigned i, j;
-	
-	for (i = 0, j = 0; j < _len; i++, j += 4)
+
+	for (i = 0 , j = 0; j < _len; i++ , j += 4)
 	{
 		_output[j] = _input[i] & 0xff;
 		_output[j + 1] = (_input[i] >> 8) & 0xff;
