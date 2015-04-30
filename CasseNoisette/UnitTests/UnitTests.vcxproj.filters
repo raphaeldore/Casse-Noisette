@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers sources\HashFactoryTests">
+      <UniqueIdentifier>{97382536-292e-4702-ace9-6336f3719a1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Fake">
+      <UniqueIdentifier>{bb28c4ac-5bfd-4fa3-bd5f-91c0d76f68f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -21,13 +27,19 @@
     <ClInclude Include="targetver.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="FakeHash.h">
+      <Filter>Fichiers sources\Fake</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="unittest1.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="HashFactoryTests.cpp">
+      <Filter>Fichiers sources\HashFactoryTests</Filter>
+    </ClCompile>
+    <ClCompile Include="FakeHash.cpp">
+      <Filter>Fichiers sources\Fake</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
