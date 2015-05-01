@@ -1,7 +1,7 @@
 /* MD5 : un algorithme de chiffrement par bloc
 
 Basé sur l'implémentation de référence
-RFC 1321 (https://www.ietf.org/rfc/rfc1321.txt)
+RFC 1321 (https://tools.ietf.org/html/rfc1321)
 
 @author Raphaël Doré
 */
@@ -26,6 +26,8 @@ namespace CustomCrypto
 		/* UINT4 définit un mot (word) de 4 octets (32 bits) */
 		typedef unsigned int uint4; 
 
+		// Appellé avant MD5Transform.
+		// Pour générer/réinitialiser un digest (qui va contenir le résultat du hachage).
 		void MD5Init();
 
 		/* ... */
@@ -34,8 +36,12 @@ namespace CustomCrypto
 		/* */
 		void MD5Finalization();
 
+		// Retourne la hash MD5 sous forme de string hexadecimale
 		string MD5HexDigest() const;
 
+		// C'est la viande de l'algorithme MD5.
+		// Applique l'algorithme MD5 sur un bloque
+		// de 16 octets (64 bits).
 		void MD5Tansform(const uint1 block[BLOCKSIZE]);
 
 		// Décodage de l'entrée (unsigned char) vers l'output (uint4).
@@ -56,7 +62,7 @@ namespace CustomCrypto
 		static uint4 I(uint4 x, uint4 y, uint4 z);
 
 		// FF, GG, HH, II: transformations pour les rondes 1, 2, 3 et 4. 
-		// Ce sont les 4 fonctions de base que l'algorithme utilise
+		// Ce sont les 4 fonctions de base que l'algorithme utilise.
 		static void FF(uint4 & a, uint4 b, uint4 c, uint4 d, uint4 x, uint4 s, uint4 ac);
 		static void GG(uint4 & a, uint4 b, uint4 c, uint4 d, uint4 x, uint4 s, uint4 ac);
 		static void HH(uint4 & a, uint4 b, uint4 c, uint4 d, uint4 x, uint4 s, uint4 ac);
@@ -64,7 +70,10 @@ namespace CustomCrypto
 
 		uint4 count[2];
 		uint4 state[4];
-		uint1 buffer[BLOCKSIZE]; // le tampon d'entré
+		uint1 buffer[BLOCKSIZE]; // le tampon d'entré. Va contenir le morceau 
+								 // de 16 octets qu'on est en train de travailler
+								 // dessus à une instance dans le temps.
+
 		uint1 digest[16]; // Le résultat
 	};
 }
