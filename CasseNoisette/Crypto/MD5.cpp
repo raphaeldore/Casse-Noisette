@@ -40,7 +40,7 @@ namespace
 
 MD5::MD5()
 {
-
+	MD5Init();
 }
 
 MD5::~MD5()
@@ -100,7 +100,7 @@ void MD5::MD5Update(const unsigned char* _input, unsigned int _length)
 		MD5Tansform(buffer);
 
 		// On transforme chaque morceaux du block (64 octets)
-		for (i = 0; i + BLOCKSIZE <= _length + 1; i += BLOCKSIZE)
+		for (i = partLength; i + BLOCKSIZE <= _length; i += BLOCKSIZE)
 		{
 			MD5Tansform(&_input[i]);
 		}
