@@ -73,8 +73,8 @@ void MD5::MD5Init()
 
 void MD5::MD5Update(const unsigned char* _input, unsigned int _length)
 {
-	// Pour chaque morceau de 512 octets..
-	// ... Pour chaque morceau, séparer en morceaux de 32 octets.
+	// Découpage de _input en blocs de 512 bits.
+	// ... chaque bloc est ensuite divisé en 16 mots de 32 bits (avec MD5Transform).
 
 	// Calcul du nombre d'octets modulo 64
 	unsigned int index = count[0] / 8 % BLOCKSIZE;
