@@ -17,7 +17,7 @@ namespace CustomCrypto
 	public:
 		MD5();
 		~MD5() override;
-		string hash(const string _stringToHash) override;
+		string hash(const string & _stringToHash) override;
 
 	private:
 		/* UINT1 définit un mot (word) d'un octet (8 bits) */

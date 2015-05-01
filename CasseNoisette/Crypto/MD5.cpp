@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "MD5.h"
-//#include <sstream>
 
 // Nombre de bits dans un int
 #define INT_BITS 32
@@ -35,7 +34,6 @@ namespace
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 	};
 
-	//ostringstream ostringstreamBuffer;
 };
 
 MD5::MD5()
@@ -47,7 +45,7 @@ MD5::~MD5()
 {
 }
 
-string MD5::hash(const string _stringToHash)
+string MD5::hash(const string & _stringToHash)
 {
 	MD5Init();
 	MD5Update(reinterpret_cast<const unsigned char *>(_stringToHash.c_str()), _stringToHash.length());
