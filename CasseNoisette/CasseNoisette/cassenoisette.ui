@@ -24,7 +24,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QLineEdit" name="pwdFileSelectTxt"/>
+          <widget class="QLineEdit" name="p"/>
          </item>
          <item>
           <widget class="QPushButton" name="pwdFileSelectBtn">
@@ -419,13 +419,16 @@
       </widget>
      </widget>
     </item>
-    <item>
-     <widget class="QDialogButtonBox" name="buttonBox">
-      <property name="standardButtons">
-       <set>QDialogButtonBox::Ok</set>
+    <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+     <widget class="QPushButton" name="startCrackBtn">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
-      <property name="centerButtons">
-       <bool>true</bool>
+      <property name="text">
+       <string>Démarrer le cassage</string>
       </property>
      </widget>
     </item>
