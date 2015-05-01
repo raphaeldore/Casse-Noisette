@@ -10,6 +10,6 @@ namespace CustomCrypto
 	public :
 		virtual ~IHash();
 
-		virtual string hash(const string _stringToHash);
+		virtual string hash(const string & _stringToHash) = 0;
 	};
 }

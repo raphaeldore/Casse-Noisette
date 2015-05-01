@@ -6,6 +6,6 @@ namespace CustomCrypto
 	{
 	public:
 		~FakeHash() override;
-		string hash(const string _stringToHash) override;
+		string hash(const string & _stringToHash) override;
 	};
 }

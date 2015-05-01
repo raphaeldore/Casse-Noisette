@@ -7,6 +7,6 @@ namespace CustomCrypto
 	{
 	public:
 		~SHA256() override;
-		string hash(const string _stringToHash) override;
+		string hash(const string & _stringToHash) override;
 	};
 }

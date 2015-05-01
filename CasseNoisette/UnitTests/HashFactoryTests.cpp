@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "CppUnitTest.h"
 
 #pragma warning(push)
 #pragma warning(disable: 4800)
@@ -35,6 +34,20 @@ namespace UnitTests
 
 			// Assert
 			Assert::IsTrue(dynamic_cast<MD5 *>(hashAlgorithm));
+		}
+
+		TEST_METHOD(should_be_able_to_compute_md5_hash_with_created_instance)
+		{
+			// Arrange
+			string PLAINTEXT_TO_HASH("message digest");
+			string EXPECTED_MD5_HASH("f96b697d7cb7938d525a2f31aaf161d0");
+
+			// Action
+			IHash * hashAlgorithm = hashFactory->CreateHashAlgorithm("MD5");
+			string actual_hash = hashAlgorithm->hash(PLAINTEXT_TO_HASH);
+
+			// Assert
+			Assert::AreEqual(EXPECTED_MD5_HASH, actual_hash);
 		}
 
 		TEST_METHOD(CreateHashAlgorithm_with_SHA1_parameter_should_return_an_instance_of_the_md5_class)

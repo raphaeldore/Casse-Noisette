@@ -19,6 +19,9 @@
     <Filter Include="Fichiers sources\Fake">
       <UniqueIdentifier>{bb28c4ac-5bfd-4fa3-bd5f-91c0d76f68f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\HashTests">
+      <UniqueIdentifier>{eccc5354-d939-44db-b9db-ba4bf8f42aef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -40,6 +43,9 @@
     </ClCompile>
     <ClCompile Include="FakeHash.cpp">
       <Filter>Fichiers sources\Fake</Filter>
+    </ClCompile>
+    <ClCompile Include="MD5Tests.cpp">
+      <Filter>Fichiers sources\HashTests</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
