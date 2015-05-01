@@ -1,4 +1,5 @@
 #include "cassenoisette.h"
+#include <iostream>
 
 CasseNoisette::CasseNoisette(QWidget *parent)
 	: QMainWindow(parent)
@@ -9,4 +10,10 @@ CasseNoisette::CasseNoisette(QWidget *parent)
 CasseNoisette::~CasseNoisette()
 {
 
+}
+
+void CasseNoisette::on_pwdFileSelectBtn_clicked()
+{
+	QString fileName = QFileDialog::getOpenFileName(this, "", "/", "*.txt");
+	ui.pwdFileSelectTxt->setText(fileName);
 }
