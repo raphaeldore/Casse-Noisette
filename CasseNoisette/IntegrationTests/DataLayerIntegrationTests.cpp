@@ -5,7 +5,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace IntegrationTests
 {		
-	TEST_CLASS(UnitTest1)
+	TEST_CLASS(DataLayer)
 	{
 	public:
 		
