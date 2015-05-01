@@ -3,7 +3,7 @@
 
 namespace CrackEngine
 {
-	class ICrackEngine
+	class CrackFactory
 	{
 	public:
 	private:
