@@ -9,6 +9,7 @@ namespace CrackEngine
 	class CrackFactory
 	{
 	public:
+		static CrackFactory * GetCrackFactory();
 		std::unique_ptr<ICrackEngine> CreateCrackEngine();
 	private:
 	};
