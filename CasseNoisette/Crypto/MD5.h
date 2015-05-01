@@ -31,7 +31,7 @@ namespace CustomCrypto
 		void MD5Init();
 
 		/* ... */
-		void MD5Update(const unsigned char * _input, unsigned int _length);
+		void MD5Update(const unsigned char * _input, const unsigned int _length);
 
 		/* */
 		void MD5Finalization();
@@ -46,27 +46,27 @@ namespace CustomCrypto
 
 		// Décodage de l'entrée (unsigned char) vers l'output (uint4).
 		// On assume ici que 'len' est un multiple de 4
-		static void Decode(uint4 _output[], const uint1 _input[], unsigned int _len);
+		static void Decode(uint4 _output[], const uint1 _input[], const unsigned int _len);
 
 		// Encodage de l'entrée (unint4) vers l'output (unsigned char) 
-		static void Encode(uint1 _output[], const uint4 _input[], unsigned int _len);
+		static void Encode(uint1 _output[], const uint4 _input[], const unsigned int _len);
 
 		// Rotation de x de n bits
-		static uint4 Rotate_left(uint4 x, uint4 n);
+		static uint4 Rotate_left(const uint4 x, const uint4 n);
 
 		// F, G, H, I sont les 4 fonctions de base
 		// utilisées lors des transformations.
-		static uint4 F(uint4 x, uint4 y, uint4 z);
-		static uint4 G(uint4 x, uint4 y, uint4 z);
-		static uint4 H(uint4 x, uint4 y, uint4 z);
-		static uint4 I(uint4 x, uint4 y, uint4 z);
+		static uint4 F(const uint4 x, const uint4 y, const uint4 z);
+		static uint4 G(const uint4 x, const uint4 y, const uint4 z);
+		static uint4 H(const uint4 x, const uint4 y, const uint4 z);
+		static uint4 I(const uint4 x, const uint4 y, const uint4 z);
 
 		// FF, GG, HH, II: transformations pour les rondes 1, 2, 3 et 4. 
 		// Ce sont les 4 fonctions de base que l'algorithme utilise.
-		static void FF(uint4 & a, uint4 b, uint4 c, uint4 d, uint4 x, uint4 s, uint4 ac);
-		static void GG(uint4 & a, uint4 b, uint4 c, uint4 d, uint4 x, uint4 s, uint4 ac);
-		static void HH(uint4 & a, uint4 b, uint4 c, uint4 d, uint4 x, uint4 s, uint4 ac);
-		static void II(uint4 & a, uint4 b, uint4 c, uint4 d, uint4 x, uint4 s, uint4 ac);
+		static void FF(uint4 & a, const uint4 b, const uint4 c, const uint4 d, const uint4 x, const uint4 s, const uint4 ac);
+		static void GG(uint4 & a, const uint4 b, const uint4 c, const uint4 d, const uint4 x, const uint4 s, const uint4 ac);
+		static void HH(uint4 & a, const uint4 b, const uint4 c, const uint4 d, const uint4 x, const uint4 s, const uint4 ac);
+		static void II(uint4 & a, const uint4 b, const uint4 c, const uint4 d, const uint4 x, const uint4 s, const uint4 ac);
 
 		uint4 count[2];
 		uint4 state[4];

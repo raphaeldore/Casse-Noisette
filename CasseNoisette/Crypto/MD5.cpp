@@ -71,7 +71,7 @@ void MD5::MD5Init()
 	count[1] = 0;
 }
 
-void MD5::MD5Update(const unsigned char* _input, unsigned int _length)
+void MD5::MD5Update(const unsigned char* _input, const unsigned int _length)
 {
 	// Découpage de _input en blocs de 512 bits.
 	// ... chaque bloc est ensuite divisé en 16 mots de 32 bits (avec MD5Transform).
@@ -247,7 +247,7 @@ void MD5::MD5Tansform(const uint1 block[BLOCKSIZE])
 	state[3] += d;
 }
 
-void MD5::Decode(uint4 output[], const uint1 _input[], unsigned int _len)
+void MD5::Decode(uint4 output[], const uint1 _input[], const unsigned int _len)
 {
 	unsigned int i, j;
 
@@ -256,7 +256,7 @@ void MD5::Decode(uint4 output[], const uint1 _input[], unsigned int _len)
 			(uint4(_input[j + 2]) << 16) | (uint4(_input[j + 3]) << 24);
 }
 
-void MD5::Encode(uint1 _output[], const uint4 _input[], unsigned int _len)
+void MD5::Encode(uint1 _output[], const uint4 _input[], const unsigned int _len)
 {
 	/*
 	On convertit 1 octet en 4 octets. Pour faire ça on fait "& 0xff". Qu'est-ce
@@ -296,7 +296,7 @@ void MD5::Encode(uint1 _output[], const uint4 _input[], unsigned int _len)
 	}
 }
 
-MD5::uint4 MD5::Rotate_left(uint4 x, uint4 n)
+MD5::uint4 MD5::Rotate_left(const uint4 x, const uint4 n)
 {
 	// Les n derniers bits sont mis à l'avant
 	// ex: Si x = 00001101
@@ -305,48 +305,48 @@ MD5::uint4 MD5::Rotate_left(uint4 x, uint4 n)
 	return (x << n) | (x >> (INT_BITS - n));
 }
 
-MD5::uint4 MD5::F(uint4 x, uint4 y, uint4 z)
+MD5::uint4 MD5::F(const uint4 x, const uint4 y, const uint4 z)
 {
 	return (x & y) | ((~x) & z);
 }
 
-MD5::uint4 MD5::G(uint4 x, uint4 y, uint4 z)
+MD5::uint4 MD5::G(const uint4 x, const uint4 y, const uint4 z)
 {
 	return (x & z) | (y & (~z));
 }
 
-MD5::uint4 MD5::H(uint4 x, uint4 y, uint4 z)
+MD5::uint4 MD5::H(uint4 const x, const uint4 y, const uint4 z)
 {
 	return (x ^ y ^ z);
 }
 
-MD5::uint4 MD5::I(uint4 x, uint4 y, uint4 z)
+MD5::uint4 MD5::I(const uint4 x, const uint4 y, const uint4 z)
 {
 	return (y ^ (x | (~z)));
 }
 
-void MD5::FF(uint4& a, uint4 b, uint4 c, uint4 d, uint4 x, uint4 s, uint4 ac)
+void MD5::FF(uint4& a, const uint4 b, const uint4 c, const uint4 d, const uint4 x, const uint4 s, const uint4 ac)
 {
 	a += F(b, c, d) + x + ac;
 	a = Rotate_left(a, s);
 	a += b;
 }
 
-void MD5::GG(uint4& a, uint4 b, uint4 c, uint4 d, uint4 x, uint4 s, uint4 ac)
+void MD5::GG(uint4& a, const uint4 b, const uint4 c, const uint4 d, const uint4 x, const uint4 s, const uint4 ac)
 {
 	a += G(b, c, d) + x + ac;
 	a = Rotate_left(a, s);
 	a += b;
 }
 
-void MD5::HH(uint4& a, uint4 b, uint4 c, uint4 d, uint4 x, uint4 s, uint4 ac)
+void MD5::HH(uint4& a, const uint4 b, const uint4 c, const uint4 d, const uint4 x, const uint4 s, const uint4 ac)
 {
 	a += H(b, c, d) + x + ac;
 	a = Rotate_left(a, s);
 	a += b;
 }
 
-void MD5::II(uint4& a, uint4 b, uint4 c, uint4 d, uint4 x, uint4 s, uint4 ac)
+void MD5::II(uint4& a, const uint4 b, const uint4 c, const uint4 d, const uint4 x, const uint4 s, const uint4 ac)
 {
 	a += I(b, c, d) + x + ac;
 	a = Rotate_left(a, s);
