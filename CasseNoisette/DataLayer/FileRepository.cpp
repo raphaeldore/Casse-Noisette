@@ -10,6 +10,9 @@ void FileRepository::loadPasswordFile(const string _pwdFilePath)
 	if (!ifile.is_open())
 		throw runtime_error("File doesn't exits");
 
+	if (fileIsEmpty(ifile))
+		throw logic_error("The file is empty");
+
 	while (getline(ifile, line))
 	{
 		hashedPasswords.push_back(line);
@@ -21,4 +24,9 @@ void FileRepository::loadPasswordFile(const string _pwdFilePath)
 vector<string> FileRepository::getAllHashedPasswords()
 {
 	return hashedPasswords;
+}
+
+bool FileRepository::fileIsEmpty(ifstream& _file) const
+{
+	return _file.peek() == std::ifstream::traits_type::eof();
 }

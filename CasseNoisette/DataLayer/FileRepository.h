@@ -13,6 +13,7 @@ namespace DataLayer
 		vector<string> getAllHashedPasswords();
 	private:
 		vector<string> hashedPasswords;
+		bool fileIsEmpty(ifstream & _file) const;
 	};
 
 }

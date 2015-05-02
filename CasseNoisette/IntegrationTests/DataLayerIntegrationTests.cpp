@@ -75,5 +75,21 @@ namespace IntegrationTests
 			Assert::AreEqual(NBR_PASSWORD_IN_FILE, hashedPwdVectorSize);
 		}
 
+		TEST_METHOD(if_file_is_empty_return_an_logic_error)
+		{
+			//Arrange
+			bool exception_thrown = false;
+			//Action
+			try
+			{
+				fileRepository->loadPasswordFile("../TestsFiles/emptyFile.txt");
+			}
+			catch(logic_error){
+				exception_thrown = true;
+			}
+			//Assert
+			Assert::IsTrue(exception_thrown);
+		}
+
 	};
 }
