@@ -1,7 +1,18 @@
 #pragma once
+using namespace std;
 
 namespace CrackEngine
 {
+	/* Les différents groupes de caractères que nous supportons */
+	namespace Charsets
+	{
+		const string loweralpha = "abcdefghijklmnopqrstuvwxyz";
+		const string upperalpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		const string numeric = "0123456789";
+		const string space = " ";
+		const string special = "!@#$%^&*()-_+=";
+	}
+
 	class CharsetBuilder
 	{
 	public:

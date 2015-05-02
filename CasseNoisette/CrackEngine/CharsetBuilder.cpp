@@ -4,19 +4,9 @@
 
 using namespace CrackEngine;
 
-/* Les différents groupes de caractères que nous supportons */
-namespace Charsets
-{
-	const string loweralpha = "abcdefghijklmnopqrstuvwxyz";
-	const string upperalpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	const string numeric = "0123456789";
-	const string space = " ";
-	const string special = "!@#$%^&*()-_+=";
-}
-
 CharsetBuilder::CharsetBuilder()
 {
-	enableLowerAlpha(); // Par défaut
+	loweralpha = false;
 	upperalpha = false;
 	numeric = false;
 	space = false;
@@ -76,7 +66,7 @@ string CharsetBuilder::BuildCharset()
 
 	if (!customCharset.empty()) {
 		generatedCharset.append(customCharset);
-		// Au cas où l'utilisateur ajoute un charactère qui existe deja.
+		// Au cas oÃ¹ l'utilisateur ajoute un charactÃ¨re qui existe deja.
 		removeDuplicateCharacters(generatedCharset);
 	}
 
