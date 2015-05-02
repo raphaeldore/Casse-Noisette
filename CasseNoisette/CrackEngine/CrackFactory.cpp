@@ -17,23 +17,14 @@ CrackFactory* CrackFactory::GetCrackFactory()
 
 unique_ptr<ICrackEngine> CrackFactory::CreateCrackEngine(const CRACK_ENGINE_TYPES & _crackEngineType, const CrackFactoryParams & _params) const
 {
-	unique_ptr<ICrackEngine> crackEngine = make_unique<ICrackEngine>();
+	unique_ptr<ICrackEngine> crackEngine;
 
 	try{
-		// Paramètres obligatoires pour chaque type de CrackEngine
-		//crackEngine->setPwdFilePath(_params.getParameterValue(PWD_FILE_PATH));
-		//crackEngine->setResultsFilePath(_params.getParameterValue(RESULTS_FILE_PATH));
-		//crackEngine->setPwdHashFunction(_params.getParameterValue(HASH_TYPE));
-
-		crackEngine->setPwdFilePath(_params[PWD_FILE_PATH]);
-		crackEngine->setResultsFilePath(_params[RESULTS_FILE_PATH]);
-		crackEngine->setPwdHashFunction(_params[HASH_TYPE]);
-
-		// On ajoute ensuite les paramètres nécessaires chaque type de CrackEngine
+		// On initialise crackEngine au bon type de CrackEngine
 		switch (_crackEngineType)
 		{
 		case BRUTE_FORCE: {
-			return createBruteForce(move(crackEngine), _params);
+			crackEngine = createBruteForce(move(crackEngine), _params);
 		};
 		case DICTIONARY: break;
 		default: break;
@@ -50,24 +41,20 @@ unique_ptr<ICrackEngine> CrackFactory::CreateCrackEngine(const CRACK_ENGINE_TYPE
 		return nullptr; // TODO: TEMP
 	}
 
-	//return make_unique<BruteForce>("abcdef");
+	// On ajoute ensuite les paramètres nécessaires chaque type de CrackEngine
+	crackEngine->setPwdFilePath(_params[PWD_FILE_PATH]);
+	crackEngine->setResultsFilePath(_params[RESULTS_FILE_PATH]);
+	crackEngine->setPwdHashFunction(_params[HASH_TYPE]);
+
+	return crackEngine;
 }
 
-unique_ptr<BruteForce> CrackFactory::createBruteForce(unique_ptr<ICrackEngine> _crackEngine, const CrackFactoryParams & _params) const
+unique_ptr<ICrackEngine> CrackFactory::createBruteForce(unique_ptr<ICrackEngine> _crackEngine, const CrackFactoryParams & _params) const
 {
-	// Avec les unique_ptr, le polymorphisme c'est un peu plus compliqué :P
-	// J'ai trouvé comment faire ici: http://stackoverflow.com/questions/17417848/stdunique-ptr-with-derived-class
+	string charset = _params.getParameterValue(CHARSET);
+	int maxPwdLenght = stoi(_params.getParameterValue(MAX_PWD_LENGTH));
 
-	BruteForce *tmp = dynamic_cast<BruteForce*>(_crackEngine.get());
-	unique_ptr<BruteForce> bruteForceInstance;
-	if (tmp != nullptr)
-	{
-		_crackEngine.release();
-		bruteForceInstance.reset(tmp);
-	}
+	_crackEngine = make_unique<BruteForce>(maxPwdLenght, charset);
 
-	bruteForceInstance->setCrackingCharset(_params.getParameterValue(CHARSET));
-	bruteForceInstance->setMaxPwdLenght(stoi(_params.getParameterValue(MAX_PWD_LENGTH)));
-
-	return move(bruteForceInstance);
+	return move(_crackEngine);
 }
