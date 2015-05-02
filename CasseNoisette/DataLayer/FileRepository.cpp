@@ -11,7 +11,10 @@ void FileRepository::loadPasswordFile(const string _pwdFilePath)
 		throw runtime_error("File doesn't exits");
 
 	if (fileIsEmpty(ifile))
+	{
+		ifile.close();
 		throw logic_error("The file is empty");
+	}
 
 	while (getline(ifile, line))
 	{
