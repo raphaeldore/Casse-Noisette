@@ -24,7 +24,7 @@ void FileRepository::loadPasswordFile(const string _pwdFilePath)
 	ifile.close();
 }
 
-vector<string> FileRepository::getAllHashedPasswords()
+vector<string> FileRepository::getAllHashedPasswords() const
 {
 	return hashedPasswords;
 }

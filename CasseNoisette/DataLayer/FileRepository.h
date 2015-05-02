@@ -10,7 +10,7 @@ namespace DataLayer
 	{
 	public:
 		void loadPasswordFile(const string _pwdFilePath);
-		vector<string> getAllHashedPasswords();
+		vector<string> getAllHashedPasswords() const;
 	private:
 		vector<string> hashedPasswords;
 		bool fileIsEmpty(ifstream & _file) const;
