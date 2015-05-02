@@ -1,16 +1,20 @@
 #pragma once
-#include "stdafx.h"
 
 namespace CrackEngine
 {
 	class BruteForce : public ICrackEngine
 	{
 	public:
-		BruteForce(const std::string & _crackingCharset);
+		BruteForce(const int & _maxPwdLenght);
+		BruteForce(const string & _crackingCharset, const int & _maxPwdLenght);
 		~BruteForce() override;
 		void Crack() override;
+
+		void setMaxPwdLenght(const int & _maxPwdLenght);
+		void setCrackingCharset(const string & _crackingCharset);
 	private:
-		std::string crackingCharset;
+		string crackingCharset;
+		int maxPwdLenght;
 	};
 
 }
