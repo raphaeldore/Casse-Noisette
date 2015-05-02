@@ -22,7 +22,7 @@ void CrackFactoryParams::setParameters(const set<Parameter>& _parameters)
 	parameters = _parameters;
 }
 
-const string & CrackFactoryParams::getParameterValue(const PARAM_TYPE & _paramType) const
+string CrackFactoryParams::getParameterValue(const PARAM_TYPE & _paramType) const
 {
 	for (auto param : parameters)
 	{
@@ -37,7 +37,7 @@ const string & CrackFactoryParams::getParameterValue(const PARAM_TYPE & _paramTy
 	throw runtime_error("Parameter does not exist in the set.");
 }
 
-const string& CrackFactoryParams::operator[](const PARAM_TYPE& _paramType) const
+string CrackFactoryParams::operator[](const PARAM_TYPE& _paramType) const
 {
 	return getParameterValue(_paramType);
 }
