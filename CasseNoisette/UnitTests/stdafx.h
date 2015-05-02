@@ -17,6 +17,7 @@
 
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme
 
+// Crypto
 #include "../Crypto/HashFactory.h"
 #include "../Crypto/IHash.h"
 #include "../Crypto/MD5.h"
@@ -24,5 +25,8 @@
 #include "../Crypto/SHA256.h"
 #include "FakeHash.h"
 
+// CrackEngine
 #include "../CrackEngine/Parameter.h"
 #include "../CrackEngine/CrackFactoryParams.h"
+#include "../CrackEngine/CrackFactory.h"
+#include "../CrackEngine/BruteForce.h"

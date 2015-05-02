@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CrackFactoryParamsTests.cpp" />
+    <ClCompile Include="CrackFactoryTests.cpp" />
     <ClCompile Include="FakeHash.cpp" />
     <ClCompile Include="MD5Tests.cpp" />
     <ClCompile Include="stdafx.cpp">

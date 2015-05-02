@@ -53,5 +53,8 @@
     <ClCompile Include="CrackFactoryParamsTests.cpp">
       <Filter>Fichiers sources\CrackEngineTests</Filter>
     </ClCompile>
+    <ClCompile Include="CrackFactoryTests.cpp">
+      <Filter>Fichiers sources\CrackEngineTests</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
