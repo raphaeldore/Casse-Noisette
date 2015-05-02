@@ -36,3 +36,8 @@ const string & CrackFactoryParams::getParameterValue(const PARAM_TYPE & _paramTy
 	// instance de DictionaryCrackEngine s'il manque le paramètre DICTIONARY_PATH).
 	throw runtime_error("Parameter does not exist in the set.");
 }
+
+const string& CrackFactoryParams::operator[](const PARAM_TYPE& _paramType) const
+{
+	return getParameterValue(_paramType);
+}
