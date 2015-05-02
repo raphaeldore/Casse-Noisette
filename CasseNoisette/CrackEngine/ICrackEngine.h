@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 
 namespace CrackEngine
 {
@@ -8,6 +7,12 @@ namespace CrackEngine
 	public:
 		virtual ~ICrackEngine() {}
 		virtual void Crack() = 0;
+		void setPwdFilePath(const string & _pwdFilePath);
+		void setResultsFilePath(const string & _resultsFilePath);
+		void setPwdHashFunction(const string & _pwdHashFunction);
 	private:
+		string pwdFilePath;
+		string resultsFilePath;
+		string pwdHashFunction;
 	};
 }
