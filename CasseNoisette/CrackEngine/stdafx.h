@@ -12,8 +12,14 @@
 #include <map>
 #include <string>
 #include <memory>
+#include <vector>
+#include <set>
+#include <iostream>
 
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme
+
+#include "Parameter.h"
+#include "CrackFactoryParams.h"
 #include "CrackFactory.h"
 #include "ICrackEngine.h"
 #include "BruteForce.h"
