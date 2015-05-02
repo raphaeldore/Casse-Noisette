@@ -41,7 +41,7 @@ unique_ptr<ICrackEngine> CrackFactory::CreateCrackEngine(const CRACK_ENGINE_TYPE
 		return nullptr; // TODO: TEMP
 	}
 
-	// On ajoute ensuite les paramètres nécessaires chaque type de CrackEngine
+	// On ajoute ensuite les paramètres nécessaires à chaque type de CrackEngine
 	crackEngine->setPwdFilePath(_params[PWD_FILE_PATH]);
 	crackEngine->setResultsFilePath(_params[RESULTS_FILE_PATH]);
 	crackEngine->setPwdHashFunction(_params[HASH_TYPE]);
