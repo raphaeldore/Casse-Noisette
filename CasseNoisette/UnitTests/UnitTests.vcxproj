@@ -87,6 +87,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CrackFactoryParamsTests.cpp" />
     <ClCompile Include="FakeHash.cpp" />
     <ClCompile Include="MD5Tests.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -96,6 +97,9 @@
     <ClCompile Include="HashFactoryTests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CrackEngine\CrackEngine.vcxproj">
+      <Project>{055e5a79-b910-4b59-b33f-ad0f87dce163}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Crypto\Crypto.vcxproj">
       <Project>{440fa387-c872-4c50-a708-273188646f9c}</Project>
     </ProjectReference>

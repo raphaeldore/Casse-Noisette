@@ -9,6 +9,8 @@
 
 #include <map>
 #include <memory>
+#include <vector>
+#include <set>
 
 // En-têtes pour CppUnitTest
 #include "CppUnitTest.h"
@@ -21,3 +23,6 @@
 #include "../Crypto/SHA1.h"
 #include "../Crypto/SHA256.h"
 #include "FakeHash.h"
+
+#include "../CrackEngine/Parameter.h"
+#include "../CrackEngine/CrackFactoryParams.h"
