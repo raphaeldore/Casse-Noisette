@@ -24,7 +24,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QLineEdit" name="p"/>
+          <widget class="QLineEdit" name="pwdFileSelectTxt"/>
          </item>
          <item>
           <widget class="QPushButton" name="pwdFileSelectBtn">
@@ -426,6 +426,9 @@
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">padding:5;</string>
       </property>
       <property name="text">
        <string>Démarrer le cassage</string>
