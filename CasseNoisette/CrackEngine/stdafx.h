@@ -18,8 +18,9 @@
 
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme
 
+#include "CharsetBuilder.h"
 #include "Parameter.h"
 #include "CrackFactoryParams.h"
-#include "CrackFactory.h"
 #include "ICrackEngine.h"
 #include "BruteForce.h"
+#include "CrackFactory.h"
