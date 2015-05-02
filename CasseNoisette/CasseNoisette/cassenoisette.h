@@ -13,6 +13,7 @@ public:
 	CasseNoisette(QWidget *parent = 0);
 	~CasseNoisette();
 	private slots:
+	void on_startCrackBtn_clicked();
 	void on_pwdFileSelectBtn_clicked();
 private:
 	Ui::CasseNoisetteClass ui;
