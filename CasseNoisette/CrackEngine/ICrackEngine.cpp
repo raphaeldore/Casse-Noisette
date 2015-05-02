@@ -3,10 +3,6 @@
 
 using namespace CrackEngine;
 
-void ICrackEngine::Crack()
-{
-}
-
 void ICrackEngine::setPwdFilePath(const string& _pwdFilePath)
 {
 	pwdFilePath = _pwdFilePath;
