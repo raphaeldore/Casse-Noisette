@@ -11,6 +11,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Crypto", "Crypto\Crypto.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTests", "UnitTests\UnitTests.vcxproj", "{E62E984F-8BA6-459C-AA82-EA624349274E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataLayer", "DataLayer\DataLayer.vcxproj", "{FFC6339B-0AA6-47BA-9314-B5F572F36439}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IntegrationTests", "IntegrationTests\IntegrationTests.vcxproj", "{90F9A2F7-3F92-431B-930A-69A11483B24B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -33,6 +37,14 @@ Global
 		{E62E984F-8BA6-459C-AA82-EA624349274E}.Debug|Win32.Build.0 = Debug|Win32
 		{E62E984F-8BA6-459C-AA82-EA624349274E}.Release|Win32.ActiveCfg = Release|Win32
 		{E62E984F-8BA6-459C-AA82-EA624349274E}.Release|Win32.Build.0 = Release|Win32
+		{FFC6339B-0AA6-47BA-9314-B5F572F36439}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FFC6339B-0AA6-47BA-9314-B5F572F36439}.Debug|Win32.Build.0 = Debug|Win32
+		{FFC6339B-0AA6-47BA-9314-B5F572F36439}.Release|Win32.ActiveCfg = Release|Win32
+		{FFC6339B-0AA6-47BA-9314-B5F572F36439}.Release|Win32.Build.0 = Release|Win32
+		{90F9A2F7-3F92-431B-930A-69A11483B24B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{90F9A2F7-3F92-431B-930A-69A11483B24B}.Debug|Win32.Build.0 = Debug|Win32
+		{90F9A2F7-3F92-431B-930A-69A11483B24B}.Release|Win32.ActiveCfg = Release|Win32
+		{90F9A2F7-3F92-431B-930A-69A11483B24B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
