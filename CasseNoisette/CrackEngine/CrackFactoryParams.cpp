@@ -29,5 +29,10 @@ const string & CrackFactoryParams::getParameterValue(const PARAM_TYPE & _paramTy
 		if (param.paramType == _paramType) return param.value;
 	}
 
+	// Lorsque la CrackFactory appelle getParameterValue c'est
+	// qu'elle s'attends qu'il y ait un paramètre (paramètre obligatoire). 
+	// Si le paramètre n'existe pas, c'est exceptionnel, et on ne peut
+	// malheureusement continuer (On ne peut pas, par exemple, créer une
+	// instance de DictionaryCrackEngine s'il manque le paramètre DICTIONARY_PATH).
 	throw runtime_error("Parameter does not exist in the set.");
 }
