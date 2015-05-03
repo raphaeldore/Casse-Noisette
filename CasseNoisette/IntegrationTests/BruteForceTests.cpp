@@ -79,11 +79,26 @@ namespace IntegrationTests
 			Assert::AreEqual(EXPECTED_RESULTS_VECTOR_SIZE, ACTUAL_DECRYPTED_PASSWORDS.size());
 
 			
-			for (auto i = 0; i < EXPECTED_RESULTS_VECTOR_SIZE; ++i)
+			for (unsigned int i = 0; i < EXPECTED_RESULTS_VECTOR_SIZE; ++i)
 			{
 				Assert::AreEqual(EXPECTED_DECRYPTED_PASSWORDS[i], ACTUAL_DECRYPTED_PASSWORDS[i]);
 			}
 			
+		}
+
+		TEST_METHOD(if_maxPwdLenght_too_small_then_results_vector_empty)
+		{
+			// Arrange
+			unsigned int EXPECTED_RESULTS_VECTOR_SIZE = 0;
+			bruteForce->setMaxPwdLenght(2);
+			bruteForce->setPwdFilePath("../TestsFiles/simple_password.txt"); // Contient le hash MD5 du mot de passe "moon" (4 caractères)
+
+			// Action
+			bruteForce->Crack();
+			vector<string> results = bruteForce->getResults();
+
+			// Assert
+			Assert::AreEqual(EXPECTED_RESULTS_VECTOR_SIZE, results.size());
 		}
 	};
 }
