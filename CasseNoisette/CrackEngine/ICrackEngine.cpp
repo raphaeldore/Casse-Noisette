@@ -17,3 +17,8 @@ void ICrackEngine::setPwdHashFunction(const string& _pwdHashFunction)
 {
 	pwdHashFunction = _pwdHashFunction;
 }
+
+vector<string> ICrackEngine::getResults()
+{
+	return results;
+}

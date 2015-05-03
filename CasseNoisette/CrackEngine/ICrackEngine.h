@@ -7,12 +7,15 @@ namespace CrackEngine
 	public:
 		virtual ~ICrackEngine() {}
 		virtual void Crack() = 0;
-		virtual void setPwdFilePath(const string & _pwdFilePath);
-		virtual void setResultsFilePath(const string & _resultsFilePath);
-		virtual void setPwdHashFunction(const string & _pwdHashFunction);
+		void setPwdFilePath(const string & _pwdFilePath);
+		void setResultsFilePath(const string & _resultsFilePath);
+		void setPwdHashFunction(const string & _pwdHashFunction);
+		vector<string> getResults();
 	protected:
 		string pwdFilePath;
 		string resultsFilePath;
 		string pwdHashFunction;
+
+		vector<string> results;
 	};
 }
