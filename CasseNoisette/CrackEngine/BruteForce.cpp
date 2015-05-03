@@ -61,8 +61,9 @@ string BruteForce::Crack(const string& _hashedPassword) const
 	// Longeur max du mot de passe: maxPwdLenght + 1
 	char * password = new char[maxPwdLenght + 1]();
 
-	// start at last character and make it bigger by building to the left
-	// passwordGuess va toujours pointer le dernier caractère de password 
+	// passwordGuess commence par pointer vers le dernier caractère de 'password'. Au fil
+	// du cassage on le fera grandir en lui ajoutant des caractères à sa gauche.
+	// Ex: password = "       ba", passwordGuess = "ba"
 	char* passwordGuess = &password[maxPwdLenght - 1];
 
 	/*
