@@ -1,4 +1,5 @@
 #pragma once
+#include "ICrackEngine.h"
 
 namespace CrackEngine
 {
@@ -13,9 +14,10 @@ namespace CrackEngine
 		void setCrackingCharset(const string & _crackingCharset);
 
 	private:
+		string Crack(const string & _hashedPassword) const;
 
+		CustomCrypto::IHash * hashAlgorithm;
 		string crackingCharset;
 		int maxPwdLenght;
 	};
-
 }

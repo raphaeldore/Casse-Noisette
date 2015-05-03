@@ -18,6 +18,8 @@
 
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme
 
+#include "../DataLayer/FileRepository.h"
+#include "../Crypto/HashFactory.h"
 #include "CharsetBuilder.h"
 #include "Parameter.h"
 #include "CrackFactoryParams.h"
