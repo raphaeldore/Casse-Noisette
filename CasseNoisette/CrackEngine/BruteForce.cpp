@@ -88,7 +88,7 @@ string BruteForce::Crack(const string& _hashedPassword) const
 		// Dans cette boucle on essaye toutes les caractères du charset à la position maxPwdLength - 1.
 		// Ce n'est jamais le même caractère, puisqu'il est "shifté" vers la droite dans la
 		// boucle suivante.
-		for (int i = 0; i < crackingCharset.length(); ++i)
+		for (unsigned int i = 0; i < crackingCharset.length(); ++i)
 		{
 			password[maxPwdLenght - 1] = crackingCharset[i];
 
