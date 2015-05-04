@@ -9,9 +9,20 @@
 
 #define WIN32_LEAN_AND_MEAN             // Exclure les en-têtes Windows rarement utilisés
 
-
+#include <map>
+#include <string>
+#include <memory>
+#include <vector>
+#include <set>
+#include <iostream>
 
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme
-#include "CrackFactory.h"
+
+#include "../DataLayer/FileRepository.h"
+#include "../Crypto/HashFactory.h"
+#include "CharsetBuilder.h"
+#include "Parameter.h"
+#include "CrackFactoryParams.h"
 #include "ICrackEngine.h"
 #include "BruteForce.h"
+#include "CrackFactory.h"

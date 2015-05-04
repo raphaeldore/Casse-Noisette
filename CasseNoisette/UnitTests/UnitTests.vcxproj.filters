@@ -22,6 +22,9 @@
     <Filter Include="Fichiers sources\HashTests">
       <UniqueIdentifier>{eccc5354-d939-44db-b9db-ba4bf8f42aef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\CrackEngineTests">
+      <UniqueIdentifier>{479163d6-c2ff-4c7a-85c3-6d17002a96d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -46,6 +49,12 @@
     </ClCompile>
     <ClCompile Include="MD5Tests.cpp">
       <Filter>Fichiers sources\HashTests</Filter>
+    </ClCompile>
+    <ClCompile Include="CrackFactoryParamsTests.cpp">
+      <Filter>Fichiers sources\CrackEngineTests</Filter>
+    </ClCompile>
+    <ClCompile Include="CrackFactoryTests.cpp">
+      <Filter>Fichiers sources\CrackEngineTests</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
