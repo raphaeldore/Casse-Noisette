@@ -96,7 +96,7 @@ string BruteForce::Crack(const string& _hashedPassword) const
 			string passwordGuessHash = hashAlgorithm->hash(string(passwordGuess));
 
 			// On compare les hash
-			if (strcmp(passwordGuessHash.c_str(), _hashedPassword.c_str()) == 0)
+			if (passwordGuessHash == _hashedPassword)
 			{
 				return passwordGuess;
 			}
