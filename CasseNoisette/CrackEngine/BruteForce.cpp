@@ -136,8 +136,8 @@ string BruteForce::Crack(const string& _hashedPassword) const
 			// Si c'est le dernier caractère, on retourne au début du crackingCharset.
 			password[j] = crackingCharset[0];
 
-			// Si j se rends jusqu'à 0, c'est qu'on a essayer toutes les combinaisons
-			// possibles avec le charset fournis et la longueur max du mot de passe et
+			// Si j se rends jusqu'à 0, c'est qu'on a essayé toutes les combinaisons
+			// possibles avec le crackingCharset fournis et la longueur max du mot de passe et
 			// on a rien trouvé. :(
 			if (j == 0)
 			{
