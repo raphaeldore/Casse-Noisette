@@ -4,14 +4,13 @@
 
 using namespace CrackEngine;
 
-CharsetBuilder::CharsetBuilder()
+CharsetBuilder::CharsetBuilder() : customCharset("")
 {
 	loweralpha = false;
 	upperalpha = false;
 	numeric = false;
 	space = false;
 	special = false;
-	customCharset = "";
 }
 
 CharsetBuilder::CharsetBuilder(const bool _loweralpha, const bool _upperalpha, const bool _numeric, const bool _space, const bool _special, const string & _customCharset)
