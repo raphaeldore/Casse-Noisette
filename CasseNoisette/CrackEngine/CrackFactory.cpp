@@ -30,7 +30,7 @@ unique_ptr<ICrackEngine> CrackFactory::CreateCrackEngine(const CRACK_ENGINE_TYPE
 		case DICTIONARY: return nullptr; // TODO
 		}
 
-		// On ajoute ensuite les paramètres nécessaires à tout les types de CrackEngine
+		// On ajoute ensuite les paramètres nécessaires à tous les types de CrackEngine
 		DataLayer::FileRepository fileRepo;
 		fileRepo.loadPasswordFile(_params[PWD_FILE_PATH]);
 
