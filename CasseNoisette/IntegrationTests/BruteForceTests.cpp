@@ -32,9 +32,10 @@ namespace IntegrationTests
 		TEST_METHOD(crack_can_crack_simple_password)
 		{
 			// Arrange
+			vector<string> hashedPasswords{ "6d4db5ff0c117864a02827bad3c361b9" };
 			unsigned int EXPECTED_RESULTS_VECTOR_SIZE = 1;
 			string EXPECTED_DECRYPTED_PASSWORD = "moon";
-			bruteForce->setPwdFilePath("../TestsFiles/simple_password.txt");
+			bruteForce->setHashedPasswords(hashedPasswords);
 
 			// Action
 			bruteForce->Crack();
@@ -49,10 +50,11 @@ namespace IntegrationTests
 		TEST_METHOD(crack_can_crack_password_with_numbers)
 		{
 			// Arrange
+			vector<string> hashedPasswords{ "e1568c571e684e0fb1724da85d215dc0" };
 			unsigned int EXPECTED_RESULTS_VECTOR_SIZE = 1;
 			string EXPECTED_DECRYPTED_PASSWORD = "l33t";
 			bruteForce->setCrackingCharset(lowerAlphaNumericCrackingCharset);
-			bruteForce->setPwdFilePath("../TestsFiles/simple_loweralphanum_password.txt");
+			bruteForce->setHashedPasswords(hashedPasswords);
 
 			// Action
 			bruteForce->Crack();
@@ -67,9 +69,10 @@ namespace IntegrationTests
 		TEST_METHOD(crack_can_crack_file_containing_multiple_passwords)
 		{
 			// Arrange
+			vector<string> hashedPasswords{ "106a6c241b8797f52e1e77317b96a201", "06d80eb0c50b49a509b49f2424e8c805", "2a1585a864d9e67627c6ae04c807a2c5", "0a16bc32f55683128983f223de242942" };
 			unsigned int EXPECTED_RESULTS_VECTOR_SIZE = 4;
 			vector<string> EXPECTED_DECRYPTED_PASSWORDS = { "home", "dog", "final", "ink" };
-			bruteForce->setPwdFilePath("../TestsFiles/multiple_simple_loweralpha_passwords.txt");
+			bruteForce->setHashedPasswords(hashedPasswords);
 
 			// Action
 			bruteForce->Crack();
@@ -91,7 +94,8 @@ namespace IntegrationTests
 			// Arrange
 			unsigned int EXPECTED_RESULTS_VECTOR_SIZE = 0;
 			bruteForce->setMaxPwdLenght(2);
-			bruteForce->setPwdFilePath("../TestsFiles/simple_password.txt"); // Contient le hash MD5 du mot de passe "moon" (4 caractères)
+			vector<string> hashedPasswords{ "6d4db5ff0c117864a02827bad3c361b9" };
+			bruteForce->setHashedPasswords(hashedPasswords);
 
 			// Action
 			bruteForce->Crack();
