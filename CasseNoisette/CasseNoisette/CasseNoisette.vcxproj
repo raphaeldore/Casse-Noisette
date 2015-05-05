@@ -151,6 +151,11 @@
   <ItemGroup>
     <ResourceCompile Include="CasseNoisette.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CrackEngine\CrackEngine.vcxproj">
+      <Project>{055e5a79-b910-4b59-b33f-ad0f87dce163}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
