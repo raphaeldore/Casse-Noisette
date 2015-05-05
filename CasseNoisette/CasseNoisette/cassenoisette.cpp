@@ -16,13 +16,20 @@ CasseNoisette::CasseNoisette(QWidget *parent)
 
 CasseNoisette::~CasseNoisette()
 {
-
 }
 
 void CasseNoisette::on_startCrackBtn_clicked()
 {
+	/*
+	TODO: Séparer cette méthode en plusieurs méthodes (Pour un autre sprint...Pour l'instant ça fait le travail)
+	TODO: Validation de l'entée (Ex: Si aucun fichier choisi on ne devrait pas permettre le cassage).
+	*/
+
 	using namespace CrackEngine;
-	
+
+	// Si currentIndex == 0 : BruteForce
+	// Si == 1 : Dictionnaire
+	// Si == 2 : Table arc-en-ciel
 	ui.tabWidget->currentIndex();
 
 	CrackFactoryParams crackFactoryParams;
@@ -32,42 +39,52 @@ void CasseNoisette::on_startCrackBtn_clicked()
 	crackFactoryParams.addParameter(Parameter(MAX_PWD_LENGTH, ui.spinBox->text().toStdString()));
 	// TODO: Remplace la ligne ci-dessous par: crackFactoryParams.addParameter(Parameter(HASH_TYPE, ui.hashFunctionsComboBox->currentText().toStdString()));
 	crackFactoryParams.addParameter(Parameter(HASH_TYPE, "MD5"));
-
 	unique_ptr<ICrackEngine> crackEngine;
 
 	QMessageBox errorBox;
-	errorBox.setText("Il y a eut une erreur avec vos choix");
+	QString errorText = "Il y a eut une erreur avec vos choix:\n";
 
 	try
 	{
 		crackEngine = CrackFactory::GetCrackFactory()->CreateCrackEngine(BRUTE_FORCE, crackFactoryParams);
-	} catch (const runtime_error & err)
+	}
+	catch (const runtime_error & err)
 	{
 		cerr << err.what();
-		errorBox.exec();		
-	} catch(const exception & ex)
+		errorBox.setText(errorText + QString(err.what()));
+		errorBox.exec();
+	}
+	catch (const exception & ex)
 	{
 		cerr << ex.what();
+		errorBox.setText(errorText + QString(ex.what()));
 		errorBox.exec();
 	}
 
 	ui.startCrackBtn->setEnabled(false);
-
-	crackEngine->Crack();
-
+	crackEngine->Crack(); // TODO: Démarrer ça dans un autre thread. Car pour l'instant ça bloque l'application.
 	ui.startCrackBtn->setEnabled(true);
 
-	QString passwords("Mots de passe trouvés:");
+	QString passwords_found_message;
 
-	for (auto pass : crackEngine->getResults())
+	auto results = crackEngine->getResults();
+
+	if (results.size() > 0)
 	{
-		passwords += "\n";
-		passwords += QString(pass.c_str());
+		passwords_found_message = QString::number(results.size()) + " mot(s) de passe trouvé(s):\n ";
+		for (auto pass : results)
+		{
+			passwords_found_message += "\n";
+			passwords_found_message += QString(pass.c_str());
+		}
+	}
+	else
+	{
+		passwords_found_message = "Aucun mot de passe trouvé";
 	}
 
 	QMessageBox msgBox;
-	QString message("Le cassage des mots de passe est terminé!");
-	msgBox.setText(passwords);
+	msgBox.setText(passwords_found_message);
 	msgBox.exec();
 }
 
