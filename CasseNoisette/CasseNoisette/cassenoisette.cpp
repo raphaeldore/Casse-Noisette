@@ -30,22 +30,24 @@ void CasseNoisette::on_startCrackBtn_clicked()
 	crackFactoryParams.addParameter(Parameter(RESULTS_FILE_PATH, "chemin/bidon/fichier_bidon.txt"));
 	crackFactoryParams.addParameter(Parameter(CHARSET, "abcdefghijklmnopqrstuvwxyz"));
 	crackFactoryParams.addParameter(Parameter(MAX_PWD_LENGTH, ui.spinBox->text().toStdString()));
-	crackFactoryParams.addParameter(Parameter(HASH_TYPE, ui.hashFunctionsComboBox->currentText().toStdString()));
+	// TODO: Remplace la ligne ci-dessous par: crackFactoryParams.addParameter(Parameter(HASH_TYPE, ui.hashFunctionsComboBox->currentText().toStdString()));
+	crackFactoryParams.addParameter(Parameter(HASH_TYPE, "MD5"));
 
 	unique_ptr<ICrackEngine> crackEngine;
+
 	QMessageBox errorBox;
-	errorBox.setText("Il y a eut une erreur avec vos choix");;
+	errorBox.setText("Il y a eut une erreur avec vos choix");
 
 	try
 	{
 		crackEngine = CrackFactory::GetCrackFactory()->CreateCrackEngine(BRUTE_FORCE, crackFactoryParams);
 	} catch (const runtime_error & err)
 	{
-		std::cerr << err.what();
+		cerr << err.what();
 		errorBox.exec();		
 	} catch(const exception & ex)
 	{
-		std::cerr << ex.what();
+		cerr << ex.what();
 		errorBox.exec();
 	}
 
@@ -59,7 +61,6 @@ void CasseNoisette::on_startCrackBtn_clicked()
 
 	for (auto pass : crackEngine->getResults())
 	{
-		//passwords.append("\n" + pass);
 		passwords += "\n";
 		passwords += QString(pass.c_str());
 	}
