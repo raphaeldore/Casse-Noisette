@@ -24,7 +24,9 @@ namespace UnitTests
 		{
 			// Arrange
 			set<Parameter> parameters;
-			parameters.insert(Parameter(PARAM_TYPE::PWD_FILE_PATH, "/home/rdore/passwords.txt"));
+
+			// TODO: Injection dépendance fileRepository à la CrackFactory.
+			parameters.insert(Parameter(PARAM_TYPE::PWD_FILE_PATH, "../TestsFiles/hashed_password_test.txt"));
 			parameters.insert(Parameter(PARAM_TYPE::RESULTS_FILE_PATH, "/home/rdore/cracking_results.txt"));
 			parameters.insert(Parameter(PARAM_TYPE::CHARSET, "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_+="));
 			parameters.insert(Parameter(HASH_TYPE, "MD5"));
@@ -36,6 +38,16 @@ namespace UnitTests
 
 			// Assert
 			Assert::IsTrue(dynamic_cast<BruteForce *>(crackEngine.get()));
+		}
+
+		// En attendant qu'on code la classe dictionary...
+		TEST_METHOD(CreateCrackEngine_should_return_nullptr_when_creating_dictionary_engine_type)
+		{
+			// Action 
+			unique_ptr<CrackEngine::ICrackEngine> crackEngine = crackFactory->CreateCrackEngine(BRUTE_FORCE, *crackFactoryParams);
+
+			// Assert
+			Assert::IsTrue(crackEngine == nullptr);
 		}
 
 	};

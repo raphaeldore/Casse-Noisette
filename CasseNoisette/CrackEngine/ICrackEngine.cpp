@@ -3,9 +3,9 @@
 
 using namespace CrackEngine;
 
-void ICrackEngine::setPwdFilePath(const string& _pwdFilePath)
+void ICrackEngine::setHashedPasswords(const vector<string>& _hashedPasswords)
 {
-	pwdFilePath = _pwdFilePath;
+	hashedPasswords = _hashedPasswords;
 }
 
 void ICrackEngine::setResultsFilePath(const string& _resultsFilePath)
@@ -15,7 +15,7 @@ void ICrackEngine::setResultsFilePath(const string& _resultsFilePath)
 
 void ICrackEngine::setPwdHashFunction(const string& _pwdHashFunction)
 {
-	pwdHashFunction = _pwdHashFunction;
+	hashAlgorithm = CustomCrypto::HashFactory::GetHashFactory()->CreateHashAlgorithm(_pwdHashFunction);
 }
 
 vector<string> ICrackEngine::getResults()

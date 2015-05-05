@@ -25,10 +25,18 @@ unique_ptr<ICrackEngine> CrackFactory::CreateCrackEngine(const CRACK_ENGINE_TYPE
 		{
 		case BRUTE_FORCE: {
 			crackEngine = createBruteForce(move(crackEngine), _params);
+			break;
 		};
-		case DICTIONARY: break;
-		default: break;
+		case DICTIONARY: return nullptr; // TODO
 		}
+
+		// On ajoute ensuite les paramètres nécessaires à tout les types de CrackEngine
+		DataLayer::FileRepository fileRepo;
+		fileRepo.loadPasswordFile(_params[PWD_FILE_PATH]);
+
+		crackEngine->setHashedPasswords(fileRepo.getAllHashedPasswords());
+		crackEngine->setResultsFilePath(_params[RESULTS_FILE_PATH]);
+		crackEngine->setPwdHashFunction(_params[HASH_TYPE]);
 	}
 	catch (const runtime_error & runtime_error)
 	{
@@ -40,12 +48,7 @@ unique_ptr<ICrackEngine> CrackFactory::CreateCrackEngine(const CRACK_ENGINE_TYPE
 		cerr << string(__FUNCTION__) << ": " << ex.what();
 		return nullptr; // TODO: TEMP
 	}
-
-	// On ajoute ensuite les paramètres nécessaires à chaque type de CrackEngine
-	crackEngine->setPwdFilePath(_params[PWD_FILE_PATH]);
-	crackEngine->setResultsFilePath(_params[RESULTS_FILE_PATH]);
-	crackEngine->setPwdHashFunction(_params[HASH_TYPE]);
-
+	
 	return crackEngine;
 }
 

@@ -15,18 +15,9 @@ BruteForce::~BruteForce()
 
 void BruteForce::Crack()
 {
-	using namespace DataLayer;
-	using namespace CustomCrypto;
-
-	// Préparatifs
-	FileRepository fileRepository{};
-	fileRepository.loadPasswordFile(pwdFilePath);
-	hashAlgorithm = HashFactory::GetHashFactory()->CreateHashAlgorithm(pwdHashFunction);
-
-	// On est prêt. Crackons ces mots de passe!
-	for (const auto hashPassword : fileRepository.getAllHashedPasswords())
+	for (const auto hashedPassword : ICrackEngine::hashedPasswords)
 	{
-		string result = Crack(hashPassword);
+		string result = Crack(hashedPassword);
 
 		if (result != "")
 		{

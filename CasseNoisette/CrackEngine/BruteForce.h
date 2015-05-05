@@ -16,7 +16,6 @@ namespace CrackEngine
 	private:
 		string Crack(const string & _hashedPassword) const;
 
-		CustomCrypto::IHash * hashAlgorithm;
 		string crackingCharset;
 		int maxPwdLenght;
 	};
