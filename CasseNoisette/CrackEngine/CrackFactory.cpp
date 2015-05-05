@@ -25,6 +25,7 @@ unique_ptr<ICrackEngine> CrackFactory::CreateCrackEngine(const CRACK_ENGINE_TYPE
 		{
 		case BRUTE_FORCE: {
 			crackEngine = createBruteForce(move(crackEngine), _params);
+			break;
 		};
 		case DICTIONARY: return nullptr; // TODO
 		}
