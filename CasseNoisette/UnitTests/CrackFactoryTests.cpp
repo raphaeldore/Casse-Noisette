@@ -24,7 +24,9 @@ namespace UnitTests
 		{
 			// Arrange
 			set<Parameter> parameters;
-			parameters.insert(Parameter(PARAM_TYPE::PWD_FILE_PATH, "/home/rdore/passwords.txt"));
+
+			// TODO: Injection dépendance fileRepository à la CrackFactory.
+			parameters.insert(Parameter(PARAM_TYPE::PWD_FILE_PATH, "../TestsFiles/hashed_password_test.txt"));
 			parameters.insert(Parameter(PARAM_TYPE::RESULTS_FILE_PATH, "/home/rdore/cracking_results.txt"));
 			parameters.insert(Parameter(PARAM_TYPE::CHARSET, "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_+="));
 			parameters.insert(Parameter(HASH_TYPE, "MD5"));
