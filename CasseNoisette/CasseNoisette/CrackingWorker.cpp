@@ -21,6 +21,7 @@ void CrackingWorker::stopCracking()
 {
 	isStopped = true;
 	isRunning = false;
+	crackEngine->stopCrack();
 	emit stopped();
 }
 
@@ -37,7 +38,6 @@ void CrackingWorker::setCrackFactoryParameters(const CrackFactoryParams& _crackF
 void CrackingWorker::crack()
 {
 	if (!isRunning || isStopped) return;
-	unique_ptr<ICrackEngine> crackEngine;
 
 	try
 	{

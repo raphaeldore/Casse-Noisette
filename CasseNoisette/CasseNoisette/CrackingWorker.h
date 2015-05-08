@@ -13,7 +13,7 @@ public:
 	CrackingWorker();
 	void setCrackEngineType(const CRACK_ENGINE_TYPES & _crackEngineType);
 	void setCrackFactoryParameters(const CrackFactoryParams & _crackFactoryParams);
-	
+
 	const vector<string> & getResults() const;
 signals:
 	void resultsReady();
@@ -37,6 +37,7 @@ private:
 	volatile bool isRunning, isStopped;
 	CRACK_ENGINE_TYPES engineType;
 	CrackFactoryParams crackFactoryParams;
+	unique_ptr<ICrackEngine> crackEngine;
 	vector<string> results;
 };
 
