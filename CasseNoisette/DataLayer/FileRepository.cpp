@@ -63,14 +63,14 @@ vector<string> FileRepository::split(const string& _string, const string& _separ
 	string::size_type i = 0;
 	string::size_type j = _string.find(_separator);
 
-	while (j != string::npos) {
+	do {
 		returnVector.push_back(_string.substr(i, j - i));
 		i = ++j;
 		j = _string.find(_separator, j);
 
-		if (j == string::npos)
-			returnVector.push_back(_string.substr(i, _string.length()));
-	}
+		//if (j == string::npos)
+			//returnVector.push_back(_string.substr(i, _string.length()));
+	} while (j != string::npos);
 
 	return returnVector;
 }

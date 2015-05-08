@@ -130,7 +130,7 @@ namespace IntegrationTests
 			//Action
 			try
 			{
-				fileRepository->loadPasswordFile(emptyFile);
+				fileRepository->loadPasswordFile(emptyFile, ";");
 			}
 			catch (runtime_error)
 			{
