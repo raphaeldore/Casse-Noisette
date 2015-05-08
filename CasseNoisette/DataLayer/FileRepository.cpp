@@ -16,38 +16,35 @@ void FileRepository::loadPasswordFile(const string _pwdFilePath, string _separat
 		throw logic_error("The file is empty");
 	}
 
-	tuple<string, string, string> hashedPwdTuple;
-
 	while (getline(ifile, line))
 	{
-		string user = "no_user";
-		string hashedPwd;
+		string default_user = "no_user";
 
-		vector<string> lineSplit = split(line, _separator);
+		auto pos = line.find(_separator);
 
-		if (lineSplit.size() == 1)
+		if (pos == string::npos)
 		{
-			hashedPwd = lineSplit[0];
-		}
-		else if (lineSplit.size() == 2)
-		{
-			user = lineSplit[0];
-			hashedPwd = lineSplit[1];
+			hashedPasswords.push_back(make_tuple(default_user, line, ""));
 		}
 		else
 		{
-			throw invalid_argument("File format is not valid.");
+			vector<string> lineSplit = split(line, _separator);
+
+			if (lineSplit.size() == 2)
+			{
+				hashedPasswords.push_back(make_tuple(lineSplit[0], lineSplit[1], ""));
+			}
+			else
+			{
+				throw invalid_argument("File format is not valid.");
+			}
 		}
-
-		hashedPwdTuple = make_tuple(user, hashedPwd, ""); //tuple<string, string, string>{user, hashedPwd, ""};
-
-		hashedPasswords.push_back(hashedPwdTuple);
 	}
 
 	ifile.close();
 }
 
-vector<tuple<string,string,string>> FileRepository::getAllHashedPasswords() const
+vector<tuple<string, string, string>> FileRepository::getAllHashedPasswords() const
 {
 	return hashedPasswords;
 }
@@ -59,18 +56,21 @@ bool FileRepository::fileIsEmpty(ifstream& _file) const
 
 vector<string> FileRepository::split(const string& _string, const string& _separator) const
 {
+	/* https://ysonggit.github.io/coding/2014/12/16/split-a-string-using-c.html */
 	vector<string> returnVector;
-	string::size_type i = 0;
-	string::size_type j = _string.find(_separator);
 
-	do {
-		returnVector.push_back(_string.substr(i, j - i));
-		i = ++j;
-		j = _string.find(_separator, j);
+	auto i = 0;
+	auto pos = _string.find(_separator);
+	while (pos != string::npos)
+	{
+		returnVector.push_back(_string.substr(i, pos - i));
+		pos += _separator.length();
+		i = pos;
+		pos = _string.find(_separator, pos);
 
-		//if (j == string::npos)
-			//returnVector.push_back(_string.substr(i, _string.length()));
-	} while (j != string::npos);
+		if (pos == string::npos)
+			returnVector.push_back(_string.substr(i, _string.length()));
+	}
 
 	return returnVector;
 }
