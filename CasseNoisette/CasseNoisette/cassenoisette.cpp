@@ -96,12 +96,16 @@ void CasseNoisette::on_pwdFileSelectBtn_clicked()
 
 void CasseNoisette::handleResults()
 {
+	QMessageBox msgBox;
 	QString passwords_found_message;
 	auto results = crackingWorker->getResults();
 
-	if (results.size() > 0)
+	if (results.size() == 1)
 	{
-		passwords_found_message = QString::number(results.size()) + " mot(s) de passe trouvé(s):\n ";
+		passwords_found_message = "1 mot de passe trouvé:\n\n " + QString(results.at(0).c_str());
+	} else if (results.size() > 1)
+	{
+		passwords_found_message = QString::number(results.size()) + " mots de passe trouvés:\n ";
 		for (auto pass : results)
 		{
 			passwords_found_message += "\n";
@@ -113,7 +117,6 @@ void CasseNoisette::handleResults()
 		passwords_found_message = "Aucun mot de passe trouvé";
 	}
 
-	QMessageBox msgBox;
 	msgBox.setText(passwords_found_message);
 	msgBox.exec();
 }
