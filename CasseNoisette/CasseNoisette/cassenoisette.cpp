@@ -139,14 +139,16 @@ void CasseNoisette::handleResults()
 
 	if (results.size() == 1)
 	{
-		passwords_found_message = "1 mot de passe trouvé:\n\n " + QString(results.at(0).c_str());
+		auto passEncoded = QString::fromLocal8Bit(results.at(0).c_str());
+		passwords_found_message = "1 mot de passe trouvé:\n\n " + passEncoded;
 	} else if (results.size() > 1)
 	{
 		passwords_found_message = QString::number(results.size()) + " mots de passe trouvés:\n ";
 		for (auto pass : results)
 		{
 			passwords_found_message += "\n";
-			passwords_found_message += QString(pass.c_str());
+			auto passEncoded = QString::fromLocal8Bit(pass.c_str());
+			passwords_found_message += passEncoded;
 		}
 	}
 	else
