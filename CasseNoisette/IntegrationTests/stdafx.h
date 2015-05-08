@@ -12,4 +12,10 @@
 
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme
 #include "../DataLayer/stdafx.h"
-#include "../CrackEngine/stdafx.h"
+
+#include <vector>
+#include <map>
+#include <string>
+
+
+#include "../DataLayer/FileRepository.h"
