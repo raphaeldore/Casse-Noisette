@@ -64,16 +64,23 @@ void CasseNoisette::on_startCrackBtn_clicked()
 	// Si currentIndex == 0 : BruteForce
 	// Si == 1 : Dictionnaire
 	// Si == 2 : Table arc-en-ciel
-	ui.tabWidget->currentIndex();
-
+	int tabIndex = ui.tabWidget->currentIndex();
 	CrackFactoryParams crackFactoryParams;
-	crackFactoryParams.addParameter(Parameter(PWD_FILE_PATH, ui.pwdFileSelectTxt->text().toStdString()));
-	crackFactoryParams.addParameter(Parameter(RESULTS_FILE_PATH, "chemin/bidon/fichier_bidon.txt"));
-	crackFactoryParams.addParameter(Parameter(CHARSET, "abcdefghijklmnopqrstuvwxyz"));
-	crackFactoryParams.addParameter(Parameter(MAX_PWD_LENGTH, ui.spinBox->text().toStdString()));
-	crackFactoryParams.addParameter(Parameter(HASH_TYPE, ui.hashFunctionsComboBox->currentText().toStdString()));
 
-	crackingWorker->setCrackEngineType(BRUTE_FORCE);
+	if (tabIndex == 0)
+	{
+		crackFactoryParams.addParameter(Parameter(PWD_FILE_PATH, ui.pwdFileSelectTxt->text().toStdString()));
+		crackFactoryParams.addParameter(Parameter(RESULTS_FILE_PATH, "chemin/bidon/fichier_bidon.txt"));
+		crackFactoryParams.addParameter(Parameter(CHARSET, "abcdefghijklmnopqrstuvwxyz"));
+		crackFactoryParams.addParameter(Parameter(MAX_PWD_LENGTH, ui.spinBox->text().toStdString()));
+		crackFactoryParams.addParameter(Parameter(HASH_TYPE, ui.hashFunctionsComboBox->currentText().toStdString()));
+		crackingWorker->setCrackEngineType(BRUTE_FORCE);
+	} else
+	{
+		return; // TODO: En attendant d'implémenter les autres engines
+	}
+
+	
 	crackingWorker->setCrackFactoryParameters(crackFactoryParams);
 
 	// On informe à ceux qui écoutent qu'on veut démarrer le cassage
