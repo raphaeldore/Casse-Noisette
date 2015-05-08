@@ -6,8 +6,6 @@
 #include "../CrackEngine/Parameter.h"
 #include "../CrackEngine/CrackFactoryParams.h"
 
-//#include <thread>
-
 CasseNoisette::CasseNoisette(QWidget *parent)
 	: QMainWindow(parent)
 {
