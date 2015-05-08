@@ -3,7 +3,7 @@
 
 using namespace CrackEngine;
 
-void ICrackEngine::stopCrack()
+void ICrackEngine::cancelCrack()
 {
 	running = false;
 }

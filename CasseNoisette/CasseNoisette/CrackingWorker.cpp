@@ -21,7 +21,7 @@ void CrackingWorker::stopCracking()
 {
 	isStopped = true;
 	isRunning = false;
-	crackEngine->stopCrack();
+	crackEngine->cancelCrack();
 	emit stopped();
 }
 
