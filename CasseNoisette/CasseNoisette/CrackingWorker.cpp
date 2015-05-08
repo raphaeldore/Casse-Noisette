@@ -1,31 +1,60 @@
 #include "CrackingWorker.h"
-//#include "../CrackEngine/CrackFactory.h"
 
-CrackingWorker::CrackingWorker(const CRACK_ENGINE_TYPES & _crackEngineType, const CrackFactoryParams& _crackFactoryParams)
+CrackingWorker::CrackingWorker() : isRunning(false), isStopped(false)
 {
-	//resultsReference = _resultsReference;
-	engineType = CrackEngine::BRUTE_FORCE;
-	crackFactoryParams = _crackFactoryParams;
 }
 
-vector<string> CrackingWorker::getResults()
+const vector<string> & CrackingWorker::getResults() const
 {
 	return results;
 }
 
 void CrackingWorker::startCracking()
 {
-	unique_ptr<ICrackEngine> crackEngine = CrackFactory::GetCrackFactory()->CreateCrackEngine(engineType, crackFactoryParams);
-	QVector<string> results_qt = QVector<string>::fromStdVector(results);
+	isStopped = false;
+	isRunning = true;
+	emit running();
+	crack();
+}
+
+void CrackingWorker::stopCracking()
+{
+	isStopped = true;
+	isRunning = false;
+	emit stopped();
+}
+
+void CrackingWorker::setCrackEngineType(const CRACK_ENGINE_TYPES& _crackEngineType)
+{
+	engineType = _crackEngineType;
+}
+
+void CrackingWorker::setCrackFactoryParameters(const CrackFactoryParams& _crackFactoryParams)
+{
+	crackFactoryParams = _crackFactoryParams;
+}
+
+void CrackingWorker::crack()
+{
+	if (!isRunning || isStopped) return;
+	unique_ptr<ICrackEngine> crackEngine;
+
+	try
+	{
+		crackEngine = CrackFactory::GetCrackFactory()->CreateCrackEngine(engineType, crackFactoryParams);
+	}
+	catch (const exception & ex)
+	{
+		QString factoryError(ex.what());
+		emit error(factoryError);
+		emit stopped();
+		return;
+	}
+
 	crackEngine->Crack();
-	
-	//results = crackEngine->getResults();
-
-	//*resultsReference = QVector<string>::fromStdVector(results);
-
-	//emit resultsReady(results_qt);
 
 	results = crackEngine->getResults();
 
-	emit resultsReady(results);
+	emit resultsReady();
+	emit stopped();
 }
