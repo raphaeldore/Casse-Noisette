@@ -3,6 +3,11 @@
 
 using namespace CrackEngine;
 
+void ICrackEngine::stopCrack()
+{
+	running = false;
+}
+
 void ICrackEngine::setHashedPasswords(const vector<string>& _hashedPasswords)
 {
 	hashedPasswords = _hashedPasswords;

@@ -7,6 +7,8 @@ namespace CrackEngine
 	public:
 		virtual ~ICrackEngine() {}
 		virtual void Crack() = 0;
+
+		void stopCrack();
 		void setHashedPasswords(const vector<string> & _hashedPasswords);
 		void setResultsFilePath(const string & _resultsFilePath);
 		void setPwdHashFunction(const string & _pwdHashFunction);
@@ -16,5 +18,6 @@ namespace CrackEngine
 		string resultsFilePath;
 		vector<string> hashedPasswords;
 		vector<string> results;
+		volatile bool running = false;
 	};
 }
