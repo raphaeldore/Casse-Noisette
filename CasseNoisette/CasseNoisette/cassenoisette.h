@@ -8,12 +8,15 @@
 //#include "../CrackEngine/ICrackEngine.h"
 #include <memory>
 #include "CrackingWorker.h"
+#include <QTimer>
 
 class CasseNoisette : public QMainWindow
 {
 	Q_OBJECT
 	QThread * crackingWorkerThread;
 	CrackingWorker * crackingWorker;
+	QTimer * crackingTimer;
+
 public:
 	CasseNoisette(QWidget *parent = 0);
 	~CasseNoisette();

@@ -12,6 +12,8 @@ CasseNoisette::CasseNoisette(QWidget *parent)
 {
 	ui.setupUi(this);
 	
+	crackingTimer = new QTimer;
+
 	crackingInProgress = false;
 
 	// On instancie un crackingWorker inactif (par défaut)
@@ -54,7 +56,6 @@ void CasseNoisette::on_startCrackBtn_clicked()
 		// On informe à ceux qui écoutent qu'on veut arrêter le cassage
 		// Dans notre cas, c'est le crackingWorker qui écoute.
 		emit stopCracking();
-		ui.startCrackBtn->setText("Démarrer le cassage");
 		return;
 	}
 
@@ -85,6 +86,7 @@ void CasseNoisette::on_startCrackBtn_clicked()
 	// Dans notre cas, c'est le crackingWorker qui écoute.
 	emit startCracking();
 
+	crackingInProgress = true;
 	ui.startCrackBtn->setText("Annuler le cassage");
 }
 
@@ -124,6 +126,7 @@ void CasseNoisette::handleResults()
 void CasseNoisette::crackingStopped()
 {
 	ui.startCrackBtn->setText("Démarrer le cassage");
+	crackingInProgress = false;
 }
 
 void CasseNoisette::errorString(QString error)
