@@ -6,6 +6,8 @@
 #include "../CrackEngine/Parameter.h"
 #include "../CrackEngine/CrackFactoryParams.h"
 
+#include "vld.h"
+
 CasseNoisette::CasseNoisette(QWidget *parent)
 	: QMainWindow(parent)
 {
@@ -48,6 +50,9 @@ CasseNoisette::CasseNoisette(QWidget *parent)
 
 CasseNoisette::~CasseNoisette()
 {
+	delete crackingWorkerThread;
+	delete crackingWorker;
+	delete crackingTime;
 }
 
 void CasseNoisette::on_startCrackBtn_clicked()
