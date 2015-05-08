@@ -9,9 +9,9 @@
 
 #define WIN32_LEAN_AND_MEAN             // Exclure les en-têtes Windows rarement utilisés
 
-#include <string>
 #include <vector>
-#include <tuple>
+#include <map>
+#include <string>
+#include <fstream>
 
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme
-#include "FileRepository.h"

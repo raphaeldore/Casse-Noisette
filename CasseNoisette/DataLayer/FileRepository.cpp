@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include <fstream>
+#include "FileRepository.h"
 
 using namespace DataLayer;
 
@@ -24,7 +24,7 @@ void FileRepository::loadPasswordFile(const string _pwdFilePath, string _separat
 
 		if (pos == string::npos)
 		{
-			hashedPasswords.push_back(make_tuple(default_user, line, ""));
+			hashedPasswords.insert(make_pair(default_user, line));
 		}
 		else
 		{
@@ -32,7 +32,7 @@ void FileRepository::loadPasswordFile(const string _pwdFilePath, string _separat
 
 			if (lineSplit.size() == 2)
 			{
-				hashedPasswords.push_back(make_tuple(lineSplit[0], lineSplit[1], ""));
+				hashedPasswords.insert(make_pair(lineSplit[0], lineSplit[1]));
 			}
 			else
 			{
@@ -44,7 +44,7 @@ void FileRepository::loadPasswordFile(const string _pwdFilePath, string _separat
 	ifile.close();
 }
 
-vector<tuple<string, string, string>> FileRepository::getAllHashedPasswords() const
+const multimap<string, string> & FileRepository::getAllHashedPasswords() const
 {
 	return hashedPasswords;
 }

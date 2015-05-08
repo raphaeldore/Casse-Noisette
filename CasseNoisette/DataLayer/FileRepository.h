@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 
 /*
 
@@ -18,10 +17,10 @@ namespace DataLayer
 	{
 	public:
 		void loadPasswordFile(const string _pwdFilePath, string _separator = ":");
-		vector<tuple<string, string, string>> getAllHashedPasswords() const;
+		const multimap<string, string> & getAllHashedPasswords() const;
 	private:
-		vector<tuple<string, string, string>> hashedPasswords;
-		bool fileIsEmpty(ifstream & _file) const;
-		vector<string> split(const string & _string, const string & _separator) const;
+		multimap<string, string> hashedPasswords;
+		bool fileIsEmpty(ifstream& _file) const;
+		vector<string> split(const string& _string, const string& _separator) const;
 	};
 }
