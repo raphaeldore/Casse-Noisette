@@ -19,6 +19,7 @@ public:
 	~CasseNoisette();
 
 	QString tupleToString(const tuple<string, string, string> & _tupleToConvert) const;
+	string GetCharset() const;
 
 public slots:
 	void on_startCrackBtn_clicked();
