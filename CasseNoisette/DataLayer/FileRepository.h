@@ -17,11 +17,12 @@ namespace DataLayer
     class FileRepository
     {
     public:
-        void loadPasswordFile(const string _pwdFilePath);
-        vector<string> getAllHashedPasswords() const;
+        void loadPasswordFile(const string _pwdFilePath, string _separator = ":");
+        vector<tuple<string,string,string>> getAllHashedPasswords() const;
     private:
-        vector<string> hashedPasswords;
+		vector<tuple<string, string, string>> hashedPasswords;
         bool fileIsEmpty(ifstream & _file) const;
+		vector<string> split(const string & _string, const string & _separator) const;
     };
 
 }

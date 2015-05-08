@@ -11,6 +11,7 @@
 
 #include <string>
 #include <vector>
+#include <tuple>
 
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme
 #include "FileRepository.h"

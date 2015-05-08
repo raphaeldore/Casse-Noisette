@@ -11,6 +11,7 @@
 #include <memory>
 #include <vector>
 #include <set>
+#include <tuple>
 
 // En-têtes pour CppUnitTest
 #include "CppUnitTest.h"
