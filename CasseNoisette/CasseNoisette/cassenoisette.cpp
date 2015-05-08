@@ -59,11 +59,6 @@ void CasseNoisette::on_startCrackBtn_clicked()
 		return;
 	}
 
-	/*
-	TODO: Séparer cette méthode en plusieurs méthodes (Pour un autre sprint...Pour l'instant ça fait le travail)
-	TODO: Validation de l'entée (Ex: Si aucun fichier choisi on ne devrait pas permettre le cassage).
-	*/
-
 	using namespace CrackEngine;
 
 	// Si currentIndex == 0 : BruteForce
@@ -76,8 +71,7 @@ void CasseNoisette::on_startCrackBtn_clicked()
 	crackFactoryParams.addParameter(Parameter(RESULTS_FILE_PATH, "chemin/bidon/fichier_bidon.txt"));
 	crackFactoryParams.addParameter(Parameter(CHARSET, "abcdefghijklmnopqrstuvwxyz"));
 	crackFactoryParams.addParameter(Parameter(MAX_PWD_LENGTH, ui.spinBox->text().toStdString()));
-	// TODO: Remplace la ligne ci-dessous par: crackFactoryParams.addParameter(Parameter(HASH_TYPE, ui.hashFunctionsComboBox->currentText().toStdString()));
-	crackFactoryParams.addParameter(Parameter(HASH_TYPE, "MD5"));
+	crackFactoryParams.addParameter(Parameter(HASH_TYPE, ui.hashFunctionsComboBox->currentText().toStdString()));
 
 	crackingWorker->setCrackEngineType(BRUTE_FORCE);
 	crackingWorker->setCrackFactoryParameters(crackFactoryParams);
