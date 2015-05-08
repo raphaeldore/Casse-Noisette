@@ -11,7 +11,9 @@ namespace IntegrationTests
 	{
 	public:
 		FileRepository * fileRepository;
-		string file_name = "../TestsFIles/hashed_password_test.txt";
+		string file_name_no_separator = "../TestsFIles/hashed_password_test.txt";
+		string file_name_with_separator = "../TestsFIles/hashed_password_separator_test.txt";
+		string emptyFile = "../TestsFiles/emptyFile.txt";
 
 		TEST_METHOD_INITIALIZE(FileRepositoryIntegrationTests_Initialize)
 		{
@@ -40,35 +42,35 @@ namespace IntegrationTests
 			Assert::IsTrue(error_thrown);
 		}
 
-		TEST_METHOD(loadPasswordFile_put_the_password_in_the_hashedPasswordVector)
+		TEST_METHOD(loadPasswordFile_put_the_password_in_tuple_in_the_hashedPasswordVector)
 		{
 			//Arrange
-			const string FILE_LINE_1 = "f71dbe52628a3f83a77ab494817525c6";
-			const string FILE_LINE_2 = "49d02d55ad10973b7b9d0dc9eba7fdf0";
-			const string FILE_LINE_3 = "5d933eef19aee7da192608de61b6c23d";
-			const string FILE_LINE_4 = "2db313fabca57504d9dc776e46b304f6";
-			const string FILE_LINE_5 = "bdb8c008fa551ba75f8481963f2201da";
+			const tuple<string, string, string> EXPECT_TUPLE_0{ "no_user", "f71dbe52628a3f83a77ab494817525c6", "" };
+			const tuple<string, string, string> EXPECT_TUPLE_1{ "no_user", "49d02d55ad10973b7b9d0dc9eba7fdf0", "" };
+			const tuple<string, string, string> EXPECT_TUPLE_2{ "no_user", "5d933eef19aee7da192608de61b6c23d", "" };
+			const tuple<string, string, string> EXPECT_TUPLE_3{ "no_user", "2db313fabca57504d9dc776e46b304f6", "" };
+			const tuple<string, string, string> EXPECT_TUPLE_4{ "no_user", "bdb8c008fa551ba75f8481963f2201da", "" };
 			//Action
-			fileRepository->loadPasswordFile(file_name);
+			fileRepository->loadPasswordFile(file_name_no_separator);
 
-			string vectorLine_1 = fileRepository->getAllHashedPasswords()[0];
-			string vectorLine_2 = fileRepository->getAllHashedPasswords()[1];
-			string vectorLine_3 = fileRepository->getAllHashedPasswords()[2];
-			string vectorLine_4 = fileRepository->getAllHashedPasswords()[3];
-			string vectorLine_5 = fileRepository->getAllHashedPasswords()[4];
+			tuple<string, string, string> result_tuple_0 = fileRepository->getAllHashedPasswords()[0];
+			tuple<string, string, string> result_tuple_1 = fileRepository->getAllHashedPasswords()[1];
+			tuple<string, string, string> result_tuple_2 = fileRepository->getAllHashedPasswords()[2];
+			tuple<string, string, string> result_tuple_3 = fileRepository->getAllHashedPasswords()[3];
+			tuple<string, string, string> result_tuple_4 = fileRepository->getAllHashedPasswords()[4];
 			//Assert
-			Assert::AreEqual(FILE_LINE_1, vectorLine_1);
-			Assert::AreEqual(FILE_LINE_2, vectorLine_2);
-			Assert::AreEqual(FILE_LINE_3, vectorLine_3);
-			Assert::AreEqual(FILE_LINE_4, vectorLine_4);
-			Assert::AreEqual(FILE_LINE_5, vectorLine_5);
+			Assert::AreEqual(EXPECT_TUPLE_0, result_tuple_0);
+			Assert::AreEqual(EXPECT_TUPLE_1, result_tuple_1);
+			Assert::AreEqual(EXPECT_TUPLE_2, result_tuple_2);
+			Assert::AreEqual(EXPECT_TUPLE_3, result_tuple_3);
+			Assert::AreEqual(EXPECT_TUPLE_4, result_tuple_4);
 		}
 
 		TEST_METHOD(hashed_Password_Vector_has_the_same_number_of_password_than_the_file)
 		{
 			//Arrange
 			const int NBR_PASSWORD_IN_FILE = 5;
-			fileRepository->loadPasswordFile(file_name);
+			fileRepository->loadPasswordFile(file_name_no_separator);
 			//Action
 			int hashedPwdVectorSize = fileRepository->getAllHashedPasswords().size();
 			//Assert
@@ -82,7 +84,7 @@ namespace IntegrationTests
 			//Action
 			try
 			{
-				fileRepository->loadPasswordFile("../TestsFiles/emptyFile.txt");
+				fileRepository->loadPasswordFile(emptyFile);
 			}
 			catch(logic_error){
 				exception_thrown = true;
@@ -91,5 +93,73 @@ namespace IntegrationTests
 			Assert::IsTrue(exception_thrown);
 		}
 
+		TEST_METHOD(if_separator_specified_and_no_separator_in_file_throw_invalid_argument)
+		{
+			//Arrange
+			bool exception_thrown = false;
+			//Action
+			try
+			{
+				fileRepository->loadPasswordFile(file_name_no_separator);
+			}
+			catch (invalid_argument) {
+				exception_thrown = true;
+			}
+			//Assert
+			Assert::IsTrue(exception_thrown);
+		}
+
+		TEST_METHOD(open_file_with_separator_and_one_line_should_create_a_vector_of_tuple_with_the_user_an_hashed_password_and_empty_string)
+		{
+			//Arrange
+			string file = "../TestsFIles/simple_password_separator.txt";
+			const tuple<string, string, string> ATTEMPT_TUPLE {"user1", "6d4db5ff0c117864a02827bad3c361b9", ""};
+			//Action
+			fileRepository->loadPasswordFile(file);
+			vector<tuple<string, string, string>> result_vector = fileRepository->getAllHashedPasswords();
+			//Assert
+			Assert::AreEqual(ATTEMPT_TUPLE, result_vector[0]);
+		}
+
+		TEST_METHOD(open_empty_file_with_separator_specified_should_return_an_runtime_error)
+		{
+			//Arrange
+			bool exception_thrown = false;
+			//Action
+			try
+			{
+				fileRepository->loadPasswordFile(emptyFile);
+			}
+			catch (runtime_error)
+			{
+				exception_thrown = true;
+			}
+			//Assert
+			Assert::IsTrue(exception_thrown);
+		}
+
+		TEST_METHOD(open_file_with_separator_and_multi_line_should_create_a_vector_of_tuple_with_the_user_an_hashed_password_and_empty_string)
+		{
+			//Arrange
+			const tuple<string, string, string> EXPECT_TUPLE_0{ "user1", "f71dbe52628a3f83a77ab494817525c6", "" };
+			const tuple<string, string, string> EXPECT_TUPLE_1{ "user2", "49d02d55ad10973b7b9d0dc9eba7fdf0", "" };
+			const tuple<string, string, string> EXPECT_TUPLE_2{ "user3", "5d933eef19aee7da192608de61b6c23d", "" };
+			const tuple<string, string, string> EXPECT_TUPLE_3{ "user4", "2db313fabca57504d9dc776e46b304f6", "" };
+			const tuple<string, string, string> EXPECT_TUPLE_4{ "user5", "bdb8c008fa551ba75f8481963f2201da", "" };
+			//Action
+			fileRepository->loadPasswordFile(file_name_with_separator);
+
+			tuple<string, string, string> result_tuple_0 = fileRepository->getAllHashedPasswords()[0];
+			tuple<string, string, string> result_tuple_1 = fileRepository->getAllHashedPasswords()[1];
+			tuple<string, string, string> result_tuple_2 = fileRepository->getAllHashedPasswords()[2];
+			tuple<string, string, string> result_tuple_3 = fileRepository->getAllHashedPasswords()[3];
+			tuple<string, string, string> result_tuple_4 = fileRepository->getAllHashedPasswords()[4];
+			//Assert
+			Assert::AreEqual(EXPECT_TUPLE_0, result_tuple_0);
+			Assert::AreEqual(EXPECT_TUPLE_1, result_tuple_1);
+			Assert::AreEqual(EXPECT_TUPLE_2, result_tuple_2);
+			Assert::AreEqual(EXPECT_TUPLE_3, result_tuple_3);
+			Assert::AreEqual(EXPECT_TUPLE_4, result_tuple_4);
+		}
 	};
 }
