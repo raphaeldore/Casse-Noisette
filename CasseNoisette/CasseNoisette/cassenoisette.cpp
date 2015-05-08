@@ -12,7 +12,7 @@ CasseNoisette::CasseNoisette(QWidget *parent)
 {
 	ui.setupUi(this);
 	
-	crackingTimer = new QTimer;
+	crackingTime = new QElapsedTimer;
 
 	crackingInProgress = false;
 
@@ -37,6 +37,7 @@ CasseNoisette::CasseNoisette(QWidget *parent)
 	/// Ce que le crackingWorker émet à cette classe (CasseNoisette)
 	connect(crackingWorker, &CrackingWorker::resultsReady, this, &CasseNoisette::handleResults);
 	connect(crackingWorker, SIGNAL(error(QString)), this, SLOT(errorString(QString)));
+	connect(crackingWorker, SIGNAL(running()), this, SLOT(crackingStarted()));
 	connect(crackingWorker, SIGNAL(stopped()), this, SLOT(crackingStopped()));
 
 	/// Ce que le crackingWorkerThread émet à lui-même
@@ -102,6 +103,8 @@ void CasseNoisette::handleResults()
 	QString passwords_found_message;
 	auto results = crackingWorker->getResults();
 
+	crackingTime->elapsed();
+
 	if (results.size() == 1)
 	{
 		passwords_found_message = "1 mot de passe trouvé:\n\n " + QString(results.at(0).c_str());
@@ -119,8 +122,15 @@ void CasseNoisette::handleResults()
 		passwords_found_message = "Aucun mot de passe trouvé";
 	}
 
+	passwords_found_message += "\n\n Temps total: " + QString::number(crackingTime->elapsed() * 0.001) + " secs";
+
 	msgBox.setText(passwords_found_message);
 	msgBox.exec();
+}
+
+void CasseNoisette::crackingStarted()
+{
+	crackingTime->restart();
 }
 
 void CasseNoisette::crackingStopped()

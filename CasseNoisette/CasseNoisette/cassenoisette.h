@@ -8,14 +8,14 @@
 //#include "../CrackEngine/ICrackEngine.h"
 #include <memory>
 #include "CrackingWorker.h"
-#include <QTimer>
+#include <QElapsedTimer>
 
 class CasseNoisette : public QMainWindow
 {
 	Q_OBJECT
 	QThread * crackingWorkerThread;
 	CrackingWorker * crackingWorker;
-	QTimer * crackingTimer;
+	QElapsedTimer * crackingTime;
 
 public:
 	CasseNoisette(QWidget *parent = 0);
@@ -25,6 +25,7 @@ public slots:
 	void on_startCrackBtn_clicked();
 	void on_pwdFileSelectBtn_clicked();
 	void handleResults();
+	void crackingStarted();
 	void crackingStopped();
 	void errorString(QString error);
 signals:
