@@ -3,7 +3,7 @@
 
 using namespace CrackEngine;
 
-void ICrackEngine::setHashedPasswords(const vector<string>& _hashedPasswords)
+void ICrackEngine::setHashedPasswords(const vector<tuple<string,string,string>>& _hashedPasswords)
 {
 	hashedPasswords = _hashedPasswords;
 }

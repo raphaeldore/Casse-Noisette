@@ -17,7 +17,7 @@ void BruteForce::Crack()
 {
 	for (const auto hashedPassword : ICrackEngine::hashedPasswords)
 	{
-		string result = Crack(hashedPassword);
+		string result = Crack(std::get<1>(hashedPassword));
 
 		if (result != "")
 		{
