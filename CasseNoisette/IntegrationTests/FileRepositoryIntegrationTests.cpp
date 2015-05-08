@@ -59,13 +59,11 @@ namespace IntegrationTests
 			tuple<string, string, string> result_tuple_3 = fileRepository->getAllHashedPasswords()[3];
 			tuple<string, string, string> result_tuple_4 = fileRepository->getAllHashedPasswords()[4];
 			//Assert
-			//Assert::AreEqual(EXPECT_TUPLE_0, result_tuple_0);
-			//Assert::AreEqual(EXPECT_TUPLE_1, result_tuple_1);
-			//Assert::AreEqual(EXPECT_TUPLE_2, result_tuple_2);
-			//Assert::AreEqual(EXPECT_TUPLE_3, result_tuple_3);
-			//Assert::AreEqual(EXPECT_TUPLE_4, result_tuple_4);
-
 			Assert::IsTrue(tuples_are_equal(EXPECT_TUPLE_0, result_tuple_0));
+			Assert::IsTrue(tuples_are_equal(EXPECT_TUPLE_1, result_tuple_1));
+			Assert::IsTrue(tuples_are_equal(EXPECT_TUPLE_2, result_tuple_2));
+			Assert::IsTrue(tuples_are_equal(EXPECT_TUPLE_3, result_tuple_3));
+			Assert::IsTrue(tuples_are_equal(EXPECT_TUPLE_4, result_tuple_4));
 		}
 
 		TEST_METHOD(hashed_Password_Vector_has_the_same_number_of_password_than_the_file)
@@ -95,22 +93,6 @@ namespace IntegrationTests
 			Assert::IsTrue(exception_thrown);
 		}
 
-		TEST_METHOD(if_separator_specified_and_no_separator_in_file_throw_invalid_argument)
-		{
-			//Arrange
-			bool exception_thrown = false;
-			//Action
-			try
-			{
-				fileRepository->loadPasswordFile(file_name_no_separator);
-			}
-			catch (invalid_argument) {
-				exception_thrown = true;
-			}
-			//Assert
-			Assert::IsTrue(exception_thrown);
-		}
-
 		TEST_METHOD(open_file_with_separator_and_one_line_should_create_a_vector_of_tuple_with_the_user_an_hashed_password_and_empty_string)
 		{
 			//Arrange
@@ -120,10 +102,10 @@ namespace IntegrationTests
 			fileRepository->loadPasswordFile(file);
 			vector<tuple<string, string, string>> result_vector = fileRepository->getAllHashedPasswords();
 			//Assert
-			//Assert::AreEqual(ATTEMPT_TUPLE, result_vector[0]);
+			Assert::IsTrue(tuples_are_equal(ATTEMPT_TUPLE, result_vector[0]));
 		}
 
-		TEST_METHOD(open_empty_file_with_separator_specified_should_return_an_runtime_error)
+		TEST_METHOD(open_empty_file_with_separator_specified_should_return_a_logic_error)
 		{
 			//Arrange
 			bool exception_thrown = false;
@@ -132,7 +114,7 @@ namespace IntegrationTests
 			{
 				fileRepository->loadPasswordFile(emptyFile, ";");
 			}
-			catch (runtime_error)
+			catch (logic_error)
 			{
 				exception_thrown = true;
 			}
@@ -157,11 +139,11 @@ namespace IntegrationTests
 			tuple<string, string, string> result_tuple_3 = fileRepository->getAllHashedPasswords()[3];
 			tuple<string, string, string> result_tuple_4 = fileRepository->getAllHashedPasswords()[4];
 			//Assert
-			//Assert::AreEqual(EXPECT_TUPLE_0, result_tuple_0);
-			//Assert::AreEqual(EXPECT_TUPLE_1, result_tuple_1);
-			//Assert::AreEqual(EXPECT_TUPLE_2, result_tuple_2);
-			//Assert::AreEqual(EXPECT_TUPLE_3, result_tuple_3);
-			//Assert::AreEqual(EXPECT_TUPLE_4, result_tuple_4);
+			Assert::IsTrue(tuples_are_equal(EXPECT_TUPLE_0, result_tuple_0));
+			Assert::IsTrue(tuples_are_equal(EXPECT_TUPLE_1, result_tuple_1));
+			Assert::IsTrue(tuples_are_equal(EXPECT_TUPLE_2, result_tuple_2));
+			Assert::IsTrue(tuples_are_equal(EXPECT_TUPLE_3, result_tuple_3));
+			Assert::IsTrue(tuples_are_equal(EXPECT_TUPLE_4, result_tuple_4));
 		}
 
 		TEST_METHOD(file_with_more_than_one_separator_per_line_return_invalid_argument)
