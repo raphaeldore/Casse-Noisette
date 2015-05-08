@@ -18,6 +18,7 @@ public:
 	CasseNoisette(QWidget *parent = 0);
 	~CasseNoisette();
 
+	string GetCharset() const;
 public slots:
 	void on_startCrackBtn_clicked();
 	void on_pwdFileSelectBtn_clicked();

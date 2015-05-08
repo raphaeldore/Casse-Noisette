@@ -6,6 +6,8 @@
 #include "../CrackEngine/Parameter.h"
 #include "../CrackEngine/CrackFactoryParams.h"
 
+#include "../CrackEngine/CharsetBuilder.h"
+
 #include "vld.h"
 
 CasseNoisette::CasseNoisette(QWidget *parent)
@@ -55,6 +57,28 @@ CasseNoisette::~CasseNoisette()
 	delete crackingTime;
 }
 
+string CasseNoisette::GetCharset() const
+{
+	CharsetBuilder charsetBuilder;
+	if (ui.chkCharsetLower->isChecked()) charsetBuilder.enableLowerAlpha();
+	if (ui.chkCharsetUpper->isChecked()) charsetBuilder.enableUpperAlpha();
+	if (ui.chkCharsetNumeric->isChecked()) charsetBuilder.enableNumeric();
+	if (ui.chkCharsetSpace->isChecked()) charsetBuilder.enableSpace();
+	if (ui.chkCharsetSpecial->isChecked()) charsetBuilder.enableSpecial();
+
+	if (!ui.txtCustomCharset->text().isEmpty())
+	{
+		// Les QString sont en UTF-16, et les std::string sont en UTF-8. On doit les convertir.
+		/* Avec windows on doit faire ça */
+		string utf8CustomCharset = ui.txtCustomCharset->text().toLocal8Bit().constData();
+		/* Avec toutes les autres OS on ferait: ui.txtCustomCharset->text().toUtf8().constData(); */
+
+		charsetBuilder.addCustomCharset(utf8CustomCharset);
+	}
+
+	return charsetBuilder.BuildCharset();
+}
+
 void CasseNoisette::on_startCrackBtn_clicked()
 {
 	if (crackingInProgress) {
@@ -80,7 +104,7 @@ void CasseNoisette::on_startCrackBtn_clicked()
 	// Paramètres spécifique 
 	if (tabIndex == 0)
 	{
-		crackFactoryParams.addParameter(Parameter(CHARSET, "abcdefghijklmnopqrstuvwxyz"));
+		crackFactoryParams.addParameter(Parameter(CHARSET, GetCharset()));
 		crackFactoryParams.addParameter(Parameter(MAX_PWD_LENGTH, ui.spinBox->text().toStdString()));
 		crackingWorker->setCrackEngineType(BRUTE_FORCE);
 	} else
@@ -115,14 +139,16 @@ void CasseNoisette::handleResults()
 
 	if (results.size() == 1)
 	{
-		passwords_found_message = "1 mot de passe trouvé:\n\n " + QString(results.at(0).c_str());
+		auto passEncoded = QString::fromLocal8Bit(results.at(0).c_str());
+		passwords_found_message = "1 mot de passe trouvé:\n\n " + passEncoded;
 	} else if (results.size() > 1)
 	{
 		passwords_found_message = QString::number(results.size()) + " mots de passe trouvés:\n ";
 		for (auto pass : results)
 		{
 			passwords_found_message += "\n";
-			passwords_found_message += QString(pass.c_str());
+			auto passEncoded = QString::fromLocal8Bit(pass.c_str());
+			passwords_found_message += passEncoded;
 		}
 	}
 	else
