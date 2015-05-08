@@ -3,10 +3,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include <QThread>
-#include <QFileDialog>
 #include "ui_cassenoisette.h"
-//#include "../CrackEngine/ICrackEngine.h"
-#include <memory>
 #include "CrackingWorker.h"
 #include <QElapsedTimer>
 

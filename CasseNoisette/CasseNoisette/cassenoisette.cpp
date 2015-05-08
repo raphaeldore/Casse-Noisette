@@ -1,9 +1,10 @@
 #include "cassenoisette.h"
 #include <iostream>
+#include <QMessageBox>
+#include <QFileDialog>
+
 #include "../CrackEngine/Parameter.h"
 #include "../CrackEngine/CrackFactoryParams.h"
-
-#include <QMessageBox>
 
 //#include <thread>
 
