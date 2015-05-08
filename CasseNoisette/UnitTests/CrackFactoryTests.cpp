@@ -44,7 +44,7 @@ namespace UnitTests
 		TEST_METHOD(CreateCrackEngine_should_return_nullptr_when_creating_dictionary_engine_type)
 		{
 			// Action 
-			unique_ptr<CrackEngine::ICrackEngine> crackEngine = crackFactory->CreateCrackEngine(BRUTE_FORCE, *crackFactoryParams);
+			unique_ptr<CrackEngine::ICrackEngine> crackEngine = crackFactory->CreateCrackEngine(DICTIONARY, *crackFactoryParams);
 
 			// Assert
 			Assert::IsTrue(crackEngine == nullptr);
