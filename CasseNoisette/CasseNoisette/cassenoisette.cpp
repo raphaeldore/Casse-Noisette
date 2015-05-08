@@ -84,6 +84,7 @@ void CasseNoisette::on_startCrackBtn_clicked()
 	if (crackingInProgress) {
 		// On informe à ceux qui écoutent qu'on veut arrêter le cassage
 		// Dans notre cas, c'est le crackingWorker qui écoute.
+		crackingWorker->stopCracking();
 		emit stopCracking();
 		return;
 	}
