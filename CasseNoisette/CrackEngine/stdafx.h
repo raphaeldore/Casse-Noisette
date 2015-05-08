@@ -15,7 +15,6 @@
 #include <vector>
 #include <set>
 #include <iostream>
-#include <tuple>
 
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme
 

@@ -3,7 +3,7 @@
 
 using namespace CrackEngine;
 
-void ICrackEngine::setHashedPasswords(const vector<tuple<string,string,string>>& _hashedPasswords)
+void ICrackEngine::setHashedPasswords(const multimap<string, string> & _hashedPasswords)
 {
 	hashedPasswords = _hashedPasswords;
 }
@@ -18,7 +18,7 @@ void ICrackEngine::setPwdHashFunction(const string& _pwdHashFunction)
 	hashAlgorithm = CustomCrypto::HashFactory::GetHashFactory()->CreateHashAlgorithm(_pwdHashFunction);
 }
 
-vector<string> ICrackEngine::getResults()
+vector<tuple<string, string, string>> ICrackEngine::getResults()
 {
 	return results;
 }

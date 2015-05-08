@@ -7,14 +7,16 @@ namespace CrackEngine
 	public:
 		virtual ~ICrackEngine() {}
 		virtual void Crack() = 0;
-		void setHashedPasswords(const vector<tuple<string,string,string>> & _hashedPasswords);
+		void setHashedPasswords(const multimap<string, string> & _hashedPasswords);
 		void setResultsFilePath(const string & _resultsFilePath);
 		void setPwdHashFunction(const string & _pwdHashFunction);
-		vector<string> getResults();
+		vector<tuple<string, string, string>> getResults();
 	protected:
+		typedef vector<tuple<string, string, string>> StringTupleVector;
+
 		CustomCrypto::IHash * hashAlgorithm;
 		string resultsFilePath;
-		vector<tuple<string,string,string>> hashedPasswords;
-		vector<string> results;
+		multimap<string, string> hashedPasswords;
+		StringTupleVector results;
 	};
 }

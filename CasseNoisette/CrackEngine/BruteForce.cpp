@@ -15,13 +15,13 @@ BruteForce::~BruteForce()
 
 void BruteForce::Crack()
 {
-	for (const auto hashedPassword : ICrackEngine::hashedPasswords)
+	for (auto hashedPassword : ICrackEngine::hashedPasswords)
 	{
-		string result = Crack(std::get<1>(hashedPassword));
+		string result = Crack(hashedPassword.second);
 
 		if (result != "")
 		{
-			results.push_back(result);
+			results.push_back(make_tuple(hashedPassword.first, hashedPassword.second, result));
 		}
 	}
 }
