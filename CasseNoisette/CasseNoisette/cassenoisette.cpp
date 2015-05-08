@@ -67,13 +67,16 @@ void CasseNoisette::on_startCrackBtn_clicked()
 	int tabIndex = ui.tabWidget->currentIndex();
 	CrackFactoryParams crackFactoryParams;
 
+	// Paramètres universels
+	crackFactoryParams.addParameter(Parameter(PWD_FILE_PATH, ui.pwdFileSelectTxt->text().toStdString()));
+	crackFactoryParams.addParameter(Parameter(RESULTS_FILE_PATH, "chemin/bidon/fichier_bidon.txt"));
+	crackFactoryParams.addParameter(Parameter(HASH_TYPE, ui.hashFunctionsComboBox->currentText().toStdString()));
+
+	// Paramètres spécifique 
 	if (tabIndex == 0)
 	{
-		crackFactoryParams.addParameter(Parameter(PWD_FILE_PATH, ui.pwdFileSelectTxt->text().toStdString()));
-		crackFactoryParams.addParameter(Parameter(RESULTS_FILE_PATH, "chemin/bidon/fichier_bidon.txt"));
 		crackFactoryParams.addParameter(Parameter(CHARSET, "abcdefghijklmnopqrstuvwxyz"));
 		crackFactoryParams.addParameter(Parameter(MAX_PWD_LENGTH, ui.spinBox->text().toStdString()));
-		crackFactoryParams.addParameter(Parameter(HASH_TYPE, ui.hashFunctionsComboBox->currentText().toStdString()));
 		crackingWorker->setCrackEngineType(BRUTE_FORCE);
 	} else
 	{
