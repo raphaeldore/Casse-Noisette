@@ -12,19 +12,25 @@
 class CasseNoisette : public QMainWindow
 {
 	Q_OBJECT
-	QThread crackingWorkerThread;
+	QThread * crackingWorkerThread;
 	CrackingWorker * crackingWorker;
 public:
 	CasseNoisette(QWidget *parent = 0);
 	~CasseNoisette();
+
 public slots:
 	void on_startCrackBtn_clicked();
 	void on_pwdFileSelectBtn_clicked();
-	void handleResults(std::vector<std::string> _results);
+	void handleResults();
+	void crackingStopped();
+	void errorString(QString error);
 signals:
-	//void operateCrackingWorker(std::unique_ptr<CrackEngine::ICrackEngine> _crackEngine);
+	void startCracking();
+	void stopCracking();
+	void error(QString err);
 private:
 	Ui::CasseNoisetteClass ui;
+	bool crackingInProgress;
 };
 
 #endif // CASSENOISETTE_H

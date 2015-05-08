@@ -2,18 +2,46 @@
 #include <iostream>
 #include "../CrackEngine/Parameter.h"
 #include "../CrackEngine/CrackFactoryParams.h"
-//#include "../CrackEngine/CrackFactory.h"
 
 #include <QMessageBox>
 
-//#include "CrackingWorker.h"
-
-#include <thread>
+//#include <thread>
 
 CasseNoisette::CasseNoisette(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
+	
+	crackingInProgress = false;
+
+	// On instancie un crackingWorker inactif (par défaut)
+	crackingWorker = new CrackingWorker;
+	crackingWorkerThread = new QThread;
+
+	// crackingWorker passe du main thread à son propre thread.
+	// (alors il ne bloquera pas l'interface)
+	crackingWorker->moveToThread(crackingWorkerThread);
+
+	
+	// On configure les différentes connections (Patron observer de QT):
+
+	/// Ce que cette classe (CasseNoisette) émet au crackingWorker.
+	connect(this, SIGNAL(startCracking()), crackingWorker, SLOT(startCracking()));
+	connect(this, SIGNAL(stopCracking()), crackingWorker, SLOT(stopCracking()));
+
+	/// Ce que le crackingWorker émet à son thread (crackingWorkerThread)
+	connect(crackingWorker, SIGNAL(finished()), crackingWorkerThread, SLOT(deleteLater()));
+
+	/// Ce que le crackingWorker émet à cette classe (CasseNoisette)
+	connect(crackingWorker, &CrackingWorker::resultsReady, this, &CasseNoisette::handleResults);
+	connect(crackingWorker, SIGNAL(error(QString)), this, SLOT(errorString(QString)));
+	connect(crackingWorker, SIGNAL(stopped()), this, SLOT(crackingStopped()));
+
+	/// Ce que le crackingWorkerThread émet à lui-même
+	connect(crackingWorkerThread, SIGNAL(finished()), crackingWorkerThread, SLOT(deleteLater()));
+
+	// On démarre le thread. (En stand-by car crackingWorker est inactif par défaut).
+	crackingWorkerThread->start(QThread::HighPriority);
 }
 
 CasseNoisette::~CasseNoisette()
@@ -22,6 +50,14 @@ CasseNoisette::~CasseNoisette()
 
 void CasseNoisette::on_startCrackBtn_clicked()
 {
+	if (crackingInProgress) {
+		// On informe à ceux qui écoutent qu'on veut arrêter le cassage
+		// Dans notre cas, c'est le crackingWorker qui écoute.
+		emit stopCracking();
+		ui.startCrackBtn->setText("Démarrer le cassage");
+		return;
+	}
+
 	/*
 	TODO: Séparer cette méthode en plusieurs méthodes (Pour un autre sprint...Pour l'instant ça fait le travail)
 	TODO: Validation de l'entée (Ex: Si aucun fichier choisi on ne devrait pas permettre le cassage).
@@ -41,102 +77,15 @@ void CasseNoisette::on_startCrackBtn_clicked()
 	crackFactoryParams.addParameter(Parameter(MAX_PWD_LENGTH, ui.spinBox->text().toStdString()));
 	// TODO: Remplace la ligne ci-dessous par: crackFactoryParams.addParameter(Parameter(HASH_TYPE, ui.hashFunctionsComboBox->currentText().toStdString()));
 	crackFactoryParams.addParameter(Parameter(HASH_TYPE, "MD5"));
-	//unique_ptr<ICrackEngine> crackEngine;
 
-	QMessageBox errorBox;
-	QString errorText = "Il y a eut une erreur avec vos choix:\n";
+	crackingWorker->setCrackEngineType(BRUTE_FORCE);
+	crackingWorker->setCrackFactoryParameters(crackFactoryParams);
 
-	//try
-	//{
-	//	crackEngine = CrackFactory::GetCrackFactory()->CreateCrackEngine(BRUTE_FORCE, crackFactoryParams);
-	//}
-	//catch (const runtime_error & err)
-	//{
-	//	cerr << err.what();
-	//	errorBox.setText(errorText + QString(err.what()));
-	//	errorBox.exec();
-	//}
-	//catch (const exception & ex)
-	//{
-	//	cerr << ex.what();
-	//	errorBox.setText(errorText + QString(ex.what()));
-	//	errorBox.exec();
-	//}
+	// On informe à ceux qui écoutent qu'on veut démarrer le cassage
+	// Dans notre cas, c'est le crackingWorker qui écoute.
+	emit startCracking();
 
-	//CrackingWorker * crackingWorker = new CrackingWorker(BRUTE_FORCE, crackFactoryParams);
-	//crackingWorker->moveToThread(&crackingWorkerThread);
-	//connect(&crackingWorkerThread, &QThread::finished, crackingWorker, &QObject::deleteLater);
-	//connect(this, &CasseNoisette::operateCrackingWorker, crackingWorker, &CrackingWorker::startCracking);
-	//connect(crackingWorker, &CrackingWorker::resultsReady, this, &CasseNoisette::handleResults);
-	//crackingWorkerThread.start(QThread::HighPriority);
-
-	/*CrackingWorker * crackingWorker = new CrackingWorker(BRUTE_FORCE, crackFactoryParams);
-	crackingWorker->moveToThread(&crackingWorkerThread);
-	connect(&crackingWorkerThread, &QThread::finished, crackingWorker, &QObject::deleteLater);
-	connect(this, &CasseNoisette::operateCrackingWorker, crackingWorker, &CrackingWorker::startCracking);
-	connect(crackingWorker, &CrackingWorker::resultsReady, this, &CasseNoisette::handleResults);
-	crackingWorkerThread.start(QThread::HighPriority);*/
-
-
-	//CrackingWorker * crackingWorker = new CrackingWorker(BRUTE_FORCE, crackFactoryParams);
-	crackingWorker = new CrackingWorker(BRUTE_FORCE, crackFactoryParams);
-	crackingWorker->moveToThread(&crackingWorkerThread);
-	//connect(crackingWorker, SIGNAL(error(QString)), this, SLOT(errorString(QString)));
-	connect(&crackingWorkerThread, SIGNAL(started()), crackingWorker, SLOT(startCracking()));
-	connect(crackingWorker, SIGNAL(finished()), &crackingWorkerThread, SLOT(quit()));
-	connect(crackingWorker, SIGNAL(finished()), &crackingWorkerThread, SLOT(deleteLater()));
-	connect(&crackingWorkerThread, SIGNAL(finished()), &crackingWorkerThread, SLOT(deleteLater()));
-	crackingWorkerThread.start(QThread::HighPriority);
-
-
-
-
-	/*
-	
-	QThread* thread = new QThread;
-Worker* worker = new Worker();
-worker->moveToThread(thread);
-connect(worker, SIGNAL(error(QString)), this, SLOT(errorString(QString)));
-connect(thread, SIGNAL(started()), worker, SLOT(process()));
-connect(worker, SIGNAL(finished()), thread, SLOT(quit()));
-connect(worker, SIGNAL(finished()), worker, SLOT(deleteLater()));
-connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
-thread->start();
-	*/
-
-	/*
-	
-	connect(&workerThread, &QThread::finished, worker, &QObject::deleteLater);
-        connect(this, &Controller::operate, worker, &Worker::doWork);
-        connect(worker, &Worker::resultReady, this, &Controller::handleResults);
-        workerThread.start();
-	*/
-
-	//ui.startCrackBtn->setEnabled(false);
-	//crackEngine->Crack(); // TODO: Démarrer ça dans un autre thread. Car pour l'instant ça bloque l'application.
-	//ui.startCrackBtn->setEnabled(true);
-
-	//QString passwords_found_message;
-
-	//auto results = crackEngine->getResults();
-
-	//if (results.size() > 0)
-	//{
-	//	passwords_found_message = QString::number(results.size()) + " mot(s) de passe trouvé(s):\n ";
-	//	for (auto pass : results)
-	//	{
-	//		passwords_found_message += "\n";
-	//		passwords_found_message += QString(pass.c_str());
-	//	}
-	//}
-	//else
-	//{
-	//	passwords_found_message = "Aucun mot de passe trouvé";
-	//}
-
-	//QMessageBox msgBox;
-	//msgBox.setText(passwords_found_message);
-	//msgBox.exec();
+	ui.startCrackBtn->setText("Annuler le cassage");
 }
 
 void CasseNoisette::on_pwdFileSelectBtn_clicked()
@@ -145,7 +94,7 @@ void CasseNoisette::on_pwdFileSelectBtn_clicked()
 	ui.pwdFileSelectTxt->setText(fileName);
 }
 
-void CasseNoisette::handleResults(vector<string> _results)
+void CasseNoisette::handleResults()
 {
 	QString passwords_found_message;
 	auto results = crackingWorker->getResults();
@@ -167,4 +116,16 @@ void CasseNoisette::handleResults(vector<string> _results)
 	QMessageBox msgBox;
 	msgBox.setText(passwords_found_message);
 	msgBox.exec();
+}
+
+void CasseNoisette::crackingStopped()
+{
+	ui.startCrackBtn->setText("Démarrer le cassage");
+}
+
+void CasseNoisette::errorString(QString error)
+{
+	QMessageBox errorBox;
+	errorBox.setText(error);
+	errorBox.exec();
 }
