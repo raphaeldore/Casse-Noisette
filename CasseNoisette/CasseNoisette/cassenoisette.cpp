@@ -78,11 +78,7 @@ string CasseNoisette::GetCharset() const
 	if (!ui.txtCustomCharset->text().isEmpty())
 	{
 		// Les QString sont en UTF-16, et les std::string sont en UTF-8. On doit les convertir.
-		/* Avec windows on doit faire ça */
-		string utf8CustomCharset = ui.txtCustomCharset->text().toLocal8Bit().constData();
-		/* Avec toutes les autres OS on ferait: ui.txtCustomCharset->text().toUtf8().constData(); */
-
-		charsetBuilder.addCustomCharset(utf8CustomCharset);
+		string utf8CustomCharset = ui.txtCustomCharset->text().toLocal8Bit().constData();;	
 	}
 
 	return charsetBuilder.BuildCharset();
