@@ -14,7 +14,7 @@ public:
 	void setCrackEngineType(const CRACK_ENGINE_TYPES & _crackEngineType);
 	void setCrackFactoryParameters(const CrackFactoryParams & _crackFactoryParams);
 	
-	const vector<string> & getResults() const;
+	const vector<tuple<string, string, string>> & getResults() const;
 signals:
 	void resultsReady();
 	void running();
@@ -37,6 +37,6 @@ private:
 	volatile bool isRunning, isStopped;
 	CRACK_ENGINE_TYPES engineType;
 	CrackFactoryParams crackFactoryParams;
-	vector<string> results;
+	vector<tuple<string, string, string>> results;
 };
 

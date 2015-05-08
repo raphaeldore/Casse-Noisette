@@ -4,7 +4,7 @@ CrackingWorker::CrackingWorker() : isRunning(false), isStopped(false)
 {
 }
 
-const vector<string> & CrackingWorker::getResults() const
+const vector<tuple<string, string, string>> & CrackingWorker::getResults() const
 {
 	return results;
 }
