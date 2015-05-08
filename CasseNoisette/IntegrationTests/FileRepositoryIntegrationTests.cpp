@@ -146,6 +146,21 @@ namespace IntegrationTests
 			Assert::IsTrue(tuples_are_equal(EXPECT_TUPLE_4, result_tuple_4));
 		}
 
+		TEST_METHOD(open_file_with_a_multiple_character_seperator_should_create_a_vector_of_tuple_with_the_user_an_hashed_password_and_empty_string)
+		{
+			// Arrange
+			string file = "../TestsFIles/simple_password_multichar_separator.txt";
+			const tuple<string, string, string> EXPECTED_TUPLE{ "user1", "6d4db5ff0c117864a02827bad3c361b9", "" }; //user1!!6d4db5ff0c117864a02827bad3c361b9
+
+			// Action
+			fileRepository->loadPasswordFile(file, "!!");
+			auto hashedPasswords = fileRepository->getAllHashedPasswords();
+			const tuple<string, string, string> ACTUAL_TUPLE = hashedPasswords[0];
+
+			// Assert
+			Assert::IsTrue(tuples_are_equal(EXPECTED_TUPLE, ACTUAL_TUPLE));
+		}
+
 		TEST_METHOD(file_with_more_than_one_separator_per_line_return_invalid_argument)
 		{
 			//Arrange
