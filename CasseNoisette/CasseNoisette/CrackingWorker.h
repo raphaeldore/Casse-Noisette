@@ -29,8 +29,8 @@ private slots:
 	void crack();
 private:
 	/*
-	Volatile pour empêcher les optimisations par le processeur.
-	Car leur valeur dépend de l'action de l'utilisateur.
+	Volatile pour empêcher les optimisations par le compilateur.
+	Car la valeur de isRunning et isStopped dépend de l'action de l'utilisateur.
 	(et donc le compilateur ne peut déterminer leur valeur lors
 	de la compilation).
 	*/
