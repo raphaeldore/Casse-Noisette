@@ -109,8 +109,9 @@ void CasseNoisette::on_startCrackBtn_clicked()
 	// Paramètres spécifique 
 	if (tabIndex == 0)
 	{
-		string seperator = ui.txtPwdsSeperator->text().toStdString();
-		crackFactoryParams.addParameter(Parameter(SEPERATOR, seperator == "" ? "" : seperator));
+		ui.txtPwdsSeperator->text().isEmpty();
+		auto seperator = ui.txtPwdsSeperator->text().isEmpty() ? ":" : ui.txtPwdsSeperator->text().toStdString();
+		crackFactoryParams.addParameter(Parameter(SEPERATOR, seperator));
 		crackFactoryParams.addParameter(Parameter(CHARSET, GetCharset()));
 		crackFactoryParams.addParameter(Parameter(MAX_PWD_LENGTH, ui.spinMaxPwdLenght->text().toStdString()));
 		crackingWorker->setCrackEngineType(BRUTE_FORCE);
