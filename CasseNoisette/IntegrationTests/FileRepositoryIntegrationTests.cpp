@@ -51,11 +51,11 @@ namespace IntegrationTests
 			multimap<string, string> expectedMap;
 			string userName = "no_user";
 
-			expectedMap.insert(make_pair(userName, "f71dbe52628a3f83a77ab494817525c6"));
-			expectedMap.insert(make_pair(userName, "49d02d55ad10973b7b9d0dc9eba7fdf0"));
-			expectedMap.insert(make_pair(userName, "5d933eef19aee7da192608de61b6c23d"));
-			expectedMap.insert(make_pair(userName, "2db313fabca57504d9dc776e46b304f6"));
-			expectedMap.insert(make_pair(userName, "bdb8c008fa551ba75f8481963f2201da"));
+			expectedMap.insert(make_pair("f71dbe52628a3f83a77ab494817525c6", userName));
+			expectedMap.insert(make_pair("49d02d55ad10973b7b9d0dc9eba7fdf0", userName));
+			expectedMap.insert(make_pair("5d933eef19aee7da192608de61b6c23d", userName));
+			expectedMap.insert(make_pair("2db313fabca57504d9dc776e46b304f6", userName));
+			expectedMap.insert(make_pair("bdb8c008fa551ba75f8481963f2201da", userName));
 
 			//Action
 			fileRepository->loadPasswordFile(file_name_no_separator);
@@ -100,7 +100,7 @@ namespace IntegrationTests
 			//Arrange
 			string file = "../TestsFIles/simple_password_separator.txt";
 			multimap<string, string> EXPECTED_MAP;
-			EXPECTED_MAP.insert(make_pair("user1", "6d4db5ff0c117864a02827bad3c361b9"));
+			EXPECTED_MAP.insert(make_pair("6d4db5ff0c117864a02827bad3c361b9", "user1"));
 
 			//Action
 			fileRepository->loadPasswordFile(file);
@@ -133,11 +133,11 @@ namespace IntegrationTests
 		{
 			//Arrange
 			multimap<string, string> EXPECTED_MAP;
-			EXPECTED_MAP.insert(make_pair("user1", "f71dbe52628a3f83a77ab494817525c6"));
-			EXPECTED_MAP.insert(make_pair("user2", "49d02d55ad10973b7b9d0dc9eba7fdf0"));
-			EXPECTED_MAP.insert(make_pair("user3", "5d933eef19aee7da192608de61b6c23d"));
-			EXPECTED_MAP.insert(make_pair("user4", "2db313fabca57504d9dc776e46b304f6"));
-			EXPECTED_MAP.insert(make_pair("user5", "bdb8c008fa551ba75f8481963f2201da"));
+			EXPECTED_MAP.insert(make_pair("f71dbe52628a3f83a77ab494817525c6", "user1"));
+			EXPECTED_MAP.insert(make_pair("49d02d55ad10973b7b9d0dc9eba7fdf0", "user2"));
+			EXPECTED_MAP.insert(make_pair("5d933eef19aee7da192608de61b6c23d", "user3"));
+			EXPECTED_MAP.insert(make_pair("2db313fabca57504d9dc776e46b304f6", "user4"));
+			EXPECTED_MAP.insert(make_pair("bdb8c008fa551ba75f8481963f2201da", "user5"));
 
 			//Action
 			fileRepository->loadPasswordFile(file_name_with_separator);
@@ -153,7 +153,7 @@ namespace IntegrationTests
 			// Arrange
 			string file = "../TestsFIles/simple_password_multichar_separator.txt";
 			multimap<string, string> EXPECTED_MAP;
-			EXPECTED_MAP.insert(make_pair("user1", "6d4db5ff0c117864a02827bad3c361b9"));
+			EXPECTED_MAP.insert(make_pair("6d4db5ff0c117864a02827bad3c361b9", "user1"));
 
 			//Action
 			fileRepository->loadPasswordFile(file, "!!");
