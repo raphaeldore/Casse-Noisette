@@ -3,6 +3,12 @@
 
 using namespace CrackEngine;
 
+
+void ICrackEngine::cancelCrack()
+{
+	running = false;
+}
+
 void ICrackEngine::setHashedPasswords(const multimap<string, string> & _hashedPasswords)
 {
 	hashedPasswords = _hashedPasswords;

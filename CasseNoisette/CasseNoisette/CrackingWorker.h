@@ -37,6 +37,7 @@ private:
 	volatile bool isRunning, isStopped;
 	CRACK_ENGINE_TYPES engineType;
 	CrackFactoryParams crackFactoryParams;
+	unique_ptr<ICrackEngine> crackEngine;
 	vector<tuple<string, string, string>> results;
 };
 

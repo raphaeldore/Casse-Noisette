@@ -15,7 +15,8 @@ BruteForce::~BruteForce()
 
 void BruteForce::Crack()
 {
-	for (auto hashedPassword : ICrackEngine::hashedPasswords)
+	running = true;
+	for (const auto hashedPassword : ICrackEngine::hashedPasswords)
 	{
 		string result = Crack(hashedPassword.second);
 
@@ -75,7 +76,7 @@ string BruteForce::Crack(const string& _hashedPassword) const
 	... et ainsi de suite.
 	*/
 
-	while (true)
+	while (running)
 	{
 		// Dans cette boucle on essaye toutes les caractères du charset à la position maxPwdLength - 1.
 		// Ce n'est jamais le même caractère, puisqu'il est "shifté" vers la droite dans la
@@ -136,4 +137,7 @@ string BruteForce::Crack(const string& _hashedPassword) const
 			}
 		}
 	}
+
+	// Si on se rends ici, c'est que quelqu'un a appellé la fonction stopCrack();
+	return string("");
 }

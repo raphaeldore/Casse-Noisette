@@ -7,6 +7,7 @@ namespace CrackEngine
 	public:
 		virtual ~ICrackEngine() {}
 		virtual void Crack() = 0;
+		void cancelCrack();
 		void setHashedPasswords(const multimap<string, string> & _hashedPasswords);
 		void setResultsFilePath(const string & _resultsFilePath);
 		void setPwdHashFunction(const string & _pwdHashFunction);
@@ -18,5 +19,6 @@ namespace CrackEngine
 		string resultsFilePath;
 		multimap<string, string> hashedPasswords;
 		StringTupleVector results;
+		volatile bool running = false;
 	};
 }
