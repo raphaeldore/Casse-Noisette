@@ -45,6 +45,24 @@ void FileRepository::loadPasswordFile(const string _pwdFilePath, string _separat
 	ifile.close();
 }
 
+vector<string> FileRepository::loadDictionaryFile(const string & _dictFilePath)
+{
+	ifstream dict(_dictFilePath);
+	if (!dict.is_open()) throw runtime_error("Le fichier dictionnaire n'existe pas.");
+	if (fileIsEmpty(dict))
+	{
+		dict.close();
+		throw runtime_error("Le fichier dictionnaire est vide.");
+	}
+
+	istream_iterator<string> dict_iter(dict);
+	istream_iterator<string> eof;
+
+	vector<string> dictionary(dict_iter, eof);
+
+	return dictionary;
+}
+
 const multimap<string, string> & FileRepository::getAllHashedPasswords() const
 {
 	return hashedPasswords;
@@ -52,7 +70,7 @@ const multimap<string, string> & FileRepository::getAllHashedPasswords() const
 
 bool FileRepository::fileIsEmpty(ifstream& _file) const
 {
-	return _file.peek() == std::ifstream::traits_type::eof();
+	return _file.peek() == ifstream::traits_type::eof();
 }
 
 vector<string> FileRepository::split(const string& _string, const string& _separator) const
