@@ -32,3 +32,4 @@
 #include "../CrackEngine/CrackFactory.h"
 #include "../CrackEngine/BruteForce.h"
 #include "../CrackEngine/CharsetBuilder.h"
+#include "../CrackEngine/Dictionary.h"

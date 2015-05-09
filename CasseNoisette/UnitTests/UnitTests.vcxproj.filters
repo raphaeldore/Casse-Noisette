@@ -62,5 +62,8 @@
     <ClCompile Include="CharsetBuilderTests.cpp">
       <Filter>Fichiers sources\CrackEngineTests</Filter>
     </ClCompile>
+    <ClCompile Include="DictionaryTests.cpp">
+      <Filter>Fichiers sources\CrackEngineTests</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
