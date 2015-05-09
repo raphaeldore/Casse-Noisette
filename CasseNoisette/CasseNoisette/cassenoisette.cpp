@@ -68,19 +68,16 @@ QString CasseNoisette::tupleToString(const tuple<string, string, string> & _tupl
 
 string CasseNoisette::GetCharset() const
 {
-	CharsetBuilder charsetBuilder;
-	if (ui.chkCharsetLower->isChecked()) charsetBuilder.enableLowerAlpha();
-	if (ui.chkCharsetUpper->isChecked()) charsetBuilder.enableUpperAlpha();
-	if (ui.chkCharsetNumeric->isChecked()) charsetBuilder.enableNumeric();
-	if (ui.chkCharsetSpace->isChecked()) charsetBuilder.enableSpace();
-	if (ui.chkCharsetSpecial->isChecked()) charsetBuilder.enableSpecial();
-
-	if (!ui.txtCustomCharset->text().isEmpty())
-	{
-		// Les QString sont en UTF-16, et les std::string sont en UTF-8. On doit les convertir.
-		string utf8CustomCharset = ui.txtCustomCharset->text().toLocal8Bit().constData();
-		charsetBuilder.addCustomCharset(utf8CustomCharset);
-	}
+	CharsetBuilder charsetBuilder {
+		ui.chkCharsetLower->isChecked(),
+		ui.chkCharsetUpper->isChecked(),
+		ui.chkCharsetNumeric->isChecked(),
+		ui.chkCharsetSpace->isChecked(),
+		ui.chkCharsetSpecial->isChecked(),
+		ui.txtCustomCharset->text().toLocal8Bit().constData() // Les QString sont en UTF-16, 
+															  // et les std::string sont en UTF-8. 
+															  // On doit les convertir.
+	};
 
 	return charsetBuilder.BuildCharset();
 }
