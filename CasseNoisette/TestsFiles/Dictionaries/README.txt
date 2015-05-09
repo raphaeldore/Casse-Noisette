@@ -1,0 +1,1 @@
+Unpack rockyou.7z in this directory. Be sure the file is named `rockyou.txt`, or else the gitignore file will not ignore it.

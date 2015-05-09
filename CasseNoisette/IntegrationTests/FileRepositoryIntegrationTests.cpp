@@ -5,6 +5,9 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
 using namespace DataLayer;
 
+// À décommenter pour tester avec un gros dictionnaire (attention, il faut beaucoup de RAM!)
+//#define TEST_LARGE_DICTIONARY
+
 namespace IntegrationTests
 {
 	TEST_CLASS(FileRepositoryIntegrationTests)
@@ -179,6 +182,96 @@ namespace IntegrationTests
 			//Assert
 			Assert::IsTrue(exception_thrown);
 		}
+
+
+		//////////////////////////////////////// LoadDictionary ////////////////////////////////////////
+
+		TEST_METHOD(load_dictionary_file_returns_all_words_in_the_dictionary)
+		{
+			// Arrange
+			string dictionaryPath = "../TestsFiles/Dictionaries/small_dict.txt";
+			unsigned int EXPECTED_DICTIONARY_SIZE = 4;
+			vector<string> EXPECTED_DICTIONARY {
+				"a",
+				"b",
+				"c",
+				"patate"
+			};
+
+			// Action
+			vector<string> ACTUAL_DICTIONARY = fileRepository->loadDictionaryFile(dictionaryPath);
+
+			// Assert
+			Assert::AreEqual(EXPECTED_DICTIONARY_SIZE, ACTUAL_DICTIONARY.size());
+			Assert::IsTrue(EXPECTED_DICTIONARY == ACTUAL_DICTIONARY);
+		}
+
+		TEST_METHOD(load_dictionary_throws_runtime_exception_when_file_does_not_exist)
+		{
+			// Arrange
+			auto loadDictionaryWithNonExistantFileFunction = [this] {fileRepository->loadDictionaryFile("this_file_does_not_exist"); };
+
+			// Assert
+			Assert::ExpectException<runtime_error>(loadDictionaryWithNonExistantFileFunction);
+		}
+
+		TEST_METHOD(load_dictionary_throws_runtime_exception_when_file_is_empty)
+		{
+			// Arrange
+			auto loadDictionaryWithEmptyFileFunction = [this] {fileRepository->loadDictionaryFile("../TestsFiles/Dictionaries/empty_dict.txt"); };
+
+			// Assert
+			Assert::ExpectException<runtime_error>(loadDictionaryWithEmptyFileFunction);
+		}
+
+#ifdef TEST_LARGE_DICTIONARY
+
+		TEST_METHOD(load_dictionary_file_works_with_large_files)
+		{
+			/********************************************
+			* NOTE: Vous devez décompresser le fichier  *
+			*    TestsFiles/Dictionaries/rockyou.7z     *
+			* Pour que ce test fonctionne			    *
+			*                                           *
+			********************************************/
+			// Arrange
+			string dictionaryPath = "../TestsFiles/Dictionaries/rockyou.txt";
+			//unsigned int EXPECTED_DICTIONARY_SIZE = 4;
+			vector<string> FIRST_FIVE_WORDS{
+				"123456",
+				"12345",
+				"123456789",
+				"password",
+				"iloveyou"
+			};
+
+			vector<string> RANDOM_WORDS_IN_FILE {
+				"lilb83",
+				"jacoby2003",
+				"s9901856i",
+				"karencita17",
+				"1002456"
+			};
+
+			// Action
+			string exceptionMsg;
+			vector<string> ACTUAL_DICTIONARY;
+			unsigned int actual_dictionary_size;
+			try
+			{
+				ACTUAL_DICTIONARY = fileRepository->loadDictionaryFile(dictionaryPath);
+				actual_dictionary_size = ACTUAL_DICTIONARY.size();
+			} catch (exception ex)
+			{
+				exceptionMsg = ex.what();
+			}
+			
+
+			// Assert
+			//Assert::AreEqual(EXPECTED_DICTIONARY_SIZE, ACTUAL_DICTIONARY.size());
+			//Assert::IsTrue(EXPECTED_DICTIONARY == ACTUAL_DICTIONARY);
+		}
+#endif
 
 	};
 }
