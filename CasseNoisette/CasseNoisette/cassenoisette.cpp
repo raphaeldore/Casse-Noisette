@@ -103,15 +103,14 @@ void CasseNoisette::on_startCrackBtn_clicked()
 
 	// Paramètres universels
 	crackFactoryParams.addParameter(Parameter(PWD_FILE_PATH, ui.pwdFileSelectTxt->text().toStdString()));
+	auto seperator = ui.txtPwdsSeperator->text().isEmpty() ? ":" : ui.txtPwdsSeperator->text().toStdString();
+	crackFactoryParams.addParameter(Parameter(SEPERATOR, seperator));
 	crackFactoryParams.addParameter(Parameter(RESULTS_FILE_PATH, "chemin/bidon/fichier_bidon.txt"));
 	crackFactoryParams.addParameter(Parameter(HASH_TYPE, ui.hashFunctionsComboBox->currentText().toStdString()));
 
 	// Paramètres spécifique 
 	if (tabIndex == 0)
 	{
-		ui.txtPwdsSeperator->text().isEmpty();
-		auto seperator = ui.txtPwdsSeperator->text().isEmpty() ? ":" : ui.txtPwdsSeperator->text().toStdString();
-		crackFactoryParams.addParameter(Parameter(SEPERATOR, seperator));
 		crackFactoryParams.addParameter(Parameter(CHARSET, GetCharset()));
 		crackFactoryParams.addParameter(Parameter(MAX_PWD_LENGTH, ui.spinMaxPwdLenght->text().toStdString()));
 		crackingWorker->setCrackEngineType(BRUTE_FORCE);
