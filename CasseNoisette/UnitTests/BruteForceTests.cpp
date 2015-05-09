@@ -5,7 +5,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
 using namespace CrackEngine;
 
-namespace IntegrationTests
+namespace UnitTests
 {
 	const static string lowerAlphaNumericCrackingCharset = "abcdefghijklmnopqrstuvwxyz0123456789";
 
