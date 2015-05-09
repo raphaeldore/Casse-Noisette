@@ -24,6 +24,7 @@ void FileRepository::loadPasswordFile(const string _pwdFilePath, string _separat
 
 		if (pos == string::npos)
 		{
+			// Ligne sans séparateur. Donc un password haché non lié à un nom d'utilisateur
 			hashedPasswords.insert(make_pair(default_user, line));
 		}
 		else
