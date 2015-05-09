@@ -13,14 +13,8 @@ namespace UnitTests
 		shared_ptr<CrackEngine::CharsetBuilder> charsetBuilder;
 		TEST_METHOD_INITIALIZE(BruteForce_Initialize)
 		{
-			// Initialize un bruteForce avec le charset par defaut : abcdefghijklmnopqrstuvwxyz
 			charsetBuilder = make_shared<CrackEngine::CharsetBuilder>();
 		}
-
-		//TEST_METHOD_CLEANUP(CharsetBuilder_Cleanup)
-		//{
-		//	charsetBuilder->reset();
-		//}
 
 		TEST_METHOD(can_build_lower_alpha_charset)
 		{
