@@ -14,7 +14,6 @@ namespace UnitTests
 		unique_ptr<queue<string>> CrackingDictionary;
 		TEST_METHOD_INITIALIZE(Dictionary_Initialise)
 		{
-			dictionaryEngine = make_unique<CrackEngine::Dictionary>();
 			CrackingDictionary = make_unique<queue<string>>();
 			CrackingDictionary->push("sausage");
 			CrackingDictionary->push("blubber");
@@ -27,7 +26,7 @@ namespace UnitTests
 			CrackingDictionary->push("network");
 			CrackingDictionary->push("hammer");
 			CrackingDictionary->push("epic007!;;!");
-			dictionaryEngine->setDictionary(move(CrackingDictionary));
+			dictionaryEngine = make_unique<CrackEngine::Dictionary>(move(CrackingDictionary));
 			dictionaryEngine->setPwdHashFunction("MD5");
 		}
 
