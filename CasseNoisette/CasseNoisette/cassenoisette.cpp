@@ -113,9 +113,13 @@ void CasseNoisette::on_startCrackBtn_clicked()
 		crackFactoryParams.addParameter(Parameter(CHARSET, GetCharset()));
 		crackFactoryParams.addParameter(Parameter(MAX_PWD_LENGTH, ui.spinMaxPwdLenght->text().toStdString()));
 		crackingWorker->setCrackEngineType(BRUTE_FORCE);
+	} else if (tabIndex == 1)
+	{
+		crackFactoryParams.addParameter(Parameter(DICTIONARY_PATH, ui.dictFileSelectTxt->text().toStdString()));
+		crackingWorker->setCrackEngineType(DICTIONARY);
 	} else
 	{
-		return; // TODO: En attendant d'implémenter les autres engines
+		return; // TODO: En attendant d'implémenter le cassage par arc-en-ciel
 	}
 
 	
