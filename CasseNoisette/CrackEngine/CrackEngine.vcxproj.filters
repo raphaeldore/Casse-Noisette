@@ -42,6 +42,9 @@
     <ClInclude Include="CharsetBuilder.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="Dictionary.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -63,6 +66,9 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="CharsetBuilder.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Dictionary.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
