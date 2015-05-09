@@ -11,10 +11,11 @@ namespace UnitTests
 	{
 	public:
 		unique_ptr<CrackEngine::Dictionary> dictionaryEngine;
-		unique_ptr<queue<string>> CrackingDictionary = make_unique<queue<string>>();
+		unique_ptr<queue<string>> CrackingDictionary;
 		TEST_METHOD_INITIALIZE(Dictionary_Initialise)
 		{
 			dictionaryEngine = make_unique<CrackEngine::Dictionary>();
+			CrackingDictionary = make_unique<queue<string>>();
 			CrackingDictionary->push("sausage");
 			CrackingDictionary->push("blubber");
 			CrackingDictionary->push("pencil");
@@ -102,6 +103,15 @@ namespace UnitTests
 
 			// Assert
 			Assert::IsTrue(EXPECTED_RESULTS == ACTUAL_RESULTS);
+		}
+
+		TEST_METHOD(setDictionary_throws_invalid_argument_if_dictionary_is_empty)
+		{
+			// Action
+			auto setDictionaryInvalidArgumentFunction = [this]{dictionaryEngine->setDictionary(make_unique<queue<string>>()); };
+
+			// Assert
+			Assert::ExpectException<invalid_argument>(setDictionaryInvalidArgumentFunction);
 		}
 	};
 }
