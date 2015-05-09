@@ -105,6 +105,24 @@ namespace UnitTests
 			Assert::IsTrue(EXPECTED_RESULTS == ACTUAL_RESULTS);
 		}
 
+		TEST_METHOD(if_password_is_not_in_dictionary_then_no_password_is_found)
+		{
+			// Arrange
+			multimap<string, string> hashedPasswords;
+			hashedPasswords.insert(make_pair("e1568c571e684e0fb1724da85d215dc0", "randomUser007"));
+			dictionaryEngine->setHashedPasswords(hashedPasswords);
+
+			vector<tuple<string, string, string>> EXPECTED_RESULTS;
+
+			// Action
+			dictionaryEngine->Crack();
+			auto ACTUAL_RESULTS = dictionaryEngine->getResults();
+
+
+			// Assert
+			Assert::IsTrue(EXPECTED_RESULTS == ACTUAL_RESULTS);
+		}
+
 		TEST_METHOD(setDictionary_throws_invalid_argument_if_dictionary_is_empty)
 		{
 			// Action
