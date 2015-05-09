@@ -132,6 +132,12 @@ void CasseNoisette::on_pwdFileSelectBtn_clicked()
 	ui.pwdFileSelectTxt->setText(fileName);
 }
 
+void CasseNoisette::on_dictFileSelectBtn_clicked()
+{
+	QString fileName = QFileDialog::getOpenFileName(this, "Choisir un fichier contenant une liste de mots", QDir::currentPath(), tr("Dictionary File (*.txt *.dict)"));
+	ui.dictFileSelectTxt->setText(fileName);
+}
+
 void CasseNoisette::handleResults()
 {
 	QMessageBox msgBox;
