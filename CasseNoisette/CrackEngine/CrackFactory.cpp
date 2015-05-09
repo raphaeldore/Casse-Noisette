@@ -30,7 +30,7 @@ unique_ptr<ICrackEngine> CrackFactory::CreateCrackEngine(const CRACK_ENGINE_TYPE
 
 	// On ajoute ensuite les paramètres nécessaires à tous les types de CrackEngine
 	DataLayer::FileRepository fileRepo;
-	fileRepo.loadPasswordFile(_params[PWD_FILE_PATH]);
+	fileRepo.loadPasswordFile(_params[PWD_FILE_PATH], _params[SEPERATOR]);
 
 	crackEngine->setHashedPasswords(fileRepo.getAllHashedPasswords());
 	crackEngine->setResultsFilePath(_params[RESULTS_FILE_PATH]);
