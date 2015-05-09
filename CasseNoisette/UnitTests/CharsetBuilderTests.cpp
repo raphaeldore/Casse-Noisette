@@ -104,7 +104,7 @@ namespace UnitTests
 		TEST_METHOD(if_duplicate_caracter_is_addded_to_custom_charset_then_it_is_removed)
 		{
 			// Arrange
-			const string CUSTOM_CHARSET("abc");
+			const string CUSTOM_CHARSET("ovrbfibcufnitxlpoxxc");
 			const string EXPECTED_CHARSET = "abcdefghijklmnopqrstuvwxyz";
 
 			// Action
