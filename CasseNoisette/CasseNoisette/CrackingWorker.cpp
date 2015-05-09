@@ -51,10 +51,16 @@ void CrackingWorker::crack()
 		return;
 	}
 
-	crackEngine->Crack();
+	if (crackEngine != nullptr)
+	{
+		crackEngine->Crack();
 
-	results = crackEngine->getResults();
+		results = crackEngine->getResults();
+		crackEngine.reset();
 
-	emit resultsReady();
+		emit resultsReady();
+	}
+
+
 	emit stopped();
 }
