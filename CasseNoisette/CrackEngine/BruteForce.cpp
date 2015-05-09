@@ -18,11 +18,11 @@ void BruteForce::Crack()
 	running = true;
 	for (const auto hashedPassword : ICrackEngine::hashedPasswords)
 	{
-		string result = Crack(hashedPassword);
+		string result = Crack(hashedPassword.second);
 
 		if (result != "")
 		{
-			results.push_back(result);
+			results.push_back(make_tuple(hashedPassword.first, hashedPassword.second, result));
 		}
 	}
 }
