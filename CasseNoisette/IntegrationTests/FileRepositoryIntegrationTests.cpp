@@ -42,7 +42,7 @@ namespace IntegrationTests
 			Assert::IsTrue(error_thrown);
 		}
 
-		TEST_METHOD(loadPasswordFile_put_the_password_in_tuple_in_the_hashedPasswordVector)
+		TEST_METHOD(loadPasswordFile_put_the_password_in_multimap_in_the_hashedPasswordVector)
 		{
 			//Arrange
 			multimap<string, string> expectedMap;
@@ -62,7 +62,7 @@ namespace IntegrationTests
 			Assert::IsTrue(expectedMap == actualMap);
 		}
 
-		TEST_METHOD(hashed_Password_Vector_has_the_same_number_of_password_than_the_file)
+		TEST_METHOD(hashed_Password_multimap_has_the_same_number_of_password_than_the_file)
 		{
 			//Arrange
 			const int NBR_PASSWORD_IN_FILE = 5;
@@ -92,7 +92,7 @@ namespace IntegrationTests
 			Assert::IsTrue(exception_thrown);
 		}
 
-		TEST_METHOD(open_file_with_separator_and_one_line_should_create_a_vector_of_tuple_with_the_user_an_hashed_password_and_empty_string)
+		TEST_METHOD(open_file_with_separator_and_one_line_should_create_multimap_with_the_user_an_hashed_password)
 		{
 			//Arrange
 			string file = "../TestsFIles/simple_password_separator.txt";
@@ -126,7 +126,7 @@ namespace IntegrationTests
 			Assert::IsTrue(exception_thrown);
 		}
 
-		TEST_METHOD(open_file_with_separator_and_multi_line_should_create_a_vector_of_tuple_with_the_user_an_hashed_password_and_empty_string)
+		TEST_METHOD(open_file_with_separator_and_multi_line_should_create_multimap_with_the_user_an_hashed_password_and_empty_string)
 		{
 			//Arrange
 			multimap<string, string> EXPECTED_MAP;
@@ -145,7 +145,7 @@ namespace IntegrationTests
 			Assert::IsTrue(EXPECTED_MAP == ACTUAL_MAP);
 		}
 
-		TEST_METHOD(open_file_with_a_multiple_character_seperator_should_create_a_vector_of_tuple_with_the_user_an_hashed_password_and_empty_string)
+		TEST_METHOD(open_file_with_a_multiple_character_seperator_should_create_a_multimap_with_the_user_an_hashed_password_and_empty_string)
 		{
 			// Arrange
 			string file = "../TestsFIles/simple_password_multichar_separator.txt";
@@ -180,9 +180,5 @@ namespace IntegrationTests
 			Assert::IsTrue(exception_thrown);
 		}
 
-		bool tuples_are_equal(const tuple<string, string, string> expected, const tuple<string, string, string> actual)
-		{
-			return expected == actual;
-		}
 	};
 }
