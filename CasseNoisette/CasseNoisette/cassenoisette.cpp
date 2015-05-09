@@ -124,9 +124,6 @@ void CasseNoisette::on_startCrackBtn_clicked()
 	// On informe à ceux qui écoutent qu'on veut démarrer le cassage
 	// Dans notre cas, c'est le crackingWorker qui écoute.
 	emit startCracking();
-
-	crackingInProgress = true;
-	ui.startCrackBtn->setText("Annuler le cassage");
 }
 
 void CasseNoisette::on_pwdFileSelectBtn_clicked()
@@ -169,6 +166,8 @@ void CasseNoisette::handleResults()
 void CasseNoisette::crackingStarted()
 {
 	crackingTime->restart();
+	crackingInProgress = true;
+	ui.startCrackBtn->setText("Annuler le cassage");
 }
 
 void CasseNoisette::crackingStopped()
