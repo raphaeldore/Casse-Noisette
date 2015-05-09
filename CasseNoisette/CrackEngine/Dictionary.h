@@ -6,7 +6,7 @@ namespace CrackEngine
 	class Dictionary : public ICrackEngine
 	{
 	public:
-		Dictionary();
+		Dictionary(unique_ptr<queue<string>> _dictionary);
 		~Dictionary();
 
 		void Crack() override;

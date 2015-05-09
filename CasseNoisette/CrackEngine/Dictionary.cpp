@@ -3,10 +3,10 @@
 
 using namespace CrackEngine;
 
-Dictionary::Dictionary()
+Dictionary::Dictionary(unique_ptr<queue<string>> _dictionary)
 {
+	setDictionary(move(_dictionary));
 }
-
 
 Dictionary::~Dictionary()
 {
