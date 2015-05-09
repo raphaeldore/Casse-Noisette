@@ -14,25 +14,25 @@ namespace UnitTests
 	public:
 		CrackEngine::CrackFactory * crackFactory;
 		unique_ptr<CrackEngine::CrackFactoryParams> crackFactoryParams;
+		unique_ptr<set<Parameter>> parameters;
 		TEST_METHOD_INITIALIZE(CrackEngineParams_Initialize)
 		{
 			crackFactory = CrackEngine::CrackFactory::GetCrackFactory();
 			crackFactoryParams = make_unique<CrackEngine::CrackFactoryParams>();
+			parameters = make_unique<set<Parameter>>();
+			parameters->insert(Parameter(PARAM_TYPE::PWD_FILE_PATH, "../TestsFiles/hashed_password_test.txt"));
+			parameters->insert(Parameter(PARAM_TYPE::SEPERATOR, ":"));
+			parameters->insert(Parameter(PARAM_TYPE::RESULTS_FILE_PATH, "/home/rdore/cracking_results.txt"));
+			parameters->insert(Parameter(PARAM_TYPE::HASH_TYPE, "MD5"));
 		}
 
 		TEST_METHOD(CreateCrackEngine_can_create_brute_force_engine)
 		{
 			// Arrange
-			set<Parameter> parameters;
-
 			// TODO: Injection dépendance fileRepository à la CrackFactory.
-			parameters.insert(Parameter(PARAM_TYPE::PWD_FILE_PATH, "../TestsFiles/hashed_password_test.txt"));
-			parameters.insert(Parameter(PARAM_TYPE::SEPERATOR, ":"));
-			parameters.insert(Parameter(PARAM_TYPE::RESULTS_FILE_PATH, "/home/rdore/cracking_results.txt"));
-			parameters.insert(Parameter(PARAM_TYPE::CHARSET, "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_+="));
-			parameters.insert(Parameter(PARAM_TYPE::HASH_TYPE, "MD5"));
-			parameters.insert(Parameter(PARAM_TYPE::MAX_PWD_LENGTH, "6"));
-			crackFactoryParams->setParameters(parameters);
+			parameters->insert(Parameter(PARAM_TYPE::CHARSET, "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_+="));
+			parameters->insert(Parameter(PARAM_TYPE::MAX_PWD_LENGTH, "6"));
+			crackFactoryParams->setParameters(*parameters);
 
 			// Action
 			unique_ptr<CrackEngine::ICrackEngine> crackEngine = crackFactory->CreateCrackEngine(BRUTE_FORCE, *crackFactoryParams);
@@ -41,16 +41,18 @@ namespace UnitTests
 			Assert::IsTrue(dynamic_cast<BruteForce *>(crackEngine.get()));
 		}
 
-		// En attendant qu'on code la classe dictionary...
-		TEST_METHOD(CreateCrackEngine_should_return_nullptr_when_creating_dictionary_engine_type)
+		TEST_METHOD(CreateCrackEngine_can_create_dictionary_engine)
 		{
-			// Action 
+			// Arrange
+			parameters->insert(Parameter(PARAM_TYPE::DICTIONARY_PATH, "../TestsFiles/Dictionaries/small_dict.txt"));
+			crackFactoryParams->setParameters(*parameters);
+
+			// Action
 			unique_ptr<CrackEngine::ICrackEngine> crackEngine = crackFactory->CreateCrackEngine(DICTIONARY, *crackFactoryParams);
 
 			// Assert
-			Assert::IsTrue(crackEngine == nullptr);
+			Assert::IsTrue(dynamic_cast<Dictionary *>(crackEngine.get()));
 		}
-
 	};
 }
 

@@ -12,6 +12,7 @@
 #include <vector>
 #include <set>
 #include <tuple>
+#include <queue>
 
 // En-têtes pour CppUnitTest
 #include "CppUnitTest.h"
