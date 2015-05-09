@@ -233,4 +233,4 @@ app_version.h
 phony.c
 
 # Large dictionary files
-/CasseNoisette/TestFiles/Dictionaries/rockyou.txt
+CasseNoisette/TestsFiles/Dictionaries/rockyou.txt
