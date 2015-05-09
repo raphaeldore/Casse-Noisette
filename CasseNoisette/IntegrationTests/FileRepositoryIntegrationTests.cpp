@@ -191,19 +191,18 @@ namespace IntegrationTests
 			// Arrange
 			string dictionaryPath = "../TestsFiles/Dictionaries/small_dict.txt";
 			unsigned int EXPECTED_DICTIONARY_SIZE = 4;
-			vector<string> EXPECTED_DICTIONARY {
-				"a",
-				"b",
-				"c",
-				"patate"
-			};
+			queue<string> EXPECTED_DICTIONARY;
+			EXPECTED_DICTIONARY.push("a");
+			EXPECTED_DICTIONARY.push("b");
+			EXPECTED_DICTIONARY.push("c");
+			EXPECTED_DICTIONARY.push("patate");
 
 			// Action
-			vector<string> ACTUAL_DICTIONARY = fileRepository->loadDictionaryFile(dictionaryPath);
+			auto ACTUAL_DICTIONARY = fileRepository->loadDictionaryFile(dictionaryPath);
 
 			// Assert
-			Assert::AreEqual(EXPECTED_DICTIONARY_SIZE, ACTUAL_DICTIONARY.size());
-			Assert::IsTrue(EXPECTED_DICTIONARY == ACTUAL_DICTIONARY);
+			Assert::AreEqual(EXPECTED_DICTIONARY_SIZE, ACTUAL_DICTIONARY->size());
+			Assert::IsTrue(EXPECTED_DICTIONARY == *ACTUAL_DICTIONARY);
 		}
 
 		TEST_METHOD(load_dictionary_throws_runtime_exception_when_file_does_not_exist)
@@ -228,48 +227,47 @@ namespace IntegrationTests
 
 		TEST_METHOD(load_dictionary_file_works_with_large_files)
 		{
+			// Arrange
+			string dictionaryPath = "../TestsFiles/Dictionaries/cain.txt";
+			unsigned int EXPECTED_DICTIONARY_SIZE = 306706U;
+
+			string EXPECTED_DICT_FRONT = "!@#$%";
+			string EXPECTED_DICT_BACK = "zyzzogeton";
+
+			// Action
+			unique_ptr<queue<string>> ACTUAL_DICTIONARY = fileRepository->loadDictionaryFile(dictionaryPath);
+			unsigned int actual_dictionary_size = ACTUAL_DICTIONARY->size();
+
+			// Assert
+			Assert::AreEqual(EXPECTED_DICTIONARY_SIZE, actual_dictionary_size);
+			Assert::AreEqual(EXPECTED_DICT_FRONT, ACTUAL_DICTIONARY->front());
+			Assert::AreEqual(EXPECTED_DICT_BACK, ACTUAL_DICTIONARY->back());
+		}
+
+		TEST_METHOD(load_dictionary_file_works_with_very_large_files)
+		{
 			/********************************************
 			* NOTE: Vous devez décompresser le fichier  *
 			*    TestsFiles/Dictionaries/rockyou.7z     *
 			* Pour que ce test fonctionne			    *
 			*                                           *
 			********************************************/
+			
 			// Arrange
 			string dictionaryPath = "../TestsFiles/Dictionaries/rockyou.txt";
-			//unsigned int EXPECTED_DICTIONARY_SIZE = 4;
-			vector<string> FIRST_FIVE_WORDS{
-				"123456",
-				"12345",
-				"123456789",
-				"password",
-				"iloveyou"
-			};
+			unsigned int EXPECTED_DICTIONARY_SIZE = 9999999U;
 
-			vector<string> RANDOM_WORDS_IN_FILE {
-				"lilb83",
-				"jacoby2003",
-				"s9901856i",
-				"karencita17",
-				"1002456"
-			};
+			string EXPECTED_DICT_FRONT = "123456";
+			string EXPECTED_DICT_BACK = "arisha786";
 
 			// Action
-			string exceptionMsg;
-			vector<string> ACTUAL_DICTIONARY;
-			unsigned int actual_dictionary_size;
-			try
-			{
-				ACTUAL_DICTIONARY = fileRepository->loadDictionaryFile(dictionaryPath);
-				actual_dictionary_size = ACTUAL_DICTIONARY.size();
-			} catch (exception ex)
-			{
-				exceptionMsg = ex.what();
-			}
-			
+			unique_ptr<queue<string>> ACTUAL_DICTIONARY = fileRepository->loadDictionaryFile(dictionaryPath);
+			unsigned int actual_dictionary_size = ACTUAL_DICTIONARY->size();
 
 			// Assert
-			//Assert::AreEqual(EXPECTED_DICTIONARY_SIZE, ACTUAL_DICTIONARY.size());
-			//Assert::IsTrue(EXPECTED_DICTIONARY == ACTUAL_DICTIONARY);
+			Assert::AreEqual(EXPECTED_DICTIONARY_SIZE, actual_dictionary_size);
+			Assert::AreEqual(EXPECTED_DICT_FRONT, ACTUAL_DICTIONARY->front());
+			Assert::AreEqual(EXPECTED_DICT_BACK, ACTUAL_DICTIONARY->back());
 		}
 #endif
 
