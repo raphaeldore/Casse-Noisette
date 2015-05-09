@@ -59,5 +59,8 @@
     <ClCompile Include="BruteForceTests.cpp">
       <Filter>Fichiers sources\CrackEngineTests</Filter>
     </ClCompile>
+    <ClCompile Include="CharsetBuilderTests.cpp">
+      <Filter>Fichiers sources\CrackEngineTests</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

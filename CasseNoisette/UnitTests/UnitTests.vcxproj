@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BruteForceTests.cpp" />
+    <ClCompile Include="CharsetBuilderTests.cpp" />
     <ClCompile Include="CrackFactoryParamsTests.cpp" />
     <ClCompile Include="CrackFactoryTests.cpp" />
     <ClCompile Include="FakeHash.cpp" />
