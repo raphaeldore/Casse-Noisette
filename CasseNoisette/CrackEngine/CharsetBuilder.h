@@ -3,7 +3,7 @@ using namespace std;
 
 namespace CrackEngine
 {
-	/* Les différents groupes de caractères que nous supportons */
+	/* Les diffÃ©rents groupes de caractÃ¨res que nous supportons */
 	namespace Charsets
 	{
 		const string loweralpha = "abcdefghijklmnopqrstuvwxyz";
@@ -19,7 +19,7 @@ namespace CrackEngine
 		CharsetBuilder();
 		CharsetBuilder(const bool _loweralpha, const bool _upperalpha, const bool _numeric, const bool _space, const bool _special, const string & _customCharset = "");
 
-		// Si l'utilisateur préfère ne pas passer par le constructeur
+		// Si l'utilisateur prÃ©fÃ¨re ne pas passer par le constructeur
 		void enableLowerAlpha();
 		void enableUpperAlpha();
 		void enableNumeric();
@@ -30,8 +30,7 @@ namespace CrackEngine
 		string BuildCharset();
 
 	private:
-
-		void removeDuplicateCharacters(string & _generatedCharset);
+		string removeDuplicateCharacters(const string & _generatedCharset) const;
 
 		bool loweralpha;
 		bool upperalpha;

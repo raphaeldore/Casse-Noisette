@@ -66,14 +66,31 @@ string CharsetBuilder::BuildCharset()
 	if (!customCharset.empty()) {
 		generatedCharset.append(customCharset);
 		// Au cas où l'utilisateur ajoute un charactère qui existe deja.
-		removeDuplicateCharacters(generatedCharset);
+		generatedCharset = removeDuplicateCharacters(generatedCharset);
 	}
 
 	return generatedCharset;
 }
 
-void CharsetBuilder::removeDuplicateCharacters(string& _generatedCharset)
+string CharsetBuilder::removeDuplicateCharacters(const string& _generatedCharset) const
 {
-	sort(_generatedCharset.begin(), _generatedCharset.end());
-	_generatedCharset.erase(unique(_generatedCharset.begin(), _generatedCharset.end()));
+	string generatedCharset = _generatedCharset;
+	sort(generatedCharset.begin(), generatedCharset.end());
+
+	string cleanedCharset;
+
+	for (auto it = generatedCharset.begin(); it < generatedCharset.end(); ++it)
+	{
+		auto currentChar = (*it);
+
+		// Si le prochain caractère est le même, on l'ignore.
+		while (next(it) != generatedCharset.end() && *next(it) == currentChar)
+		{
+			++it;
+		}
+
+		cleanedCharset += currentChar;
+	}
+
+	return cleanedCharset;
 }
