@@ -1,4 +1,5 @@
 #pragma once
+#include <queue>
 
 /*
 
@@ -17,8 +18,9 @@ namespace DataLayer
 	{
 	public:
 		void loadPasswordFile(const string _pwdFilePath, string _separator = ":");
-		vector<string> loadDictionaryFile(const string & _dictFilePath);
+		unique_ptr<queue<string>> loadDictionaryFile(const string & _dictFilePath);
 		const multimap<string, string> & getAllHashedPasswords() const;
+
 	private:
 		multimap<string, string> hashedPasswords;
 		bool fileIsEmpty(ifstream& _file) const;
