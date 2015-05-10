@@ -8,7 +8,7 @@
 
 #include "../CrackEngine/CharsetBuilder.h"
 
-#include "vld.h"
+//#include "vld.h"
 
 CasseNoisette::CasseNoisette(QWidget *parent)
 	: QMainWindow(parent)
@@ -42,6 +42,9 @@ CasseNoisette::CasseNoisette(QWidget *parent)
 	connect(crackingWorker, SIGNAL(error(QString)), this, SLOT(errorString(QString)));
 	connect(crackingWorker, SIGNAL(running()), this, SLOT(crackingStarted()));
 	connect(crackingWorker, SIGNAL(stopped()), this, SLOT(crackingStopped()));
+	connect(crackingWorker, SIGNAL(creatingEngine()), this, SLOT(engineInCreation()));
+	connect(crackingWorker, SIGNAL(engineCreated()), this, SLOT(engineReady()));
+	connect(crackingWorker, SIGNAL(unloadingEngine()), this, SLOT(engineUnloading()));
 
 	/// Ce que le crackingWorkerThread émet à lui-même
 	connect(crackingWorkerThread, SIGNAL(finished()), crackingWorkerThread, SLOT(deleteLater()));
@@ -182,6 +185,7 @@ void CasseNoisette::crackingStarted()
 
 void CasseNoisette::crackingStopped()
 {
+	ui.startCrackBtn->setEnabled(true);
 	ui.startCrackBtn->setText("Démarrer le cassage");
 	crackingInProgress = false;
 }
@@ -191,4 +195,21 @@ void CasseNoisette::errorString(QString error)
 	QMessageBox errorBox;
 	errorBox.setText(error);
 	errorBox.exec();
+}
+
+void CasseNoisette::engineInCreation()
+{
+	ui.startCrackBtn->setText("Chargement des fichiers...");
+	ui.startCrackBtn->setDisabled(true);
+}
+
+void CasseNoisette::engineReady()
+{
+	ui.startCrackBtn->setDisabled(false);
+}
+
+void CasseNoisette::engineUnloading()
+{
+	ui.startCrackBtn->setText("Déchargement de l'engin...");
+	ui.startCrackBtn->setDisabled(true);
 }

@@ -29,10 +29,14 @@ public slots:
 	void crackingStarted();
 	void crackingStopped();
 	void errorString(QString error);
+	void engineInCreation();
+	void engineReady();
+	void engineUnloading();
 signals:
 	void startCracking();
 	void stopCracking();
 	void error(QString err);
+
 private:
 	Ui::CasseNoisetteClass ui;
 	bool crackingInProgress;
