@@ -8,7 +8,8 @@
 
 #include "../CrackEngine/CharsetBuilder.h"
 
-//#include "vld.h"
+// #include "vld.h" // VLD cause des problèmes de null pointer exceptions pour des raisons étranges
+					// quand je charge de très gros fichiers ( > 50Mo)
 
 CasseNoisette::CasseNoisette(QWidget *parent)
 	: QMainWindow(parent)
