@@ -12,6 +12,7 @@
 #include <vector>
 #include <set>
 #include <tuple>
+#include <queue>
 
 // En-têtes pour CppUnitTest
 #include "CppUnitTest.h"
@@ -32,3 +33,4 @@
 #include "../CrackEngine/CrackFactory.h"
 #include "../CrackEngine/BruteForce.h"
 #include "../CrackEngine/CharsetBuilder.h"
+#include "../CrackEngine/Dictionary.h"

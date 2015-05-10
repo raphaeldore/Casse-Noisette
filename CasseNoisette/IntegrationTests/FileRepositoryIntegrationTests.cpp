@@ -5,6 +5,9 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
 using namespace DataLayer;
 
+// À décommenter pour tester avec un gros dictionnaire (attention, il faut beaucoup de RAM!)
+//#define TEST_LARGE_DICTIONARY
+
 namespace IntegrationTests
 {
 	TEST_CLASS(FileRepositoryIntegrationTests)
@@ -48,11 +51,11 @@ namespace IntegrationTests
 			multimap<string, string> expectedMap;
 			string userName = "no_user";
 
-			expectedMap.insert(make_pair(userName, "f71dbe52628a3f83a77ab494817525c6"));
-			expectedMap.insert(make_pair(userName, "49d02d55ad10973b7b9d0dc9eba7fdf0"));
-			expectedMap.insert(make_pair(userName, "5d933eef19aee7da192608de61b6c23d"));
-			expectedMap.insert(make_pair(userName, "2db313fabca57504d9dc776e46b304f6"));
-			expectedMap.insert(make_pair(userName, "bdb8c008fa551ba75f8481963f2201da"));
+			expectedMap.insert(make_pair("f71dbe52628a3f83a77ab494817525c6", userName));
+			expectedMap.insert(make_pair("49d02d55ad10973b7b9d0dc9eba7fdf0", userName));
+			expectedMap.insert(make_pair("5d933eef19aee7da192608de61b6c23d", userName));
+			expectedMap.insert(make_pair("2db313fabca57504d9dc776e46b304f6", userName));
+			expectedMap.insert(make_pair("bdb8c008fa551ba75f8481963f2201da", userName));
 
 			//Action
 			fileRepository->loadPasswordFile(file_name_no_separator);
@@ -97,7 +100,7 @@ namespace IntegrationTests
 			//Arrange
 			string file = "../TestsFIles/simple_password_separator.txt";
 			multimap<string, string> EXPECTED_MAP;
-			EXPECTED_MAP.insert(make_pair("user1", "6d4db5ff0c117864a02827bad3c361b9"));
+			EXPECTED_MAP.insert(make_pair("6d4db5ff0c117864a02827bad3c361b9", "user1"));
 
 			//Action
 			fileRepository->loadPasswordFile(file);
@@ -130,11 +133,11 @@ namespace IntegrationTests
 		{
 			//Arrange
 			multimap<string, string> EXPECTED_MAP;
-			EXPECTED_MAP.insert(make_pair("user1", "f71dbe52628a3f83a77ab494817525c6"));
-			EXPECTED_MAP.insert(make_pair("user2", "49d02d55ad10973b7b9d0dc9eba7fdf0"));
-			EXPECTED_MAP.insert(make_pair("user3", "5d933eef19aee7da192608de61b6c23d"));
-			EXPECTED_MAP.insert(make_pair("user4", "2db313fabca57504d9dc776e46b304f6"));
-			EXPECTED_MAP.insert(make_pair("user5", "bdb8c008fa551ba75f8481963f2201da"));
+			EXPECTED_MAP.insert(make_pair("f71dbe52628a3f83a77ab494817525c6", "user1"));
+			EXPECTED_MAP.insert(make_pair("49d02d55ad10973b7b9d0dc9eba7fdf0", "user2"));
+			EXPECTED_MAP.insert(make_pair("5d933eef19aee7da192608de61b6c23d", "user3"));
+			EXPECTED_MAP.insert(make_pair("2db313fabca57504d9dc776e46b304f6", "user4"));
+			EXPECTED_MAP.insert(make_pair("bdb8c008fa551ba75f8481963f2201da", "user5"));
 
 			//Action
 			fileRepository->loadPasswordFile(file_name_with_separator);
@@ -150,7 +153,7 @@ namespace IntegrationTests
 			// Arrange
 			string file = "../TestsFIles/simple_password_multichar_separator.txt";
 			multimap<string, string> EXPECTED_MAP;
-			EXPECTED_MAP.insert(make_pair("user1", "6d4db5ff0c117864a02827bad3c361b9"));
+			EXPECTED_MAP.insert(make_pair("6d4db5ff0c117864a02827bad3c361b9", "user1"));
 
 			//Action
 			fileRepository->loadPasswordFile(file, "!!");
@@ -179,6 +182,94 @@ namespace IntegrationTests
 			//Assert
 			Assert::IsTrue(exception_thrown);
 		}
+
+
+		//////////////////////////////////////// LoadDictionary ////////////////////////////////////////
+
+		TEST_METHOD(load_dictionary_file_returns_all_words_in_the_dictionary)
+		{
+			// Arrange
+			string dictionaryPath = "../TestsFiles/Dictionaries/small_dict.txt";
+			unsigned int EXPECTED_DICTIONARY_SIZE = 4;
+			queue<string> EXPECTED_DICTIONARY;
+			EXPECTED_DICTIONARY.push("a");
+			EXPECTED_DICTIONARY.push("b");
+			EXPECTED_DICTIONARY.push("c");
+			EXPECTED_DICTIONARY.push("patate");
+
+			// Action
+			auto ACTUAL_DICTIONARY = fileRepository->loadDictionaryFile(dictionaryPath);
+
+			// Assert
+			Assert::AreEqual(EXPECTED_DICTIONARY_SIZE, ACTUAL_DICTIONARY->size());
+			Assert::IsTrue(EXPECTED_DICTIONARY == *ACTUAL_DICTIONARY);
+		}
+
+		TEST_METHOD(load_dictionary_throws_runtime_exception_when_file_does_not_exist)
+		{
+			// Arrange
+			auto loadDictionaryWithNonExistantFileFunction = [this] {fileRepository->loadDictionaryFile("this_file_does_not_exist"); };
+
+			// Assert
+			Assert::ExpectException<runtime_error>(loadDictionaryWithNonExistantFileFunction);
+		}
+
+		TEST_METHOD(load_dictionary_throws_runtime_exception_when_file_is_empty)
+		{
+			// Arrange
+			auto loadDictionaryWithEmptyFileFunction = [this] {fileRepository->loadDictionaryFile("../TestsFiles/Dictionaries/empty_dict.txt"); };
+
+			// Assert
+			Assert::ExpectException<runtime_error>(loadDictionaryWithEmptyFileFunction);
+		}
+
+#ifdef TEST_LARGE_DICTIONARY
+
+		TEST_METHOD(load_dictionary_file_works_with_large_files)
+		{
+			// Arrange
+			string dictionaryPath = "../TestsFiles/Dictionaries/cain.txt";
+			unsigned int EXPECTED_DICTIONARY_SIZE = 306706U;
+
+			string EXPECTED_DICT_FRONT = "!@#$%";
+			string EXPECTED_DICT_BACK = "zyzzogeton";
+
+			// Action
+			unique_ptr<queue<string>> ACTUAL_DICTIONARY = fileRepository->loadDictionaryFile(dictionaryPath);
+			unsigned int actual_dictionary_size = ACTUAL_DICTIONARY->size();
+
+			// Assert
+			Assert::AreEqual(EXPECTED_DICTIONARY_SIZE, actual_dictionary_size);
+			Assert::AreEqual(EXPECTED_DICT_FRONT, ACTUAL_DICTIONARY->front());
+			Assert::AreEqual(EXPECTED_DICT_BACK, ACTUAL_DICTIONARY->back());
+		}
+
+		TEST_METHOD(load_dictionary_file_works_with_very_large_files)
+		{
+			/********************************************
+			* NOTE: Vous devez décompresser le fichier  *
+			*    TestsFiles/Dictionaries/rockyou.7z     *
+			* Pour que ce test fonctionne			    *
+			*                                           *
+			********************************************/
+			
+			// Arrange
+			string dictionaryPath = "../TestsFiles/Dictionaries/rockyou.txt";
+			unsigned int EXPECTED_DICTIONARY_SIZE = 9999999U;
+
+			string EXPECTED_DICT_FRONT = "123456";
+			string EXPECTED_DICT_BACK = "arisha786";
+
+			// Action
+			unique_ptr<queue<string>> ACTUAL_DICTIONARY = fileRepository->loadDictionaryFile(dictionaryPath);
+			unsigned int actual_dictionary_size = ACTUAL_DICTIONARY->size();
+
+			// Assert
+			Assert::AreEqual(EXPECTED_DICTIONARY_SIZE, actual_dictionary_size);
+			Assert::AreEqual(EXPECTED_DICT_FRONT, ACTUAL_DICTIONARY->front());
+			Assert::AreEqual(EXPECTED_DICT_BACK, ACTUAL_DICTIONARY->back());
+		}
+#endif
 
 	};
 }

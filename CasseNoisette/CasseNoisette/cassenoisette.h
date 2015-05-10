@@ -24,14 +24,19 @@ public:
 public slots:
 	void on_startCrackBtn_clicked();
 	void on_pwdFileSelectBtn_clicked();
+	void on_dictFileSelectBtn_clicked();
 	void handleResults();
 	void crackingStarted();
 	void crackingStopped();
 	void errorString(QString error);
+	void engineInCreation();
+	void engineReady();
+	void engineUnloading();
 signals:
 	void startCracking();
 	void stopCracking();
 	void error(QString err);
+
 private:
 	Ui::CasseNoisetteClass ui;
 	bool crackingInProgress;

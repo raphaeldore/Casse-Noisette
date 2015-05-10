@@ -334,10 +334,10 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_2">
              <item>
-              <widget class="QLineEdit" name="lineEdit_2"/>
+              <widget class="QLineEdit" name="dictFileSelectTxt"/>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_2">
+              <widget class="QPushButton" name="dictFileSelectBtn">
                <property name="text">
                 <string>Parcourir...</string>
                </property>

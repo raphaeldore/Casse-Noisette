@@ -25,7 +25,7 @@ void FileRepository::loadPasswordFile(const string _pwdFilePath, string _separat
 		if (pos == string::npos)
 		{
 			// Ligne sans séparateur. Donc un password haché non lié à un nom d'utilisateur
-			hashedPasswords.insert(make_pair(default_user, line));
+			hashedPasswords.insert(make_pair(line, default_user));
 		}
 		else
 		{
@@ -33,7 +33,7 @@ void FileRepository::loadPasswordFile(const string _pwdFilePath, string _separat
 
 			if (lineSplit.size() == 2)
 			{
-				hashedPasswords.insert(make_pair(lineSplit[0], lineSplit[1]));
+				hashedPasswords.insert(make_pair(lineSplit[1], lineSplit[0]));
 			}
 			else
 			{
@@ -45,6 +45,40 @@ void FileRepository::loadPasswordFile(const string _pwdFilePath, string _separat
 	ifile.close();
 }
 
+unique_ptr<queue<string>> FileRepository::loadDictionaryFile(const string& _dictFilePath)
+{
+	ifstream dict(_dictFilePath);
+	if (!dict.is_open()) throw runtime_error("Le fichier dictionnaire n'existe pas.");
+	if (fileIsEmpty(dict))
+	{
+		dict.close();
+		throw runtime_error("Le fichier dictionnaire est vide.");
+	}
+
+	// Sur le Heap car le Stack est trop petit (pour les gros fichiers)
+	unique_ptr<queue<string>> dictionary = make_unique<queue<string>>();
+
+	try
+	{
+		string line;
+		while (getline(dict, line))
+		{
+			dictionary->push(line);
+		}
+	}
+	catch (const exception& ex)
+	{
+		cerr << ex.what();
+		dict.close();
+	}
+	catch (...)
+	{
+		dict.close();
+	}
+
+	return move(dictionary);
+}
+
 const multimap<string, string> & FileRepository::getAllHashedPasswords() const
 {
 	return hashedPasswords;
@@ -52,7 +86,7 @@ const multimap<string, string> & FileRepository::getAllHashedPasswords() const
 
 bool FileRepository::fileIsEmpty(ifstream& _file) const
 {
-	return _file.peek() == std::ifstream::traits_type::eof();
+	return _file.peek() == ifstream::traits_type::eof();
 }
 
 vector<string> FileRepository::split(const string& _string, const string& _separator) const

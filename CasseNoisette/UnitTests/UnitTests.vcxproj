@@ -91,6 +91,7 @@
     <ClCompile Include="CharsetBuilderTests.cpp" />
     <ClCompile Include="CrackFactoryParamsTests.cpp" />
     <ClCompile Include="CrackFactoryTests.cpp" />
+    <ClCompile Include="DictionaryTests.cpp" />
     <ClCompile Include="FakeHash.cpp" />
     <ClCompile Include="MD5Tests.cpp" />
     <ClCompile Include="stdafx.cpp">

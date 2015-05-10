@@ -232,4 +232,5 @@ app_version.h
 /share/qtcreator/externaltools
 phony.c
 
-
+# Large dictionary files
+CasseNoisette/TestsFiles/Dictionaries/rockyou.txt

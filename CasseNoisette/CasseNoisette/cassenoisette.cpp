@@ -8,7 +8,8 @@
 
 #include "../CrackEngine/CharsetBuilder.h"
 
-#include "vld.h"
+// #include "vld.h" // VLD cause des problèmes de null pointer exceptions pour des raisons étranges
+					// quand je charge de très gros fichiers ( > 50Mo)
 
 CasseNoisette::CasseNoisette(QWidget *parent)
 	: QMainWindow(parent)
@@ -42,6 +43,9 @@ CasseNoisette::CasseNoisette(QWidget *parent)
 	connect(crackingWorker, SIGNAL(error(QString)), this, SLOT(errorString(QString)));
 	connect(crackingWorker, SIGNAL(running()), this, SLOT(crackingStarted()));
 	connect(crackingWorker, SIGNAL(stopped()), this, SLOT(crackingStopped()));
+	connect(crackingWorker, SIGNAL(creatingEngine()), this, SLOT(engineInCreation()));
+	connect(crackingWorker, SIGNAL(engineCreated()), this, SLOT(engineReady()));
+	connect(crackingWorker, SIGNAL(unloadingEngine()), this, SLOT(engineUnloading()));
 
 	/// Ce que le crackingWorkerThread émet à lui-même
 	connect(crackingWorkerThread, SIGNAL(finished()), crackingWorkerThread, SLOT(deleteLater()));
@@ -113,9 +117,13 @@ void CasseNoisette::on_startCrackBtn_clicked()
 		crackFactoryParams.addParameter(Parameter(CHARSET, GetCharset()));
 		crackFactoryParams.addParameter(Parameter(MAX_PWD_LENGTH, ui.spinMaxPwdLenght->text().toStdString()));
 		crackingWorker->setCrackEngineType(BRUTE_FORCE);
+	} else if (tabIndex == 1)
+	{
+		crackFactoryParams.addParameter(Parameter(DICTIONARY_PATH, ui.dictFileSelectTxt->text().toStdString()));
+		crackingWorker->setCrackEngineType(DICTIONARY);
 	} else
 	{
-		return; // TODO: En attendant d'implémenter les autres engines
+		return; // TODO: En attendant d'implémenter le cassage par arc-en-ciel
 	}
 
 	
@@ -130,6 +138,12 @@ void CasseNoisette::on_pwdFileSelectBtn_clicked()
 {
 	QString fileName = QFileDialog::getOpenFileName(this, "Choisir un fichier contenant des mots de passe", QDir::currentPath(), tr("Password File (*.txt *.pwd)"));
 	ui.pwdFileSelectTxt->setText(fileName);
+}
+
+void CasseNoisette::on_dictFileSelectBtn_clicked()
+{
+	QString fileName = QFileDialog::getOpenFileName(this, "Choisir un fichier contenant une liste de mots", QDir::currentPath(), tr("Dictionary File (*.txt *.dict)"));
+	ui.dictFileSelectTxt->setText(fileName);
 }
 
 void CasseNoisette::handleResults()
@@ -165,13 +179,13 @@ void CasseNoisette::handleResults()
 
 void CasseNoisette::crackingStarted()
 {
-	crackingTime->restart();
 	crackingInProgress = true;
 	ui.startCrackBtn->setText("Annuler le cassage");
 }
 
 void CasseNoisette::crackingStopped()
 {
+	ui.startCrackBtn->setEnabled(true);
 	ui.startCrackBtn->setText("Démarrer le cassage");
 	crackingInProgress = false;
 }
@@ -181,4 +195,22 @@ void CasseNoisette::errorString(QString error)
 	QMessageBox errorBox;
 	errorBox.setText(error);
 	errorBox.exec();
+}
+
+void CasseNoisette::engineInCreation()
+{
+	crackingTime->restart();
+	ui.startCrackBtn->setText("Chargement des fichiers...");
+	ui.startCrackBtn->setDisabled(true);
+}
+
+void CasseNoisette::engineReady()
+{
+	ui.startCrackBtn->setDisabled(false);
+}
+
+void CasseNoisette::engineUnloading()
+{
+	ui.startCrackBtn->setText("Déchargement de l'engin...");
+	ui.startCrackBtn->setDisabled(true);
 }

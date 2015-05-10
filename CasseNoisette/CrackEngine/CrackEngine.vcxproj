@@ -78,6 +78,7 @@
     <ClInclude Include="CharsetBuilder.h" />
     <ClInclude Include="CrackFactory.h" />
     <ClInclude Include="CrackFactoryParams.h" />
+    <ClInclude Include="Dictionary.h" />
     <ClInclude Include="ICrackEngine.h" />
     <ClInclude Include="Parameter.h" />
     <ClInclude Include="stdafx.h" />
@@ -88,6 +89,7 @@
     <ClCompile Include="CharsetBuilder.cpp" />
     <ClCompile Include="CrackFactory.cpp" />
     <ClCompile Include="CrackFactoryParams.cpp" />
+    <ClCompile Include="Dictionary.cpp" />
     <ClCompile Include="ICrackEngine.cpp" />
     <ClCompile Include="Parameter.cpp" />
     <ClCompile Include="stdafx.cpp">

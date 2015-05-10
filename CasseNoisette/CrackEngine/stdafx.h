@@ -25,4 +25,5 @@
 #include "CrackFactoryParams.h"
 #include "ICrackEngine.h"
 #include "BruteForce.h"
+#include "Dictionary.h"
 #include "CrackFactory.h"

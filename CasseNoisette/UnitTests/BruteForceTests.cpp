@@ -33,7 +33,7 @@ namespace UnitTests
 		{
 			// Arrange
 			multimap<string, string> hashedPasswords;
-			hashedPasswords.insert(make_pair("no_user", "6d4db5ff0c117864a02827bad3c361b9"));
+			hashedPasswords.insert(make_pair("6d4db5ff0c117864a02827bad3c361b9", "no_user"));
 			unsigned int EXPECTED_RESULTS_VECTOR_SIZE = 1;
 			string EXPECTED_DECRYPTED_PASSWORD = "moon";
 			bruteForce->setHashedPasswords(hashedPasswords);
@@ -52,7 +52,7 @@ namespace UnitTests
 		{
 			// Arrange
 			multimap<string, string> hashedPasswords;
-			hashedPasswords.insert(make_pair("randomUser007", "e1568c571e684e0fb1724da85d215dc0"));
+			hashedPasswords.insert(make_pair("e1568c571e684e0fb1724da85d215dc0", "randomUser007"));
 			unsigned int EXPECTED_RESULTS_VECTOR_SIZE = 1;
 
 			/// Nom d'utilisateur, Hash, Mot de passe décrypté
@@ -74,17 +74,17 @@ namespace UnitTests
 		{
 			// Arrange
 			multimap<string, string> hashedPasswords;
-			hashedPasswords.insert(make_pair("randomUser007", "106a6c241b8797f52e1e77317b96a201"));
-			hashedPasswords.insert(make_pair("randomUser008", "06d80eb0c50b49a509b49f2424e8c805"));
-			hashedPasswords.insert(make_pair("randomUser009", "2a1585a864d9e67627c6ae04c807a2c5"));
-			hashedPasswords.insert(make_pair("randomUser010", "0a16bc32f55683128983f223de242942"));
+			hashedPasswords.insert(make_pair("106a6c241b8797f52e1e77317b96a201", "randomUser007"));
+			hashedPasswords.insert(make_pair("06d80eb0c50b49a509b49f2424e8c805", "randomUser008"));
+			hashedPasswords.insert(make_pair("2a1585a864d9e67627c6ae04c807a2c5", "randomUser009"));
+			hashedPasswords.insert(make_pair("0a16bc32f55683128983f223de242942", "randomUser010"));
 
 			unsigned int EXPECTED_RESULTS_VECTOR_SIZE = 4;
 			vector<tuple<string, string, string>> EXPECTED_RESULTS{
-				make_tuple("randomUser007", "106a6c241b8797f52e1e77317b96a201", "home"),
 				make_tuple("randomUser008", "06d80eb0c50b49a509b49f2424e8c805", "dog"),
-				make_tuple("randomUser009", "2a1585a864d9e67627c6ae04c807a2c5", "final"),
-				make_tuple("randomUser010", "0a16bc32f55683128983f223de242942", "ink")
+				make_tuple("randomUser010", "0a16bc32f55683128983f223de242942", "ink"),
+				make_tuple("randomUser007", "106a6c241b8797f52e1e77317b96a201", "home"),
+				make_tuple("randomUser009", "2a1585a864d9e67627c6ae04c807a2c5", "final")
 			};
 
 			bruteForce->setHashedPasswords(hashedPasswords);
@@ -104,7 +104,7 @@ namespace UnitTests
 			unsigned int EXPECTED_RESULTS_VECTOR_SIZE = 0;
 			bruteForce->setMaxPwdLenght(2);
 			multimap<string, string> hashedPasswords;
-			hashedPasswords.insert(make_pair("no_user", "6d4db5ff0c117864a02827bad3c361b9"));
+			hashedPasswords.insert(make_pair("6d4db5ff0c117864a02827bad3c361b9", "no_user"));
 			bruteForce->setHashedPasswords(hashedPasswords);
 
 			// Action
