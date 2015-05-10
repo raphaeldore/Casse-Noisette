@@ -24,7 +24,7 @@ HashFactory * HashFactory::GetHashFactory()
 	return factoryInstance.get();
 }
 
-void HashFactory::Register(const string _hashName, unique_ptr<IHash> _hashFunction)
+void HashFactory::Register(const string & _hashName, unique_ptr<IHash> _hashFunction)
 {
 	if (hashAlgorithms_map.find(_hashName) == hashAlgorithms_map.end())
 	{
