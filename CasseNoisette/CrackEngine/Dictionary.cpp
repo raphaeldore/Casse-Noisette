@@ -15,7 +15,7 @@ Dictionary::~Dictionary()
 void Dictionary::Crack()
 {
 	running = true;
-	while (!dictionary->empty() && !hashedPasswords.empty())
+	while (!dictionary->empty() && !hashedPasswords.empty() && running)
 	{
 		string currentWord = dictionary->front();
 		dictionary->pop();
