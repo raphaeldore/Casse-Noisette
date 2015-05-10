@@ -8,5 +8,5 @@ SHA256::~SHA256()
 
 string SHA256::hash(const string & _stringToHash)
 {
-	return "";
+	return _stringToHash;
 }
