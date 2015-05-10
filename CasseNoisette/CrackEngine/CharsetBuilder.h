@@ -30,7 +30,7 @@ namespace CrackEngine
 		string BuildCharset();
 
 	private:
-		string removeDuplicateCharacters(const string & _generatedCharset) const;
+		string removeDuplicateCharacters(string _generatedCharset) const;
 
 		bool loweralpha;
 		bool upperalpha;

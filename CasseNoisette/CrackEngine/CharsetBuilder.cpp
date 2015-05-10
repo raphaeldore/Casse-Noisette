@@ -72,19 +72,18 @@ string CharsetBuilder::BuildCharset()
 	return generatedCharset;
 }
 
-string CharsetBuilder::removeDuplicateCharacters(const string& _generatedCharset) const
+string CharsetBuilder::removeDuplicateCharacters(string _generatedCharset) const
 {
-	string generatedCharset = _generatedCharset;
-	sort(generatedCharset.begin(), generatedCharset.end());
+	sort(_generatedCharset.begin(), _generatedCharset.end());
 
 	string cleanedCharset;
 
-	for (auto it = generatedCharset.begin(); it < generatedCharset.end(); ++it)
+	for (auto it = _generatedCharset.begin(); it < _generatedCharset.end(); ++it)
 	{
 		auto currentChar = (*it);
 
 		// Si le prochain caractère est le même, on l'ignore.
-		while (next(it) != generatedCharset.end() && *next(it) == currentChar)
+		while (next(it) != _generatedCharset.end() && *next(it) == currentChar)
 		{
 			++it;
 		}
