@@ -13,15 +13,18 @@ void CrackingWorker::startCracking()
 {
 	isStopped = false;
 	isRunning = true;
-	emit running();
 	crack();
+	emit resultsReady();
+	emit unloadingEngine();
+	crackEngine.reset();
+	emit stopped();
 }
 
 void CrackingWorker::stopCracking()
 {
 	isStopped = true;
 	isRunning = false;
-	crackEngine->cancelCrack();
+	if (crackEngine != nullptr)	crackEngine->cancelCrack();
 	emit stopped();
 }
 
@@ -41,7 +44,9 @@ void CrackingWorker::crack()
 
 	try
 	{
+		emit creatingEngine();
 		crackEngine = CrackFactory::GetCrackFactory()->CreateCrackEngine(engineType, crackFactoryParams);
+		emit engineCreated();
 	}
 	catch (const exception & ex)
 	{
@@ -51,16 +56,12 @@ void CrackingWorker::crack()
 		return;
 	}
 
+
 	if (crackEngine != nullptr)
 	{
+		emit running();
 		crackEngine->Crack();
 
 		results = crackEngine->getResults();
-		crackEngine.reset();
-
-		emit resultsReady();
 	}
-
-
-	emit stopped();
 }

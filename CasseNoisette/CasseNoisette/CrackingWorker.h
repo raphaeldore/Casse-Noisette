@@ -16,6 +16,9 @@ public:
 	
 	const vector<tuple<string, string, string>> & getResults() const;
 signals:
+	void creatingEngine();
+	void engineCreated();
+	void unloadingEngine();
 	void resultsReady();
 	void running();
 	void stopped();
