@@ -179,7 +179,6 @@ void CasseNoisette::handleResults()
 
 void CasseNoisette::crackingStarted()
 {
-	crackingTime->restart();
 	crackingInProgress = true;
 	ui.startCrackBtn->setText("Annuler le cassage");
 }
@@ -200,6 +199,7 @@ void CasseNoisette::errorString(QString error)
 
 void CasseNoisette::engineInCreation()
 {
+	crackingTime->restart();
 	ui.startCrackBtn->setText("Chargement des fichiers...");
 	ui.startCrackBtn->setDisabled(true);
 }
