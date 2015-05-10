@@ -16,39 +16,39 @@ CasseNoisette::CasseNoisette(QWidget *parent)
 {
 	ui.setupUi(this);
 	
-	crackingTime = new QElapsedTimer;
+	crackingTime = make_unique<QElapsedTimer>();
 
 	crackingInProgress = false;
 
 	// On instancie un crackingWorker inactif (par défaut)
-	crackingWorker = new CrackingWorker;
-	crackingWorkerThread = new QThread;
+	crackingWorker = make_unique<CrackingWorker>();
+	crackingWorkerThread = make_unique<QThread>();
 
 	// crackingWorker passe du main thread à son propre thread.
 	// (alors il ne bloquera pas l'interface)
-	crackingWorker->moveToThread(crackingWorkerThread);
+	crackingWorker->moveToThread(crackingWorkerThread.get());
 
 	
 	// On configure les différentes connections (Patron observer de QT):
 
 	/// Ce que cette classe (CasseNoisette) émet au crackingWorker.
-	connect(this, SIGNAL(startCracking()), crackingWorker, SLOT(startCracking()));
-	connect(this, SIGNAL(stopCracking()), crackingWorker, SLOT(stopCracking()));
+	connect(this, SIGNAL(startCracking()), crackingWorker.get(), SLOT(startCracking()));
+	connect(this, SIGNAL(stopCracking()), crackingWorker.get(), SLOT(stopCracking()));
 
 	/// Ce que le crackingWorker émet à son thread (crackingWorkerThread)
-	connect(crackingWorker, SIGNAL(finished()), crackingWorkerThread, SLOT(deleteLater()));
+	connect(crackingWorker.get(), SIGNAL(finished()), crackingWorkerThread.get(), SLOT(deleteLater()));
 
 	/// Ce que le crackingWorker émet à cette classe (CasseNoisette)
-	connect(crackingWorker, &CrackingWorker::resultsReady, this, &CasseNoisette::handleResults);
-	connect(crackingWorker, SIGNAL(error(QString)), this, SLOT(errorString(QString)));
-	connect(crackingWorker, SIGNAL(running()), this, SLOT(crackingStarted()));
-	connect(crackingWorker, SIGNAL(stopped()), this, SLOT(crackingStopped()));
-	connect(crackingWorker, SIGNAL(creatingEngine()), this, SLOT(engineInCreation()));
-	connect(crackingWorker, SIGNAL(engineCreated()), this, SLOT(engineReady()));
-	connect(crackingWorker, SIGNAL(unloadingEngine()), this, SLOT(engineUnloading()));
+	connect(crackingWorker.get(), &CrackingWorker::resultsReady, this, &CasseNoisette::handleResults);
+	connect(crackingWorker.get(), SIGNAL(error(QString)), this, SLOT(errorString(QString)));
+	connect(crackingWorker.get(), SIGNAL(running()), this, SLOT(crackingStarted()));
+	connect(crackingWorker.get(), SIGNAL(stopped()), this, SLOT(crackingStopped()));
+	connect(crackingWorker.get(), SIGNAL(creatingEngine()), this, SLOT(engineInCreation()));
+	connect(crackingWorker.get(), SIGNAL(engineCreated()), this, SLOT(engineReady()));
+	connect(crackingWorker.get(), SIGNAL(unloadingEngine()), this, SLOT(engineUnloading()));
 
 	/// Ce que le crackingWorkerThread émet à lui-même
-	connect(crackingWorkerThread, SIGNAL(finished()), crackingWorkerThread, SLOT(deleteLater()));
+	connect(crackingWorkerThread.get(), SIGNAL(finished()), crackingWorkerThread.get(), SLOT(deleteLater()));
 
 	// On démarre le thread. (En stand-by car crackingWorker est inactif par défaut).
 	crackingWorkerThread->start(QThread::HighPriority);
@@ -56,9 +56,6 @@ CasseNoisette::CasseNoisette(QWidget *parent)
 
 CasseNoisette::~CasseNoisette()
 {
-	delete crackingWorkerThread;
-	delete crackingWorker;
-	delete crackingTime;
 }
 
 QString CasseNoisette::tupleToString(const tuple<string, string, string> & _tupleToConvert) const

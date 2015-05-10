@@ -10,9 +10,9 @@
 class CasseNoisette : public QMainWindow
 {
 	Q_OBJECT
-	QThread * crackingWorkerThread;
-	CrackingWorker * crackingWorker;
-	QElapsedTimer * crackingTime;
+	unique_ptr<QThread> crackingWorkerThread;
+	unique_ptr<CrackingWorker> crackingWorker;
+	unique_ptr<QElapsedTimer> crackingTime;
 
 public:
 	CasseNoisette(QWidget *parent = 0);
