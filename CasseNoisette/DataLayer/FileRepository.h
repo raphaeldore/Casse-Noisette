@@ -17,7 +17,7 @@ namespace DataLayer
 	class FileRepository
 	{
 	public:
-		void loadPasswordFile(const string _pwdFilePath, string _separator = ":");
+		void loadPasswordFile(const string & _pwdFilePath, const string & _separator = ":");
 		unique_ptr<queue<string>> loadDictionaryFile(const string & _dictFilePath);
 		const multimap<string, string> & getAllHashedPasswords() const;
 

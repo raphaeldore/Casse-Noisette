@@ -3,7 +3,7 @@
 
 using namespace DataLayer;
 
-void FileRepository::loadPasswordFile(const string _pwdFilePath, string _separator)
+void FileRepository::loadPasswordFile(const string & _pwdFilePath, const string & _separator)
 {
 	string line;
 	ifstream ifile(_pwdFilePath.c_str());
