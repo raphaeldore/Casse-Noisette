@@ -255,7 +255,7 @@ namespace IntegrationTests
 			
 			// Arrange
 			string dictionaryPath = "../TestsFiles/Dictionaries/rockyou.txt";
-			unsigned int EXPECTED_DICTIONARY_SIZE = 9999999U;
+			unsigned int EXPECTED_DICTIONARY_SIZE = 9999998U;
 
 			string EXPECTED_DICT_FRONT = "123456";
 			string EXPECTED_DICT_BACK = "arisha786";
