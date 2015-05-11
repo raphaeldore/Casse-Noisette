@@ -47,33 +47,29 @@ void FileRepository::loadPasswordFile(const string & _pwdFilePath, const string 
 
 unique_ptr<queue<string>> FileRepository::loadDictionaryFile(const string& _dictFilePath)
 {
-	ifstream dict(_dictFilePath);
-	if (!dict.is_open()) throw runtime_error("Le fichier dictionnaire n'existe pas.");
-	if (fileIsEmpty(dict))
-	{
-		dict.close();
-		throw runtime_error("Le fichier dictionnaire est vide.");
-	}
-
 	// Sur le Heap car le Stack est trop petit (pour les gros fichiers)
 	unique_ptr<queue<string>> dictionary = make_unique<queue<string>>();
 
-	try
+	MemoryMapped dictionaryFile(_dictFilePath, MemoryMapped::WholeFile, MemoryMapped::SequentialScan);
+
+	if (!dictionaryFile.isValid()) throw runtime_error("Le fichier dictionnaire n'existe pas.");
+
+	char * buffer = (char *) dictionaryFile.getData();
+
+	for (uint64_t i = 0; i < dictionaryFile.size(); i++)
 	{
+		if (buffer[i] == '\n' || buffer[i] == '\r') continue;
+
 		string line;
-		while (getline(dict, line))
+
+		do
 		{
-			dictionary->push(line);
-		}
-	}
-	catch (const exception& ex)
-	{
-		cerr << ex.what();
-		dict.close();
-	}
-	catch (...)
-	{
-		dict.close();
+			line += buffer[i];
+			i++;
+		} while (i < dictionaryFile.size() && buffer[i] != '\n' && buffer[i] != '\r');
+
+		dictionary->push(line);
+
 	}
 
 	return move(dictionary);
