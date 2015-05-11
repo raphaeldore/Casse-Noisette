@@ -47,12 +47,12 @@ void FileRepository::loadPasswordFile(const string & _pwdFilePath, const string 
 
 unique_ptr<queue<string>> FileRepository::loadDictionaryFile(const string& _dictFilePath)
 {
-	// Sur le Heap car le Stack est trop petit (pour les gros fichiers)
-	unique_ptr<queue<string>> dictionary = make_unique<queue<string>>();
-
 	MemoryMapped dictionaryFile(_dictFilePath, MemoryMapped::WholeFile, MemoryMapped::SequentialScan);
 
 	if (!dictionaryFile.isValid()) throw runtime_error("Le fichier dictionnaire n'existe pas.");
+
+	// Sur le Heap car le Stack est trop petit (pour les gros fichiers)
+	unique_ptr<queue<string>> dictionary = make_unique<queue<string>>();
 
 	char * buffer = (char *) dictionaryFile.getData();
 
