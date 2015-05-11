@@ -58,7 +58,7 @@ unique_ptr<queue<string>> FileRepository::loadDictionaryFile(const string& _dict
 
 	for (uint64_t i = 0; i < dictionaryFile.size(); i++)
 	{
-		// On ignore les fin de lignes et les retours de chariot (1 mot par ligne)
+		// On ignore les fins de lignes et les retours de chariot (1 mot par ligne)
 		if (buffer[i] == '\n' || buffer[i] == '\r') continue;
 
 		string line;
