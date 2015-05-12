@@ -11,7 +11,7 @@ FileRepository::~FileRepository()
 {
 }
 
-void FileRepository::loadPasswordFile(const string & _pwdFilePath, const string & _separator)
+multimap<string, string> FileRepository::loadPasswordFile(const string & _pwdFilePath, const string & _separator)
 {
 	string line;
 	ifstream ifile(_pwdFilePath.c_str());
@@ -23,6 +23,8 @@ void FileRepository::loadPasswordFile(const string & _pwdFilePath, const string 
 		ifile.close();
 		throw logic_error("The file is empty");
 	}
+
+	multimap<string, string> hashedPasswords;
 
 	while (getline(ifile, line))
 	{
@@ -51,6 +53,8 @@ void FileRepository::loadPasswordFile(const string & _pwdFilePath, const string 
 	}
 
 	ifile.close();
+
+	return hashedPasswords;
 }
 
 unique_ptr<queue<string>> FileRepository::loadDictionaryFile(const string& _dictFilePath)
@@ -82,11 +86,6 @@ unique_ptr<queue<string>> FileRepository::loadDictionaryFile(const string& _dict
 	}
 
 	return move(dictionary);
-}
-
-multimap<string, string> & FileRepository::getAllHashedPasswords()
-{
-	return hashedPasswords;
 }
 
 bool FileRepository::fileIsEmpty(ifstream& _file)

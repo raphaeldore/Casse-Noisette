@@ -23,12 +23,10 @@ namespace DataLayer
 		FileRepository();
 		~FileRepository() override;
 
-		void loadPasswordFile(const string & _pwdFilePath, const string & _separator = ":") override;
+		multimap<string, string> loadPasswordFile(const string & _pwdFilePath, const string & _separator = ":") override;
 		unique_ptr<queue<string>> loadDictionaryFile(const string & _dictFilePath) override;
-		multimap<string, string> & getAllHashedPasswords() override;
 
 	private:
-		multimap<string, string> hashedPasswords;
 		static bool fileIsEmpty(ifstream& _file);
 		static vector<string> split(const string& _string, const string& _separator);
 	};
