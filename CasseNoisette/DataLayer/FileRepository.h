@@ -14,7 +14,7 @@ using namespace std;
 
 namespace DataLayer
 {
-	class FileRepository
+	class FileRepository : public FileRepository
 	{
 	public:
 		void loadPasswordFile(const string & _pwdFilePath, const string & _separator = ":");
@@ -24,6 +24,6 @@ namespace DataLayer
 	private:
 		multimap<string, string> hashedPasswords;
 		bool fileIsEmpty(ifstream& _file) const;
-		vector<string> split(const string& _string, const string& _separator) const;
+		static vector<string> split(const string& _string, const string& _separator);
 	};
 }
