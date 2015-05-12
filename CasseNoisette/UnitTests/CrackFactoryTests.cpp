@@ -21,7 +21,7 @@ namespace UnitTests
 		{
 			fakeFileRepository = make_unique<FakeFileRepository>();
 			crackFactory = CrackEngine::CrackFactory::GetCrackFactory();
-			crackFactory->SetFileRepository(move(fakeFileRepository));
+			crackFactory->SetFileRepository(*fakeFileRepository);
 			crackFactoryParams = make_unique<CrackEngine::CrackFactoryParams>();
 			parameters = make_unique<set<Parameter>>();
 			parameters->insert(Parameter(PARAM_TYPE::PWD_FILE_PATH, "fakePasswordFile.txt"));

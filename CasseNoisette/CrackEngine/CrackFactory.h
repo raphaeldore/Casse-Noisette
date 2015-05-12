@@ -19,12 +19,12 @@ namespace CrackEngine
 		CrackFactory();
 		static CrackFactory * GetCrackFactory();
 		unique_ptr<ICrackEngine> CreateCrackEngine(const CRACK_ENGINE_TYPES & _crackEngineType, const CrackFactoryParams & _params) const;
-		void SetFileRepository(unique_ptr<DataLayer::IFileRepository> _fileRepository);
+		void SetFileRepository(DataLayer::IFileRepository & _fileRepository);
 	private:
 		unique_ptr<ICrackEngine> createBruteForce(unique_ptr<ICrackEngine> _crackEngine, const CrackFactoryParams & _params) const;
 		unique_ptr<ICrackEngine> createDictionary(unique_ptr<ICrackEngine> _crackEngine, const CrackFactoryParams & _params) const;
 
-		unique_ptr<DataLayer::IFileRepository> fileRepository;
+		DataLayer::IFileRepository * fileRepository;
 		static map<string, unique_ptr<ICrackEngine>> crackEngines_map;
 	};
 }

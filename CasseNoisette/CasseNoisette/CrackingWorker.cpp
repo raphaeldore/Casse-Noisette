@@ -4,7 +4,8 @@
 CrackingWorker::CrackingWorker() : isRunning(false), isStopped(false)
 {
 	crackFactory = CrackFactory::GetCrackFactory();
-	crackFactory->SetFileRepository(make_unique<DataLayer::FileRepository>());
+	fileRepository = make_unique<DataLayer::FileRepository>();
+	crackFactory->SetFileRepository(*fileRepository);
 }
 
 const vector<tuple<string, string, string>> & CrackingWorker::getResults() const

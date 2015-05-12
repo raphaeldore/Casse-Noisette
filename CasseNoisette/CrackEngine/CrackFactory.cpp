@@ -44,9 +44,9 @@ unique_ptr<ICrackEngine> CrackFactory::CreateCrackEngine(const CRACK_ENGINE_TYPE
 	return crackEngine;
 }
 
-void CrackFactory::SetFileRepository(unique_ptr<DataLayer::IFileRepository> _fileRepository)
+void CrackFactory::SetFileRepository(DataLayer::IFileRepository & _fileRepository)
 {
-	fileRepository.reset(_fileRepository.release());
+	fileRepository = &_fileRepository;
 }
 
 unique_ptr<ICrackEngine> CrackFactory::createBruteForce(unique_ptr<ICrackEngine> _crackEngine, const CrackFactoryParams & _params) const
