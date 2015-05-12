@@ -41,6 +41,7 @@ namespace UnitTests
 			unique_ptr<CrackEngine::ICrackEngine> crackEngine = crackFactory->CreateCrackEngine(BRUTE_FORCE, *crackFactoryParams);
 
 			// Assert
+			Assert::IsTrue(fakeFileRepository->hasLoadPasswordFileBeenCalled());
 			Assert::IsTrue(dynamic_cast<BruteForce *>(crackEngine.get()));
 		}
 
@@ -54,6 +55,8 @@ namespace UnitTests
 			unique_ptr<CrackEngine::ICrackEngine> crackEngine = crackFactory->CreateCrackEngine(DICTIONARY, *crackFactoryParams);
 
 			// Assert
+			Assert::IsTrue(fakeFileRepository->hasLoadPasswordFileBeenCalled());
+			Assert::IsTrue(fakeFileRepository->hasLoadDictionaryFileBeenCalled());
 			Assert::IsTrue(dynamic_cast<Dictionary *>(crackEngine.get()));
 		}
 	};
