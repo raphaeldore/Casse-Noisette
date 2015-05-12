@@ -10,7 +10,10 @@ public:
 	multimap<string, string> loadPasswordFile(const string & _pwdFilePath, const string & _separator);
 	unique_ptr<queue<string>> loadDictionaryFile(const string & _dictFilePath);
 
+	bool hasLoadPasswordFileBeenCalled();
+	bool hasLoadDictionaryFileBeenCalled();
+
 private:
-	bool loadPasswordFileHashBeenCalled;
-	bool loadDictionaryFileHashBeenCalled;
+	bool loadPasswordFileHasBeenCalled;
+	bool loadDictionaryFileHasBeenCalled;
 };
