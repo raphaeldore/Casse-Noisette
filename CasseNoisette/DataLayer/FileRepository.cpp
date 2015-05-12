@@ -3,6 +3,14 @@
 
 using namespace DataLayer;
 
+FileRepository::FileRepository()
+{
+}
+
+FileRepository::~FileRepository()
+{
+}
+
 void FileRepository::loadPasswordFile(const string & _pwdFilePath, const string & _separator)
 {
 	string line;
@@ -76,17 +84,17 @@ unique_ptr<queue<string>> FileRepository::loadDictionaryFile(const string& _dict
 	return move(dictionary);
 }
 
-const multimap<string, string> & FileRepository::getAllHashedPasswords() const
+multimap<string, string> & FileRepository::getAllHashedPasswords()
 {
 	return hashedPasswords;
 }
 
-bool FileRepository::fileIsEmpty(ifstream& _file) const
+bool FileRepository::fileIsEmpty(ifstream& _file)
 {
 	return _file.peek() == ifstream::traits_type::eof();
 }
 
-vector<string> FileRepository::split(const string& _string, const string& _separator) const
+vector<string> FileRepository::split(const string& _string, const string& _separator)
 {
 	/* https://ysonggit.github.io/coding/2014/12/16/split-a-string-using-c.html */
 	vector<string> returnVector;

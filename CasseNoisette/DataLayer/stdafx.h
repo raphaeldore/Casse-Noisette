@@ -17,9 +17,6 @@
 #include <string>
 #include <fstream>
 
-#include "IFileRepositiry.h"
-#include "FileRepository.h"
-
 #include "Libs\portable-memory-mapping\MemoryMapped.h"
 
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme

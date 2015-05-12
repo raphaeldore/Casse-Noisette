@@ -1,5 +1,8 @@
 #pragma once
+
 #include <queue>
+
+#include "IFileRepository.h"
 
 /*
 
@@ -14,16 +17,19 @@ using namespace std;
 
 namespace DataLayer
 {
-	class FileRepository : public FileRepository
+	class FileRepository : public IFileRepository
 	{
 	public:
-		void loadPasswordFile(const string & _pwdFilePath, const string & _separator = ":");
-		unique_ptr<queue<string>> loadDictionaryFile(const string & _dictFilePath);
-		const multimap<string, string> & getAllHashedPasswords() const;
+		FileRepository();
+		~FileRepository() override;
+
+		void loadPasswordFile(const string & _pwdFilePath, const string & _separator = ":") override;
+		unique_ptr<queue<string>> loadDictionaryFile(const string & _dictFilePath) override;
+		multimap<string, string> & getAllHashedPasswords() override;
 
 	private:
 		multimap<string, string> hashedPasswords;
-		bool fileIsEmpty(ifstream& _file) const;
+		static bool fileIsEmpty(ifstream& _file);
 		static vector<string> split(const string& _string, const string& _separator);
 	};
 }
