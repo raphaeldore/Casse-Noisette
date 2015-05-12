@@ -1,7 +1,11 @@
 #include "CrackingWorker.h"
+#include "../DataLayer/FileRepository.h"
 
 CrackingWorker::CrackingWorker() : isRunning(false), isStopped(false)
 {
+	crackFactory = CrackFactory::GetCrackFactory();
+	fileRepository = make_unique<DataLayer::FileRepository>();
+	crackFactory->SetFileRepository(*fileRepository);
 }
 
 const vector<tuple<string, string, string>> & CrackingWorker::getResults() const
@@ -45,7 +49,7 @@ void CrackingWorker::crack()
 	try
 	{
 		emit creatingEngine();
-		crackEngine = CrackFactory::GetCrackFactory()->CreateCrackEngine(engineType, crackFactoryParams);
+		crackEngine = crackFactory->CreateCrackEngine(engineType, crackFactoryParams);
 		emit engineCreated();
 	}
 	catch (const exception & ex)

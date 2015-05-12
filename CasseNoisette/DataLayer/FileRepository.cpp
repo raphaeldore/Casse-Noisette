@@ -3,7 +3,15 @@
 
 using namespace DataLayer;
 
-void FileRepository::loadPasswordFile(const string & _pwdFilePath, const string & _separator)
+FileRepository::FileRepository()
+{
+}
+
+FileRepository::~FileRepository()
+{
+}
+
+multimap<string, string> FileRepository::loadPasswordFile(const string & _pwdFilePath, const string & _separator)
 {
 	string line;
 	ifstream ifile(_pwdFilePath.c_str());
@@ -15,6 +23,8 @@ void FileRepository::loadPasswordFile(const string & _pwdFilePath, const string 
 		ifile.close();
 		throw logic_error("The file is empty");
 	}
+
+	multimap<string, string> hashedPasswords;
 
 	while (getline(ifile, line))
 	{
@@ -43,6 +53,8 @@ void FileRepository::loadPasswordFile(const string & _pwdFilePath, const string 
 	}
 
 	ifile.close();
+
+	return hashedPasswords;
 }
 
 unique_ptr<queue<string>> FileRepository::loadDictionaryFile(const string& _dictFilePath)
@@ -76,17 +88,12 @@ unique_ptr<queue<string>> FileRepository::loadDictionaryFile(const string& _dict
 	return move(dictionary);
 }
 
-const multimap<string, string> & FileRepository::getAllHashedPasswords() const
-{
-	return hashedPasswords;
-}
-
-bool FileRepository::fileIsEmpty(ifstream& _file) const
+bool FileRepository::fileIsEmpty(ifstream& _file)
 {
 	return _file.peek() == ifstream::traits_type::eof();
 }
 
-vector<string> FileRepository::split(const string& _string, const string& _separator) const
+vector<string> FileRepository::split(const string& _string, const string& _separator)
 {
 	/* https://ysonggit.github.io/coding/2014/12/16/split-a-string-using-c.html */
 	vector<string> returnVector;

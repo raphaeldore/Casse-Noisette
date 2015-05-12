@@ -58,8 +58,7 @@ namespace IntegrationTests
 			expectedMap.insert(make_pair("bdb8c008fa551ba75f8481963f2201da", userName));
 
 			//Action
-			fileRepository->loadPasswordFile(file_name_no_separator);
-			multimap<string, string> actualMap = fileRepository->getAllHashedPasswords();
+			multimap<string, string> actualMap = fileRepository->loadPasswordFile(file_name_no_separator);;
 
 			// Assert
 			Assert::IsTrue(expectedMap == actualMap);
@@ -69,10 +68,10 @@ namespace IntegrationTests
 		{
 			//Arrange
 			const int NBR_PASSWORD_IN_FILE = 5;
-			fileRepository->loadPasswordFile(file_name_no_separator);
 
 			//Action
-			int hashedPwdVectorSize = fileRepository->getAllHashedPasswords().size();
+			auto passwordsFile = fileRepository->loadPasswordFile(file_name_no_separator);
+			int hashedPwdVectorSize = passwordsFile.size();
 
 			//Assert
 			Assert::AreEqual(NBR_PASSWORD_IN_FILE, hashedPwdVectorSize);
@@ -103,8 +102,7 @@ namespace IntegrationTests
 			EXPECTED_MAP.insert(make_pair("6d4db5ff0c117864a02827bad3c361b9", "user1"));
 
 			//Action
-			fileRepository->loadPasswordFile(file);
-			multimap<string, string> ACTUAL_MAP = fileRepository->getAllHashedPasswords();
+			multimap<string, string> ACTUAL_MAP = fileRepository->loadPasswordFile(file);
 
 			//Assert
 			Assert::IsTrue(EXPECTED_MAP == ACTUAL_MAP);
@@ -140,9 +138,7 @@ namespace IntegrationTests
 			EXPECTED_MAP.insert(make_pair("bdb8c008fa551ba75f8481963f2201da", "user5"));
 
 			//Action
-			fileRepository->loadPasswordFile(file_name_with_separator);
-
-			auto ACTUAL_MAP = fileRepository->getAllHashedPasswords();
+			auto ACTUAL_MAP = fileRepository->loadPasswordFile(file_name_with_separator);
 
 			// Assert
 			Assert::IsTrue(EXPECTED_MAP == ACTUAL_MAP);
@@ -156,8 +152,7 @@ namespace IntegrationTests
 			EXPECTED_MAP.insert(make_pair("6d4db5ff0c117864a02827bad3c361b9", "user1"));
 
 			//Action
-			fileRepository->loadPasswordFile(file, "!!");
-			multimap<string, string> ACTUAL_MAP = fileRepository->getAllHashedPasswords();
+			multimap<string, string> ACTUAL_MAP = fileRepository->loadPasswordFile(file, "!!");
 
 			//Assert
 			Assert::IsTrue(EXPECTED_MAP == ACTUAL_MAP);
