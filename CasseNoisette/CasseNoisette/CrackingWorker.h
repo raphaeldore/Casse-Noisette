@@ -41,6 +41,7 @@ private:
 	CRACK_ENGINE_TYPES engineType;
 	CrackFactoryParams crackFactoryParams;
 	unique_ptr<ICrackEngine> crackEngine;
+	CrackFactory * crackFactory;
 	vector<tuple<string, string, string>> results;
 };
 
