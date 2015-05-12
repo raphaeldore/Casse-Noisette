@@ -211,3 +211,9 @@ void CasseNoisette::engineUnloading()
 	ui.startCrackBtn->setText("Déchargement de l'engin...");
 	ui.startCrackBtn->setDisabled(true);
 }
+
+void CasseNoisette::on_aboutBtn_triggered(){
+	AboutDialog aboutDialog(this);
+
+	aboutDialog.exec();
+}

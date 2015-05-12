@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>470</width>
-    <height>474</height>
+    <height>476</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -461,6 +461,13 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu_propos">
+    <property name="title">
+     <string>Aide</string>
+    </property>
+    <addaction name="aboutBtn"/>
+   </widget>
+   <addaction name="menu_propos"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -471,6 +478,11 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="aboutBtn">
+   <property name="text">
+    <string>À propos</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
