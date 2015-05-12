@@ -83,6 +83,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="FakeFileRepository.h" />
     <ClInclude Include="FakeHash.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -93,6 +94,7 @@
     <ClCompile Include="CrackFactoryParamsTests.cpp" />
     <ClCompile Include="CrackFactoryTests.cpp" />
     <ClCompile Include="DictionaryTests.cpp" />
+    <ClCompile Include="FakeFileRepository.cpp" />
     <ClCompile Include="FakeHash.cpp" />
     <ClCompile Include="MD5Tests.cpp" />
     <ClCompile Include="stdafx.cpp">

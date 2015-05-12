@@ -34,3 +34,6 @@
 #include "../CrackEngine/BruteForce.h"
 #include "../CrackEngine/CharsetBuilder.h"
 #include "../CrackEngine/Dictionary.h"
+
+// Ce projet
+#include "FakeFileRepository.h"
