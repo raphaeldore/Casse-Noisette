@@ -15,12 +15,16 @@ namespace UnitTests
 		CrackEngine::CrackFactory * crackFactory;
 		unique_ptr<CrackEngine::CrackFactoryParams> crackFactoryParams;
 		unique_ptr<set<Parameter>> parameters;
+		unique_ptr<FakeFileRepository> fakeFileRepository;
+
 		TEST_METHOD_INITIALIZE(CrackEngineParams_Initialize)
 		{
+			fakeFileRepository = make_unique<FakeFileRepository>();
 			crackFactory = CrackEngine::CrackFactory::GetCrackFactory();
+			crackFactory->SetFileRepository(move(fakeFileRepository));
 			crackFactoryParams = make_unique<CrackEngine::CrackFactoryParams>();
 			parameters = make_unique<set<Parameter>>();
-			parameters->insert(Parameter(PARAM_TYPE::PWD_FILE_PATH, "../TestsFiles/hashed_password_test.txt"));
+			parameters->insert(Parameter(PARAM_TYPE::PWD_FILE_PATH, "fakePasswordFile.txt"));
 			parameters->insert(Parameter(PARAM_TYPE::SEPERATOR, ":"));
 			parameters->insert(Parameter(PARAM_TYPE::RESULTS_FILE_PATH, "/home/rdore/cracking_results.txt"));
 			parameters->insert(Parameter(PARAM_TYPE::HASH_TYPE, "MD5"));
@@ -29,7 +33,6 @@ namespace UnitTests
 		TEST_METHOD(CreateCrackEngine_can_create_brute_force_engine)
 		{
 			// Arrange
-			// TODO: Injection dépendance fileRepository à la CrackFactory.
 			parameters->insert(Parameter(PARAM_TYPE::CHARSET, "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_+="));
 			parameters->insert(Parameter(PARAM_TYPE::MAX_PWD_LENGTH, "6"));
 			crackFactoryParams->setParameters(*parameters);
@@ -44,7 +47,7 @@ namespace UnitTests
 		TEST_METHOD(CreateCrackEngine_can_create_dictionary_engine)
 		{
 			// Arrange
-			parameters->insert(Parameter(PARAM_TYPE::DICTIONARY_PATH, "../TestsFiles/Dictionaries/small_dict.txt"));
+			parameters->insert(Parameter(PARAM_TYPE::DICTIONARY_PATH, "randomDictionary.txt"));
 			crackFactoryParams->setParameters(*parameters);
 
 			// Action
