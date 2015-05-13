@@ -17,6 +17,7 @@ namespace Utilities {
 		~FileUtilities();
 
 		static bool DoesFileExist(const std::string & _path);
+		static bool IsFileEmpty(const std::string & _path);
 		static bool CreateFile(const std::string & _path, const bool & _overwriteExisting = false);
 	};
 }

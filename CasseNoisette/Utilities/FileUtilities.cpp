@@ -17,6 +17,10 @@ bool FileUtilities::DoesFileExist(const string & _path) {
 	return tr2::sys::exists(tr2::sys::path(_path));
 }
 
+bool FileUtilities::IsFileEmpty(const string & _path) {
+	return tr2::sys::is_empty(tr2::sys::path(_path));
+}
+
 bool FileUtilities::CreateFile(const string & _path, const bool & _overwriteExisting) {
 
 	if (DoesFileExist(_path) && !_overwriteExisting) return false;

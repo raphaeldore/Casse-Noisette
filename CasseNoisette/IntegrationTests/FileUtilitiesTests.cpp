@@ -16,7 +16,15 @@ namespace IntegrationTests
 		}
 
 		//TEST_METHOD(can_create_file) {
-		//	Assert::IsTrue(Utilities::FileUtilities::CreateFile("bybye.txt"));
+		//	Assert::IsTrue(Utilities::FileUtilities::CreateFile("E:\\bybye.txt"));
 		//}
+
+		TEST_METHOD(IsFileEmpty_returns_true_if_empty) {
+			Assert::IsTrue(Utilities::FileUtilities::IsFileEmpty("../TestsFiles/emptyFile.txt"));
+		}
+
+		TEST_METHOD(IsFileEmpty_returns_flase_if_not_empty) {
+			Assert::IsTrue(Utilities::FileUtilities::IsFileEmpty("../TestsFiles/simple_password.txt"));
+		}
 	};
 }
