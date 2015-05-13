@@ -28,6 +28,6 @@ namespace DataLayer
 
 	private:
 		static bool fileIsEmpty(ifstream& _file);
-		static vector<string> split(const string& _string, const string& _separator);
+		static bool split(const string& _string, const string& _separator, vector<string> & _outVector);
 	};
 }

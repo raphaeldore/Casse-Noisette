@@ -39,9 +39,9 @@ multimap<string, string> FileRepository::loadPasswordFile(const string & _pwdFil
 		}
 		else
 		{
-			vector<string> lineSplit = split(line, _separator);
+			vector<string> lineSplit;
 
-			if (lineSplit.size() == 2)
+			if (split(line, _separator, lineSplit) && lineSplit.size() == 2)
 			{
 				hashedPasswords.insert(make_pair(lineSplit[1], lineSplit[0]));
 			}
@@ -66,7 +66,7 @@ unique_ptr<queue<string>> FileRepository::loadDictionaryFile(const string& _dict
 	// Sur le Heap car le Stack est trop petit (pour les gros fichiers)
 	unique_ptr<queue<string>> dictionary = make_unique<queue<string>>();
 
-	char * buffer = (char *) dictionaryFile.getData();
+	const unsigned char * buffer = dictionaryFile.getData();
 
 	for (uint64_t i = 0; i < dictionaryFile.size(); i++)
 	{
@@ -93,23 +93,28 @@ bool FileRepository::fileIsEmpty(ifstream& _file)
 	return _file.peek() == ifstream::traits_type::eof();
 }
 
-vector<string> FileRepository::split(const string& _string, const string& _separator)
+bool FileRepository::split(const string& _string, const string& _separator, vector<string>& _outVector)
 {
 	/* https://ysonggit.github.io/coding/2014/12/16/split-a-string-using-c.html */
-	vector<string> returnVector;
+
+	_outVector.clear();
 
 	auto i = 0;
 	auto pos = _string.find(_separator);
 	while (pos != string::npos)
 	{
-		returnVector.push_back(_string.substr(i, pos - i));
+		// On prend la partie avant le séparateur
+		_outVector.push_back(_string.substr(i, pos - i));
 		pos += _separator.length();
 		i = pos;
 		pos = _string.find(_separator, pos);
 
+		// On prend la partie après le séparateur
 		if (pos == string::npos)
-			returnVector.push_back(_string.substr(i, _string.length()));
+			_outVector.push_back(_string.substr(i, _string.length()));
 	}
 
-	return returnVector;
+	if (_outVector.empty()) return false;
+
+	return true;
 }
