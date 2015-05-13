@@ -16,7 +16,7 @@ DictionaryGenerator::~DictionaryGenerator()
 }
 
 bool DictionaryGenerator::GenerateDictionary() {
-
+	return true;
 }
 
 void DictionaryGenerator::generateWords(const unsigned int _wordLength, string _s) {
