@@ -18,7 +18,7 @@ DictionaryGenerator::~DictionaryGenerator()
 }
 
 void DictionaryGenerator::GenerateDictionary() {
-	for (int i = 0; i <= maxWordLength; ++i) {
+	for (unsigned int i = 0; i <= maxWordLength; ++i) {
 		string initialString = "";
 		generateWords(i, initialString);
 		Utilities::FileUtilities::AppendVectorContentToFile(outputFilePath, buffer);
