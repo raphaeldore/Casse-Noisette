@@ -121,7 +121,7 @@ void CasseNoisette::on_startCrackBtn_clicked()
 	crackFactoryParams.addParameter(Parameter(PWD_FILE_PATH, ui.pwdFileSelectTxt->text().toStdString()));
 	auto seperator = ui.txtPwdsSeperator->text().isEmpty() ? ":" : ui.txtPwdsSeperator->text().toStdString();
 	crackFactoryParams.addParameter(Parameter(SEPERATOR, seperator));
-	crackFactoryParams.addParameter(Parameter(RESULTS_FILE_PATH, ui.resultsFileFolderSelectTxt->text().toStdString()));
+	//crackFactoryParams.addParameter(Parameter(RESULTS_FILE_PATH, ui.resultsFileFolderSelectTxt->text().toStdString()));
 	crackFactoryParams.addParameter(Parameter(HASH_TYPE, ui.hashFunctionsComboBox->currentText().toStdString()));
 
 	// Paramètres spécifique 
@@ -158,16 +158,6 @@ void CasseNoisette::on_dictFileSelectBtn_clicked()
 {
 	QString fileName = QFileDialog::getOpenFileName(this, "Choisir un fichier contenant une liste de mots", QDir::currentPath(), tr("Dictionary File (*.txt *.dict)"));
 	ui.dictFileSelectTxt->setText(fileName);
-}
-
-void CasseNoisette::on_resultsFileFolderSelectBtn_clicked()
-{
-	QString dossier = QFileDialog::getExistingDirectory(this, tr("Dossier du fichier de résultats"),
-														QDir::currentPath(),
-														QFileDialog::ShowDirsOnly
-														| QFileDialog::DontResolveSymlinks);
-	
-	ui.resultsFileFolderSelectTxt->setText(dossier);
 }
 
 void CasseNoisette::handleResults()
