@@ -20,3 +20,6 @@
 
 
 #include "../DataLayer/FileRepository.h"
+
+// Utilities
+#include "../Utilities/FileUtilities.h"
