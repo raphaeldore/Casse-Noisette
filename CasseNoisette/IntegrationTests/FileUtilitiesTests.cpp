@@ -31,5 +31,10 @@ namespace IntegrationTests
 			vector <string> words{ "Hello", "my", "name", "is", "slim", "shady" };
 			Utilities::FileUtilities::AppendVectorContentToFile("words.txt", words);
 		}
+
+		//TEST_METHOD(generate_dictionary) {
+		//	Utilities::DictionaryGenerator generator(4, "abcdefghijklmnopqrstuvwxyz", "words.txt");
+		//	generator.GenerateDictionary();
+		//}
 	};
 }

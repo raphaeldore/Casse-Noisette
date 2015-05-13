@@ -7,7 +7,7 @@ namespace Utilities {
 		DictionaryGenerator(const unsigned int _maxWordLength, const std::string & _charset, const std::string & _outputFilePath);
 		~DictionaryGenerator();
 
-		bool GenerateDictionary();
+		void GenerateDictionary();
 
 	private:
 		// Fonction récursive
@@ -16,5 +16,6 @@ namespace Utilities {
 		unsigned int maxWordLength;
 		std::string charset;
 		std::string outputFilePath;
+		std::vector<std::string> buffer;
 	};
 }

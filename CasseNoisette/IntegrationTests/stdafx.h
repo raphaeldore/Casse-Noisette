@@ -22,4 +22,5 @@
 #include "../DataLayer/FileRepository.h"
 
 // Utilities
+#include "../Utilities/DictionaryGenerator.h"
 #include "../Utilities/FileUtilities.h"
