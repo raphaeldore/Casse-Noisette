@@ -24,7 +24,7 @@ namespace IntegrationTests
 		}
 
 		TEST_METHOD(IsFileEmpty_returns_flase_if_not_empty) {
-			Assert::IsTrue(Utilities::FileUtilities::IsFileEmpty("../TestsFiles/simple_password.txt"));
+			Assert::IsFalse(Utilities::FileUtilities::IsFileEmpty("../TestsFiles/simple_password.txt"));
 		}
 
 		TEST_METHOD(can_create_file_from_vector) {
