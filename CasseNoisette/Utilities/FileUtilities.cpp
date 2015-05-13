@@ -8,7 +8,6 @@ FileUtilities::FileUtilities()
 {
 }
 
-
 FileUtilities::~FileUtilities()
 {
 }
@@ -22,7 +21,6 @@ bool FileUtilities::IsFileEmpty(const string & _path) {
 }
 
 bool FileUtilities::CreateFile(const string & _path, const bool & _overwriteExisting) {
-
 	if (DoesFileExist(_path) && !_overwriteExisting) return false;
 
 	tr2::sys::path path(_path);
@@ -37,4 +35,22 @@ bool FileUtilities::CreateFile(const string & _path, const bool & _overwriteExis
 
 	newFile.close();
 	return false;
+}
+
+void FileUtilities::AppendVectorContentToFile(const std::string & _path, const std::vector<string> & _vector) {
+	if (!DoesFileExist(_path)) {
+		if (!CreateFile(_path)) return;
+	}
+
+	ofstream file(_path, ofstream::out | ofstream::app);
+
+	for (const auto & word : _vector) {
+		AppendStringToFile(file, word);
+	}
+
+	file.close();
+}
+
+void FileUtilities::AppendStringToFile(std::ofstream & _file, const string & _string) {
+	_file << _string << "\n";
 }
