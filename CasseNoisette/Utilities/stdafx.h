@@ -10,7 +10,8 @@
 #define WIN32_LEAN_AND_MEAN             // Exclure les en-têtes Windows rarement utilisés
 
 #include <iostream>
+#include <fstream>
 #include <string>
-
+#include <filesystem>
 
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme
