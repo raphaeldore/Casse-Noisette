@@ -2,6 +2,7 @@
 #include "FileUtilities.h"
 
 using namespace std;
+using namespace Utilities;
 
 FileUtilities::FileUtilities()
 {
