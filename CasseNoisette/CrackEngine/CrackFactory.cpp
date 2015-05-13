@@ -38,7 +38,6 @@ unique_ptr<ICrackEngine> CrackFactory::CreateCrackEngine(const CRACK_ENGINE_TYPE
 	// On ajoute ensuite les paramètres nécessaires à tous les types de CrackEngine
 	auto hashedPasswords = fileRepository->loadPasswordFile(_params[PWD_FILE_PATH], _params[SEPERATOR]);
 	crackEngine->setHashedPasswords(hashedPasswords);
-	crackEngine->setResultsFilePath(_params[RESULTS_FILE_PATH]);
 	crackEngine->setPwdHashFunction(_params[HASH_TYPE]);
 	
 	return crackEngine;
