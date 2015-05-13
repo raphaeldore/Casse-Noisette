@@ -9,7 +9,7 @@
 #include "../CrackEngine/CharsetBuilder.h"
 
 // #include "vld.h" // VLD cause des problèmes de null pointer exceptions pour des raisons étranges
-					// quand je charge de très gros fichiers ( > 50Mo)
+                    // quand je charge de très gros fichiers ( > 50Mo)
 
 CasseNoisette::CasseNoisette(QWidget *parent)
 	: QMainWindow(parent)
@@ -76,8 +76,8 @@ string CasseNoisette::GetCharset() const
 		ui.chkCharsetSpace->isChecked(),
 		ui.chkCharsetSpecial->isChecked(),
 		ui.txtCustomCharset->text().toLocal8Bit().constData() // Les QString sont en UTF-16, 
-                                                              // et les std::string sont en UTF-8. 
-                                                              // On doit les convertir.
+		                                                      // et les std::string sont en UTF-8.
+		                                                      // On doit les convertir.
 	};
 
 	return charsetBuilder.BuildCharset();
