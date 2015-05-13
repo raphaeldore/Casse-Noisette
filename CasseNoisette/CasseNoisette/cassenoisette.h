@@ -25,6 +25,7 @@ public slots:
 	void on_startCrackBtn_clicked();
 	void on_pwdFileSelectBtn_clicked();
 	void on_dictFileSelectBtn_clicked();
+	void on_resultsFileFolderSelectBtn_clicked();
 	void handleResults();
 	void crackingStarted();
 	void crackingStopped();

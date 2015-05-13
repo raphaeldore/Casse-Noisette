@@ -64,7 +64,7 @@ QString CasseNoisette::tupleToString(const tuple<string, string, string> & _tupl
 	QString hashedPassword = QString::fromLocal8Bit(get<1>(_tupleToConvert).c_str());
 	QString plainTextPassword = QString::fromLocal8Bit(get<2>(_tupleToConvert).c_str());
 
-	return userName + " : " + hashedPassword + " : " + plainTextPassword;
+	return userName + "\t\t : " + hashedPassword + " : " + plainTextPassword;
 }
 
 string CasseNoisette::GetCharset() const
@@ -105,7 +105,7 @@ void CasseNoisette::on_startCrackBtn_clicked()
 	crackFactoryParams.addParameter(Parameter(PWD_FILE_PATH, ui.pwdFileSelectTxt->text().toStdString()));
 	auto seperator = ui.txtPwdsSeperator->text().isEmpty() ? ":" : ui.txtPwdsSeperator->text().toStdString();
 	crackFactoryParams.addParameter(Parameter(SEPERATOR, seperator));
-	crackFactoryParams.addParameter(Parameter(RESULTS_FILE_PATH, "chemin/bidon/fichier_bidon.txt"));
+	crackFactoryParams.addParameter(Parameter(RESULTS_FILE_PATH, ui.resultsFileFolderSelectTxt->text().toStdString()));
 	crackFactoryParams.addParameter(Parameter(HASH_TYPE, ui.hashFunctionsComboBox->currentText().toStdString()));
 
 	// Paramètres spécifique 
@@ -120,6 +120,7 @@ void CasseNoisette::on_startCrackBtn_clicked()
 		crackingWorker->setCrackEngineType(DICTIONARY);
 	} else
 	{
+		//QMessageBox msgBox("Pas implémenté encore");
 		return; // TODO: En attendant d'implémenter le cassage par arc-en-ciel
 	}
 
@@ -141,6 +142,16 @@ void CasseNoisette::on_dictFileSelectBtn_clicked()
 {
 	QString fileName = QFileDialog::getOpenFileName(this, "Choisir un fichier contenant une liste de mots", QDir::currentPath(), tr("Dictionary File (*.txt *.dict)"));
 	ui.dictFileSelectTxt->setText(fileName);
+}
+
+void CasseNoisette::on_resultsFileFolderSelectBtn_clicked()
+{
+	QString dossier = QFileDialog::getExistingDirectory(this, tr("Dossier du fichier de résultats"),
+														QDir::currentPath(),
+														QFileDialog::ShowDirsOnly
+														| QFileDialog::DontResolveSymlinks);
+	
+	ui.resultsFileFolderSelectTxt->setText(dossier);
 }
 
 void CasseNoisette::handleResults()
@@ -166,11 +177,13 @@ void CasseNoisette::handleResults()
 	else
 	{
 		passwords_found_message = "Aucun mot de passe trouvé";
+		msgBox.setInformativeText("Essayez avec d'autres paramètres.");
 	}
 
 	passwords_found_message += "\n\n Temps total: " + QString::number(crackingTime->elapsed() * 0.001) + " secs";
 
 	msgBox.setText(passwords_found_message);
+	msgBox.setDetailedText(passwords_found_message);
 	msgBox.exec();
 }
 

@@ -146,16 +146,16 @@
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Destination du fichier qui contiendra les mots de passes décryptés (le résultat du crackage)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="title">
-       <string>Fichier de sortie :</string>
+       <string>Dossier des résultats :</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
-          <widget class="QLineEdit" name="lineEdit"/>
+          <widget class="QLineEdit" name="resultsFileFolderSelectTxt"/>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_3">
+          <widget class="QPushButton" name="resultsFileFolderSelectBtn">
            <property name="text">
             <string>Parcourir...</string>
            </property>
