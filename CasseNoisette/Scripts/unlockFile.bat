@@ -1,0 +1,1 @@
+ICACLS ../TestsFiles/UtilitiesTests/lockedFile.txt /grant "tout le monde":R

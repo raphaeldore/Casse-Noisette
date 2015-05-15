@@ -14,7 +14,7 @@ bool FileUtilities::IsFileEmpty(const string & _path) {
 
 string FileUtilities::IncrementFileNameIfExists(const string & _path)
 {
-	// Pas la manière la plus élégante... Mais ça marche!
+	// Pas la maniÃ¨re la plus Ã©lÃ©gante... Mais Ã§a marche!
 
 	if (!DoesFileExist(_path)) return _path;
 
@@ -48,11 +48,11 @@ string FileUtilities::GetFileContent(const string& _path)
 
 string FileUtilities::GetFileNameFromPath(const string& _path)
 {
-	string seperator = "/"; // Séparateur Unix
+	string seperator = "/"; // SÃ©parateur Unix
 
-	// Dans l'intérêt de coder une classe portable...
+	// Dans l'intÃ©rÃªt de coder une classe portable...
 #ifdef _WIN32
-	seperator = '\\'; // Séparateur Windows
+	seperator = '\\'; // SÃ©parateur Windows
 #endif
 
 	auto startFrom = _path.find_last_of(seperator) + 1;

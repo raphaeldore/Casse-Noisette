@@ -1,0 +1,1 @@
+ICACLS ../TestsFiles/UtilitiesTests/lockedFile.txt /deny "tout le monde":R

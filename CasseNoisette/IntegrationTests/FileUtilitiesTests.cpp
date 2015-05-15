@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include <mutex>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
@@ -33,14 +32,17 @@ namespace IntegrationTests
 
 		TEST_METHOD(getFileContent_throws_runtime_error_if_unable_to_open_file)
 		{
-			// Note: j'ai enlevé la permission de lecture au fichier lockedFile 
-			// (chmod -r "testfile.txt" avec linux, ou avec Windows > 7 : ICACLS "lockedFile.txt" /deny  "tout le monde":(GR) ).
-			// P-S: C'est encore possible de supprimer le fichier, ça c'est encore permis ;)
+			// Script empÃªche la lecture du fichier par tous les utilisateurs
+			system("..\\Scripts\\lockFile.bat");
 
 			auto loadDictionaryWithNonExistantFileFunction = [this] {Utilities::FileUtilities::GetFileContent("..\\TestsFiles\\UtilitiesTests\\lockedFile.txt"); };
 
 			// Assert
 			Assert::ExpectException<runtime_error>(loadDictionaryWithNonExistantFileFunction);
+
+			// Script qui redonne permission Ã  tout le monde de lire le fichier
+			// (sinon git ne veut rien savoir)
+			system("..\\Scripts\\unlockFile.bat");
 		}
 		
 		TEST_METHOD(does_file_exist_returns_false_if_file_does_not_exist) {
@@ -117,7 +119,7 @@ namespace IntegrationTests
 		TEST_METHOD(IncrementFileNameIfExists_returns_correct_incremented_file_name)
 		{
 			// Note: Dans le dossier '..\TestsFiles\\UtilitiesTests\' il y a, parmis d'autres fichiers,
-			// les fichiers suivants: file.txt, file1.txt, et file2.txt. Je me base sur ça pour faire ce test.
+			// les fichiers suivants: file.txt, file1.txt, et file2.txt. Je me base sur Ã§a pour faire ce test.
 
 			// Arrange
 			string attemptedPath = "..\\TestsFiles\\UtilitiesTests\\file.txt";
@@ -134,5 +136,8 @@ namespace IntegrationTests
 		//	Utilities::DictionaryGenerator generator(8, "abcdefg", "words.txt");
 		//	generator.GenerateDictionary();
 		//}
+
+
 	};
+
 }
