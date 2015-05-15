@@ -7,7 +7,6 @@ namespace CrackEngine
 	enum PARAM_TYPE
 	{
 		PWD_FILE_PATH,
-		RESULTS_FILE_PATH,
 		MAX_PWD_LENGTH,
 		CHARSET,
 		SEPERATOR,

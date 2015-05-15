@@ -110,6 +110,9 @@
     <ProjectReference Include="..\Crypto\Crypto.vcxproj">
       <Project>{440fa387-c872-4c50-a708-273188646f9c}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.vcxproj">
+      <Project>{11533f07-9a0a-4efa-a678-79e4725f3e97}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

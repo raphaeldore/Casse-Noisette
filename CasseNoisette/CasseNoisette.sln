@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataLayer", "DataLayer\Data
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IntegrationTests", "IntegrationTests\IntegrationTests.vcxproj", "{90F9A2F7-3F92-431B-930A-69A11483B24B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utilities", "Utilities\Utilities.vcxproj", "{11533F07-9A0A-4EFA-A678-79E4725F3E97}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -45,6 +47,10 @@ Global
 		{90F9A2F7-3F92-431B-930A-69A11483B24B}.Debug|Win32.Build.0 = Debug|Win32
 		{90F9A2F7-3F92-431B-930A-69A11483B24B}.Release|Win32.ActiveCfg = Release|Win32
 		{90F9A2F7-3F92-431B-930A-69A11483B24B}.Release|Win32.Build.0 = Release|Win32
+		{11533F07-9A0A-4EFA-A678-79E4725F3E97}.Debug|Win32.ActiveCfg = Debug|Win32
+		{11533F07-9A0A-4EFA-A678-79E4725F3E97}.Debug|Win32.Build.0 = Debug|Win32
+		{11533F07-9A0A-4EFA-A678-79E4725F3E97}.Release|Win32.ActiveCfg = Release|Win32
+		{11533F07-9A0A-4EFA-A678-79E4725F3E97}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -26,7 +26,6 @@ namespace UnitTests
 			parameters = make_unique<set<Parameter>>();
 			parameters->insert(Parameter(PARAM_TYPE::PWD_FILE_PATH, "fakePasswordFile.txt"));
 			parameters->insert(Parameter(PARAM_TYPE::SEPERATOR, ":"));
-			parameters->insert(Parameter(PARAM_TYPE::RESULTS_FILE_PATH, "/home/rdore/cracking_results.txt"));
 			parameters->insert(Parameter(PARAM_TYPE::HASH_TYPE, "MD5"));
 		}
 
