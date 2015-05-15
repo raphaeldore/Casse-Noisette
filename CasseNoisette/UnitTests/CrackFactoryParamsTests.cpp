@@ -32,11 +32,11 @@ namespace UnitTests
 		TEST_METHOD(subscript_operator_should_return_parameter_value)
 		{
 			// Arrange
-			string EXPECTED_PARAM_VALUE = "/home/rdore/cracking_results.txt";
-			crackFactoryParams->addParameter(Parameter(PARAM_TYPE::RESULTS_FILE_PATH, "/home/rdore/cracking_results.txt"));
+			string EXPECTED_PARAM_VALUE = "/home/rdore/password.txt";
+			crackFactoryParams->addParameter(Parameter(PARAM_TYPE::PWD_FILE_PATH, "/home/rdore/password.txt"));
 
 			// Action
-			string ACTUAL_PARAM_VALUE = crackFactoryParams->operator[](PARAM_TYPE::RESULTS_FILE_PATH);
+			string ACTUAL_PARAM_VALUE = crackFactoryParams->operator[](PARAM_TYPE::PWD_FILE_PATH);
 
 			// Assert
 			Assert::AreEqual(EXPECTED_PARAM_VALUE, ACTUAL_PARAM_VALUE);
@@ -46,23 +46,23 @@ namespace UnitTests
 		{
 			// Arrange
 			string EXPECTED_PWD_FILE_PATH = "/home/rdore/passwords.txt";
-			string EXPECTED_RESULTS_FILE_PATH = "/home/rdore/cracking_results.txt";
+			string EXPECTED_SEPERATOR = ":";
 			string EXPECTED_CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_+=";
 
 			set<Parameter> parameters;
 			parameters.insert(Parameter(PARAM_TYPE::PWD_FILE_PATH, "/home/rdore/passwords.txt"));
-			parameters.insert(Parameter(PARAM_TYPE::RESULTS_FILE_PATH, "/home/rdore/cracking_results.txt"));
+			parameters.insert(Parameter(PARAM_TYPE::SEPERATOR, ":"));
 			parameters.insert(Parameter(PARAM_TYPE::CHARSET, "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_+="));
 			crackFactoryParams->setParameters(parameters);
 
 			// Action
 			string ACTUAL_PWD_FILE_PATH = crackFactoryParams->operator[](PWD_FILE_PATH);
-			string ACTUAL_RESULTS_FILE_PATH = crackFactoryParams->operator[](RESULTS_FILE_PATH);
+			string ACTUAL_SEPERATOR = crackFactoryParams->operator[](SEPERATOR);
 			string ACTUAL_CHARSET = crackFactoryParams->operator[](CHARSET);
 
 			// Assert
 			Assert::AreEqual(EXPECTED_PWD_FILE_PATH, ACTUAL_PWD_FILE_PATH);
-			Assert::AreEqual(EXPECTED_RESULTS_FILE_PATH, ACTUAL_RESULTS_FILE_PATH);
+			Assert::AreEqual(EXPECTED_SEPERATOR, ACTUAL_SEPERATOR);
 			Assert::AreEqual(EXPECTED_CHARSET, ACTUAL_CHARSET);
 		}
 

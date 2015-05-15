@@ -14,9 +14,9 @@ namespace IntegrationTests
 	{
 	public:
 		FileRepository * fileRepository;
-		string file_name_no_separator = "../TestsFIles/hashed_password_test.txt";
-		string file_name_with_separator = "../TestsFIles/hashed_password_separator_test.txt";
-		string emptyFile = "../TestsFiles/emptyFile.txt";
+		string file_name_no_separator = "..\\TestsFiles\\hashed_password_test.txt";
+		string file_name_with_separator = "..\\TestsFiles\\hashed_password_separator_test.txt";
+		string emptyFile = "..\\TestsFiles\\emptyFile.txt";
 
 		TEST_METHOD_INITIALIZE(FileRepositoryIntegrationTests_Initialize)
 		{
@@ -58,8 +58,7 @@ namespace IntegrationTests
 			expectedMap.insert(make_pair("bdb8c008fa551ba75f8481963f2201da", userName));
 
 			//Action
-			fileRepository->loadPasswordFile(file_name_no_separator);
-			multimap<string, string> actualMap = fileRepository->getAllHashedPasswords();
+			multimap<string, string> actualMap = fileRepository->loadPasswordFile(file_name_no_separator);;
 
 			// Assert
 			Assert::IsTrue(expectedMap == actualMap);
@@ -69,10 +68,10 @@ namespace IntegrationTests
 		{
 			//Arrange
 			const int NBR_PASSWORD_IN_FILE = 5;
-			fileRepository->loadPasswordFile(file_name_no_separator);
 
 			//Action
-			int hashedPwdVectorSize = fileRepository->getAllHashedPasswords().size();
+			auto passwordsFile = fileRepository->loadPasswordFile(file_name_no_separator);
+			int hashedPwdVectorSize = passwordsFile.size();
 
 			//Assert
 			Assert::AreEqual(NBR_PASSWORD_IN_FILE, hashedPwdVectorSize);
@@ -88,7 +87,7 @@ namespace IntegrationTests
 			{
 				fileRepository->loadPasswordFile(emptyFile);
 			}
-			catch (logic_error){
+			catch (runtime_error err){
 				exception_thrown = true;
 			}
 			//Assert
@@ -98,13 +97,12 @@ namespace IntegrationTests
 		TEST_METHOD(open_file_with_separator_and_one_line_should_create_multimap_with_the_user_an_hashed_password)
 		{
 			//Arrange
-			string file = "../TestsFIles/simple_password_separator.txt";
+			string file = "..\\TestsFiles\\simple_password_separator.txt";
 			multimap<string, string> EXPECTED_MAP;
 			EXPECTED_MAP.insert(make_pair("6d4db5ff0c117864a02827bad3c361b9", "user1"));
 
 			//Action
-			fileRepository->loadPasswordFile(file);
-			multimap<string, string> ACTUAL_MAP = fileRepository->getAllHashedPasswords();
+			multimap<string, string> ACTUAL_MAP = fileRepository->loadPasswordFile(file);
 
 			//Assert
 			Assert::IsTrue(EXPECTED_MAP == ACTUAL_MAP);
@@ -120,7 +118,7 @@ namespace IntegrationTests
 			{
 				fileRepository->loadPasswordFile(emptyFile, ";");
 			}
-			catch (logic_error)
+			catch (runtime_error)
 			{
 				exception_thrown = true;
 			}
@@ -140,9 +138,7 @@ namespace IntegrationTests
 			EXPECTED_MAP.insert(make_pair("bdb8c008fa551ba75f8481963f2201da", "user5"));
 
 			//Action
-			fileRepository->loadPasswordFile(file_name_with_separator);
-
-			auto ACTUAL_MAP = fileRepository->getAllHashedPasswords();
+			auto ACTUAL_MAP = fileRepository->loadPasswordFile(file_name_with_separator);
 
 			// Assert
 			Assert::IsTrue(EXPECTED_MAP == ACTUAL_MAP);
@@ -151,13 +147,12 @@ namespace IntegrationTests
 		TEST_METHOD(open_file_with_a_multiple_character_seperator_should_create_a_multimap_with_the_user_an_hashed_password_and_empty_string)
 		{
 			// Arrange
-			string file = "../TestsFIles/simple_password_multichar_separator.txt";
+			string file = "..\\TestsFiles\\simple_password_multichar_separator.txt";
 			multimap<string, string> EXPECTED_MAP;
 			EXPECTED_MAP.insert(make_pair("6d4db5ff0c117864a02827bad3c361b9", "user1"));
 
 			//Action
-			fileRepository->loadPasswordFile(file, "!!");
-			multimap<string, string> ACTUAL_MAP = fileRepository->getAllHashedPasswords();
+			multimap<string, string> ACTUAL_MAP = fileRepository->loadPasswordFile(file, "!!");
 
 			//Assert
 			Assert::IsTrue(EXPECTED_MAP == ACTUAL_MAP);
@@ -166,7 +161,7 @@ namespace IntegrationTests
 		TEST_METHOD(file_with_more_than_one_separator_per_line_return_invalid_argument)
 		{
 			//Arrange
-			string file = "../TestsFiles/invalid_separator_file.txt";
+			string file = "..\\TestsFiles\\invalid_separator_file.txt";
 			bool exception_thrown = false;
 
 			//Action
@@ -189,7 +184,7 @@ namespace IntegrationTests
 		TEST_METHOD(load_dictionary_file_returns_all_words_in_the_dictionary)
 		{
 			// Arrange
-			string dictionaryPath = "../TestsFiles/Dictionaries/small_dict.txt";
+			string dictionaryPath = "..\\TestsFiles\\Dictionaries\\small_dict.txt";
 			unsigned int EXPECTED_DICTIONARY_SIZE = 4;
 			queue<string> EXPECTED_DICTIONARY;
 			EXPECTED_DICTIONARY.push("a");
@@ -217,7 +212,7 @@ namespace IntegrationTests
 		TEST_METHOD(load_dictionary_throws_runtime_exception_when_file_is_empty)
 		{
 			// Arrange
-			auto loadDictionaryWithEmptyFileFunction = [this] {fileRepository->loadDictionaryFile("../TestsFiles/Dictionaries/empty_dict.txt"); };
+			auto loadDictionaryWithEmptyFileFunction = [this] {fileRepository->loadDictionaryFile("..\\TestsFiles\\Dictionaries\\empty_dict.txt"); };
 
 			// Assert
 			Assert::ExpectException<runtime_error>(loadDictionaryWithEmptyFileFunction);
@@ -228,7 +223,7 @@ namespace IntegrationTests
 		TEST_METHOD(load_dictionary_file_works_with_large_files)
 		{
 			// Arrange
-			string dictionaryPath = "../TestsFiles/Dictionaries/cain.txt";
+			string dictionaryPath = "..\\TestsFiles\\Dictionaries\\cain.txt";
 			unsigned int EXPECTED_DICTIONARY_SIZE = 306706U;
 
 			string EXPECTED_DICT_FRONT = "!@#$%";
@@ -254,7 +249,7 @@ namespace IntegrationTests
 			********************************************/
 			
 			// Arrange
-			string dictionaryPath = "../TestsFiles/Dictionaries/rockyou.txt";
+			string dictionaryPath = "..\\TestsFiles\\Dictionaries\\rockyou.txt";
 			unsigned int EXPECTED_DICTIONARY_SIZE = 9999998U;
 
 			string EXPECTED_DICT_FRONT = "123456";

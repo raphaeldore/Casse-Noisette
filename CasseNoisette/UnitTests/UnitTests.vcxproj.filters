@@ -36,6 +36,9 @@
     <ClInclude Include="FakeHash.h">
       <Filter>Fichiers sources\Fake</Filter>
     </ClInclude>
+    <ClInclude Include="FakeFileRepository.h">
+      <Filter>Fichiers sources\Fake</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -64,6 +67,9 @@
     </ClCompile>
     <ClCompile Include="DictionaryTests.cpp">
       <Filter>Fichiers sources\CrackEngineTests</Filter>
+    </ClCompile>
+    <ClCompile Include="FakeFileRepository.cpp">
+      <Filter>Fichiers sources\Fake</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

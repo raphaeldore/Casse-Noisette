@@ -2,6 +2,8 @@
 #include <iostream>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QTextStream>
+#include <QDateTime>
 
 #include "../CrackEngine/Parameter.h"
 #include "../CrackEngine/CrackFactoryParams.h"
@@ -9,7 +11,7 @@
 #include "../CrackEngine/CharsetBuilder.h"
 
 // #include "vld.h" // VLD cause des problèmes de null pointer exceptions pour des raisons étranges
-					// quand je charge de très gros fichiers ( > 50Mo)
+                    // quand je charge de très gros fichiers ( > 50Mo)
 
 CasseNoisette::CasseNoisette(QWidget *parent)
 	: QMainWindow(parent)
@@ -76,11 +78,25 @@ string CasseNoisette::GetCharset() const
 		ui.chkCharsetSpace->isChecked(),
 		ui.chkCharsetSpecial->isChecked(),
 		ui.txtCustomCharset->text().toLocal8Bit().constData() // Les QString sont en UTF-16, 
-															  // et les std::string sont en UTF-8. 
-															  // On doit les convertir.
+		                                                      // et les std::string sont en UTF-8.
+		                                                      // On doit les convertir.
 	};
 
 	return charsetBuilder.BuildCharset();
+}
+
+bool CasseNoisette::SaveResults(const QString& _contents)
+{
+	QString proposedFileName = QDate::currentDate().toString("'results_'dd_MM_yyyy'.txt'");
+	QString filename = QFileDialog::getSaveFileName(this, tr("Sauvegarder les résultats"), proposedFileName, tr("Fichiers Textes (*.txt)"));
+	QFile f(filename);
+	f.open(QIODevice::WriteOnly);
+	QTextStream stream(&f);
+	stream << _contents;
+	auto flushStatus = f.flush();
+	f.close();
+
+	return flushStatus;
 }
 
 void CasseNoisette::on_startCrackBtn_clicked()
@@ -105,7 +121,7 @@ void CasseNoisette::on_startCrackBtn_clicked()
 	crackFactoryParams.addParameter(Parameter(PWD_FILE_PATH, ui.pwdFileSelectTxt->text().toStdString()));
 	auto seperator = ui.txtPwdsSeperator->text().isEmpty() ? ":" : ui.txtPwdsSeperator->text().toStdString();
 	crackFactoryParams.addParameter(Parameter(SEPERATOR, seperator));
-	crackFactoryParams.addParameter(Parameter(RESULTS_FILE_PATH, "chemin/bidon/fichier_bidon.txt"));
+	//crackFactoryParams.addParameter(Parameter(RESULTS_FILE_PATH, ui.resultsFileFolderSelectTxt->text().toStdString()));
 	crackFactoryParams.addParameter(Parameter(HASH_TYPE, ui.hashFunctionsComboBox->currentText().toStdString()));
 
 	// Paramètres spécifique 
@@ -120,6 +136,7 @@ void CasseNoisette::on_startCrackBtn_clicked()
 		crackingWorker->setCrackEngineType(DICTIONARY);
 	} else
 	{
+		//QMessageBox msgBox("Pas implémenté encore");
 		return; // TODO: En attendant d'implémenter le cassage par arc-en-ciel
 	}
 
@@ -146,10 +163,9 @@ void CasseNoisette::on_dictFileSelectBtn_clicked()
 void CasseNoisette::handleResults()
 {
 	QMessageBox msgBox;
+	msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Ok);
 	QString passwords_found_message;
 	auto results = crackingWorker->getResults();
-
-	crackingTime->elapsed();
 
 	if (results.size() == 1)
 	{
@@ -166,12 +182,28 @@ void CasseNoisette::handleResults()
 	else
 	{
 		passwords_found_message = "Aucun mot de passe trouvé";
+		msgBox.setInformativeText("Essayez avec d'autres paramètres.");
 	}
 
-	passwords_found_message += "\n\n Temps total: " + QString::number(crackingTime->elapsed() * 0.001) + " secs";
+	passwords_found_message += "\n\nTemps total: " + QString::number(crackingTime->elapsed() * 0.001) + " secs";
 
-	msgBox.setText(passwords_found_message);
-	msgBox.exec();
+	msgBox.setText("Le cassage des mots de passe est terminé!");
+	msgBox.setInformativeText("Appuyez sur le bouton \"Show Details\" pour afficher les résultats");
+	msgBox.setDetailedText(passwords_found_message);
+
+	// La grosseur de QMessageBox
+	QSpacerItem* horizontalSpacer = new QSpacerItem(500, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+	QGridLayout* layout = static_cast<QGridLayout*>(msgBox.layout());
+	layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
+
+	int ret = msgBox.exec();
+
+	switch (ret)
+	{
+	case QMessageBox::Save:
+		SaveResults(passwords_found_message);
+		break;
+	}
 }
 
 void CasseNoisette::crackingStarted()

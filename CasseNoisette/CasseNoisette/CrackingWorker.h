@@ -41,6 +41,8 @@ private:
 	CRACK_ENGINE_TYPES engineType;
 	CrackFactoryParams crackFactoryParams;
 	unique_ptr<ICrackEngine> crackEngine;
+	CrackFactory * crackFactory;
+	unique_ptr<DataLayer::IFileRepository> fileRepository;
 	vector<tuple<string, string, string>> results;
 };
 

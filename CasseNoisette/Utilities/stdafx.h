@@ -9,14 +9,12 @@
 
 #define WIN32_LEAN_AND_MEAN             // Exclure les en-têtes Windows rarement utilisés
 
-#include <memory>
-#include <vector>
-#include <queue>
-#include <map>
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "../Utilities/FileUtilities.h"
-#include "Libs\portable-memory-mapping\MemoryMapped.h"
+#include <filesystem>
+#include <vector>
+
+#include <mutex>
 
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme

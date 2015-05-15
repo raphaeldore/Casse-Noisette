@@ -76,7 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileRepository.h" />
-    <ClInclude Include="IFileRepositiry.h" />
+    <ClInclude Include="IFileRepository.h" />
     <ClInclude Include="Libs\portable-memory-mapping\MemoryMapped.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -91,6 +91,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utilities\Utilities.vcxproj">
+      <Project>{11533f07-9a0a-4efa-a678-79e4725f3e97}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

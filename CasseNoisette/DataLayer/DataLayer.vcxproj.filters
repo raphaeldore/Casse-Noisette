@@ -33,7 +33,7 @@
     <ClInclude Include="Libs\portable-memory-mapping\MemoryMapped.h">
       <Filter>Libs</Filter>
     </ClInclude>
-    <ClInclude Include="IFileRepositiry.h">
+    <ClInclude Include="IFileRepository.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
