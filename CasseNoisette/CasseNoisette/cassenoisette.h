@@ -6,6 +6,7 @@
 #include "ui_cassenoisette.h"
 #include "CrackingWorker.h"
 #include <QElapsedTimer>
+#include "AboutDialog.h"
 
 class CasseNoisette : public QMainWindow
 {
@@ -26,6 +27,7 @@ public slots:
 	void on_startCrackBtn_clicked();
 	void on_pwdFileSelectBtn_clicked();
 	void on_dictFileSelectBtn_clicked();
+	void on_aboutBtn_triggered();
 	void handleResults();
 	void crackingStarted();
 	void crackingStopped();

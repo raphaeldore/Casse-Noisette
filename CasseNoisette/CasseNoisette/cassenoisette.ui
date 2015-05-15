@@ -142,11 +142,11 @@
     </item>
     <item>
      <widget class="QLabel" name="lblEnginDesc">
-      <property name="text">
+           <property name="text">
        <string>Engin de cassage :</string>
-      </property>
-     </widget>
-    </item>
+           </property>
+          </widget>
+         </item>
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
@@ -429,6 +429,9 @@
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
       <property name="styleSheet">
        <string notr="true">padding:5;</string>
       </property>
@@ -448,6 +451,13 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu_propos">
+    <property name="title">
+     <string>Aide</string>
+    </property>
+    <addaction name="aboutBtn"/>
+  </widget>
+   <addaction name="menu_propos"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -458,6 +468,11 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="aboutBtn">
+   <property name="text">
+    <string>À propos</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
