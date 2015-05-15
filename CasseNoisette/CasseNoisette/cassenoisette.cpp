@@ -85,20 +85,6 @@ string CasseNoisette::GetCharset() const
 	return charsetBuilder.BuildCharset();
 }
 
-bool CasseNoisette::SaveResults(const QString& _contents)
-{
-	QString proposedFileName = QDate::currentDate().toString("'results_'dd_MM_yyyy'.txt'");
-	QString filename = QFileDialog::getSaveFileName(this, tr("Sauvegarder les résultats"), proposedFileName, tr("Fichiers Textes (*.txt)"));
-	QFile f(filename);
-	f.open(QIODevice::WriteOnly);
-	QTextStream stream(&f);
-	stream << _contents;
-	auto flushStatus = f.flush();
-	f.close();
-
-	return flushStatus;
-}
-
 void CasseNoisette::on_startCrackBtn_clicked()
 {
 	if (crackingInProgress) {
@@ -162,11 +148,9 @@ void CasseNoisette::on_dictFileSelectBtn_clicked()
 
 void CasseNoisette::handleResults()
 {
-	QMessageBox msgBox;
-	msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Ok);
-	QString passwords_found_message;
+	ResultDialog resultDialog(this);
 	auto results = crackingWorker->getResults();
-
+	QString passwords_found_message;
 	if (results.size() == 1)
 	{
 		passwords_found_message = "1 mot de passe trouvé:\n\n " + tupleToString(results.front());
@@ -182,28 +166,15 @@ void CasseNoisette::handleResults()
 	else
 	{
 		passwords_found_message = "Aucun mot de passe trouvé";
-		msgBox.setInformativeText("Essayez avec d'autres paramètres.");
+		resultDialog.setInformativeText("Essayez avec d'autres paramètres.");
 	}
 
 	passwords_found_message += "\n\nTemps total: " + QString::number(crackingTime->elapsed() * 0.001) + " secs";
 
-	msgBox.setText("Le cassage des mots de passe est terminé!");
-	msgBox.setInformativeText("Appuyez sur le bouton \"Show Details\" pour afficher les résultats");
-	msgBox.setDetailedText(passwords_found_message);
+	resultDialog.setInformativeText("Le cassage des mots de passe est terminé! \n\nAppuyez sur le bouton \"Enregistrer\" pour enregistrer les résultats dans un fichier.");
+	resultDialog.setResultText(passwords_found_message);
 
-	// La grosseur de QMessageBox
-	QSpacerItem* horizontalSpacer = new QSpacerItem(500, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-	QGridLayout* layout = static_cast<QGridLayout*>(msgBox.layout());
-	layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
-
-	int ret = msgBox.exec();
-
-	switch (ret)
-	{
-	case QMessageBox::Save:
-		SaveResults(passwords_found_message);
-		break;
-	}
+	resultDialog.exec();
 }
 
 void CasseNoisette::crackingStarted()

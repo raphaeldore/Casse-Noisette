@@ -7,6 +7,7 @@
 #include "CrackingWorker.h"
 #include <QElapsedTimer>
 #include "AboutDialog.h"
+#include "ResultDialog.h"
 
 class CasseNoisette : public QMainWindow
 {
@@ -21,7 +22,6 @@ public:
 
 	QString tupleToString(const tuple<string, string, string> & _tupleToConvert) const;
 	string GetCharset() const;
-	bool SaveResults(const QString & _contents);
 
 public slots:
 	void on_startCrackBtn_clicked();
