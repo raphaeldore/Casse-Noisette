@@ -69,22 +69,6 @@ QString CasseNoisette::tupleToString(const tuple<string, string, string> & _tupl
 	return userName + " : " + hashedPassword + " : " + plainTextPassword;
 }
 
-string CasseNoisette::GetCharset() const
-{
-	CharsetBuilder charsetBuilder {
-		ui.chkCharsetLower->isChecked(),
-		ui.chkCharsetUpper->isChecked(),
-		ui.chkCharsetNumeric->isChecked(),
-		ui.chkCharsetSpace->isChecked(),
-		ui.chkCharsetSpecial->isChecked(),
-		ui.txtCustomCharset->text().toLocal8Bit().constData() // Les QString sont en UTF-16, 
-		                                                      // et les std::string sont en UTF-8.
-		                                                      // On doit les convertir.
-	};
-
-	return charsetBuilder.BuildCharset();
-}
-
 bool CasseNoisette::SaveResults(const QString& _contents)
 {
 	QString proposedFileName = QDate::currentDate().toString("'results_'dd_MM_yyyy'.txt'");
@@ -127,7 +111,7 @@ void CasseNoisette::on_startCrackBtn_clicked()
 	// Paramètres spécifique 
 	if (tabIndex == 0)
 	{
-		crackFactoryParams.addParameter(Parameter(CHARSET, GetCharset()));
+		crackFactoryParams.addParameter(Parameter(CHARSET, ui.charsetSelectorWidget->getCharset()));
 		crackFactoryParams.addParameter(Parameter(MAX_PWD_LENGTH, ui.spinMaxPwdLenght->text().toStdString()));
 		crackingWorker->setCrackEngineType(BRUTE_FORCE);
 	} else if (tabIndex == 1)

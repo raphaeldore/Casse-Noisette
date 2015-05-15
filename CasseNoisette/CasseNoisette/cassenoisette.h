@@ -7,6 +7,7 @@
 #include "CrackingWorker.h"
 #include <QElapsedTimer>
 #include "AboutDialog.h"
+#include "CharsetSelector.h"
 
 class CasseNoisette : public QMainWindow
 {
@@ -20,7 +21,6 @@ public:
 	~CasseNoisette();
 
 	QString tupleToString(const tuple<string, string, string> & _tupleToConvert) const;
-	string GetCharset() const;
 	bool SaveResults(const QString & _contents);
 
 public slots:
@@ -44,6 +44,7 @@ signals:
 private:
 	Ui::CasseNoisetteClass ui;
 	bool crackingInProgress;
+	QWidget * charsetSelector;
 };
 
 #endif // CASSENOISETTE_H
