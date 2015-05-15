@@ -442,6 +442,9 @@
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
       <property name="styleSheet">
        <string notr="true">padding:5;</string>
       </property>
