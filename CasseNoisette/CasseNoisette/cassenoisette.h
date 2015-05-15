@@ -7,6 +7,7 @@
 #include "CrackingWorker.h"
 #include <QElapsedTimer>
 #include "AboutDialog.h"
+#include "ResultDialog.h"
 
 class CasseNoisette : public QMainWindow
 {

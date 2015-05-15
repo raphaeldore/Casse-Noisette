@@ -9,7 +9,6 @@
 #include "../CrackEngine/CrackFactoryParams.h"
 
 #include "../CrackEngine/CharsetBuilder.h"
-#include "ResultDialog.h"
 
 // #include "vld.h" // VLD cause des problèmes de null pointer exceptions pour des raisons étranges
                     // quand je charge de très gros fichiers ( > 50Mo)
@@ -84,20 +83,6 @@ string CasseNoisette::GetCharset() const
 	};
 
 	return charsetBuilder.BuildCharset();
-}
-
-bool CasseNoisette::SaveResults(const QString& _contents)
-{
-	QString proposedFileName = QDate::currentDate().toString("'results_'dd_MM_yyyy'.txt'");
-	QString filename = QFileDialog::getSaveFileName(this, tr("Sauvegarder les résultats"), proposedFileName, tr("Fichiers Textes (*.txt)"));
-	QFile f(filename);
-	f.open(QIODevice::WriteOnly);
-	QTextStream stream(&f);
-	stream << _contents;
-	auto flushStatus = f.flush();
-	f.close();
-
-	return flushStatus;
 }
 
 void CasseNoisette::on_startCrackBtn_clicked()
