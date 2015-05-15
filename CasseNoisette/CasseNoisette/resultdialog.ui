@@ -10,6 +10,18 @@
     <height>285</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>632</width>
+    <height>285</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>632</width>
+    <height>285</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Résultats du cassage</string>
   </property>
@@ -91,6 +103,12 @@ p, li { white-space: pre-wrap; }
      <width>631</width>
      <height>191</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
    </property>
   </widget>
  </widget>
