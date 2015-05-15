@@ -33,7 +33,7 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
-    <Filter Include="Widgets">
+    <Filter Include="CustomWidgets">
       <UniqueIdentifier>{f5216746-731c-4a78-b819-bb1ebf7105e1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -72,7 +72,7 @@
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="CharsetSelector.cpp">
-      <Filter>Widgets</Filter>
+      <Filter>CustomWidgets</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_CharsetSelector.cpp">
       <Filter>Generated Files\Debug</Filter>
@@ -113,7 +113,7 @@
       <Filter>Form Files</Filter>
     </CustomBuild>
     <CustomBuild Include="CharsetSelector.h">
-      <Filter>Widgets</Filter>
+      <Filter>CustomWidgets</Filter>
     </CustomBuild>
     <CustomBuild Include="CharsetSelector.ui">
       <Filter>Form Files</Filter>
