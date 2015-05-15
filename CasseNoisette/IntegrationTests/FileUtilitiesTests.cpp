@@ -77,6 +77,13 @@ namespace IntegrationTests
 			Assert::IsFalse(Utilities::FileUtilities::IsFileEmpty(nonEmptyFilePath));
 		}
 
+		/**********
+		
+		NOTE: À partir de maintenant, je considère que les fonctions DoesFileExist et IsFileEmpty 
+		      sont fonctionnelles (Et donc je les utilises dans les Asserts).
+		
+		*********/
+
 		TEST_METHOD(getFileNameFromPath_returns_correct_fileName)
 		{
 			// Arrange
@@ -130,6 +137,35 @@ namespace IntegrationTests
 
 			// Assert
 			Assert::AreEqual(EXPECTED_INCREMENTED_FILE_NAME, ACTUAL_INCREMENTED_FILE_NAME);
+		}
+
+		TEST_METHOD(clearFileContent_empties_the_file)
+		{
+			// Arrange
+			string fileToClear = "..\\TestsFiles\\UtilitiesTests\\fileToClear.txt";
+
+			/// On ajoute du contenu au fichier (pour qu'il ne soit plus vide)
+			ofstream file(fileToClear, ofstream::out);
+			file << "Bonjour";
+			file.close();
+
+			/// On s'assure qu'on a bien écrit dans le fichier
+			Assert::IsFalse(Utilities::FileUtilities::IsFileEmpty(fileToClear));
+
+			// Action
+			Utilities::FileUtilities::ClearFileContent(fileToClear);
+
+			// Assert
+			Assert::IsTrue(Utilities::FileUtilities::IsFileEmpty(fileToClear));
+		}
+
+		TEST_METHOD(clearFileContent_throws_runtime_exception_if_file_does_not_exist)
+		{
+			// Arrange
+			auto loadDictionaryWithNonExistantFileFunction = [this] {Utilities::FileUtilities::ClearFileContent("this_file_does_not_exist"); };
+
+			// Assert
+			Assert::ExpectException<runtime_error>(loadDictionaryWithNonExistantFileFunction);
 		}
 
 		//TEST_METHOD(generate_dictionary) {
