@@ -4,14 +4,6 @@
 using namespace std;
 using namespace Utilities;
 
-FileUtilities::FileUtilities()
-{
-}
-
-FileUtilities::~FileUtilities()
-{
-}
-
 bool FileUtilities::DoesFileExist(const string & _path) {
 	return tr2::sys::exists(tr2::sys::path(_path));
 }
@@ -20,37 +12,68 @@ bool FileUtilities::IsFileEmpty(const string & _path) {
 	return tr2::sys::is_empty(tr2::sys::path(_path));
 }
 
-bool FileUtilities::CreateFile(const string & _path, const bool & _overwriteExisting) {
-	if (DoesFileExist(_path) && !_overwriteExisting) return false;
+string FileUtilities::IncrementFileNameIfExists(const string & _path)
+{
+	// Pas la manière la plus élégante... Mais ça marche!
 
-	tr2::sys::path path(_path);
+	if (!DoesFileExist(_path)) return _path;
 
-	fstream newFile;
-	newFile.open(path, std::fstream::binary | std::fstream::out);
+	string originalFileName = GetBaseFileNameFromPath(_path);
+	string pathAttempt;
+	unsigned int increment = 1;
+	do
+	{
+		pathAttempt = _path; // On reset le path
+		string newFileName = originalFileName + to_string(increment);
+		pathAttempt.replace(pathAttempt.find(originalFileName), newFileName.size() - 1, newFileName);
+		++increment;
+	} while (DoesFileExist(pathAttempt));
 
-	if (newFile.good()) {
-		newFile.close();
-		return true;
-	}
-
-	newFile.close();
-	return false;
+	return pathAttempt;
 }
 
-void FileUtilities::AppendVectorContentToFile(const std::string & _path, const std::vector<string> & _vector) {
-	if (!DoesFileExist(_path)) {
-		if (!CreateFile(_path)) return;
-	}
+string FileUtilities::GetFileContent(const string& _path)
+{
+	if (!DoesFileExist(_path)) throw runtime_error("Le fichier n'existe pas!");
 
-	ofstream file(_path, ofstream::out | ofstream::app);
+	ifstream file(_path, ifstream::in);
 
-	for (const auto & word : _vector) {
-		AppendStringToFile(file, word);
-	}
+	if (!file.is_open()) throw runtime_error("Je suis incapable d'ouvrir le fichier :(");
 
-	file.close();
+	string fileContent((istreambuf_iterator<char>(file)),
+		istreambuf_iterator<char>());
+
+	return fileContent;
 }
 
-void FileUtilities::AppendStringToFile(std::ofstream & _file, const string & _string) {
-	_file << _string << "\n";
+string FileUtilities::GetFileNameFromPath(const string& _path)
+{
+	string seperator = "/"; // Séparateur Unix
+
+	// Dans l'intérêt de coder une classe portable...
+#ifdef _WIN32
+	seperator = '\\'; // Séparateur Windows
+#endif
+
+	auto startFrom = _path.find_last_of(seperator) + 1;
+	string fileName = _path.substr(startFrom, _path.length() - 1);
+
+	return fileName;
+}
+
+string FileUtilities::GetBaseFileNameFromPath(const string& _path)
+{
+	string fileNameWithExtension = GetFileNameFromPath(_path);
+	auto stopPosition = fileNameWithExtension.find_last_of('.');
+	string baseFileName = fileNameWithExtension.substr(0, stopPosition);
+
+	return baseFileName;
+}
+
+string FileUtilities::GetFileExtension(const string& _fileName)
+{
+	auto startFrom = _fileName.find_last_of('.') + 1;
+	string fileNameExtension = _fileName.substr(startFrom, _fileName.length() - 1);
+
+	return fileNameExtension;
 }
