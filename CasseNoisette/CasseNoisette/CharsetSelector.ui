@@ -78,7 +78,7 @@
          <string>!@#$%^&amp;*()-_+=</string>
         </property>
         <property name="text">
-         <string>Spéciaux (!, $, #, ...) ***</string>
+         <string>Spéciaux (!, $, #, ...)</string>
         </property>
        </widget>
       </item>
