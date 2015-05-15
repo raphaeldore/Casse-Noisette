@@ -16,7 +16,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-
+#include "../Utilities/FileUtilities.h"
 #include "Libs\portable-memory-mapping\MemoryMapped.h"
 
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme
