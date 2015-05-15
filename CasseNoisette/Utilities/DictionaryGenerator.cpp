@@ -21,19 +21,18 @@ void DictionaryGenerator::GenerateDictionary() {
 	for (unsigned int i = 0; i <= maxWordLength; ++i) {
 		string initialString = "";
 		generateWords(i, initialString);
-		Utilities::FileUtilities::AppendVectorContentToFile(outputFilePath, buffer);
+		flushBufferToFile();
 		buffer.clear();
 	}
 }
 
 void DictionaryGenerator::generateWords(const unsigned int _wordLength, string _s) {
-	
+
 	// Condition d'arrêt
 	if (_wordLength == 0) {
-		if (buffer.size() == 500000) {
+		if (buffer.size() == 1000000) {
 			// On prends le contenu du vector et on l'envoi dans le fichier
-			Utilities::FileUtilities::AppendVectorContentToFile(outputFilePath, buffer);
-			buffer.clear();
+			flushBufferToFile();
 		}
 
 		buffer.push_back(_s);
@@ -46,4 +45,29 @@ void DictionaryGenerator::generateWords(const unsigned int _wordLength, string _
 		string appended = _s + charset[i];
 		generateWords(_wordLength - 1, appended);
 	}
+}
+
+void DictionaryGenerator::flushBufferToFile()
+{
+	// On veut être le seul à écrire dans le fichier
+	static mutex mutex;
+
+	// On vérouille le mutex avant d'accèder au fichier
+	lock_guard<std::mutex> lock(mutex);
+
+	// On tente d'écrire dans le fichier
+	ofstream outputFile(outputFilePath, ofstream::out | ofstream::app);
+	if (!outputFile.is_open())
+		throw runtime_error("Je suis incapable d'ouvrir le fichier :(");
+
+	// On ajoute toutes les combinaisons de mots du vecteur dans le fichier
+	for (const auto & combination : buffer)
+	{
+		outputFile << combination + "\n";
+	}
+
+	// On vide enfin le vecteur
+	buffer.clear();
+
+	// outputFile est fermé automatiquement.
 }

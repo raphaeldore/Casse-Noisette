@@ -15,4 +15,6 @@
 #include <filesystem>
 #include <vector>
 
+#include <mutex>
+
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme

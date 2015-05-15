@@ -12,6 +12,7 @@ namespace Utilities {
 	private:
 		// Fonction récursive
 		void generateWords(const unsigned int _wordLength, std::string _s);
+		void flushBufferToFile();
 
 		unsigned int maxWordLength;
 		std::string charset;
