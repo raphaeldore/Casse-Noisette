@@ -1,1 +1,1 @@
-ICACLS ../TestsFiles/UtilitiesTests/lockedFile.txt /grant "tout le monde":R
+ICACLS ../TestsFiles/UtilitiesTests/lockedFile.txt /grant *S-1-1-0:R

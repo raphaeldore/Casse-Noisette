@@ -1,1 +1,1 @@
-ICACLS ../TestsFiles/UtilitiesTests/lockedFile.txt /deny "tout le monde":R
+ICACLS ../TestsFiles/UtilitiesTests/lockedFile.txt /deny *S-1-1-0:R
