@@ -249,3 +249,7 @@ void CasseNoisette::on_aboutBtn_triggered(){
 
 	aboutDialog.exec();
 }
+
+void CasseNoisette::on_generateDictionaryBtn_triggered()
+{
+}

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>470</width>
-    <height>428</height>
+    <height>429</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -142,11 +142,11 @@
     </item>
     <item>
      <widget class="QLabel" name="lblEnginDesc">
-           <property name="text">
+      <property name="text">
        <string>Engin de cassage :</string>
-           </property>
-          </widget>
-         </item>
+      </property>
+     </widget>
+    </item>
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
@@ -333,22 +333,6 @@
          </widget>
         </item>
         <item>
-         <widget class="QGroupBox" name="groupBox_3">
-          <property name="title">
-           <string>Optimisation</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout">
-           <item>
-            <widget class="QCheckBox" name="checkBox">
-             <property name="text">
-              <string>CheckBox</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
          <spacer name="verticalSpacer">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -455,8 +439,10 @@
     <property name="title">
      <string>Aide</string>
     </property>
+    <addaction name="generateDictionaryBtn"/>
+    <addaction name="separator"/>
     <addaction name="aboutBtn"/>
-  </widget>
+   </widget>
    <addaction name="menu_propos"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -471,6 +457,11 @@
   <action name="aboutBtn">
    <property name="text">
     <string>À propos</string>
+   </property>
+  </action>
+  <action name="generateDictionaryBtn">
+   <property name="text">
+    <string>Générer un dictionnaire</string>
    </property>
   </action>
  </widget>

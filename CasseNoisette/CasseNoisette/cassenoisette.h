@@ -28,6 +28,7 @@ public slots:
 	void on_pwdFileSelectBtn_clicked();
 	void on_dictFileSelectBtn_clicked();
 	void on_aboutBtn_triggered();
+	void on_generateDictionaryBtn_triggered();
 	void handleResults();
 	void crackingStarted();
 	void crackingStopped();
