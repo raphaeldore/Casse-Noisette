@@ -7,6 +7,7 @@
 
 #include "../CrackEngine/Parameter.h"
 #include "../CrackEngine/CrackFactoryParams.h"
+#include "GenerateDictionaryDialog.h"
 
 // #include "vld.h" // VLD cause des problèmes de null pointer exceptions pour des raisons étranges
                     // quand je charge de très gros fichiers ( > 50Mo)
@@ -234,4 +235,6 @@ void CasseNoisette::on_aboutBtn_triggered(){
 
 void CasseNoisette::on_generateDictionaryBtn_triggered()
 {
+	GenerateDictionaryDialog generateDictionaryDialog(this);
+	generateDictionaryDialog.exec();
 }

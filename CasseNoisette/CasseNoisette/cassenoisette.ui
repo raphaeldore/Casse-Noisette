@@ -385,6 +385,9 @@
    <property name="text">
     <string>Générer un dictionnaire</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+G</string>
+   </property>
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
