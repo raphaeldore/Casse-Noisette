@@ -1,5 +1,4 @@
 #include "GenerateDictionaryDialog.h"
-#include "../Utilities/DictionaryGenerator.h"
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
 
@@ -35,8 +34,6 @@ GenerateDictionaryDialog::~GenerateDictionaryDialog()
 
 void GenerateDictionaryDialog::on_btnGenerateDictionary_clicked()
 {
-	using namespace Utilities;
-
 	QMessageBox msgBox;
 	if (!AllInputsValid())
 	{
