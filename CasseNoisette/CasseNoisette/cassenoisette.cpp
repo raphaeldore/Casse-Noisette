@@ -7,8 +7,7 @@
 
 #include "../CrackEngine/Parameter.h"
 #include "../CrackEngine/CrackFactoryParams.h"
-
-#include "../CrackEngine/CharsetBuilder.h"
+#include "GenerateDictionaryDialog.h"
 
 // #include "vld.h" // VLD cause des problèmes de null pointer exceptions pour des raisons étranges
                     // quand je charge de très gros fichiers ( > 50Mo)
@@ -69,22 +68,6 @@ QString CasseNoisette::tupleToString(const tuple<string, string, string> & _tupl
 	return userName + " : " + hashedPassword + " : " + plainTextPassword;
 }
 
-string CasseNoisette::GetCharset() const
-{
-	CharsetBuilder charsetBuilder {
-		ui.chkCharsetLower->isChecked(),
-		ui.chkCharsetUpper->isChecked(),
-		ui.chkCharsetNumeric->isChecked(),
-		ui.chkCharsetSpace->isChecked(),
-		ui.chkCharsetSpecial->isChecked(),
-		ui.txtCustomCharset->text().toLocal8Bit().constData() // Les QString sont en UTF-16, 
-		                                                      // et les std::string sont en UTF-8.
-		                                                      // On doit les convertir.
-	};
-
-	return charsetBuilder.BuildCharset();
-}
-
 void CasseNoisette::on_startCrackBtn_clicked()
 {
 	if (crackingInProgress) {
@@ -113,7 +96,7 @@ void CasseNoisette::on_startCrackBtn_clicked()
 	// Paramètres spécifique 
 	if (tabIndex == 0)
 	{
-		crackFactoryParams.addParameter(Parameter(CHARSET, GetCharset()));
+		crackFactoryParams.addParameter(Parameter(CHARSET, ui.charsetSelectorWidget->getCharset()));
 		crackFactoryParams.addParameter(Parameter(MAX_PWD_LENGTH, ui.spinMaxPwdLenght->text().toStdString()));
 		crackingWorker->setCrackEngineType(BRUTE_FORCE);
 	} else if (tabIndex == 1)
@@ -219,4 +202,10 @@ void CasseNoisette::on_aboutBtn_triggered(){
 	AboutDialog aboutDialog(this);
 
 	aboutDialog.exec();
+}
+
+void CasseNoisette::on_generateDictionaryBtn_triggered()
+{
+	GenerateDictionaryDialog generateDictionaryDialog(this);
+	generateDictionaryDialog.exec();
 }

@@ -32,6 +32,19 @@ string FileUtilities::IncrementFileNameIfExists(const string & _path)
 	return pathAttempt;
 }
 
+void FileUtilities::ClearFileContent(const std::string& _path)
+{
+	if (!DoesFileExist(_path)) throw runtime_error("Le fichier n'existe pas!");
+
+	ofstream file;
+
+	file.open(_path, ofstream::out | ofstream::trunc);
+
+	if (!file.is_open()) throw runtime_error("Je suis incapable d'ouvrir le fichier :(");
+
+	file.close();
+}
+
 string FileUtilities::GetFileContent(const string& _path)
 {
 	if (!DoesFileExist(_path)) throw runtime_error("Le fichier n'existe pas!");

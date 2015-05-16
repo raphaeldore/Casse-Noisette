@@ -17,6 +17,7 @@ namespace Utilities {
 		static bool IsFileEmpty(const std::string & _path);
 
 		static std::string IncrementFileNameIfExists(const std::string & _path);
+		static void ClearFileContent(const std::string & _path);
 
 		static std::string GetFileContent(const std::string & _path);
 		static std::string GetFileNameFromPath(const std::string & _path);

@@ -33,6 +33,12 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="CustomWidgets">
+      <UniqueIdentifier>{f5216746-731c-4a78-b819-bb1ebf7105e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Workers">
+      <UniqueIdentifier>{6a2c2f77-d03c-47e5-b7c9-426abdedc410}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -50,9 +56,6 @@
     <ClCompile Include="GeneratedFiles\qrc_cassenoisette.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="CrackingWorker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_CrackingWorker.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
@@ -68,6 +71,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_AboutDialog.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="CharsetSelector.cpp">
+      <Filter>CustomWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CharsetSelector.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CharsetSelector.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
     <ClCompile Include="ResultDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -76,6 +88,27 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_ResultDialog.cpp">
       <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GenerateDictionaryDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_GenerateDictionaryDialog.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_GenerateDictionaryDialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_GenerateDictionaryWorker.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_GenerateDictionaryWorker.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GenerateDictionaryWorker.cpp">
+      <Filter>Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="CrackingWorker.cpp">
+      <Filter>Workers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -91,9 +124,6 @@
     <CustomBuild Include="GeneratedFiles\ui_cassenoisette.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="CrackingWorker.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="AboutDialog.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -106,6 +136,24 @@
     <CustomBuild Include="ResultDialog.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="CharsetSelector.h">
+      <Filter>CustomWidgets</Filter>
+    </CustomBuild>
+    <CustomBuild Include="CharsetSelector.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="GenerateDictionaryDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="GenerateDictionaryDialog.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="GenerateDictionaryWorker.h">
+      <Filter>Workers</Filter>
+    </CustomBuild>
+    <CustomBuild Include="CrackingWorker.h">
+      <Filter>Workers</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -115,6 +163,12 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_resultdialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_CharsetSelector.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_GenerateDictionaryDialog.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
