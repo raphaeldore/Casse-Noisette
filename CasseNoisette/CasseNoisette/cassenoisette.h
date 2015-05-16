@@ -38,7 +38,8 @@ signals:
 	void startCracking();
 	void stopCracking();
 	void error(QString err);
-
+protected:
+	void closeEvent(QCloseEvent*);
 private:
 	Ui::CasseNoisetteClass ui;
 	bool crackingInProgress;

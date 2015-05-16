@@ -182,3 +182,8 @@ void CasseNoisette::on_generateDictionaryBtn_triggered()
 	GenerateDictionaryDialog generateDictionaryDialog(this);
 	generateDictionaryDialog.exec();
 }
+
+void CasseNoisette::closeEvent(QCloseEvent*)
+{
+	if (crackingInProgress) crackingWorker->exit();
+}
