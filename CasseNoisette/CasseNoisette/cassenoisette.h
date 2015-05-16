@@ -21,8 +21,6 @@ public:
 	CasseNoisette(QWidget *parent = 0);
 	~CasseNoisette();
 
-	QString tupleToString(const tuple<string, string, string> & _tupleToConvert) const;
-
 public slots:
 	void on_startCrackBtn_clicked();
 	void on_pwdFileSelectBtn_clicked();

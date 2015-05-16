@@ -59,15 +59,6 @@ CasseNoisette::~CasseNoisette()
 {
 }
 
-QString CasseNoisette::tupleToString(const tuple<string, string, string> & _tupleToConvert) const
-{
-	QString userName = QString::fromLocal8Bit(get<0>(_tupleToConvert).c_str());
-	QString hashedPassword = QString::fromLocal8Bit(get<1>(_tupleToConvert).c_str());
-	QString plainTextPassword = QString::fromLocal8Bit(get<2>(_tupleToConvert).c_str());
-
-	return userName + " : " + hashedPassword + " : " + plainTextPassword;
-}
-
 void CasseNoisette::on_startCrackBtn_clicked()
 {
 	if (crackingInProgress) {
@@ -133,29 +124,11 @@ void CasseNoisette::handleResults()
 {
 	ResultDialog resultDialog(this);
 	auto results = crackingWorker->getResults();
-	QString passwords_found_message;
-	if (results.size() == 1)
-	{
-		passwords_found_message = "1 mot de passe trouvé:\n\n " + tupleToString(results.front());
-	} else if (results.size() > 1)
-	{
-		passwords_found_message = QString::number(results.size()) + " mots de passe trouvés:\n ";
-		for (auto pass : results)
-		{
-			passwords_found_message += "\n";
-			passwords_found_message += tupleToString(pass);
-		}
-	}
-	else
-	{
-		passwords_found_message = "Aucun mot de passe trouvé";
-		resultDialog.setInformativeText("Essayez avec d'autres paramètres.");
-	}
 
-	passwords_found_message += "\n\nTemps total: " + QString::number(crackingTime->elapsed() * 0.001) + " secs";
+	QString totalCrackingTime = QString::number(crackingTime->elapsed() * 0.001);
 
+	resultDialog.setCrackingResults(results, totalCrackingTime);
 	resultDialog.setInformativeText("Le cassage des mots de passe est terminé! \n\nAppuyez sur le bouton \"Enregistrer\" pour enregistrer les résultats dans un fichier.");
-	resultDialog.setResultText(passwords_found_message);
 
 	resultDialog.exec();
 }
