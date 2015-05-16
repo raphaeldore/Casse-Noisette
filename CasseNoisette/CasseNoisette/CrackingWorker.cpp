@@ -8,7 +8,7 @@ CrackingWorker::CrackingWorker() : isRunning(false), isStopped(false)
 	crackFactory->SetFileRepository(*fileRepository);
 }
 
-const vector<tuple<string, string, string>> & CrackingWorker::getResults() const
+vector<tuple<string, string, string>> CrackingWorker::getResults() const
 {
 	return results;
 }

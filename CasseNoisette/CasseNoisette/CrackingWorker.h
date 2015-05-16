@@ -14,7 +14,7 @@ public:
 	void setCrackEngineType(const CRACK_ENGINE_TYPES & _crackEngineType);
 	void setCrackFactoryParameters(const CrackFactoryParams & _crackFactoryParams);
 	
-	const vector<tuple<string, string, string>> & getResults() const;
+	vector<tuple<string, string, string>> getResults() const;
 signals:
 	void creatingEngine();
 	void engineCreated();
