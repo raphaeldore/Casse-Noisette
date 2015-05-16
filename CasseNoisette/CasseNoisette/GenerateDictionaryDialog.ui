@@ -100,6 +100,20 @@
     </spacer>
    </item>
    <item>
+    <widget class="QLabel" name="label_2">
+     <property name="font">
+      <font>
+       <weight>50</weight>
+       <bold>false</bold>
+       <underline>true</underline>
+      </font>
+     </property>
+     <property name="text">
+      <string>Note: Ne pas fermer l'application lors de la génération, au risque d'un plantage.</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QPushButton" name="btnGenerateDictionary">

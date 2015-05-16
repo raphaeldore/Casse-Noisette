@@ -8,6 +8,24 @@ GenerateDictionaryDialog::GenerateDictionaryDialog(QWidget * parent) : QDialog(p
 	ui.setupUi(this);
 	this->setModal(true);
 	this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
+	
+	generateDictionaryWorkerThread = std::make_unique<QThread>();
+	generateDictionaryWorker = std::make_unique<GenerateDictionaryWorker>();
+
+	generateDictionaryWorker->moveToThread(generateDictionaryWorkerThread.get());
+
+	// Ce que cette classe émet au generateDictionaryWorker
+	connect(this, SIGNAL(generateDictionary()), generateDictionaryWorker.get(), SLOT(startGeneration()));
+
+	// Ce que le generateDictionaryWorker émet à cette clase
+	connect(generateDictionaryWorker.get(), SIGNAL(generationStarted()), this, SLOT(generationStarted()));
+	connect(generateDictionaryWorker.get(), SIGNAL(generationFinished()), this, SLOT(generationFinished()));
+	connect(generateDictionaryWorker.get(), SIGNAL(error(QString)), this, SLOT(errorString(QString)));
+
+	// Ce que le generateDictionaryWorkerThread émet à lui-même
+	connect(generateDictionaryWorkerThread.get(), SIGNAL(finished()), generateDictionaryWorkerThread.get(), SLOT(deleteLater()));
+
+	generateDictionaryWorkerThread->start(QThread::HighPriority);
 }
 
 
@@ -32,22 +50,9 @@ void GenerateDictionaryDialog::on_btnGenerateDictionary_clicked()
 	std::string charset = ui.charsetSelectorWidget->getCharset();
 	std::string dictionaryPath = ui.txtDictionaryFileName->text().toLocal8Bit().constData();
 
-	try
-	{
-		DictionaryGenerator generator(maxCombinationLength, charset, dictionaryPath);
-		ui.btnGenerateDictionary->setDisabled(true);
-		generator.GenerateDictionary();
-		msgBox.setText("Génération terminé!");
-		msgBox.exec();
-		ui.btnGenerateDictionary->setDisabled(false);
-	} catch (const std::exception & ex)
-	{
-		msgBox.setIcon(QMessageBox::Critical);
-		msgBox.setText(ex.what());
-		msgBox.exec();
-		ui.btnGenerateDictionary->setDisabled(false);
-		return;
-	}
+	generateDictionaryWorker->setGenerationParameters(maxCombinationLength, charset, dictionaryPath);
+
+	emit generateDictionary();
 	
 }
 
@@ -92,6 +97,29 @@ void GenerateDictionaryDialog::on_spinMaxCombinationLength_valueChanged()
 			ignoreFutureWarnings = true;
 		}
 	}
+}
+
+void GenerateDictionaryDialog::generationStarted()
+{
+	ui.btnGenerateDictionary->setDisabled(true);
+	ui.btnCloseDialog->setDisabled(true);
+}
+
+void GenerateDictionaryDialog::generationFinished()
+{
+	ui.btnGenerateDictionary->setDisabled(false);
+	ui.btnCloseDialog->setDisabled(false);
+	QMessageBox msgBox;
+	msgBox.setText("Génération terminée!");
+	msgBox.exec();
+}
+
+void GenerateDictionaryDialog::errorString(QString error)
+{
+	QMessageBox msgBox;
+	msgBox.setIcon(QMessageBox::Critical);
+	msgBox.setText(error);
+	msgBox.exec();
 }
 
 bool GenerateDictionaryDialog::AllInputsValid()
