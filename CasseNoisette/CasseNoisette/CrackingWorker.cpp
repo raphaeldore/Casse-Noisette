@@ -17,8 +17,13 @@ void CrackingWorker::startCracking()
 {
 	isStopped = false;
 	isRunning = true;
+
 	crack();
 
+	// S'il n'y a eu aucune erreur durant le cassage,
+	// ou si l'utilisateur ne quitte pas l'application,
+	// alors on informe à ceux qui écoutent que les
+	// résultats sont prêts.
 	if (!wasError && !exitWasCalled)
 	{
 		emit resultsReady();
@@ -27,15 +32,18 @@ void CrackingWorker::startCracking()
 	emit unloadingEngine();
 	crackEngine.reset();
 	emit stopped();
+
+	isStopped = true;
+	isRunning = false;
 }
 
 void CrackingWorker::stopCracking()
 {
-	isStopped = true;
-	isRunning = false;
-	if (crackEngine != nullptr)	{
+	if (isRunning)
+	{
 		crackEngine->cancelCrack();
-		emit stopped();
+		isStopped = true;
+		isRunning = false;
 	}
 }
 
@@ -76,9 +84,13 @@ void CrackingWorker::crack()
 	
 	if (crackEngine != nullptr)
 	{
+		// On informe à ceux qui écoutent qu'on commence le cassage
 		emit running();
+
 		crackEngine->Crack();
+
 		wasError = false;
+
 		results = crackEngine->getResults();
 	}
 }
