@@ -27,6 +27,7 @@ public slots:
 	void on_dictFileSelectBtn_clicked();
 	void on_aboutBtn_triggered();
 	void on_generateDictionaryBtn_triggered();
+	void on_actionQuitter_triggered();
 	void on_hashFunctionsComboBox_currentIndexChanged(int _newIndex);
 	void handleResults();
 	void crackingStarted();

@@ -183,6 +183,11 @@ void CasseNoisette::on_generateDictionaryBtn_triggered()
 	generateDictionaryDialog.exec();
 }
 
+void CasseNoisette::on_actionQuitter_triggered()
+{
+	this->close();
+}
+
 void CasseNoisette::on_hashFunctionsComboBox_currentIndexChanged(int _newIndex)
 {
 	// C'est temporaire. Pour l'instant il y a seulement MD5 qui fonctionne.
