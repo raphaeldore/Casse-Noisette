@@ -18,7 +18,12 @@ void CrackingWorker::startCracking()
 	isStopped = false;
 	isRunning = true;
 	crack();
-	emit resultsReady();
+
+	if (!wasError)
+	{
+		emit resultsReady();
+	}
+
 	emit unloadingEngine();
 	crackEngine.reset();
 	emit stopped();
@@ -28,8 +33,10 @@ void CrackingWorker::stopCracking()
 {
 	isStopped = true;
 	isRunning = false;
-	if (crackEngine != nullptr)	crackEngine->cancelCrack();
-	emit stopped();
+	if (crackEngine != nullptr)	{
+		crackEngine->cancelCrack();
+		emit stopped();
+	}
 }
 
 void CrackingWorker::setCrackEngineType(const CRACK_ENGINE_TYPES& _crackEngineType)
@@ -56,16 +63,15 @@ void CrackingWorker::crack()
 	{
 		QString factoryError(ex.what());
 		emit error(factoryError);
-		emit stopped();
+		wasError = true;
 		return;
 	}
-
-
+	
 	if (crackEngine != nullptr)
 	{
 		emit running();
 		crackEngine->Crack();
-
+		wasError = false;
 		results = crackEngine->getResults();
 	}
 }

@@ -38,6 +38,7 @@ private:
 	de la compilation).
 	*/
 	volatile bool isRunning, isStopped;
+	bool wasError = false;
 	CRACK_ENGINE_TYPES engineType;
 	CrackFactoryParams crackFactoryParams;
 	unique_ptr<ICrackEngine> crackEngine;
