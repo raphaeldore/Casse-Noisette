@@ -19,7 +19,7 @@ void CrackingWorker::startCracking()
 	isRunning = true;
 	crack();
 
-	if (!wasError)
+	if (!wasError && !exitWasCalled)
 	{
 		emit resultsReady();
 	}
@@ -37,6 +37,13 @@ void CrackingWorker::stopCracking()
 		crackEngine->cancelCrack();
 		emit stopped();
 	}
+}
+
+void CrackingWorker::exit()
+{
+	exitWasCalled = true;
+	stopCracking();
+	emit exited();
 }
 
 void CrackingWorker::setCrackEngineType(const CRACK_ENGINE_TYPES& _crackEngineType)

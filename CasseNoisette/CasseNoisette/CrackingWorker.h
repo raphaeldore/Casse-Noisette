@@ -22,11 +22,13 @@ signals:
 	void resultsReady();
 	void running();
 	void stopped();
+	void exited();
 	void error(QString err);
 
 public slots:
 	void startCracking();
 	void stopCracking();
+	void exit();
 
 private slots:
 	void crack();
@@ -39,6 +41,7 @@ private:
 	*/
 	volatile bool isRunning, isStopped;
 	bool wasError = false;
+	bool exitWasCalled = false;
 	CRACK_ENGINE_TYPES engineType;
 	CrackFactoryParams crackFactoryParams;
 	unique_ptr<ICrackEngine> crackEngine;
