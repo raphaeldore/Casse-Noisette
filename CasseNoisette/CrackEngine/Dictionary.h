@@ -1,4 +1,5 @@
 #pragma once
+
 #include "ICrackEngine.h"
 
 namespace CrackEngine
@@ -6,13 +7,13 @@ namespace CrackEngine
 	class Dictionary : public ICrackEngine
 	{
 	public:
-		Dictionary(unique_ptr<queue<string>> _dictionary);
+		Dictionary(std::unique_ptr<std::queue<std::string>> _dictionary);
 		~Dictionary();
 
 		void Crack() override;
-		void setDictionary(unique_ptr<queue<string>> _dictionary);
+		void setDictionary(std::unique_ptr<std::queue<std::string>> _dictionary);
 	private:
-		unique_ptr<queue<string>> dictionary;
+		std::unique_ptr<std::queue<std::string>> dictionary;
 	};
 }
 

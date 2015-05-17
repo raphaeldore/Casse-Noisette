@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "BruteForce.h"
+#include "CharsetBuilder.h"
 
 using namespace CrackEngine;
+using namespace std;
 
 BruteForce::BruteForce(const int & _maxPwdLenght, const string& _crackingCharset)
 {

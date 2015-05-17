@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "CrackFactoryParams.h"
+#include "Parameter.h"
 
 using namespace CrackEngine;
+using namespace std;
 
 CrackFactoryParams::CrackFactoryParams()
 {

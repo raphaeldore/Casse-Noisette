@@ -14,16 +14,8 @@
 #include <memory>
 #include <vector>
 #include <set>
+#include <queue>
 #include <iostream>
 
-// TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme
 
-#include "../DataLayer/IFileRepository.h"
-#include "../Crypto/HashFactory.h"
-#include "CharsetBuilder.h"
-#include "Parameter.h"
-#include "CrackFactoryParams.h"
-#include "ICrackEngine.h"
-#include "BruteForce.h"
-#include "Dictionary.h"
-#include "CrackFactory.h"
+#include "../Crypto/IHash.h"

@@ -1,7 +1,15 @@
 #include "stdafx.h"
+
+#include "../DataLayer/IFileRepository.h"
+
 #include "CrackFactory.h"
+#include "Parameter.h"
+#include "CrackFactoryParams.h"
+#include "BruteForce.h"
+#include "Dictionary.h"
 
 using namespace CrackEngine;
+using namespace std;
 
 map<string, unique_ptr<ICrackEngine>> CrackFactory::crackEngines_map;
 

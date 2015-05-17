@@ -2,6 +2,7 @@
 #include "Dictionary.h"
 
 using namespace CrackEngine;
+using namespace std;
 
 Dictionary::Dictionary(unique_ptr<queue<string>> _dictionary)
 {
