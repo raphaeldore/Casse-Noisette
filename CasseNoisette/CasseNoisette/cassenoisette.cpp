@@ -2,6 +2,7 @@
 
 #include "../CrackEngine/Parameter.h"
 #include "../CrackEngine/CrackFactoryParams.h"
+#include "../CrackEngine/CrackFactory.h"
 
 #include "CrackingWorker.h"
 #include "ResultDialog.h"
@@ -12,6 +13,7 @@
 #include <QFileDialog>
 #include <QThread>
 #include <QElapsedTimer>
+
 
 // #include "vld.h" // VLD cause des problèmes de null pointer exceptions pour des raisons étranges
                     // quand je charge de très gros fichiers ( > 50Mo)
