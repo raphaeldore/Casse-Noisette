@@ -1,6 +1,10 @@
 #include "GenerateDictionaryDialog.h"
+
+#include "GenerateDictionaryWorker.h"
+
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
+#include <QThread>
 
 GenerateDictionaryDialog::GenerateDictionaryDialog(QWidget * parent) : QDialog(parent)
 {
