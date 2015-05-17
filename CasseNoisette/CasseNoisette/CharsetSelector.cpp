@@ -1,6 +1,8 @@
 #include "CharsetSelector.h"
 #include "../CrackEngine/CharsetBuilder.h"
 
+using namespace std;
+
 CharsetSelector::CharsetSelector(QWidget *parent) : QWidget(parent)
 {
 	ui.setupUi(this);
