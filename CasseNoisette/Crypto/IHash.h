@@ -1,7 +1,4 @@
 #pragma once
-#include "stdafx.h"
-
-using namespace std;
 
 namespace CustomCrypto
 {
@@ -10,6 +7,6 @@ namespace CustomCrypto
 	public :
 		virtual ~IHash();
 
-		virtual string hash(const string & _stringToHash) = 0;
+		virtual std::string hash(const std::string & _stringToHash) = 0;
 	};
 }

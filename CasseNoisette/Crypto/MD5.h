@@ -7,7 +7,6 @@ RFC 1321 (https://tools.ietf.org/html/rfc1321)
 */
 
 #pragma once
-#include "stdafx.h"
 #define BLOCKSIZE 64
 
 namespace CustomCrypto
@@ -17,7 +16,7 @@ namespace CustomCrypto
 	public:
 		MD5();
 		~MD5() override;
-		string hash(const string & _stringToHash) override;
+		std::string hash(const std::string & _stringToHash) override;
 
 	private:
 		/* UINT1 définit un mot (word) d'un octet (8 bits) */
@@ -37,7 +36,7 @@ namespace CustomCrypto
 		void MD5Finalization();
 
 		// Retourne la hash MD5 sous forme de string hexadecimale
-		string MD5HexDigest() const;
+		std::string MD5HexDigest() const;
 
 		// C'est la viande de l'algorithme MD5.
 		// Applique l'algorithme MD5 sur un bloque
