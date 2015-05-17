@@ -2,6 +2,7 @@
 #include "FakeHash.h"
 
 using namespace CustomCrypto;
+using namespace std;
 
 string FakeHash::hash(const string & _stringToHash)
 {
