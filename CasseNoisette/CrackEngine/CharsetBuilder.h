@@ -1,23 +1,22 @@
 #pragma once
-using namespace std;
 
 namespace CrackEngine
 {
 	/* Les différents groupes de caractères que nous supportons */
 	namespace Charsets
 	{
-		const string loweralpha = "abcdefghijklmnopqrstuvwxyz";
-		const string upperalpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		const string numeric = "0123456789";
-		const string space = " ";
-		const string special = "!@#$%^&*()-_+=";
+		const std::string loweralpha = "abcdefghijklmnopqrstuvwxyz";
+		const std::string upperalpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		const std::string numeric = "0123456789";
+		const std::string space = " ";
+		const std::string special = "!@#$%^&*()-_+=";
 	}
 
 	class CharsetBuilder
 	{
 	public:
 		CharsetBuilder();
-		CharsetBuilder(const bool _loweralpha, const bool _upperalpha, const bool _numeric, const bool _space, const bool _special, const string & _customCharset = "");
+		CharsetBuilder(const bool _loweralpha, const bool _upperalpha, const bool _numeric, const bool _space, const bool _special, const std::string & _customCharset = "");
 
 		// Si l'utilisateur préfère ne pas passer par le constructeur
 		void enableLowerAlpha();
@@ -25,12 +24,12 @@ namespace CrackEngine
 		void enableNumeric();
 		void enableSpace();
 		void enableSpecial();
-		void addCustomCharset(const string & _customCharset);
+		void addCustomCharset(const std::string & _customCharset);
 
-		string BuildCharset();
+		std::string BuildCharset();
 
 	private:
-		string removeDuplicateCharacters(string _generatedCharset) const;
+		std::string removeDuplicateCharacters(std::string _generatedCharset) const;
 
 		bool loweralpha;
 		bool upperalpha;
@@ -38,6 +37,6 @@ namespace CrackEngine
 		bool space;
 		bool special;
 
-		string customCharset;
+		std::string customCharset;
 	};
 }
