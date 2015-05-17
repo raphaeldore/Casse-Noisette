@@ -2,6 +2,21 @@
 #include "QObject.h"
 
 #include "../CrackEngine/CrackFactoryParams.h"
+#include <memory>
+
+
+namespace CrackEngine
+{
+	enum CRACK_ENGINE_TYPES;
+	class CrackFactoryParams;
+	class ICrackEngine;
+	class CrackFactory;
+}
+
+namespace DataLayer
+{
+	class IFileRepository;
+}
 
 using namespace CrackEngine;
 
@@ -12,9 +27,9 @@ class CrackingWorker :
 public:
 	CrackingWorker();
 	void setCrackEngineType(const CRACK_ENGINE_TYPES & _crackEngineType);
-	void setCrackFactoryParameters(const CrackFactoryParams & _crackFactoryParams);
+	void setCrackFactoryParameters(const CrackEngine::CrackFactoryParams & _crackFactoryParams);
 	
-	vector<tuple<string, string, string>> getResults() const;
+	std::vector<std::tuple<std::string, std::string, std::string>> getResults() const;
 signals:
 	void creatingEngine();
 	void engineCreated();
@@ -43,10 +58,10 @@ private:
 	bool wasError = false;
 	bool exitWasCalled = false;
 	CRACK_ENGINE_TYPES engineType;
-	CrackFactoryParams crackFactoryParams;
-	unique_ptr<ICrackEngine> crackEngine;
-	CrackFactory * crackFactory;
-	unique_ptr<DataLayer::IFileRepository> fileRepository;
-	vector<tuple<string, string, string>> results;
+	CrackEngine::CrackFactoryParams crackFactoryParams;
+	std::unique_ptr<CrackEngine::ICrackEngine> crackEngine;
+	CrackEngine::CrackFactory * crackFactory;
+	std::unique_ptr<DataLayer::IFileRepository> fileRepository;
+	std::vector<std::tuple<std::string, std::string, std::string>> results;
 };
 
