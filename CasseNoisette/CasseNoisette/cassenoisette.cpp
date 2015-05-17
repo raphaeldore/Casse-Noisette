@@ -63,6 +63,11 @@ CasseNoisette::~CasseNoisette()
 {
 }
 
+void CasseNoisette::closeEvent(QCloseEvent*)
+{
+	if (crackingInProgress) crackingWorker->exit();
+}
+
 void CasseNoisette::on_startCrackBtn_clicked()
 {
 	if (crackingInProgress) {
@@ -124,6 +129,33 @@ void CasseNoisette::on_dictFileSelectBtn_clicked()
 	ui.dictFileSelectTxt->setText(fileName);
 }
 
+void CasseNoisette::on_aboutBtn_triggered(){
+	AboutDialog aboutDialog(this);
+
+	aboutDialog.exec();
+}
+
+void CasseNoisette::on_generateDictionaryBtn_triggered()
+{
+	GenerateDictionaryDialog generateDictionaryDialog(this);
+	generateDictionaryDialog.exec();
+}
+
+void CasseNoisette::on_actionQuitter_triggered()
+{
+	this->close();
+}
+
+void CasseNoisette::on_hashFunctionsComboBox_currentIndexChanged(int _newIndex)
+{
+	// TODO. C'est temporaire. Pour l'instant il y a seulement MD5 qui fonctionne.
+	if (_newIndex != 0)
+	{
+		QMessageBox::information(this, "Information", "Cette fonction de hachage n'est pas implémentée.");
+		ui.hashFunctionsComboBox->setCurrentIndex(0);
+	}
+}
+
 void CasseNoisette::handleResults()
 {
 	ResultDialog resultDialog(this);
@@ -173,36 +205,4 @@ void CasseNoisette::engineUnloading()
 {
 	ui.startCrackBtn->setText("Déchargement de l'engin...");
 	ui.startCrackBtn->setDisabled(true);
-}
-
-void CasseNoisette::on_aboutBtn_triggered(){
-	AboutDialog aboutDialog(this);
-
-	aboutDialog.exec();
-}
-
-void CasseNoisette::on_generateDictionaryBtn_triggered()
-{
-	GenerateDictionaryDialog generateDictionaryDialog(this);
-	generateDictionaryDialog.exec();
-}
-
-void CasseNoisette::on_actionQuitter_triggered()
-{
-	this->close();
-}
-
-void CasseNoisette::on_hashFunctionsComboBox_currentIndexChanged(int _newIndex)
-{
-	// C'est temporaire. Pour l'instant il y a seulement MD5 qui fonctionne.
-	if (_newIndex != 0)
-	{
-		QMessageBox::information(this, "Information", "Cette fonction de hachage n'est pas implémentée.");
-		ui.hashFunctionsComboBox->setCurrentIndex(0);
-	}
-}
-
-void CasseNoisette::closeEvent(QCloseEvent*)
-{
-	if (crackingInProgress) crackingWorker->exit();
 }
