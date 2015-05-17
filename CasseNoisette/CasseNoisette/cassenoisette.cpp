@@ -1,13 +1,17 @@
 #include "cassenoisette.h"
-#include <iostream>
-#include <QMessageBox>
-#include <QFileDialog>
-#include <QTextStream>
-#include <QDateTime>
 
 #include "../CrackEngine/Parameter.h"
 #include "../CrackEngine/CrackFactoryParams.h"
+
+#include "CrackingWorker.h"
+#include "ResultDialog.h"
+#include "AboutDialog.h"
 #include "GenerateDictionaryDialog.h"
+
+#include <QMessageBox>
+#include <QFileDialog>
+#include <QThread>
+#include <QElapsedTimer>
 
 // #include "vld.h" // VLD cause des problèmes de null pointer exceptions pour des raisons étranges
                     // quand je charge de très gros fichiers ( > 50Mo)

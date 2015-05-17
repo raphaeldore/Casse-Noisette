@@ -2,20 +2,20 @@
 #define CASSENOISETTE_H
 
 #include <QtWidgets/QMainWindow>
-#include <QThread>
 #include "ui_cassenoisette.h"
-#include "CrackingWorker.h"
-#include <QElapsedTimer>
-#include "AboutDialog.h"
-#include "ResultDialog.h"
-#include "CharsetSelector.h"
+#include <memory>
+
+class CrackingWorker;
+class QThread;
+class QElapsedTimer;
 
 class CasseNoisette : public QMainWindow
 {
 	Q_OBJECT
-	unique_ptr<QThread> crackingWorkerThread;
-	unique_ptr<CrackingWorker> crackingWorker;
-	unique_ptr<QElapsedTimer> crackingTime;
+
+	std::unique_ptr<QThread> crackingWorkerThread;
+	std::unique_ptr<CrackingWorker> crackingWorker;
+	std::unique_ptr<QElapsedTimer> crackingTime;
 
 public:
 	CasseNoisette(QWidget *parent = 0);
