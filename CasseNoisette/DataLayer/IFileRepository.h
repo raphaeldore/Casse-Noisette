@@ -1,7 +1,6 @@
 #pragma once
-#include "stdafx.h"
 
-using namespace std;
+#include <queue>
 
 namespace DataLayer
 {
@@ -10,7 +9,7 @@ namespace DataLayer
 	public:
 		virtual ~IFileRepository() {};
 
-		virtual multimap<string, string> loadPasswordFile(const string & _pwdFilePath, const string & _separator) = 0;
-		virtual unique_ptr<queue<string>> loadDictionaryFile(const string & _dictFilePath) = 0;
+		virtual std::multimap<std::string, std::string> loadPasswordFile(const std::string & _pwdFilePath, const std::string & _separator) = 0;
+		virtual std::unique_ptr<std::queue<std::string>> loadDictionaryFile(const std::string & _dictFilePath) = 0;
 	};
 }
