@@ -6,7 +6,7 @@
 
 
 using namespace CustomCrypto;
-
+using namespace std;
 
 namespace
 {

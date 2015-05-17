@@ -1,5 +1,5 @@
 #include "GenerateDictionaryWorker.h"
-
+#include "../Utilities/DictionaryGenerator.h"
 
 GenerateDictionaryWorker::GenerateDictionaryWorker()
 {

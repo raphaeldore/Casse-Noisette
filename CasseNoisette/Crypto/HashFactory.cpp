@@ -1,7 +1,12 @@
 #include "stdafx.h"
 #include "HashFactory.h"
 
+#include "MD5.h"
+#include "SHA1.h"
+#include "SHA256.h"
+
 using namespace CustomCrypto;
+using namespace std;
 
 map<string, unique_ptr<IHash>> HashFactory::hashAlgorithms_map;
 

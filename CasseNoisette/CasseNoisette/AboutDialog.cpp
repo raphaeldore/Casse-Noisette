@@ -1,7 +1,7 @@
 #include <QtGui>
 #include "AboutDialog.h"
 
-AboutDialog::AboutDialog(QWidget * parent)
+AboutDialog::AboutDialog(QWidget* parent)
 	:QDialog(parent)
 {
 	ui.setupUi(this);
@@ -9,6 +9,7 @@ AboutDialog::AboutDialog(QWidget * parent)
 	this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
 }
 
-void AboutDialog::on_closeBtn_clicked(){
+void AboutDialog::on_closeBtn_clicked()
+{
 	this->close();
 }

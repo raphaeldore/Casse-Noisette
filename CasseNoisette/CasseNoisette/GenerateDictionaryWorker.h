@@ -1,7 +1,12 @@
 #pragma once
 #include "QObject.h"
 #include <memory>
-#include "../Utilities/DictionaryGenerator.h"
+
+
+namespace Utilities
+{
+	class DictionaryGenerator;
+}
 
 class GenerateDictionaryWorker :
 	public QObject

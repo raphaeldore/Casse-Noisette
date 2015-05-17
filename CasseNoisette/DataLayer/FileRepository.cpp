@@ -3,6 +3,7 @@
 
 using namespace DataLayer;
 using namespace Utilities;
+using namespace std;
 
 FileRepository::FileRepository()
 {

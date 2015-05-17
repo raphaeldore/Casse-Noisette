@@ -1,6 +1,12 @@
 #include "CrackingWorker.h"
 #include "../DataLayer/FileRepository.h"
 
+#include "../CrackEngine/ICrackEngine.h"
+#include "../CrackEngine/CrackFactoryParams.h"
+#include "../CrackEngine/CrackFactory.h"
+
+using namespace std;
+
 CrackingWorker::CrackingWorker() : isRunning(false), isStopped(false)
 {
 	crackFactory = CrackFactory::GetCrackFactory();

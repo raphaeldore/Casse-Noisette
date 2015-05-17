@@ -2,6 +2,8 @@
 #include "ResultDialog.h"
 #include <QtWidgets/QFileDialog>
 
+using namespace std;
+
 ResultDialog::ResultDialog(QWidget * parent)
 	:QDialog(parent)
 {

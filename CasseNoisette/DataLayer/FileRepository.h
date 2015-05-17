@@ -1,19 +1,6 @@
 #pragma once
 
-#include <queue>
-
 #include "IFileRepository.h"
-
-/*
-
-TODO:
-- Validation du contenu du fichier
-- Utilisation d'un séparateur (ex: username:hashedPassword)
-- Validation du formatage de chaque lignes du fichier
-- Bref, de la robustesse.
-*/
-
-using namespace std;
 
 namespace DataLayer
 {
@@ -23,10 +10,10 @@ namespace DataLayer
 		FileRepository();
 		~FileRepository() override;
 
-		multimap<string, string> loadPasswordFile(const string & _pwdFilePath, const string & _separator = ":") override;
-		unique_ptr<queue<string>> loadDictionaryFile(const string & _dictFilePath) override;
+		std::multimap<std::string, std::string> loadPasswordFile(const std::string & _pwdFilePath, const std::string & _separator = ":") override;
+		std::unique_ptr<std::queue<std::string>> loadDictionaryFile(const std::string & _dictFilePath) override;
 
 	private:
-		static bool split(const string& _string, const string& _separator, vector<string> & _outVector);
+		static bool split(const std::string& _string, const std::string& _separator, std::vector<std::string> & _outVector);
 	};
 }

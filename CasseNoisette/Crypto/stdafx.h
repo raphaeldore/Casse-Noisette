@@ -14,8 +14,4 @@
 #include <map>
 #include <memory>
 
-// #include "HashFactory.h"
 #include "IHash.h"
-#include "MD5.h"
-#include "SHA1.h"
-#include "SHA256.h"

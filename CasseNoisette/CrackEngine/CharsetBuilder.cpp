@@ -3,6 +3,7 @@
 #include <algorithm>
 
 using namespace CrackEngine;
+using namespace std;
 
 CharsetBuilder::CharsetBuilder() : customCharset("")
 {

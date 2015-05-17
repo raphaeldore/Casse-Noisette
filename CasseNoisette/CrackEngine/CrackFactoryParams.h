@@ -1,13 +1,10 @@
 #pragma once
-#include "stdafx.h"
-#include "Parameter.h"
 
-using namespace std;
+#include <set>
+#include "Parameter.h"
 
 namespace CrackEngine
 {
-	class Parameter;
-
 	class CrackFactoryParams
 	{
 		friend class CrackFactory;
@@ -17,13 +14,13 @@ namespace CrackEngine
 		~CrackFactoryParams();
 
 		void addParameter(const Parameter & _parameter);
-		void setParameters(const set<Parameter> & _parameters);
-		string getParameterValue(const PARAM_TYPE & _paramType) const;
+		void setParameters(const std::set<Parameter> & _parameters);
+		std::string getParameterValue(const PARAM_TYPE & _paramType) const;
 
 		// Pour accéder aux éléments plus facilement
-		string operator[] (const PARAM_TYPE & _paramType) const;
+		std::string operator[] (const PARAM_TYPE & _paramType) const;
 
 	private:
-		set<Parameter> parameters;
+		std::set<Parameter> parameters;
 	};
 }

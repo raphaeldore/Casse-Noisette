@@ -1,6 +1,8 @@
 #include "stdafx.h"
+#include "SHA1.h"
 
 using namespace CustomCrypto;
+using namespace std;
 
 SHA1::~SHA1()
 {
