@@ -11,15 +11,14 @@
 
 using namespace std;
 
-HaveIBeenPwnedDialog::HaveIBeenPwnedDialog(QWidget* parent) : QDialog(parent)
+HaveIBeenPwnedDialog::HaveIBeenPwnedDialog(QWidget* parent) : QDialog(parent),
+															  networkManager(make_unique<QNetworkAccessManager>(this))
 {
 	ui.setupUi(this);
 	this->setModal(true);
 	this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
-
-	networkManager = make_unique<QNetworkAccessManager>(this);
+	ui.searchResults->setOpenExternalLinks(true);
 }
-
 
 HaveIBeenPwnedDialog::~HaveIBeenPwnedDialog()
 {
@@ -27,11 +26,13 @@ HaveIBeenPwnedDialog::~HaveIBeenPwnedDialog()
 
 void HaveIBeenPwnedDialog::on_btnAccountSearch_clicked()
 {
+	ui.searchResults->setHtml("<b>Recherche en cours...</b>");
 	QNetworkRequest request;
 	QString accountToSearch = ui.txtAcountName->text();
 	QUrl url("https://haveibeenpwned.com/api/v2/breachedaccount/" + accountToSearch.toHtmlEscaped() + "?includeUnverified=true");
 
 	request.setUrl(url);
+	request.setRawHeader("User-Agent", "Casse-Noisette/1.0 (Nokia; Qt)");
 	QNetworkReply * reply = networkManager->get(request);
 
 	connect(networkManager.get(), SIGNAL(finished(QNetworkReply*)), this, SLOT(onResult(QNetworkReply*)));
