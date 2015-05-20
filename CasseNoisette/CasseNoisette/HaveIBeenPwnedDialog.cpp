@@ -41,7 +41,14 @@ void HaveIBeenPwnedDialog::onResult(QNetworkReply * reply)
 {
 	QString html;
 
-	if (reply->error() != QNetworkReply::NoError && reply->error() != QNetworkReply::HostNotFoundError)
+	if (reply->error() == QNetworkReply::ContentNotFoundError)
+	{
+		ui.searchResults->setHtml("<p style=\"font-size: 18px\">Vous êtes chanceux, ce compte n'a pas été victime d'une fuite de données!</p>");
+		return;
+	}
+
+	// Pour tous les autres erreurs, on affiche un MessageBox
+	if (reply->error() != QNetworkReply::NoError)
 	{
 		QMessageBox msgBox;
 		msgBox.setIcon(QMessageBox::Critical);
