@@ -371,7 +371,14 @@
     <addaction name="separator"/>
     <addaction name="actionQuitter"/>
    </widget>
+   <widget class="QMenu" name="menuOutils">
+    <property name="title">
+     <string>Outils</string>
+    </property>
+    <addaction name="actionHaveIBeenPwned"/>
+   </widget>
    <addaction name="menuFichier"/>
+   <addaction name="menuOutils"/>
    <addaction name="menu_propos"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -394,6 +401,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionHaveIBeenPwned">
+   <property name="text">
+    <string>haveibeenpwned</string>
    </property>
   </action>
  </widget>
