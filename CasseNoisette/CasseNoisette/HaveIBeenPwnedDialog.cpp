@@ -83,9 +83,8 @@ void HaveIBeenPwnedDialog::onResult(QNetworkReply * reply)
 		QString description = value["Description"].toString();
 		QString domain = value["Domain"].toString();
 
-		html += "<p><b>Titre : </b>" + title + "<br />" + "<b>Site Web : </b>" + domain + "<br />" + "<b>Description : </b>" + description + "</p>";
+		html += "<p><b>Titre : </b>" + title + "<br />" + "<b>Site Web : </b><a href=\"http://" + domain + "\">" + domain + "</a><br />" + "<b>Description : </b>" + description + "</p>";
 	}
 
 	ui.searchResults->setHtml(html);
-
 }
