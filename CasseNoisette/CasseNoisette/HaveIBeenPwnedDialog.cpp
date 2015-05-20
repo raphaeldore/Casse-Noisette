@@ -56,17 +56,22 @@ void HaveIBeenPwnedDialog::onResult(QNetworkReply * reply)
 		msgBox.exec();
 		return;
 	}
-	
-	if (reply->error() == QNetworkReply::HostNotFoundError)
-	{
-		html += "<p>Vous êtes chanceux, ce compte n'a pas été victime d'un fuite de données!</p>";
-	}
-	// La requête s'est bien effectée
 
+	// Si on se rend jusqu'ici, la requête s'est bien effectuée et a retourné des résultats
 
-	//parse json
+	html += "<p style=\"font-size: 12px;\">"
+		"<b>:( Oh non! Ce compte a été victime d'une ou plusieurs fuites."
+		" Il est fortement conseillé de changer votre mot de passe.</b></p>"
+		"<p>Note: Une « fuite » est un incident où les données d’un site"
+		" ont été consultées illégalement par des pirates, puis rendues"
+		" publiques. Passez en revue les types de données qui ont été"
+		" compromises (adresses courriel, mots de passe, cartes de crédit,"
+		" etc.) et prenez les mesures nécessaires, tel que de changez vos"
+		" mots de passe.</p>"
+		"<h2>Site affectés</h2>";
+
+	// Parse json
 	QJsonDocument jsonResponse = QJsonDocument::fromJson(reply->readAll());
-	
 
 	QJsonArray awesomeArray = jsonResponse.array();
 
