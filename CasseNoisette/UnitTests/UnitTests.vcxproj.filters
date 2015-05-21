@@ -25,6 +25,9 @@
     <Filter Include="Fichiers sources\CrackEngineTests">
       <UniqueIdentifier>{479163d6-c2ff-4c7a-85c3-6d17002a96d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\UtilitiesTests">
+      <UniqueIdentifier>{35569b71-1905-4418-9fd2-2f3500b21b0c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -70,6 +73,9 @@
     </ClCompile>
     <ClCompile Include="FakeFileRepository.cpp">
       <Filter>Fichiers sources\Fake</Filter>
+    </ClCompile>
+    <ClCompile Include="PasswordGeneratorTests.cpp">
+      <Filter>Fichiers sources\UtilitiesTests</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

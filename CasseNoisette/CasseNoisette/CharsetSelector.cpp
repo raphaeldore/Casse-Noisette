@@ -1,5 +1,6 @@
 #include "CharsetSelector.h"
 #include "../CrackEngine/CharsetBuilder.h"
+#include <cassert>
 
 using namespace std;
 
@@ -27,4 +28,14 @@ string CharsetSelector::getCharset()
 	};
 
 	return charsetBuilder.BuildCharset();
+}
+
+void CharsetSelector::toggleChkBoxCheckedState(const QString& _checkBoxName)
+{
+	QCheckBox * chkBox = this->findChild<QCheckBox *>(_checkBoxName);
+
+	// Assert au lieu d'un if car si chkBox est null c'est de la faute du programmeur
+	// (et on veut lui informer de son erreur).
+	assert(chkBox != nullptr);
+	chkBox->toggle();
 }

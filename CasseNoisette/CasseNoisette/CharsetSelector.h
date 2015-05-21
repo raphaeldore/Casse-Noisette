@@ -12,6 +12,8 @@ public:
 	~CharsetSelector();
 
 	std::string getCharset();
+	void toggleChkBoxCheckedState(const QString & _checkBoxName);
+
 private:
 	Ui::CharsetSelector ui;
 };
