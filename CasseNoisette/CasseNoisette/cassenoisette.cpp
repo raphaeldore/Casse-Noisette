@@ -8,12 +8,12 @@
 #include "ResultDialog.h"
 #include "AboutDialog.h"
 #include "GenerateDictionaryDialog.h"
+#include "HaveIBeenPwnedDialog.h"
 
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QThread>
 #include <QElapsedTimer>
-
 
 // #include "vld.h" // VLD cause des problèmes de null pointer exceptions pour des raisons étranges
                     // quand je charge de très gros fichiers ( > 50Mo)
@@ -146,6 +146,12 @@ void CasseNoisette::on_generateDictionaryBtn_triggered()
 void CasseNoisette::on_actionQuitter_triggered()
 {
 	this->close();
+}
+
+void CasseNoisette::on_actionHaveIBeenPwned_triggered()
+{
+	HaveIBeenPwnedDialog haveIBeenPwnedDialog(this);
+	haveIBeenPwnedDialog.exec();
 }
 
 void CasseNoisette::on_hashFunctionsComboBox_currentIndexChanged(int _newIndex)
