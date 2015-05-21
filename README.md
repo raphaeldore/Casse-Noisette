@@ -42,6 +42,8 @@ Pour compiler, vous avez besoin de 3 choses:
 
 ### OpenSSL
 
+OpenSSL n'est pas nécessaire pour compiler l'application, mais il est nécessaire si vous voulez pouvoir éxecuter l'executable CasseNoisette.exe ailleurs que dans Visual Studio.
+
 Rendez-vous à la page [http://slproweb.com/products/Win32OpenSSL.html](http://slproweb.com/products/Win32OpenSSL.html), et téléchargez la version 32bits la plus récente de OpenSSL qu'il y a sur la page (Pas la version light). Au moment de l'écriture de ces instructions, la version la plus récente est : Win32 OpenSSL v1.0.2a. Lancez l'installateur, et choisissez un emplacement approprié pour votre installation d'OpenSSL (Par exemple: C:\lib\OpenSSL). Lorsqu'on vous demandera où copier les fichiers .DLL, choisissez l'option «Copy OpenSSL Files to **The Windows system directory**».
 
 Vous pouvez être informé lors de l'exécution de l'installateur que «Visual C ++ 2008 Redistributable» est introuvable. Dans ce cas vous devez d'abords installer le composant manquant. Suivez les instructions à l'adresse suivante [https://www.microsoft.com/en-us/download/details.aspx?id=29](https://www.microsoft.com/en-us/download/details.aspx?id=29), et puis relancez l'installateur.
