@@ -20,7 +20,8 @@ Table des matières
   * [Casse-Noisette](#casse-noisette)
     * [Comment compiler](#comment-compiler)
       * [OpenSSL](#openssl)
-      * [QT](#qt) 
+      * [QT](#qt)
+    * [Comment distribuer l'application compilée](comment-distribuer-lapplication-compil%C3%A9e) 
     * [Méthodes de cassage](#m%C3%A9thodes-de-cassage)
       * [Attaque par force brute](#attaque-par-force-brute)
       * [Attaque par dictionnaire](#attaque-par-dictionnaire)
@@ -59,6 +60,43 @@ C'est tout pour l'installation de QT, mais il reste encore quelques petits trucs
 Voilà, ça devrait suffir!
 
 ![High Five](http://www.petitpetitgamin.com/wp-content/uploads/2011/02/high-fivepicture.png)
+
+## Comment distribuer l'application compilée
+
+Une fois que vous avez compilé l'application, vous allez surement vouloir la partager, ou bien l'utiliser sur un autre ordinateur. Le problème ici est que ce nouvel ordinateur n'a probablement pas tous les .DLLs requis pour executer l'application. Voici donc une liste des fichier .DLLs que vous devez inclure dans le même dossier que l'executable de l'application CasseNoisette.exe :
+
+	¦   CasseNoisette.exe
+	¦   icudt53.dll
+	¦   icuin53.dll
+	¦   icuuc53.dll
+	¦   libeay32.dll
+	¦   libEGL.dll
+	¦   libGLESv2.dll
+	¦   msvcp120.dll
+	¦   msvcr120.dll
+	¦   Qt5Core.dll
+	¦   Qt5Gui.dll
+	¦   Qt5Network.dll
+	¦   Qt5Widgets.dll
+	¦   ssleay32.dll
+	¦   vccorlib120.dll
+	¦
+	+---platforms
+    	    qminimal.dll
+        	qoffscreen.dll
+        	qwindows.dll
+
+La structure du dossier doit être exactement la même (n'oubliez surtout pas de créer le dossier platforms et d'y mettre les .DLLs requis).
+
+Où trouver ces fichiers .DLL?
+
+Les fichiers icudt53.dll, icuin53.dll, icuuc53.dll, libEGL.dll, libGLESv2.dll, Qt5Core.dll, Qt5Gui.dll, Qt5Network.dll, Qt5Widgets.dll vous les trouverez dans le dossier bin/ situé à l'endroit où vous avez installé QT.
+
+Les fichiers qminimal.dll, qoffscreen.dll et qwindows.dll sont disponibles dans le dossier plugins/platforms/ de votre installation QT.
+
+Les fichiers msvcp120.dll, msvcr120.dll et vccorlib120.dll sont fournis avec Visual Studio. Sur mon ordinateur ces .DLLs se situent dans le dossier C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\redist\x86\Microsoft.VC120.CRT. Le chemin peut varier légèrement pour vous, mais ça devrait être dans ces environs.
+
+Finalement, les fichiers ssleay32.dll et libeay32.dll, sont fournis avec OpenSSL. Si vous ne l'avez pas déjà fait, suivez les instructions pour [installer OpenSSL](#openssl). Les fichiers .DLLs se situent dans la racine de votre dossier d'installation d'OpenSSL (Par exemple, C:\lib\OpenSSL-Win32\\).
 
 ## Méthodes de cassage
 
