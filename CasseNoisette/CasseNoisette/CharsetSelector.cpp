@@ -28,3 +28,8 @@ string CharsetSelector::getCharset()
 
 	return charsetBuilder.BuildCharset();
 }
+
+const Ui::CharsetSelector& CharsetSelector::getUi() const
+{
+	return ui;
+}

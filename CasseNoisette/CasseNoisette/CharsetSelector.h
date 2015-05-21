@@ -12,6 +12,7 @@ public:
 	~CharsetSelector();
 
 	std::string getCharset();
+	const Ui::CharsetSelector & getUi() const;
 private:
 	Ui::CharsetSelector ui;
 };
