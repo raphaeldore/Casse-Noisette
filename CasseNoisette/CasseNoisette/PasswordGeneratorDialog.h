@@ -14,6 +14,7 @@ public:
 	// Actions des contrôles du GUI
 	void on_btnGeneratePwd_clicked();
 	void on_btnCloseDialog_clicked();
+	void on_txtGeneratedPwd_selectionChanged();
 
 private:
 	Ui::PasswordGeneratorDialog ui;

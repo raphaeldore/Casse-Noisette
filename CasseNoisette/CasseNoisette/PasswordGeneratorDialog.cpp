@@ -9,6 +9,7 @@ PasswordGeneratorDialog::PasswordGeneratorDialog(QWidget * parent) : QDialog(par
 	ui.setupUi(this);
 	this->setModal(true);
 	this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
+	ui.txtGeneratedPwd->installEventFilter(this);
 }
 
 
@@ -33,9 +34,15 @@ void PasswordGeneratorDialog::on_btnGeneratePwd_clicked()
 	std::string generatedPassword = PasswordGenerator::GeneratePassword(charset, pwdLenght);
 
 	ui.txtGeneratedPwd->setText(QString::fromLocal8Bit(generatedPassword.c_str()));
+	ui.txtGeneratedPwd->selectAll();
 }
 
 void PasswordGeneratorDialog::on_btnCloseDialog_clicked()
 {
 	this->close();
+}
+
+void PasswordGeneratorDialog::on_txtGeneratedPwd_selectionChanged()
+{
+	ui.txtGeneratedPwd->copy();
 }
