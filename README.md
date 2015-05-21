@@ -2,8 +2,6 @@
 
 # Casse-Noisette
 
-## Qu'est-ce que Casse-Noisette?
-
 Casse-Noisette est une application qui permet le cassage de mots de passe (autrement connu sous le nom de "Password Cracking" dans le monde informatique). 
 
 Casse-Noisette offre 2 manières de casser une liste de mots de passe :
@@ -15,6 +13,10 @@ Ressources :
 
 * [Page Wikipedia sur l'Attaque par force brute](http://fr.wikipedia.org/wiki/Attaque_par_force_brute)
 * [Page Wikipedia sur l'Attaque par dictionnaire](http://fr.wikipedia.org/wiki/Attaque_par_dictionnaire)
+
+## Méthodes de cassage
+
+Casse-Noisette permet de casser des mots de passe de deux manières différentes.
 
 ### Attaque par force brute
 
