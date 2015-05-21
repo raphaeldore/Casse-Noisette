@@ -9,7 +9,11 @@ PasswordGeneratorDialog::PasswordGeneratorDialog(QWidget * parent) : QDialog(par
 	ui.setupUi(this);
 	this->setModal(true);
 	this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
-	ui.txtGeneratedPwd->installEventFilter(this);
+
+	// Options sélectionnées par défaut
+	ui.charsetSelectorWidget->getUi().chkCharsetUpper->setCheckState(Qt::Checked);
+	ui.charsetSelectorWidget->getUi().chkCharsetLower->setCheckState(Qt::Checked);
+	ui.charsetSelectorWidget->getUi().chkCharsetNumeric->setCheckState(Qt::Checked);
 }
 
 
