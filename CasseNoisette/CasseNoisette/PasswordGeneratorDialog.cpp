@@ -35,7 +35,7 @@ void PasswordGeneratorDialog::on_btnGeneratePwd_clicked()
 		return;
 	}
 
-	std::string generatedPassword = PasswordGenerator::GeneratePassword(charset, pwdLenght);
+	std::string generatedPassword = Utilities::PasswordGenerator::GeneratePassword(charset, pwdLenght);
 
 	ui.txtGeneratedPwd->setText(QString::fromLocal8Bit(generatedPassword.c_str()));
 	ui.txtGeneratedPwd->selectAll();

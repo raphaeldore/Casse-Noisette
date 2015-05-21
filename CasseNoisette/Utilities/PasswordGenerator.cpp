@@ -4,6 +4,7 @@
 #include <random>
 
 using namespace std;
+using namespace Utilities;
 
 string PasswordGenerator::GeneratePassword(const string & _charset, const unsigned int & _lenght)
 {

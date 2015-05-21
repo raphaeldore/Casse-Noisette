@@ -17,7 +17,7 @@ namespace UnitTests
 			unsigned int EXPECTED_PWD_LENGTH = 15;
 
 			// Action
-			string generatedPassword = PasswordGenerator::GeneratePassword(charset, EXPECTED_PWD_LENGTH);
+			string generatedPassword = Utilities::PasswordGenerator::GeneratePassword(charset, EXPECTED_PWD_LENGTH);
 			unsigned int ACTUAL_PWD_LENGTH = generatedPassword.length();
 
 			// Assert
@@ -30,7 +30,7 @@ namespace UnitTests
 			unsigned int PWD_LENGTH = 20;
 
 			// Action
-			string generatedPassword = PasswordGenerator::GeneratePassword(charset, PWD_LENGTH);
+			string generatedPassword = Utilities::PasswordGenerator::GeneratePassword(charset, PWD_LENGTH);
 
 			// Assert (ici je dois improviser dû à la nature de la randomisation)
 			for (auto c : generatedPassword)
@@ -49,7 +49,7 @@ namespace UnitTests
 			string EXPECTED_GENERATED_PWD = "AAAAAAAAAA";
 
 			// Action
-			string ACTUAL_GENERATED_PWD = PasswordGenerator::GeneratePassword(oneCharacterCharset, PWD_LENGTH);
+			string ACTUAL_GENERATED_PWD = Utilities::PasswordGenerator::GeneratePassword(oneCharacterCharset, PWD_LENGTH);
 
 			// Assert
 			Assert::AreEqual(EXPECTED_GENERATED_PWD, ACTUAL_GENERATED_PWD);
