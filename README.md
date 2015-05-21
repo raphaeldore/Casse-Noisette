@@ -38,7 +38,7 @@ Pour compiler, vous avez besoin de 3 choses:
 
 * Une version récente de Visual Studio (de préférence 2013, mais 2012 devrait fonctionner aussi)
 * OpenSSL : Nécessaire pour faire des requêtes https
-* QT : Nécessaire pour l'interface
+* QT 32bits 5.4.x msvc 2013 : Nécessaire pour l'interface
 
 ### OpenSSL
 
