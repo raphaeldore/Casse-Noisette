@@ -9,6 +9,7 @@
 #include "AboutDialog.h"
 #include "GenerateDictionaryDialog.h"
 #include "HaveIBeenPwnedDialog.h"
+#include "PasswordGeneratorDialog.h"
 
 #include <QMessageBox>
 #include <QFileDialog>
@@ -152,6 +153,12 @@ void CasseNoisette::on_actionHaveIBeenPwned_triggered()
 {
 	HaveIBeenPwnedDialog haveIBeenPwnedDialog(this);
 	haveIBeenPwnedDialog.exec();
+}
+
+void CasseNoisette::on_actionPwdGenerator_triggered()
+{
+	PasswordGeneratorDialog passwordGeneratorDialog(this);
+	passwordGeneratorDialog.exec();
 }
 
 void CasseNoisette::on_hashFunctionsComboBox_currentIndexChanged(int _newIndex)
