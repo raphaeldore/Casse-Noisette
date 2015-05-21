@@ -1,5 +1,7 @@
 #include "PasswordGeneratorDialog.h"
 
+#include "../Utilities/PasswordGenerator.h"
+
 #include <QtWidgets/QMessageBox>
 
 PasswordGeneratorDialog::PasswordGeneratorDialog(QWidget * parent) : QDialog(parent)
@@ -16,7 +18,7 @@ PasswordGeneratorDialog::~PasswordGeneratorDialog()
 
 void PasswordGeneratorDialog::on_btnGeneratePwd_clicked()
 {
-	int pwdLenght = ui.spinMaxPwdLength->value();
+	int pwdLenght = ui.spinPwdLength->value();
 	std::string charset = ui.charsetSelectorWidget->getCharset();
 	
 	if (charset.empty())
@@ -27,7 +29,10 @@ void PasswordGeneratorDialog::on_btnGeneratePwd_clicked()
 		msgBox.exec();
 		return;
 	}
-	
+
+	std::string generatedPassword = PasswordGenerator::GeneratePassword(charset, pwdLenght);
+
+	ui.txtGeneratedPwd->setText(QString::fromLocal8Bit(generatedPassword.c_str()));
 }
 
 void PasswordGeneratorDialog::on_btnCloseDialog_clicked()
