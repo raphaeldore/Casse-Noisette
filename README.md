@@ -19,7 +19,8 @@ Table des matières
 
   * [Casse-Noisette](#casse-noisette)
     * [Comment compiler](#comment-compiler)
-      * [OpenSSL](#openssl) 
+      * [OpenSSL](#openssl)
+      * [QT](#qt) 
     * [Méthodes de cassage](#m%C3%A9thodes-de-cassage)
       * [Attaque par force brute](#attaque-par-force-brute)
       * [Attaque par dictionnaire](#attaque-par-dictionnaire)
@@ -46,6 +47,16 @@ Rendez-vous à la page [http://slproweb.com/products/Win32OpenSSL.html](http://s
 Vous pouvez être informé lors de l'exécution de l'installateur que «Visual C ++ 2008 Redistributable» est introuvable. Dans ce cas vous devez d'abords installer le composant manquant. Suivez les instructions à l'adresse suivante [https://www.microsoft.com/en-us/download/details.aspx?id=29](https://www.microsoft.com/en-us/download/details.aspx?id=29), et puis relancez l'installateur.
 
 C'est tout!
+
+### QT
+
+Téléchargez la version 32bits community de QT (version 5.4.x) pour msvc2013 (vous pouvez vous rendre sur cette page [http://download.qt.io/archive/qt/5.4/5.4.1/qt-opensource-windows-x86-msvc2013-5.4.1.exe.mirrorlist](http://download.qt.io/archive/qt/5.4/5.4.1/qt-opensource-windows-x86-msvc2013-5.4.1.exe.mirrorlist), et appuyez sur le lien « Download file » ). Lancez l'installateur, et suivez les instructions. Lorsqu'on vous demandera de choisir un dossier d'installation, choisissez un chemin qui n'a aucun espace et caractères spéciaux, tel que C:\lib\Qt5.4.0. 
+
+C'est tout pour l'installation de QT, mais il reste encore quelques petits trucs à faire. Pour que QT fonctionne bien avec Visual Studio, il vous faut installer le plugin QT pour Visual Studio. Pour faire ça, rendez-vous à la page suivante [https://www.qt.io/download-open-source/](https://www.qt.io/download-open-source/), dans le bas de la page (sous la section « Other downloads ») devrait se situer un lien pour télécharger le plugin QT pour Visual Studio. Installez le plugin, et ensuite ouvrez Visual Studio. Il devrait maintenant avoir y un nouveau menu QT5. Sélectionner QT5 -> QT Options, l'onglet Qt Versions et cliquez sur le bouton « Add » pour faire afficher le dialogue « Add New QT Version ». Choisissez un nom significatif pour le nom de la version, tel que QT 5.4 32bits msvc 2013. Rendez-vous ensuite jusqu'au chemin où vous avez installé QT. Une fois la version de QT ajoutée, toujours dans QT Options, sélectionnez comme version de QT par défaut la version que vous venez d'ajouter.
+
+Voilà, ça devrait suffir!
+
+![High Five](http://www.petitpetitgamin.com/wp-content/uploads/2011/02/high-fivepicture.png)
 
 ## Méthodes de cassage
 
