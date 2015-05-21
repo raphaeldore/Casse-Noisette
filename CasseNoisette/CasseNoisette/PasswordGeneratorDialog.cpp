@@ -10,10 +10,10 @@ PasswordGeneratorDialog::PasswordGeneratorDialog(QWidget * parent) : QDialog(par
 	this->setModal(true);
 	this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
-	// Options sélectionnées par défaut
-	ui.charsetSelectorWidget->getUi().chkCharsetUpper->setCheckState(Qt::Checked);
-	ui.charsetSelectorWidget->getUi().chkCharsetLower->setCheckState(Qt::Checked);
-	ui.charsetSelectorWidget->getUi().chkCharsetNumeric->setCheckState(Qt::Checked);
+	// Checkboxes sélectionnées par défaut
+	ui.charsetSelectorWidget->toggleChkBoxCheckedState("chkCharsetUpper");
+	ui.charsetSelectorWidget->toggleChkBoxCheckedState("chkCharsetLower");
+	ui.charsetSelectorWidget->toggleChkBoxCheckedState("chkCharsetNumeric");
 }
 
 
