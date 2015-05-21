@@ -14,6 +14,22 @@ Ressources :
 * [Page Wikipedia sur l'Attaque par force brute](http://fr.wikipedia.org/wiki/Attaque_par_force_brute)
 * [Page Wikipedia sur l'Attaque par dictionnaire](http://fr.wikipedia.org/wiki/Attaque_par_dictionnaire)
 
+Table des matières
+=================
+
+  * [Casse-Noisette](#casse-noisette)
+    * [Méthodes de cassage](#m%C3%A9thodes-de-cassage)
+      * [Attaque par force brute](#attaque-par-force-brute)
+      * [Attaque par dictionnaire](#attaque-par-dictionnaire)
+    * [Structure de l'application](#structure-de-lapplication)
+      * [Interface](#interface)
+      * [Crypto](#crypto)
+      * [CrackingEngine](#crackingengine)
+      * [UnitTests + IntegrationTests](#unittests--integrationtests)
+    * [Annexes](#annexes)
+      * [Où puis-je me procurer un dictionnaire de mots?](#o%C3%B9-puis-je-me-procurer-un-dictionnaire-de-mots)
+
+
 ## Méthodes de cassage
 
 Casse-Noisette permet de casser des mots de passe de deux manières différentes.
