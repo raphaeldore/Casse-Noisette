@@ -77,5 +77,8 @@
     <ClCompile Include="PasswordGeneratorTests.cpp">
       <Filter>Fichiers sources\UtilitiesTests</Filter>
     </ClCompile>
+    <ClCompile Include="SHA1Tests.cpp">
+      <Filter>Fichiers sources\HashTests</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
