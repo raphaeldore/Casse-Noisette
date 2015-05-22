@@ -41,7 +41,7 @@ namespace UnitTests
 			// Action
 			bruteForce->Crack();
 			vector<tuple<string, string, string>> results = bruteForce->getResults();
-			string ACTUAL_DECRYPTED_PASSWORD = get<2>(results.at(0)); // Il y a seulement 1 hash dans le fichier simple_password.txt
+			string ACTUAL_DECRYPTED_PASSWORD = get<2>(results.at(0));
 
 			// Assert
 			Assert::AreEqual(EXPECTED_RESULTS_VECTOR_SIZE, results.size());
@@ -70,7 +70,7 @@ namespace UnitTests
 			Assert::IsTrue(EXPECTED_RESULT == ACTUAL_RESULT);
 		}
 
-		TEST_METHOD(crack_can_crack_file_containing_multiple_passwords)
+		TEST_METHOD(crack_can_crack_multimap_containing_multiple_passwords)
 		{
 			// Arrange
 			multimap<string, string> hashedPasswords;
