@@ -7,7 +7,7 @@ using namespace CrackEngine;
 
 namespace UnitTests
 {
-	TEST_CLASS(Dictionary)
+	TEST_CLASS(DictionaryEngineTests)
 	{
 	public:
 		unique_ptr<CrackEngine::Dictionary> dictionaryEngine;
@@ -129,6 +129,67 @@ namespace UnitTests
 
 			// Assert
 			Assert::ExpectException<invalid_argument>(setDictionaryInvalidArgumentFunction);
+		}
+
+		TEST_METHOD(can_crack_sha1_password)
+		{
+			// Arrange
+			multimap<string, string> hashedPasswords;
+			hashedPasswords.insert(make_pair("0bd7ea460f5fb0fa2d368f737c3ce63e19fdec50", "randomUser007"));
+			dictionaryEngine->setHashedPasswords(hashedPasswords);
+			dictionaryEngine->setPwdHashFunction("SHA-1");
+
+			vector<tuple<string, string, string>> EXPECTED_RESULTS {
+				make_tuple("randomUser007", "0bd7ea460f5fb0fa2d368f737c3ce63e19fdec50", "sausage")
+			};
+
+			// Action
+			dictionaryEngine->Crack();
+			auto ACTUAL_RESULTS = dictionaryEngine->getResults();
+
+
+			// Assert
+			Assert::IsTrue(EXPECTED_RESULTS == ACTUAL_RESULTS);
+		}
+
+		TEST_METHOD(can_crack_sha256_password)
+		{
+			// Arrange
+			multimap<string, string> hashedPasswords;
+			hashedPasswords.insert(make_pair("60da557b31b0321ad22fd3cb2b0099340cb8c5fc0c88dc4632ed6ae9b3c6b87e", "randomUser007"));
+			dictionaryEngine->setHashedPasswords(hashedPasswords);
+			dictionaryEngine->setPwdHashFunction("SHA-256");
+
+			vector<tuple<string, string, string>> EXPECTED_RESULTS{
+				make_tuple("randomUser007", "60da557b31b0321ad22fd3cb2b0099340cb8c5fc0c88dc4632ed6ae9b3c6b87e", "epic007!;;!")
+			};
+
+			// Action
+			dictionaryEngine->Crack();
+			auto ACTUAL_RESULTS = dictionaryEngine->getResults();
+
+			// Assert
+			Assert::IsTrue(EXPECTED_RESULTS == ACTUAL_RESULTS);
+		}
+
+		TEST_METHOD(can_crack_sha512_password)
+		{
+			// Arrange
+			multimap<string, string> hashedPasswords;
+			hashedPasswords.insert(make_pair("3827ce40191fde336b60b5d5e938d22ebb457e282dfdb0caddcb330e8a76a26e3c757899a5b5f949c4917a85dda0d714d880f9999600454882d17a71a35a7ebd", "randomUser007"));
+			dictionaryEngine->setHashedPasswords(hashedPasswords);
+			dictionaryEngine->setPwdHashFunction("SHA-512");
+
+			vector<tuple<string, string, string>> EXPECTED_RESULTS {
+				make_tuple("randomUser007", "3827ce40191fde336b60b5d5e938d22ebb457e282dfdb0caddcb330e8a76a26e3c757899a5b5f949c4917a85dda0d714d880f9999600454882d17a71a35a7ebd", "network")
+			};
+
+			// Action
+			dictionaryEngine->Crack();
+			auto ACTUAL_RESULTS = dictionaryEngine->getResults();
+
+			// Assert
+			Assert::IsTrue(EXPECTED_RESULTS == ACTUAL_RESULTS);
 		}
 	};
 }

@@ -50,7 +50,7 @@ namespace UnitTests
 			Assert::AreEqual(EXPECTED_MD5_HASH, actual_hash);
 		}
 
-		TEST_METHOD(CreateHashAlgorithm_with_SHA1_parameter_should_return_an_instance_of_the_md5_class)
+		TEST_METHOD(CreateHashAlgorithm_with_SHA1_parameter_should_return_an_instance_of_the_SHA1_class)
 		{
 			// Action
 			IHash * hashAlgorithm = hashFactory->CreateHashAlgorithm("SHA-1");
@@ -59,13 +59,22 @@ namespace UnitTests
 			Assert::IsTrue(dynamic_cast<SHA1 *>(hashAlgorithm));
 		}
 
-		TEST_METHOD(CreateHashAlgorithm_with_SHA256_parameter_should_return_an_instance_of_the_md5_class)
+		TEST_METHOD(CreateHashAlgorithm_with_SHA256_parameter_should_return_an_instance_of_the_SHA256_class)
 		{
 			// Action
 			IHash * hashAlgorithm = hashFactory->CreateHashAlgorithm("SHA-256");
 
 			// Assert
 			Assert::IsTrue(dynamic_cast<SHA256 *>(hashAlgorithm));
+		}
+
+		TEST_METHOD(CreateHashAlgorithm_with_SHA512_parameter_should_return_an_instance_of_the_SHA512_class)
+		{
+			// Action
+			IHash * hashAlgorithm = hashFactory->CreateHashAlgorithm("SHA-512");
+
+			// Assert
+			Assert::IsTrue(dynamic_cast<SHA512 *>(hashAlgorithm));
 		}
 
 		TEST_METHOD(CreateHashAlgorithm_with_unknown_parameter_should_throw_exception)

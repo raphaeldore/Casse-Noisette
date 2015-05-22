@@ -25,6 +25,7 @@
 #include "../Crypto/MD5.h"
 #include "../Crypto/SHA1.h"
 #include "../Crypto/SHA256.h"
+#include "../Crypto/SHA512.h"
 #include "FakeHash.h"
 
 // CrackEngine
