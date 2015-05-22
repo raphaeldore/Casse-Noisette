@@ -154,5 +154,25 @@ namespace UnitTests
 			Assert::AreEqual(EXPECTED_RESULTS_VECTOR_SIZE, results.size());
 			Assert::AreEqual(EXPECTED_DECRYPTED_PASSWORD, ACTUAL_DECRYPTED_PASSWORD);
 		}
+
+		TEST_METHOD(crack_can_crack_simple_sha512_password)
+		{
+			// Arrange
+			multimap<string, string> hashedPasswords;
+			hashedPasswords.insert(make_pair("6ab10af8ba889a65796d58fce59dc5f02ea78744255ccee70e555ff18932a876fa1f02bd81478224af8540e752cc5deb83d5d445c198d04065d6d05be8b4f4e7", "no_user"));
+			unsigned int EXPECTED_RESULTS_VECTOR_SIZE = 1;
+			string EXPECTED_DECRYPTED_PASSWORD = "moon";
+			bruteForce->setHashedPasswords(hashedPasswords);
+			bruteForce->setPwdHashFunction("SHA-512");
+
+			// Action
+			bruteForce->Crack();
+			vector<tuple<string, string, string>> results = bruteForce->getResults();
+			string ACTUAL_DECRYPTED_PASSWORD = get<2>(results.at(0));
+
+			// Assert
+			Assert::AreEqual(EXPECTED_RESULTS_VECTOR_SIZE, results.size());
+			Assert::AreEqual(EXPECTED_DECRYPTED_PASSWORD, ACTUAL_DECRYPTED_PASSWORD);
+		}
 	};
 }
