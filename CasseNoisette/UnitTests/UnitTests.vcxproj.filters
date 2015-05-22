@@ -80,5 +80,8 @@
     <ClCompile Include="SHA1Tests.cpp">
       <Filter>Fichiers sources\HashTests</Filter>
     </ClCompile>
+    <ClCompile Include="SHA256Tests.cpp">
+      <Filter>Fichiers sources\HashTests</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
