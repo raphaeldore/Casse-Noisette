@@ -4,6 +4,7 @@
 #include "MD5.h"
 #include "SHA1.h"
 #include "SHA256.h"
+#include "SHA512.h"
 
 using namespace CustomCrypto;
 using namespace std;
@@ -17,6 +18,7 @@ HashFactory::HashFactory()
 	Register("MD5", make_unique<MD5>());
 	Register("SHA-1", make_unique<SHA1>());
 	Register("SHA-256", make_unique<SHA256>());
+	Register("SHA-512", make_unique<SHA512>());
 }
 
 HashFactory::~HashFactory()
