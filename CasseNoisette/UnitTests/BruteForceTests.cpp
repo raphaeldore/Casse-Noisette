@@ -114,5 +114,45 @@ namespace UnitTests
 			// Assert
 			Assert::AreEqual(EXPECTED_RESULTS_VECTOR_SIZE, results.size());
 		}
+
+		TEST_METHOD(crack_can_crack_simple_sha1_password)
+		{
+			// Arrange
+			multimap<string, string> hashedPasswords;
+			hashedPasswords.insert(make_pair("46dcd4dd65b63d106b8cfb4aad906b23716cc613", "no_user"));
+			unsigned int EXPECTED_RESULTS_VECTOR_SIZE = 1;
+			string EXPECTED_DECRYPTED_PASSWORD = "moon";
+			bruteForce->setHashedPasswords(hashedPasswords);
+			bruteForce->setPwdHashFunction("SHA-1");
+
+			// Action
+			bruteForce->Crack();
+			vector<tuple<string, string, string>> results = bruteForce->getResults();
+			string ACTUAL_DECRYPTED_PASSWORD = get<2>(results.at(0));
+
+			// Assert
+			Assert::AreEqual(EXPECTED_RESULTS_VECTOR_SIZE, results.size());
+			Assert::AreEqual(EXPECTED_DECRYPTED_PASSWORD, ACTUAL_DECRYPTED_PASSWORD);
+		}
+
+		TEST_METHOD(crack_can_crack_simple_sha256_password)
+		{
+			// Arrange
+			multimap<string, string> hashedPasswords;
+			hashedPasswords.insert(make_pair("9e78b43ea00edcac8299e0cc8df7f6f913078171335f733a21d5d911b6999132", "no_user"));
+			unsigned int EXPECTED_RESULTS_VECTOR_SIZE = 1;
+			string EXPECTED_DECRYPTED_PASSWORD = "moon";
+			bruteForce->setHashedPasswords(hashedPasswords);
+			bruteForce->setPwdHashFunction("SHA-256");
+
+			// Action
+			bruteForce->Crack();
+			vector<tuple<string, string, string>> results = bruteForce->getResults();
+			string ACTUAL_DECRYPTED_PASSWORD = get<2>(results.at(0));
+
+			// Assert
+			Assert::AreEqual(EXPECTED_RESULTS_VECTOR_SIZE, results.size());
+			Assert::AreEqual(EXPECTED_DECRYPTED_PASSWORD, ACTUAL_DECRYPTED_PASSWORD);
+		}
 	};
 }
