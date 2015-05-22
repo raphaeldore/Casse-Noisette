@@ -147,13 +147,7 @@ string MD5::MD5HexDigest() const
 	// On convertit les charactères en hexadecimal 
 	for (unsigned int i = 0; i < 16; i++)
 	{
-		// Pas le choix vraiment de mettre ça. Sinon Visual Studio ne me laisse
-		// pas utiliser sprintf. Et sprintf c'est la manière la plus rapide
-		// de convertir des char en hex.
-#pragma warning(push)
-#pragma warning(disable: 4996) // Équivalent à _CRT_SECURE_NO_WARNINGS
 		sprintf(charBuffer + i * 2, "%02x", digest[i]);
-#pragma warning(pop)
 	}
 
 	charBuffer[32] = 0;
