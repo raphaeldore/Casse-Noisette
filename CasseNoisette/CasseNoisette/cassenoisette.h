@@ -1,7 +1,6 @@
 #ifndef CASSENOISETTE_H
 #define CASSENOISETTE_H
 
-#include <QtWidgets/QMainWindow>
 #include "ui_cassenoisette.h"
 #include <memory>
 
