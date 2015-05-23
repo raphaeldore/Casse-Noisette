@@ -36,6 +36,10 @@ void HaveIBeenPwnedDialog::on_btnAccountSearch_clicked()
 	request.setRawHeader("User-Agent", "Casse-Noisette/1.0 (Nokia; Qt)");
 	QNetworkReply * reply = networkManager->get(request);
 
+	// On informe à l'environnement de supprimer le pointeur une fois
+	// que tous les évènements impliquant l'objet soient terminés.
+	reply->deleteLater();
+
 	connect(networkManager.get(), SIGNAL(finished(QNetworkReply*)), this, SLOT(onResult(QNetworkReply*)));
 }
 
@@ -57,7 +61,6 @@ void HaveIBeenPwnedDialog::onResult(QNetworkReply * reply)
 		msgBox.setIcon(QMessageBox::Critical);
 		msgBox.setText(reply->errorString());
 		msgBox.exec();
-		delete reply;
 		return;
 	}
 
@@ -91,5 +94,4 @@ void HaveIBeenPwnedDialog::onResult(QNetworkReply * reply)
 	}
 
 	ui.searchResults->setHtml(html);
-	delete reply;
 }
