@@ -107,8 +107,9 @@ void CasseNoisette::on_startCrackBtn_clicked()
 		crackingWorker->setCrackEngineType(DICTIONARY);
 	} else
 	{
-		//QMessageBox msgBox("Pas implémenté encore");
-		return; // TODO: En attendant d'implémenter le cassage par arc-en-ciel
+		// TODO: En attendant d'implémenter le cassage par arc-en-ciel
+		QMessageBox::information(this, tr("Casse-Noisette"), tr("Cette section n'est malheureusement pas implémentée encore :("));
+		return;
 	}
 
 	
