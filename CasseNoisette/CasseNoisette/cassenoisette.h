@@ -41,7 +41,7 @@ private slots:
 	void handleResults();
 	void crackingStarted();
 	void crackingStopped();
-	void errorString(QString error);
+	void errorString(const QString & error);
 	void engineInCreation();
 	void engineReady();
 	void engineUnloading();

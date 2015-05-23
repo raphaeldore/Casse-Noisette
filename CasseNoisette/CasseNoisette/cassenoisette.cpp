@@ -187,7 +187,7 @@ void CasseNoisette::crackingStopped()
 	crackingInProgress = false;
 }
 
-void CasseNoisette::errorString(QString error)
+void CasseNoisette::errorString(const QString & error)
 {
 	QMessageBox errorBox;
 	errorBox.setText(error);
