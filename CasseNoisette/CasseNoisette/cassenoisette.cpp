@@ -15,6 +15,7 @@
 #include <QFileDialog>
 #include <QThread>
 #include <QElapsedTimer>
+#include <QtCore/qsettings.h>
 
 // #include "vld.h" // VLD cause des problèmes de null pointer exceptions pour des raisons étranges
                     // quand je charge de très gros fichiers ( > 50Mo)
@@ -122,19 +123,32 @@ void CasseNoisette::on_startCrackBtn_clicked()
 
 void CasseNoisette::on_pwdFileSelectBtn_clicked()
 {
-	QString fileName = QFileDialog::getOpenFileName(this, "Choisir un fichier contenant des mots de passe", QDir::currentPath(), tr("Password File (*.txt *.pwd)"));
-	ui.pwdFileSelectTxt->setText(fileName);
+	QString selectedPwdsFile = QFileDialog::getOpenFileName(this, "Choisir un fichier contenant des mots de passe", "", tr("Password File (*.txt *.pwd)"));
+
+	if (!selectedPwdsFile.isEmpty()) {
+		ui.pwdFileSelectTxt->setText(selectedPwdsFile);
+	}
 }
 
 void CasseNoisette::on_dictFileSelectBtn_clicked()
 {
-	QString fileName = QFileDialog::getOpenFileName(this, "Choisir un fichier contenant une liste de mots", QDir::currentPath(), tr("Dictionary File (*.txt *.dict)"));
+	QDir dir;
+	if (!ui.pwdFileSelectTxt->text().isEmpty())
+	{
+		// Ici on assume que le dictionnaire se situe dans le même dossier
+		// que les mots de passe. Si ce n'est pas le cas ce n'est pas grave,
+		// mais si c'est le cas, l'utilisateur n'a pas à recommencer le processus
+		// de sélection de fichier (puisqu'il est déjà dans le bon dossier!).
+		// Ce sont les détails qui comptent :D
+		dir = QFileInfo(ui.pwdFileSelectTxt->text()).absoluteDir();
+	}
+
+	QString fileName = QFileDialog::getOpenFileName(this, "Choisir un fichier contenant une liste de mots", dir.absolutePath(), tr("Dictionary File (*.txt *.dict)"));
 	ui.dictFileSelectTxt->setText(fileName);
 }
 
 void CasseNoisette::on_aboutBtn_triggered(){
 	AboutDialog aboutDialog(this);
-
 	aboutDialog.exec();
 }
 
@@ -163,14 +177,15 @@ void CasseNoisette::on_actionPwdGenerator_triggered()
 
 void CasseNoisette::handleResults()
 {
-	ResultDialog resultDialog(this);
+	// On va chercher les résultats et le temps que ça a pris
 	auto results = crackingWorker->getResults();
-
 	QString totalCrackingTime = QString::number(crackingTime->elapsed() * 0.001);
-
+	
+	// On donne ensuite les résultats au ResultDialog pour que celui-ci 
+	// puisse préparer les résultats pour les afficher à l'utilisateur.
+	ResultDialog resultDialog(this);
 	resultDialog.setCrackingResults(results, totalCrackingTime);
 	resultDialog.setInformativeText("Le cassage des mots de passe est terminé! \n\nAppuyez sur le bouton \"Enregistrer\" pour enregistrer les résultats dans un fichier.");
-
 	resultDialog.exec();
 }
 
