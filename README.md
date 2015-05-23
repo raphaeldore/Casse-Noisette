@@ -56,7 +56,7 @@ Ensuite, copiez tous les fichiers qui sont dans le répertoire `C:\OpenSSL\inclu
 
 Voilà, vous devriez maintenant être en mesure d'utiliser la librairie OpenSSL avec notre projet!
 
-Truc de pro : Si jamais vous voulez utiliser OpenSSL dans un de vos projets, rendez-vous dans les `propriétés de votre projet -> Générateur de bibliothèque -> Dépendances supplémentaires` et d'ajouter dans le champ   « Dépendances supplémentaires » le fichier .lib libeay32MDd.lib pour la compilation en mode debug, ou sinon en mode release ajoutez ajoutez à la place libeay32MD.lib (d'ailleurs il y a 4 versions des librairies disponibles, voici la définition des suffixes : MD pour dynamic-release, MDd pour dynamic-debug, MT pour static-release, MTd pour static-debug).
+Truc de pro : Si jamais vous voulez utiliser OpenSSL dans un de vos projets, rendez-vous dans les `propriétés de votre projet -> Générateur de bibliothèque -> Dépendances supplémentaires` et d'ajouter dans le champ   « Dépendances supplémentaires » le fichier .lib libeay32MDd.lib pour la compilation en mode debug, ou sinon en mode release ajoutez à la place libeay32MD.lib (d'ailleurs il y a 4 versions des librairies disponibles, voici la définition des suffixes : MD pour dynamic-release, MDd pour dynamic-debug, MT pour static-release, MTd pour static-debug).
 
 MD pour dynamic-release, MDd pour dynamic-debug, MT pour static-release, MTd pour static-debug
 
