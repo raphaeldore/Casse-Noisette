@@ -76,6 +76,8 @@ unique_ptr<queue<string>> FileRepository::loadDictionaryFile(const string& _dict
 
 		string line;
 
+		// On va ensuite chercher tous les charactères de la ligne
+		// et on arrête lorsqu'on arrive à la fin de la ligne.
 		do
 		{
 			line += buffer[i];
