@@ -20,7 +20,7 @@ GenerateDictionaryDialog::GenerateDictionaryDialog(QWidget * parent) : QDialog(p
 	// Ce que cette classe émet au generateDictionaryWorker
 	connect(this, SIGNAL(generateDictionary()), generateDictionaryWorker.get(), SLOT(startGeneration()));
 
-	// Ce que le generateDictionaryWorker émet à cette clase
+	// Ce que le generateDictionaryWorker émet à cette classe
 	connect(generateDictionaryWorker.get(), SIGNAL(generationStarted()), this, SLOT(generationStarted()));
 	connect(generateDictionaryWorker.get(), SIGNAL(generationFinished()), this, SLOT(generationFinished()));
 	connect(generateDictionaryWorker.get(), SIGNAL(error(QString)), this, SLOT(errorString(QString)));
