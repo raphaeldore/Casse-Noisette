@@ -38,7 +38,7 @@ void Dictionary::Crack()
 
 void Dictionary::setDictionary(unique_ptr<queue<string>> _dictionary)
 {
-	if (_dictionary->empty()) throw invalid_argument("Le dictionnaire ne contient aucun mots!");
+	if (_dictionary->empty()) throw invalid_argument("Le dictionnaire ne contient aucun mot!");
 
 	dictionary.reset(_dictionary.release());
 }
