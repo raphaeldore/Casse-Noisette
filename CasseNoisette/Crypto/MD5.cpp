@@ -134,9 +134,12 @@ void MD5::MD5Finalization()
 	// Stocker le state (état) dans le digest
 	Encode(digest, state, 16);
 
-	// On reset les arrays (on les vide)
-	memset(buffer, 0, sizeof buffer);
-	memset(count, 0, sizeof count);
+	// Normalement on viderait les buffers afin d'être sécuritaire...Mais dans notre cas
+	// la sécurité est +/- importante. memset ajoute un 5 milisecondes de délais par hash
+	
+	//// On reset les arrays (on les vide)
+	//memset(buffer, 0, sizeof buffer);
+	//memset(count, 0, sizeof count);
 }
 
 string MD5::MD5HexDigest() const
