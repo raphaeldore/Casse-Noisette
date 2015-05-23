@@ -15,7 +15,6 @@
 #include <QFileDialog>
 #include <QThread>
 #include <QElapsedTimer>
-#include <QtCore/qsettings.h>
 
 // #include "vld.h" // VLD cause des problèmes de null pointer exceptions pour des raisons étranges
                     // quand je charge de très gros fichiers ( > 50Mo)
