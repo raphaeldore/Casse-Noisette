@@ -6,7 +6,7 @@ using namespace std;
 
 namespace IntegrationTests
 {
-	TEST_CLASS(Utilities_tests){
+	TEST_CLASS(FileUtilitiesTests){
 
 		TEST_METHOD(getFileContent_returns_all_content_in_the_file)
 		{
@@ -35,10 +35,11 @@ namespace IntegrationTests
 			// Script empêche la lecture du fichier par tous les utilisateurs
 			system("..\\Scripts\\lockFile.bat");
 
-			auto loadDictionaryWithNonExistantFileFunction = [this] {Utilities::FileUtilities::GetFileContent("..\\TestsFiles\\UtilitiesTests\\lockedFile.txt"); };
+			// On tente donc d'ouvrir un fichier qu'on a pas la permission d'ouvrir
+			auto loadDictionaryLockedFileFunction = [this] {Utilities::FileUtilities::GetFileContent("..\\TestsFiles\\Other\\lockedFile.txt"); };
 
 			// Assert
-			Assert::ExpectException<runtime_error>(loadDictionaryWithNonExistantFileFunction);
+			Assert::ExpectException<runtime_error>(loadDictionaryLockedFileFunction);
 
 			// Script qui redonne permission à tout le monde de lire le fichier
 			// (sinon git ne veut rien savoir)
