@@ -26,6 +26,7 @@ HaveIBeenPwnedDialog::~HaveIBeenPwnedDialog()
 
 void HaveIBeenPwnedDialog::on_btnAccountSearch_clicked()
 {
+	ui.btnAccountSearch->setEnabled(false);
 	ui.searchResults->setHtml("<b>Recherche en cours...</b>");
 	QNetworkRequest request;
 	QString accountToSearch = ui.txtAcountName->text();
@@ -40,6 +41,7 @@ void HaveIBeenPwnedDialog::on_btnAccountSearch_clicked()
 
 void HaveIBeenPwnedDialog::onResult(QNetworkReply * reply)
 {
+	ui.btnAccountSearch->setEnabled(true);
 	QString html;
 
 	if (reply->error() == QNetworkReply::ContentNotFoundError)
