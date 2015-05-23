@@ -38,18 +38,27 @@ Table des matières
 Pour compiler, vous avez besoin de 3 choses:
 
 * Une version récente de Visual Studio (de préférence 2013, mais 2012 devrait fonctionner aussi)
-* OpenSSL : Nécessaire pour faire des requêtes https
+* OpenSSL : Nécessaire pour compiler le projet Crypto (On a implémenté la fonction de hachage MD5 nous-mêmes, mais pour les fonctions SHA-1, SHA-256 et SHA-512 ont a utilisé OpenSSL).
 * QT 32bits 5.4.x msvc 2013 : Nécessaire pour l'interface
 
 ### OpenSSL
 
-OpenSSL n'est pas nécessaire pour compiler l'application, mais il est nécessaire si vous voulez pouvoir éxecuter l'executable CasseNoisette.exe ailleurs que dans Visual Studio.
+Rendez-vous à la page [http://slproweb.com/products/Win32OpenSSL.html](http://slproweb.com/products/Win32OpenSSL.html), et téléchargez la version 32bits la plus récente de OpenSSL qu'il y a sur la page (<u>**Pas la version light!**</u>). Au moment de l'écriture de ces instructions, la version la plus récente était : `Win32 OpenSSL v1.0.2a`. Lancez l'installateur, et choisissez un emplacement approprié pour votre installation d'OpenSSL (Par exemple: C:\lib\OpenSSL). Lorsqu'on vous demandera où copier les fichiers .DLL, choisissez l'option « Copy OpenSSL Files to **The Windows system directory** » (très important).
 
-Rendez-vous à la page [http://slproweb.com/products/Win32OpenSSL.html](http://slproweb.com/products/Win32OpenSSL.html), et téléchargez la version 32bits la plus récente de OpenSSL qu'il y a sur la page (Pas la version light). Au moment de l'écriture de ces instructions, la version la plus récente est : Win32 OpenSSL v1.0.2a. Lancez l'installateur, et choisissez un emplacement approprié pour votre installation d'OpenSSL (Par exemple: C:\lib\OpenSSL). Lorsqu'on vous demandera où copier les fichiers .DLL, choisissez l'option «Copy OpenSSL Files to **The Windows system directory**».
+Vous pouvez être informé lors de l'exécution de l'installateur que « Visual C ++ 2008 Redistributable » est introuvable. Dans ce cas vous devez d'abords installer le composant manquant. Suivez les instructions à l'adresse suivante [https://www.microsoft.com/en-us/download/details.aspx?id=29](https://www.microsoft.com/en-us/download/details.aspx?id=29), et puis relancez l'installateur.
 
-Vous pouvez être informé lors de l'exécution de l'installateur que «Visual C ++ 2008 Redistributable» est introuvable. Dans ce cas vous devez d'abords installer le composant manquant. Suivez les instructions à l'adresse suivante [https://www.microsoft.com/en-us/download/details.aspx?id=29](https://www.microsoft.com/en-us/download/details.aspx?id=29), et puis relancez l'installateur.
+![But wait, there's more!](http://i.imgur.com/CQHRVih.png)
 
-C'est tout!
+
+Maintenant que OpenSSL est installé, vous avez quelques petites choses à faire pour utiliser la librairie avec Visual Studio. La première chose à faire (en supposant une installation dans le dossier `C:\lib\OpenSSL`) est d'aller dans le répertoire `C:\lib\OpenSSL\lib\VC` et de copiez tous les fichiers qui s'y trouve dans le répertoire « lib » de Visual Studio C++ (dans mon cas, le chemin était: `C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\lib`).
+
+Ensuite, copiez tous les fichiers qui sont dans le répertoire `C:\OpenSSL\include` dans le dossier « Include » de Visual Studio (devrait être dans le même dossier où se trouve le répertoire « lib », donc `C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include` dans le cas de Visual Studio 2013).
+
+Voilà, vous devriez maintenant être en mesure d'utiliser la librairie OpenSSL avec notre projet!
+
+Truc de pro : Si jamais vous voulez utiliser OpenSSL dans un de vos projets, rendez vous dans les `propriétés de votre projet -> Générateur de bibliothèque -> Dépendances supplémentaires` et d'ajouter dans le champ   « Dépendances supplémentaires » le fichier .lib libeay32MDd.lib pour la compilation en mode debug, ou sinon en mode release ajoutez ajoutez à la place libeay32MD.lib (d'alleurs il y a 4 versions des librairies disponibles, voici la définition des suffixes : MD pour dynamic-release, MDd pour dynamic-debug, MT pour static-release, MTd pour static-debug).
+
+MD pour dynamic-release, MDd pour dynamic-debug, MT pour static-release, MTd pour static-debug
 
 ### QT
 
