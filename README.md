@@ -21,7 +21,8 @@ Table des matières
     * [Comment compiler](#comment-compiler)
       * [OpenSSL](#openssl)
       * [QT](#qt)
-    * [Comment distribuer l'application compilée](comment-distribuer-lapplication-compil%C3%A9e) 
+    * [Comment distribuer l'application compilée](comment-distribuer-lapplication-compil%C3%A9e)
+      * [Où trouver ces fichiers .DLLs](#o%C3%B9-trouver-ces-fichiers-dlls)
     * [Méthodes de cassage](#m%C3%A9thodes-de-cassage)
       * [Attaque par force brute](#attaque-par-force-brute)
       * [Attaque par dictionnaire](#attaque-par-dictionnaire)
@@ -37,9 +38,9 @@ Table des matières
 
 Pour compiler, vous avez besoin de 3 choses:
 
-* Une version récente de Visual Studio (de préférence 2013, mais 2012 devrait fonctionner aussi... Mais on ne garantit rien)
-* OpenSSL : Nécessaire pour compiler le projet Crypto (On a implémenté la fonction de hachage MD5 nous-mêmes, mais pour les fonctions SHA-1, SHA-256 et SHA-512 ont a utilisé OpenSSL). De plus, OpenSSL est nécessaire pour faire des requêtes HTTPS avec QT.
-* QT 32bits 5.4.x msvc 2013 : Nécessaire pour l'interface utilisateur (GUI, ou UI).
+* Une version récente de **Visual Studio** (de préférence 2013, mais 2012 devrait fonctionner aussi... Mais on ne garantit rien)
+* **OpenSSL** : Nécessaire pour compiler le projet Crypto (On a implémenté la fonction de hachage MD5 nous-mêmes, mais pour les fonctions SHA-1, SHA-256 et SHA-512 ont a utilisé OpenSSL). De plus, OpenSSL est nécessaire pour faire des requêtes HTTPS avec QT.
+* **QT 32bits 5.4.x msvc 2013** : Nécessaire pour l'interface utilisateur (GUI, ou UI).
 
 ### OpenSSL
 
@@ -60,11 +61,11 @@ Voilà, vous devriez maintenant être en mesure d'utiliser la librairie OpenSSL 
 
 ### QT
 
-Téléchargez la version 32bits community de QT (version 5.4.x) pour msvc2013 (vous pouvez vous rendre sur cette page [http://download.qt.io/archive/qt/5.4/5.4.1/qt-opensource-windows-x86-msvc2013-5.4.1.exe.mirrorlist](http://download.qt.io/archive/qt/5.4/5.4.1/qt-opensource-windows-x86-msvc2013-5.4.1.exe.mirrorlist), et appuyez sur le lien « Download file » ). Lancez l'installateur, et suivez les instructions. Lorsqu'on vous demandera de choisir un dossier d'installation, choisissez un chemin qui n'a aucun espace et caractère spécial, tel que C:\lib\Qt5.4.0. 
+Téléchargez la version **32bits** community de QT (version 5.4.x) **pour msvc2013** (vous pouvez vous rendre sur cette page [http://download.qt.io/archive/qt/5.4/5.4.1/qt-opensource-windows-x86-msvc2013-5.4.1.exe.mirrorlist](http://download.qt.io/archive/qt/5.4/5.4.1/qt-opensource-windows-x86-msvc2013-5.4.1.exe.mirrorlist), et appuyez sur le lien « Download file » ). Lancez l'installateur, et suivez les instructions à l'écran. Lorsqu'on vous demandera de choisir un dossier d'installation, choisissez un chemin qui n'a aucun espace et caractère spécial, tel que `C:\lib\Qt5.4.0`. 
 
-C'est tout pour l'installation de QT, mais il reste encore quelques petits trucs à faire. Pour que QT fonctionne bien avec Visual Studio, il vous faut installer le plugin QT pour Visual Studio. Pour faire ça, rendez-vous à la page suivante [https://www.qt.io/download-open-source/](https://www.qt.io/download-open-source/), dans le bas de la page (sous la section « Other downloads ») devrait se situer un lien pour télécharger le plugin QT pour Visual Studio. Installez le plugin, et ensuite ouvrez Visual Studio. Il devrait maintenant avoir y un nouveau menu QT5. Sélectionner QT5 -> QT Options, l'onglet Qt Versions et cliquez sur le bouton « Add » pour faire afficher le dialogue « Add New QT Version ». Choisissez un nom significatif pour le nom de la version, tel que QT 5.4 32bits MSVC 2013. Rendez-vous ensuite jusqu'au chemin où vous avez installé QT. Une fois la version de QT ajoutée, toujours dans QT Options, sélectionnez comme version de QT par défaut la version que vous venez d'ajouter.
+C'est tout pour l'installation de QT, mais il reste encore quelques petits trucs à faire. Pour que QT fonctionne bien avec Visual Studio, il vous faut installer le plugin QT pour Visual Studio. Rendez-vous à la page suivante [https://www.qt.io/download-open-source/](https://www.qt.io/download-open-source/), dans le bas de la page (sous la section « Other downloads ») devrait se situer un lien pour télécharger le plugin QT pour Visual Studio. Installez le plugin, et ensuite ouvrez Visual Studio. Il devrait maintenant avoir y un nouveau menu `QT5` (haut de la fenêtre, près du menu « Affichage » ). Sélectionnez `QT5 -> QT Options`, ensuite l'onglet Qt Versions et cliquez sur le bouton « Add » pour faire afficher le dialogue « Add New QT Version ». Choisissez un nom significatif pour le nom de la version, tel que QT 5.4 32bits MSVC 2013. Rendez-vous ensuite jusqu'au chemin où vous avez installé QT. Une fois la version de QT ajoutée, toujours dans QT Options, sélectionnez comme version de QT par défaut la version que vous venez d'ajouter.
 
-Voilà, ça devrait suffire!
+Voilà, ça devrait suffire! Tope là!
 
 ![High Five](http://www.petitpetitgamin.com/wp-content/uploads/2011/02/high-fivepicture.png)
 
@@ -95,15 +96,15 @@ Une fois que vous avez compilé l'application, vous allez sûrement vouloir la p
 
 La structure du dossier doit être exactement la même (n'oubliez surtout pas de créer le dossier platforms et d'y mettre les .DLLs requis).
 
-Où trouver ces fichiers .DLLs?
+### Où trouver ces fichiers .DLLs?
 
-Les fichiers icudt53.dll, icuin53.dll, icuuc53.dll, libEGL.dll, libGLESv2.dll, Qt5Core.dll, Qt5Gui.dll, Qt5Network.dll, Qt5Widgets.dll : vous les trouverez dans le dossier bin/ situé à l'endroit où vous avez installé QT.
+Les fichiers `icudt53.dll`, `icuin53.dll`, `icuuc53.dll`, `libEGL.dll`, `libGLESv2.dll`, `Qt5Core.dll`, `Qt5Gui.dll`, `Qt5Network.dll`, `Qt5Widgets.dll` : vous les trouverez dans le dossier `bin/` situé à l'endroit où vous avez installé QT (Ex: `C:\Qt\Qt5.4.0_x86\5.4\msvc2013\bin\`).
 
-Les fichiers qminimal.dll, qoffscreen.dll et qwindows.dll : sont disponibles dans le dossier plugins/platforms/ de votre installation QT.
+Les fichiers `qminimal.dll`, `qoffscreen.dll` et `qwindows.dll` : sont disponibles dans le dossier `plugins/platforms/` de votre installation QT (Ex: `C:\Qt\Qt5.4.0_x86\5.4\msvc2013\plugins\platforms\`).
 
-Les fichiers msvcp120.dll, msvcr120.dll et vccorlib120.dll : sont fournis avec Visual Studio. Sur mon ordinateur ces .DLLs se situent dans le dossier C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\redist\x86\Microsoft.VC120.CRT. Le chemin peut varier légèrement pour vous, mais ça devrait être dans ces environs.
+Les fichiers `msvcp120.dll`, `msvcr120.dll` et `vccorlib120.dll` : sont fournis avec Visual Studio. Sur mon ordinateur ces .DLLs se situent dans le dossier `C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\redist\x86\Microsoft.VC120.CRT\`. Le chemin peut varier légèrement pour vous, mais ça devrait être dans ces environs.
 
-Finalement, les fichiers ssleay32.dll et libeay32.dll : sont fournis avec OpenSSL. Si vous ne l'avez pas déjà fait, suivez les instructions pour [installer OpenSSL](#openssl). Les fichiers .DLLs se situent dans la racine de votre dossier d'installation d'OpenSSL (Par exemple, C:\lib\OpenSSL\\).
+Finalement, les fichiers `ssleay32.dll` et `libeay32.dll` : sont fournis avec OpenSSL. Si vous ne l'avez pas déjà fait, suivez les instructions pour [installer OpenSSL](#openssl). Les fichiers .DLLs se situent dans la racine de votre dossier d'installation d'OpenSSL (Par exemple, `C:\lib\OpenSSL\`).
 
 ## Méthodes de cassage
 
