@@ -141,6 +141,6 @@ string BruteForce::Crack(const string& _hashedPassword) const
 		}
 	}
 
-	// Si on se rends ici, c'est que quelqu'un a appellé la fonction stopCrack();
+	// Si on se rends ici, c'est que quelqu'un a appellé la fonction stopCrack() à partir d'un autre thread
 	return string("");
 }
