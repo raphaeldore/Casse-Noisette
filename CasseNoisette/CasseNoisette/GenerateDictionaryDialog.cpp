@@ -73,7 +73,7 @@ void GenerateDictionaryDialog::on_spinMaxCombinationLength_valueChanged()
 	if (!ignoreFutureWarnings && ui.spinMaxCombinationLength->value() >= 6)
 	{
 		QMessageBox warningMsgBox;
-		QPushButton* yesBtn = warningMsgBox.addButton(tr("Oui"), QMessageBox::YesRole);
+		warningMsgBox.addButton(tr("Oui"), QMessageBox::YesRole);
 		QPushButton* noBtn = warningMsgBox.addButton(tr("Non"), QMessageBox::NoRole);
 		QPushButton* ignoreFutureWarningsBtn = warningMsgBox.addButton(tr("Ne plus m'avertir"), QMessageBox::ActionRole);
 
@@ -115,7 +115,7 @@ void GenerateDictionaryDialog::generationFinished()
 	msgBox.exec();
 }
 
-void GenerateDictionaryDialog::errorString(QString error)
+void GenerateDictionaryDialog::errorString(const QString & error)
 {
 	QMessageBox msgBox;
 	msgBox.setIcon(QMessageBox::Critical);

@@ -27,7 +27,7 @@ private slots:
 	// Réactions face aux signaux de GenerateDictionaryWorker
 	void generationStarted();
 	void generationFinished();
-	void errorString(QString error);
+	void errorString(const QString & error);
 
 private:
 	bool AllInputsValid();
