@@ -92,6 +92,7 @@ string BruteForce::Crack(const string& _hashedPassword) const
 			// On compare les hash
 			if (passwordGuessHash == _hashedPassword)
 			{
+				// On a trouvé le mot!!
 				return passwordGuess;
 			}
 		}
