@@ -57,6 +57,7 @@ void HaveIBeenPwnedDialog::onResult(QNetworkReply * reply)
 		msgBox.setIcon(QMessageBox::Critical);
 		msgBox.setText(reply->errorString());
 		msgBox.exec();
+		delete reply;
 		return;
 	}
 
@@ -90,4 +91,5 @@ void HaveIBeenPwnedDialog::onResult(QNetworkReply * reply)
 	}
 
 	ui.searchResults->setHtml(html);
+	delete reply;
 }
