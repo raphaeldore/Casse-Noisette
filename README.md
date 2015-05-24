@@ -6,14 +6,6 @@ Casse-Noisette est une application qui permet le cassage de mots de passe (autre
 
 Casse-Noisette offre 2 manières de casser une liste de mots de passe :
 
-* [Attaque par force brute](#attaque-par-force-brute) (brute force attack)
-* [Attaque par dictionnaire](#attaque-par-dictionnaire) (dictionary attack)
-
-Ressources :
-
-* [Page Wikipedia sur l'Attaque par force brute](http://fr.wikipedia.org/wiki/Attaque_par_force_brute)
-* [Page Wikipedia sur l'Attaque par dictionnaire](http://fr.wikipedia.org/wiki/Attaque_par_dictionnaire)
-
 Table des matières
 =================
 
@@ -32,6 +24,7 @@ Table des matières
       * [CrackingEngine](#crackingengine)
       * [UnitTests + IntegrationTests](#unittests--integrationtests)
     * [Annexes](#annexes)
+      * [Ressources](#ressources)
       * [Où puis-je me procurer un dictionnaire de mots?](#o%C3%B9-puis-je-me-procurer-un-dictionnaire-de-mots)
 
 ## Comment compiler
@@ -141,6 +134,11 @@ TODO : Description CrackingEngine
 TODO : Description UnitTests + IntegrationTests 
 
 ## Annexes
+
+### Ressources
+
+* [Page Wikipedia sur l'Attaque par force brute](http://fr.wikipedia.org/wiki/Attaque_par_force_brute)
+* [Page Wikipedia sur l'Attaque par dictionnaire](http://fr.wikipedia.org/wiki/Attaque_par_dictionnaire)
 
 ### Où puis-je me procurer un dictionnaire de mots?
 
