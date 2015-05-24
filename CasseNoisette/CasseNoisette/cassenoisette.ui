@@ -98,8 +98,16 @@
             <bool>false</bool>
            </property>
            <property name="currentText">
-            <string>MD5</string>
+            <string/>
            </property>
+           <property name="currentIndex">
+            <number>0</number>
+           </property>
+           <item>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
            <item>
             <property name="text">
              <string>MD5</string>
