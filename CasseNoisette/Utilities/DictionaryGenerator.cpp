@@ -11,7 +11,7 @@ DictionaryGenerator::DictionaryGenerator(const unsigned int _maxWordLength,
                                          const string & _charset,
 										 const string & _outputFilePath) : maxWordLength(_maxWordLength), charset(_charset), outputFilePath(_outputFilePath)
 {
-	buffer.reserve(500000);
+	buffer.reserve(MAX_VECTOR_SIZE_BEFORE_FLUSH);
 
 	// On vide le fichier s'il existe déjà
 	if (FileUtilities::DoesFileExist(_outputFilePath)) FileUtilities::ClearFileContent(_outputFilePath);
