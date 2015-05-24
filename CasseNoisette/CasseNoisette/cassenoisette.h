@@ -34,6 +34,7 @@ private slots:
 	void on_actionQuitter_triggered();
 	void on_actionHaveIBeenPwned_triggered();
 	void on_actionPwdGenerator_triggered();
+	void on_GuessHashCheckBox_toggled(bool _toggledState);
 
 	/* Méthodes qui réagissent aux signaux de
 	CrackingWorker */

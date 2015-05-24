@@ -42,7 +42,7 @@ void HaveIBeenPwnedDialog::on_btnAccountSearch_clicked()
 
 	request.setUrl(url);
 	request.setRawHeader("User-Agent", "Casse-Noisette/1.0 (Nokia; Qt)");
-	QNetworkReply * reply = networkManager->get(request);
+	networkManager->get(request);
 
 	connect(networkManager.get(), SIGNAL(finished(QNetworkReply*)), this, SLOT(onResult(QNetworkReply*)));
 }
