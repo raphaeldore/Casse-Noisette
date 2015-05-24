@@ -182,12 +182,6 @@ namespace IntegrationTests
 			Assert::ExpectException<runtime_error>(loadDictionaryWithNonExistantFileFunction);
 		}
 
-		//TEST_METHOD(generate_dictionary) {
-		//	Utilities::DictionaryGenerator generator(8, "abcdefg", "words.txt");
-		//	generator.GenerateDictionary();
-		//}
-
-
 	};
 
 }
