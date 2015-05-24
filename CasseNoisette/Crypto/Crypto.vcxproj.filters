@@ -47,9 +47,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="IHash.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="MD5.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>

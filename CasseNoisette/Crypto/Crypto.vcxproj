@@ -94,7 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HashFactory.cpp" />
-    <ClCompile Include="IHash.cpp" />
     <ClCompile Include="MD5.cpp" />
     <ClCompile Include="SHA1.cpp" />
     <ClCompile Include="SHA256.cpp" />
