@@ -101,7 +101,7 @@ Finalement, les fichiers `ssleay32.dll` et `libeay32.dll` : sont fournis avec Op
 
 Casse-Noisette permet de casser des mots de passe de deux manières différentes.
 
-Pour les deux méthodes de cassage, il faut fournir un fichier `.txt` contenant la liste des mots de passe hachés à casser. Le fichier doit contenir **1 seul** mot de passe haché par ligne. Le formatage d'une ligne doit être :
+Pour les deux méthodes de cassage, il faut fournir un fichier `.txt` contenant la liste des mots de passe hachés à casser. Le fichier doit contenir **1 seul** mot de passe haché **en hexadécimal** par ligne. Le formatage d'une ligne doit être :
 
 `([NomUtilisateur][separateur])mot de passe haché`
 
@@ -117,6 +117,8 @@ Ceci est valide :
     06d80eb0c50b49a509b49f2424e8c805
     2a1585a864d9e67627c6ae04c807a2c5
     john:0a16bc32f55683128983f223de242942
+
+Ceci n'est pas valide : `claude:za1585a864d9e67627c6ae04c807a2c5` car le hash contient au moins un caractère qui n'est pas en hexadécimal (le **z**). Petit rappel sur l'hexadécimal : Chiffres de 0 à 9, et lettres de A à F. Touts les autres lettres n'existent pas en hexadécimal. Ça peut sembler bizarre comme format, mais c'est la manière la plus simple de représenter un hash. Tous les algorithmes de hachage affichent le hash en hexadécimal (et Casse-Noisette n'en est pas l'exception).
 
 ### Attaque par force brute
 
