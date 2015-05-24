@@ -97,6 +97,7 @@
     <ClCompile Include="DictionaryTests.cpp" />
     <ClCompile Include="FakeFileRepository.cpp" />
     <ClCompile Include="FakeHash.cpp" />
+    <ClCompile Include="GuessHashTests.cpp" />
     <ClCompile Include="MD5Tests.cpp" />
     <ClCompile Include="PasswordGeneratorTests.cpp" />
     <ClCompile Include="SHA1Tests.cpp" />
