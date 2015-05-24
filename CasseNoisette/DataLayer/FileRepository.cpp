@@ -53,7 +53,7 @@ multimap<string, string> FileRepository::loadPasswordFile(const string & _pwdFil
 		}
 
 		// Un hash doit être en Hexadécimal, donc les seuls caractères permis sont: 0 à 9, et les lettres de A à F.
-		if (!hashContainsValidCharacters(pwdLine.first)) throw runtime_error("le fichier fournis contient des hashs invalides, ou n'est pas un fichier valide.");
+		if (!hashContainsValidCharacters(pwdLine.first)) throw runtime_error("Le fichier fournis contient des hashs invalides, ou n'est pas un fichier valide.");
 
 		hashedPasswords.insert(pwdLine);
 	}
