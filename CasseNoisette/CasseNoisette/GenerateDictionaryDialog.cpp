@@ -64,7 +64,7 @@ void GenerateDictionaryDialog::on_btnCloseDialog_clicked()
 
 void GenerateDictionaryDialog::on_btnDictionaryFileName_clicked()
 {
-	QString filename = QFileDialog::getSaveFileName(this, tr("Sauvegarder les résultats"), QDir::currentPath(), tr("Fichiers Textes (*.txt)"));
+	QString filename = QFileDialog::getSaveFileName(this, tr("Fichier qui va contenir la liste de mots"), QDir::currentPath(), tr("Fichiers Textes (*.txt)"));
 	ui.txtDictionaryFileName->setText(filename);
 }
 
