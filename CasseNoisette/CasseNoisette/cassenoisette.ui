@@ -367,7 +367,6 @@
     <property name="title">
      <string>Fichier</string>
     </property>
-    <addaction name="generateDictionaryBtn"/>
     <addaction name="separator"/>
     <addaction name="actionQuitter"/>
    </widget>
@@ -377,6 +376,7 @@
     </property>
     <addaction name="actionHaveIBeenPwned"/>
     <addaction name="actionPwdGenerator"/>
+    <addaction name="generateDictionaryBtn"/>
    </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuOutils"/>
