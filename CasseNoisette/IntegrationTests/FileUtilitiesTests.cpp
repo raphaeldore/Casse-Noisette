@@ -140,6 +140,19 @@ namespace IntegrationTests
 			Assert::AreEqual(EXPECTED_INCREMENTED_FILE_NAME, ACTUAL_INCREMENTED_FILE_NAME);
 		}
 
+		TEST_METHOD(IncrementFileNameIfExists_returns_original_path_if_fileName_does_not_exist)
+		{
+			// Arrange
+			string attemptedPath = "..\\TestsFiles\\UtilitiesTests\\thisFileDoesNotExist.txt";
+			string EXPECTED_INCREMENTED_FILE_NAME = "..\\TestsFiles\\UtilitiesTests\\thisFileDoesNotExist.txt";
+
+			// Action
+			string ACTUAL_INCREMENTED_FILE_NAME = Utilities::FileUtilities::IncrementFileNameIfExists(attemptedPath);
+
+			// Assert
+			Assert::AreEqual(EXPECTED_INCREMENTED_FILE_NAME, ACTUAL_INCREMENTED_FILE_NAME);
+		}
+
 		TEST_METHOD(clearFileContent_empties_the_file)
 		{
 			// Arrange
