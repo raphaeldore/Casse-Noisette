@@ -7,8 +7,6 @@ namespace CrackEngine
 {
 	class CrackFactoryParams
 	{
-		friend class CrackFactory;
-
 	public:
 		CrackFactoryParams();
 		~CrackFactoryParams();
