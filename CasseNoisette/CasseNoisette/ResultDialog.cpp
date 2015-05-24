@@ -55,7 +55,7 @@ void ResultDialog::on_closeBtn_clicked(){
 
 void ResultDialog::on_saveBtn_clicked()
 {
-	QString proposedFileName = QDateTime::currentDateTime().toString("'results_'yyyy-MM-dd'.txt");
+	QString proposedFileName = QDate::currentDate().toString("'results_'yyyy_MM_dd'.txt");
 	QString filename = QFileDialog::getSaveFileName(this, tr("Sauvegarder les résultats"), proposedFileName, tr("Fichiers Textes (*.txt)"));
 	QFile f(filename);
 	f.open(QIODevice::WriteOnly);
