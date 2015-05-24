@@ -20,6 +20,8 @@ void BruteForce::Crack()
 	running = true;
 	for (const auto hashedPassword : ICrackEngine::hashedPasswords)
 	{
+		if (!running) break;
+
 		string result = Crack(hashedPassword.first);
 
 		if (result != "")
