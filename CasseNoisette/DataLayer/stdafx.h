@@ -16,6 +16,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <regex>
 #include "../Utilities/FileUtilities.h"
 #include "Libs\portable-memory-mapping\MemoryMapped.h"
 
