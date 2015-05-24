@@ -11,8 +11,7 @@
 
 using namespace std;
 
-HaveIBeenPwnedDialog::HaveIBeenPwnedDialog(QWidget* parent) : QDialog(parent),
-															  networkManager(make_unique<QNetworkAccessManager>(this))
+HaveIBeenPwnedDialog::HaveIBeenPwnedDialog(QWidget* parent) : QDialog(parent)
 {
 	ui.setupUi(this);
 	this->setModal(true);
@@ -31,6 +30,9 @@ void HaveIBeenPwnedDialog::on_btnAccountSearch_clicked()
 		QMessageBox::warning(this, "Case-Noisette", "Vous devez fournir un nom de compte (nom d'utilisateur, courriel...).");
 		return;
 	}
+
+	// C'est la seul manière que j'ai pu régler l'issue #25
+	networkManager.reset(new QNetworkAccessManager(this));
 
 	ui.btnAccountSearch->setEnabled(false);
 	ui.searchResults->setHtml("<b>Recherche en cours...</b>");
