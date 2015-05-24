@@ -179,6 +179,15 @@ namespace IntegrationTests
 		}
 
 
+		TEST_METHOD(if_a_hash_in_file_contains_invalid_characters_then_runtime_error_is_thrown)
+		{
+			// Arrange
+			auto loadInvalidCharactersFileFunction = [this] {fileRepository->loadPasswordFile("..\\TestsFiles\\invalidPwdFile.txt"); };
+
+			// Assert
+			Assert::ExpectException<runtime_error>(loadInvalidCharactersFileFunction);
+		}
+
 		TEST_METHOD(loadPasswordFile_throws_exception_when_non_empty_file_exists_but_unable_to_open_it)
 		{
 			// Si le fichier existe, et n'est pas vide, mais qu'on est incapable d'ouvrir le fichier
