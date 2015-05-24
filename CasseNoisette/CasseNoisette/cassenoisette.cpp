@@ -95,7 +95,7 @@ void CasseNoisette::on_startCrackBtn_clicked()
 	CrackFactoryParams crackFactoryParams;
 
 	// Paramètres universels
-	crackFactoryParams.addParameter(Parameter(PWD_FILE_PATH, ui.pwdFileSelectTxt->text().toStdString()));
+	crackFactoryParams.addParameter(Parameter(PWD_FILE_PATH, ui.pwdFileSelectTxt->text().toLocal8Bit().constData()));
 	auto seperator = ui.txtPwdsSeperator->text().isEmpty() ? ":" : ui.txtPwdsSeperator->text().toStdString();
 	crackFactoryParams.addParameter(Parameter(SEPERATOR, seperator));
 	crackFactoryParams.addParameter(Parameter(HASH_TYPE, ui.hashFunctionsComboBox->currentText().toStdString()));
