@@ -10,11 +10,14 @@
 #include "GenerateDictionaryDialog.h"
 #include "HaveIBeenPwnedDialog.h"
 #include "PasswordGeneratorDialog.h"
+#include "../Utilities/GuessHash.h"
 
 #include <QMessageBox>
+#include <QInputDialog>
 #include <QFileDialog>
 #include <QThread>
 #include <QElapsedTimer>
+
 
 // #include "vld.h" // VLD cause des problèmes de null pointer exceptions pour des raisons étranges
                     // quand je charge de très gros fichiers ( > 50Mo)
@@ -174,6 +177,35 @@ void CasseNoisette::on_actionPwdGenerator_triggered()
 {
 	PasswordGeneratorDialog passwordGeneratorDialog(this);
 	passwordGeneratorDialog.exec();
+}
+
+void CasseNoisette::on_GuessHashCheckBox_toggled(bool _toggledState)
+{
+	if (_toggledState)
+	{
+		bool ok = false;
+		QString hashSample = QInputDialog::getText(this, tr("Deviner le hash"), "Échantillon de hash :", QLineEdit::Normal, "", &ok);
+
+		// Si l'utilisateur a cliqué sur le bouton "Cancel"
+		if (!ok)
+		{
+			ui.GuessHashCheckBox->setCheckState(Qt::Unchecked);
+			return;
+		}
+
+		string hashGuess;
+		if (Utilities::GuessHash::Guess(hashSample.toLocal8Bit().constData(), hashGuess))
+		{
+			QString qhashGuess = QString::fromLocal8Bit(hashGuess.c_str());
+			ui.hashFunctionsComboBox->setCurrentIndex(ui.hashFunctionsComboBox->findText(qhashGuess));
+			QMessageBox::information(this, "Casse-Noisette", "La fonction de hachage est " + qhashGuess);
+		}
+		else
+		{
+			ui.hashFunctionsComboBox->setCurrentIndex(0);
+			QMessageBox::warning(this, "Casse-Noisette", "Impossible d'identifier cet échantillon de hash");
+		}
+	}
 }
 
 void CasseNoisette::handleResults()
