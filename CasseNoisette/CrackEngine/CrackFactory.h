@@ -27,6 +27,5 @@ namespace CrackEngine
 		std::unique_ptr<ICrackEngine> createDictionary(std::unique_ptr<ICrackEngine> _crackEngine, const CrackFactoryParams & _params) const;
 
 		DataLayer::IFileRepository * fileRepository;
-		static std::map<std::string, std::unique_ptr<ICrackEngine>> crackEngines_map;
 	};
 }

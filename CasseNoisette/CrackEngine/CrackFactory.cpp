@@ -11,8 +11,6 @@
 using namespace CrackEngine;
 using namespace std;
 
-map<string, unique_ptr<ICrackEngine>> CrackFactory::crackEngines_map;
-
 CrackFactory::CrackFactory()
 {
 }
