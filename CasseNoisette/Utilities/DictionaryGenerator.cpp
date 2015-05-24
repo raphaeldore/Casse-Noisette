@@ -2,6 +2,8 @@
 #include "DictionaryGenerator.h"
 #include "FileUtilities.h"
 
+#define MAX_VECTOR_SIZE_BEFORE_FLUSH 1000000
+
 using namespace std;
 using namespace Utilities;
 
@@ -33,7 +35,7 @@ void DictionaryGenerator::generateWords(const unsigned int _wordLength, string _
 
 	// Condition d'arrêt
 	if (_wordLength == 0) {
-		if (buffer.size() == 1000000) {
+		if (buffer.size() == MAX_VECTOR_SIZE_BEFORE_FLUSH) {
 			// On prends le contenu du vector et on l'envoi dans le fichier
 			flushBufferToFile();
 		}
