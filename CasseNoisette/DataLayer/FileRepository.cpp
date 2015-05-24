@@ -45,7 +45,7 @@ multimap<string, string> FileRepository::loadPasswordFile(const string & _pwdFil
 			}
 			else
 			{
-				throw invalid_argument("File format is not valid.");
+				throw invalid_argument("Le format du fichier est invalide");
 			}
 		}
 	}
