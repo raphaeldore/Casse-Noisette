@@ -21,7 +21,7 @@ DictionaryGenerator::~DictionaryGenerator()
 }
 
 void DictionaryGenerator::GenerateDictionary() {
-	for (unsigned int i = 0; i <= maxWordLength; ++i) {
+	for (unsigned int i = 1; i <= maxWordLength; ++i) {
 		string initialString = "";
 		generateWords(i, initialString);
 		flushBufferToFile();
