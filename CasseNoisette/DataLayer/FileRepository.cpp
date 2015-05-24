@@ -30,10 +30,13 @@ multimap<string, string> FileRepository::loadPasswordFile(const string & _pwdFil
 
 		auto pos = line.find(_separator);
 
+		pair<string, string> pwdLine;
+
 		if (pos == string::npos)
 		{
+			
 			// Ligne sans séparateur. Donc un password haché non lié à un nom d'utilisateur
-			hashedPasswords.insert(make_pair(line, default_user));
+			pwdLine = make_pair(line, default_user);
 		}
 		else
 		{
@@ -41,13 +44,18 @@ multimap<string, string> FileRepository::loadPasswordFile(const string & _pwdFil
 
 			if (split(line, _separator, lineSplit) && lineSplit.size() == 2)
 			{
-				hashedPasswords.insert(make_pair(lineSplit[1], lineSplit[0]));
+				pwdLine = make_pair(lineSplit[1], lineSplit[0]);
 			}
 			else
 			{
 				throw invalid_argument("Le format du fichier est invalide");
 			}
 		}
+
+		// Un hash doit être en Hexadécimal, donc les seuls caractères permis sont: 0 à 9, et les lettres de A à F.
+		if (!hashContainsValidCharacters(pwdLine.first)) throw runtime_error("le fichier fournis contient des hashs invalides, ou n'est pas un fichier valide.");
+
+		hashedPasswords.insert(pwdLine);
 	}
 
 	ifile.close();
@@ -115,4 +123,9 @@ bool FileRepository::split(const string& _string, const string& _separator, vect
 	if (_outVector.empty()) return false;
 
 	return true;
+}
+
+bool FileRepository::hashContainsValidCharacters(const std::string& _hash)
+{
+	return regex_match(_hash, regex("^[a-f0-9]*$"));
 }

@@ -15,5 +15,6 @@ namespace DataLayer
 
 	private:
 		static bool split(const std::string& _string, const std::string& _separator, std::vector<std::string> & _outVector);
+		static bool hashContainsValidCharacters(const std::string& _hash);
 	};
 }
