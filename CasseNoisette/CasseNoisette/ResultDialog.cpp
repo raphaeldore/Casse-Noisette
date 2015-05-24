@@ -13,12 +13,12 @@ ResultDialog::ResultDialog(QWidget * parent)
 	this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
 }
 
-void ResultDialog::setInformativeText(string informativeText)
+void ResultDialog::setInformativeText(const string & informativeText)
 {
 	ui.informativeTxt->setPlainText(QString::fromStdString(informativeText));
 }
 
-void ResultDialog::setCrackingResults(vector<tuple<string, string, string>> _results, const QString & _crackingTime)
+void ResultDialog::setCrackingResults(const vector<tuple<string, string, string>> & _results, const QString & _crackingTime)
 {
 	QString passwords_found_message;
 	if (_results.size() == 1)
@@ -55,7 +55,7 @@ void ResultDialog::on_closeBtn_clicked(){
 
 void ResultDialog::on_saveBtn_clicked()
 {
-	QString proposedFileName = QDate::currentDate().toString("'results_'dd_MM_yyyy'.txt'");
+	QString proposedFileName = QDate::currentDate().toString("'results_'yyyy_MM_dd'.txt");
 	QString filename = QFileDialog::getSaveFileName(this, tr("Sauvegarder les résultats"), proposedFileName, tr("Fichiers Textes (*.txt)"));
 	QFile f(filename);
 	f.open(QIODevice::WriteOnly);

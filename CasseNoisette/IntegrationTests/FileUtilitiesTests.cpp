@@ -6,7 +6,7 @@ using namespace std;
 
 namespace IntegrationTests
 {
-	TEST_CLASS(Utilities_tests){
+	TEST_CLASS(FileUtilitiesTests){
 
 		TEST_METHOD(getFileContent_returns_all_content_in_the_file)
 		{
@@ -35,10 +35,11 @@ namespace IntegrationTests
 			// Script empêche la lecture du fichier par tous les utilisateurs
 			system("..\\Scripts\\lockFile.bat");
 
-			auto loadDictionaryWithNonExistantFileFunction = [this] {Utilities::FileUtilities::GetFileContent("..\\TestsFiles\\UtilitiesTests\\lockedFile.txt"); };
+			// On tente donc d'ouvrir un fichier qu'on a pas la permission d'ouvrir
+			auto loadDictionaryLockedFileFunction = [this] {Utilities::FileUtilities::GetFileContent("..\\TestsFiles\\Other\\lockedFile.txt"); };
 
 			// Assert
-			Assert::ExpectException<runtime_error>(loadDictionaryWithNonExistantFileFunction);
+			Assert::ExpectException<runtime_error>(loadDictionaryLockedFileFunction);
 
 			// Script qui redonne permission à tout le monde de lire le fichier
 			// (sinon git ne veut rien savoir)
@@ -139,6 +140,19 @@ namespace IntegrationTests
 			Assert::AreEqual(EXPECTED_INCREMENTED_FILE_NAME, ACTUAL_INCREMENTED_FILE_NAME);
 		}
 
+		TEST_METHOD(IncrementFileNameIfExists_returns_original_path_if_fileName_does_not_exist)
+		{
+			// Arrange
+			string attemptedPath = "..\\TestsFiles\\UtilitiesTests\\thisFileDoesNotExist.txt";
+			string EXPECTED_INCREMENTED_FILE_NAME = "..\\TestsFiles\\UtilitiesTests\\thisFileDoesNotExist.txt";
+
+			// Action
+			string ACTUAL_INCREMENTED_FILE_NAME = Utilities::FileUtilities::IncrementFileNameIfExists(attemptedPath);
+
+			// Assert
+			Assert::AreEqual(EXPECTED_INCREMENTED_FILE_NAME, ACTUAL_INCREMENTED_FILE_NAME);
+		}
+
 		TEST_METHOD(clearFileContent_empties_the_file)
 		{
 			// Arrange
@@ -167,12 +181,6 @@ namespace IntegrationTests
 			// Assert
 			Assert::ExpectException<runtime_error>(loadDictionaryWithNonExistantFileFunction);
 		}
-
-		//TEST_METHOD(generate_dictionary) {
-		//	Utilities::DictionaryGenerator generator(8, "abcdefg", "words.txt");
-		//	generator.GenerateDictionary();
-		//}
-
 
 	};
 

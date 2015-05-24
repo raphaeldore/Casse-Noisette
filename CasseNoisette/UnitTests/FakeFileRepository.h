@@ -7,8 +7,8 @@ public:
 	FakeFileRepository();
 	~FakeFileRepository();
 
-	multimap<string, string> loadPasswordFile(const string & _pwdFilePath, const string & _separator);
-	unique_ptr<queue<string>> loadDictionaryFile(const string & _dictFilePath);
+	std::multimap<std::string, std::string> loadPasswordFile(const std::string & _pwdFilePath, const std::string & _separator);
+	std::unique_ptr<std::queue<std::string>> loadDictionaryFile(const std::string & _dictFilePath);
 
 	bool hasLoadPasswordFileBeenCalled();
 	bool hasLoadDictionaryFileBeenCalled();

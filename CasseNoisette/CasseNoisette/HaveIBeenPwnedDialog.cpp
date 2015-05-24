@@ -26,6 +26,13 @@ HaveIBeenPwnedDialog::~HaveIBeenPwnedDialog()
 
 void HaveIBeenPwnedDialog::on_btnAccountSearch_clicked()
 {
+	if (ui.txtAcountName->text().isEmpty())
+	{
+		QMessageBox::warning(this, "Case-Noisette", "Vous devez fournir un nom de compte (nom d'utilisateur, courriel...).");
+		return;
+	}
+
+	ui.btnAccountSearch->setEnabled(false);
 	ui.searchResults->setHtml("<b>Recherche en cours...</b>");
 	QNetworkRequest request;
 	QString accountToSearch = ui.txtAcountName->text();
@@ -40,6 +47,7 @@ void HaveIBeenPwnedDialog::on_btnAccountSearch_clicked()
 
 void HaveIBeenPwnedDialog::onResult(QNetworkReply * reply)
 {
+	ui.btnAccountSearch->setEnabled(true);
 	QString html;
 
 	if (reply->error() == QNetworkReply::ContentNotFoundError)
@@ -88,4 +96,8 @@ void HaveIBeenPwnedDialog::onResult(QNetworkReply * reply)
 	}
 
 	ui.searchResults->setHtml(html);
+
+	// On informe à l'environnement de supprimer le pointeur une fois
+	// que tous les évènements impliquant l'objet soient terminés.
+	reply->deleteLater();
 }

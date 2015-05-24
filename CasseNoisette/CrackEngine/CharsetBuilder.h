@@ -5,11 +5,11 @@ namespace CrackEngine
 	/* Les différents groupes de caractères que nous supportons */
 	namespace Charsets
 	{
-		const std::string loweralpha = "abcdefghijklmnopqrstuvwxyz";
-		const std::string upperalpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		const std::string numeric = "0123456789";
-		const std::string space = " ";
-		const std::string special = "!@#$%^&*()-_+=";
+		static const std::string loweralpha = "abcdefghijklmnopqrstuvwxyz";
+		static const std::string upperalpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		static const std::string numeric = "0123456789";
+		static const std::string space = " ";
+		static const std::string special = "!@#$%^&*()-_+=";
 	}
 
 	class CharsetBuilder

@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "FakeFileRepository.h"
 
+using namespace std;
+
 FakeFileRepository::FakeFileRepository() : loadPasswordFileHasBeenCalled(false), loadDictionaryFileHasBeenCalled(false)
 {
 }

@@ -1,7 +1,5 @@
 #pragma once
 
-using namespace std;
-
 namespace CrackEngine
 {
 	enum PARAM_TYPE
@@ -19,7 +17,7 @@ namespace CrackEngine
 	{
 		friend class CrackFactoryParams;
 	public:
-		Parameter(const PARAM_TYPE& _paramType, const string& _value);
+		Parameter(const PARAM_TYPE& _paramType, const std::string& _value);
 		~Parameter();
 
 		// Pour rendre la classe capatible avec le conteneur 'set'
@@ -27,6 +25,6 @@ namespace CrackEngine
 
 	private:
 		PARAM_TYPE paramType;
-		string value;
+		std::string value;
 	};
 }

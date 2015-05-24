@@ -1,7 +1,6 @@
 #ifndef CASSENOISETTE_H
 #define CASSENOISETTE_H
 
-#include <QtWidgets/QMainWindow>
 #include "ui_cassenoisette.h"
 #include <memory>
 
@@ -41,7 +40,7 @@ private slots:
 	void handleResults();
 	void crackingStarted();
 	void crackingStopped();
-	void errorString(QString error);
+	void errorString(const QString & error);
 	void engineInCreation();
 	void engineReady();
 	void engineUnloading();

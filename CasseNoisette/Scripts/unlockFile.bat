@@ -1,1 +1,1 @@
-ICACLS ../TestsFiles/UtilitiesTests/lockedFile.txt /grant *S-1-1-0:R
+ICACLS ../TestsFiles/Other/lockedFile.txt /grant *S-1-1-0:R

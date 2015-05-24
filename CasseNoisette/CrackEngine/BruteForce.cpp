@@ -20,6 +20,8 @@ void BruteForce::Crack()
 	running = true;
 	for (const auto hashedPassword : ICrackEngine::hashedPasswords)
 	{
+		if (!running) break;
+
 		string result = Crack(hashedPassword.first);
 
 		if (result != "")
@@ -92,6 +94,7 @@ string BruteForce::Crack(const string& _hashedPassword) const
 			// On compare les hash
 			if (passwordGuessHash == _hashedPassword)
 			{
+				// On a trouvé le mot!!
 				return passwordGuess;
 			}
 		}
@@ -140,6 +143,6 @@ string BruteForce::Crack(const string& _hashedPassword) const
 		}
 	}
 
-	// Si on se rends ici, c'est que quelqu'un a appellé la fonction stopCrack();
+	// Si on se rends ici, c'est que quelqu'un a appellé la fonction stopCrack() à partir d'un autre thread
 	return string("");
 }

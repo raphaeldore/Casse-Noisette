@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>CasseNoisette</string>
+   <string>Casse-Noisette</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -367,7 +367,6 @@
     <property name="title">
      <string>Fichier</string>
     </property>
-    <addaction name="generateDictionaryBtn"/>
     <addaction name="separator"/>
     <addaction name="actionQuitter"/>
    </widget>
@@ -377,6 +376,7 @@
     </property>
     <addaction name="actionHaveIBeenPwned"/>
     <addaction name="actionPwdGenerator"/>
+    <addaction name="generateDictionaryBtn"/>
    </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuOutils"/>
@@ -386,6 +386,9 @@
   <action name="aboutBtn">
    <property name="text">
     <string>À propos</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
    </property>
   </action>
   <action name="generateDictionaryBtn">
@@ -406,12 +409,18 @@
   </action>
   <action name="actionHaveIBeenPwned">
    <property name="text">
-    <string>haveibeenpwned</string>
+    <string>Have I Been Pwned?</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I</string>
    </property>
   </action>
   <action name="actionPwdGenerator">
    <property name="text">
     <string>Générateur de mot de passe</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
    </property>
   </action>
  </widget>

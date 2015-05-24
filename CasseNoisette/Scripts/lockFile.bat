@@ -1,1 +1,1 @@
-ICACLS ../TestsFiles/UtilitiesTests/lockedFile.txt /deny *S-1-1-0:R
+ICACLS ../TestsFiles/Other/lockedFile.txt /deny *S-1-1-0:R

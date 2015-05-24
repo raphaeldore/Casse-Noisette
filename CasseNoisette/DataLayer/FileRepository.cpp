@@ -45,7 +45,7 @@ multimap<string, string> FileRepository::loadPasswordFile(const string & _pwdFil
 			}
 			else
 			{
-				throw invalid_argument("File format is not valid.");
+				throw invalid_argument("Le format du fichier est invalide");
 			}
 		}
 	}
@@ -76,6 +76,8 @@ unique_ptr<queue<string>> FileRepository::loadDictionaryFile(const string& _dict
 
 		string line;
 
+		// On va ensuite chercher tous les charactères de la ligne
+		// et on arrête lorsqu'on arrive à la fin de la ligne.
 		do
 		{
 			line += buffer[i];

@@ -20,7 +20,7 @@ GenerateDictionaryDialog::GenerateDictionaryDialog(QWidget * parent) : QDialog(p
 	// Ce que cette classe émet au generateDictionaryWorker
 	connect(this, SIGNAL(generateDictionary()), generateDictionaryWorker.get(), SLOT(startGeneration()));
 
-	// Ce que le generateDictionaryWorker émet à cette clase
+	// Ce que le generateDictionaryWorker émet à cette classe
 	connect(generateDictionaryWorker.get(), SIGNAL(generationStarted()), this, SLOT(generationStarted()));
 	connect(generateDictionaryWorker.get(), SIGNAL(generationFinished()), this, SLOT(generationFinished()));
 	connect(generateDictionaryWorker.get(), SIGNAL(error(QString)), this, SLOT(errorString(QString)));
@@ -64,7 +64,7 @@ void GenerateDictionaryDialog::on_btnCloseDialog_clicked()
 
 void GenerateDictionaryDialog::on_btnDictionaryFileName_clicked()
 {
-	QString filename = QFileDialog::getSaveFileName(this, tr("Sauvegarder les résultats"), QDir::currentPath(), tr("Fichiers Textes (*.txt)"));
+	QString filename = QFileDialog::getSaveFileName(this, tr("Fichier qui va contenir la liste de mots"), QDir::currentPath(), tr("Fichiers Textes (*.txt)"));
 	ui.txtDictionaryFileName->setText(filename);
 }
 
@@ -73,7 +73,7 @@ void GenerateDictionaryDialog::on_spinMaxCombinationLength_valueChanged()
 	if (!ignoreFutureWarnings && ui.spinMaxCombinationLength->value() >= 6)
 	{
 		QMessageBox warningMsgBox;
-		QPushButton* yesBtn = warningMsgBox.addButton(tr("Oui"), QMessageBox::YesRole);
+		warningMsgBox.addButton(tr("Oui"), QMessageBox::YesRole);
 		QPushButton* noBtn = warningMsgBox.addButton(tr("Non"), QMessageBox::NoRole);
 		QPushButton* ignoreFutureWarningsBtn = warningMsgBox.addButton(tr("Ne plus m'avertir"), QMessageBox::ActionRole);
 
@@ -115,7 +115,7 @@ void GenerateDictionaryDialog::generationFinished()
 	msgBox.exec();
 }
 
-void GenerateDictionaryDialog::errorString(QString error)
+void GenerateDictionaryDialog::errorString(const QString & error)
 {
 	QMessageBox msgBox;
 	msgBox.setIcon(QMessageBox::Critical);
