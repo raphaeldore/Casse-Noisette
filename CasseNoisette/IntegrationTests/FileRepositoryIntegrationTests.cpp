@@ -179,6 +179,29 @@ namespace IntegrationTests
 		}
 
 
+		TEST_METHOD(loadPasswordFile_throws_exception_when_non_empty_file_exists_but_unable_to_open_it)
+		{
+			// Si le fichier existe, et n'est pas vide, mais qu'on est incapable d'ouvrir le fichier
+			// pour une raison quelconque, on lance une exception. Dans ce test, nous empêchons
+			// la lecture du fichier en enlevant la permission aux utilisateurs de lire le fichier
+			// lockedFile.txt
+
+			// Action
+
+			// Script qui empêche la lecture du fichier par tous les utilisateurs
+			system("..\\Scripts\\lockFile.bat");
+
+			auto loadLockedFileFunction = [this] {fileRepository->loadPasswordFile("..\\TestsFiles\\Other\\lockedFile.txt"); };
+
+			// Assert
+			Assert::ExpectException<runtime_error>(loadLockedFileFunction);
+
+			// Script qui redonne permission à tout le monde de lire le fichier
+			// (sinon git ne veut rien savoir)
+			system("..\\Scripts\\unlockFile.bat");
+		}
+
+
 		//////////////////////////////////////// LoadDictionary ////////////////////////////////////////
 
 		TEST_METHOD(load_dictionary_file_returns_all_words_in_the_dictionary)
@@ -216,6 +239,23 @@ namespace IntegrationTests
 
 			// Assert
 			Assert::ExpectException<runtime_error>(loadDictionaryWithEmptyFileFunction);
+		}
+
+		TEST_METHOD(loadDictionaryFile_throws_exception_when_non_empty_file_exists_but_unable_to_open_it)
+		{
+			// Même chose que le test ci-haut 
+			//     loadPasswordFile_throws_exception_when_non_empty_file_exists_but_unable_to_open_it
+
+
+			// Action
+			system("..\\Scripts\\lockFile.bat");
+
+			auto loadLockedFileFunction = [this] {fileRepository->loadDictionaryFile("..\\TestsFiles\\Other\\lockedFile.txt"); };
+
+			// Assert
+			Assert::ExpectException<runtime_error>(loadLockedFileFunction);
+
+			system("..\\Scripts\\unlockFile.bat");
 		}
 
 #ifdef TEST_LARGE_DICTIONARY
