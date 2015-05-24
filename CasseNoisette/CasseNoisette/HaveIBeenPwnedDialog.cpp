@@ -26,6 +26,12 @@ HaveIBeenPwnedDialog::~HaveIBeenPwnedDialog()
 
 void HaveIBeenPwnedDialog::on_btnAccountSearch_clicked()
 {
+	if (ui.txtAcountName->text().isEmpty())
+	{
+		QMessageBox::warning(this, "Case-Noisette", "Vous devez fournir un nom de compte (nom d'utilisateur, courriel...).");
+		return;
+	}
+
 	ui.btnAccountSearch->setEnabled(false);
 	ui.searchResults->setHtml("<b>Recherche en cours...</b>");
 	QNetworkRequest request;
