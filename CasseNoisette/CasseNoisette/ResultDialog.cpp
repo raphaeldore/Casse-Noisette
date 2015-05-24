@@ -13,12 +13,12 @@ ResultDialog::ResultDialog(QWidget * parent)
 	this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
 }
 
-void ResultDialog::setInformativeText(string informativeText)
+void ResultDialog::setInformativeText(const string & informativeText)
 {
 	ui.informativeTxt->setPlainText(QString::fromStdString(informativeText));
 }
 
-void ResultDialog::setCrackingResults(vector<tuple<string, string, string>> _results, const QString & _crackingTime)
+void ResultDialog::setCrackingResults(const vector<tuple<string, string, string>> & _results, const QString & _crackingTime)
 {
 	QString passwords_found_message;
 	if (_results.size() == 1)

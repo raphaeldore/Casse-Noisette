@@ -12,8 +12,8 @@ class ResultDialog : public QDialog
 
 public:
 	ResultDialog(QWidget* parent = 0);
-	void setInformativeText(std::string informativeText);
-	void setCrackingResults(std::vector<std::tuple<std::string, std::string, std::string>> _results, const QString& _crackingTime);
+	void setInformativeText(const std::string & informativeText);
+	void setCrackingResults(const std::vector<std::tuple<std::string, std::string, std::string>> & _results, const QString& _crackingTime);
 	void setResultText(QString resultText);
 public slots:
 	void on_closeBtn_clicked();
