@@ -1,5 +1,3 @@
-**NOTE : Éviter si possible d'utiliser Casse-Noisette avec des répertoires qui ont des accents (é, ê, ë, etc...). Pour des raisons obscures, les chemins avec des accents fonctionnent en mode debug, mais pas en mode release. Désolé pour les inconvénients que ça peut causer.**
-
 ![Casse-Noisette Banner](https://github.com/440-H15/EQ16-TP3/blob/master/Documents/banner.png)
 
 # Casse-Noisette
