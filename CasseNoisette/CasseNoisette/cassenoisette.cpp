@@ -93,7 +93,7 @@ void CasseNoisette::on_startCrackBtn_clicked()
 
 	// Paramètres universels
 	crackFactoryParams.addParameter(Parameter(PWD_FILE_PATH, ui.pwdFileSelectTxt->text().toLocal8Bit().constData()));
-	auto seperator = ui.txtPwdsSeperator->text().isEmpty() ? ":" : ui.txtPwdsSeperator->text().toStdString();
+	auto seperator = ui.txtPwdsSeperator->text().isEmpty() ? ":" : ui.txtPwdsSeperator->text().toLocal8Bit().constData();
 	crackFactoryParams.addParameter(Parameter(SEPERATOR, seperator));
 	crackFactoryParams.addParameter(Parameter(HASH_TYPE, ui.hashFunctionsComboBox->currentText().toStdString()));
 
@@ -105,7 +105,7 @@ void CasseNoisette::on_startCrackBtn_clicked()
 		crackingWorker->setCrackEngineType(BRUTE_FORCE);
 	} else if (tabIndex == 1)
 	{
-		crackFactoryParams.addParameter(Parameter(DICTIONARY_PATH, ui.dictFileSelectTxt->text().toStdString()));
+		crackFactoryParams.addParameter(Parameter(DICTIONARY_PATH, ui.dictFileSelectTxt->text().toLocal8Bit().constData()));
 		crackingWorker->setCrackEngineType(DICTIONARY);
 	} else
 	{
