@@ -48,9 +48,6 @@ CasseNoisette::CasseNoisette(QWidget *parent)
 	connect(this, SIGNAL(startCracking()), crackingWorker.get(), SLOT(startCracking()));
 	connect(this, SIGNAL(stopCracking()), crackingWorker.get(), SLOT(stopCracking()));
 
-	/// Ce que le crackingWorker émet à son thread (crackingWorkerThread)
-	connect(crackingWorker.get(), SIGNAL(finished()), crackingWorkerThread.get(), SLOT(deleteLater()));
-
 	/// Ce que le crackingWorker émet à cette classe (CasseNoisette)
 	connect(crackingWorker.get(), &CrackingWorker::resultsReady, this, &CasseNoisette::handleResults);
 	connect(crackingWorker.get(), SIGNAL(error(QString)), this, SLOT(errorString(QString)));
