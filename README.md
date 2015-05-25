@@ -1,3 +1,5 @@
+>Je suis vraiment content et fier de ce qu'on a accompli. Notre application est vraiment professionnelle. Je crois qu'elle est bien structurée, que la plupart des fonctions s'occupent de faire 1 et 1 seule chose (One responsibility principle), que le code est clair et bien documenté... Il n'y a pas de magie dans notre code. Il n'y a pas d'algorithmes super malades. La seule complexité est structurelle, et elle est assez simple une fois qu'on connait le code un petit peu. Très amusant comme projet final. Bonne fin d'année! - Raphaël Doré
+
 ![Casse-Noisette Banner](https://github.com/440-H15/EQ16-TP3/blob/master/Documents/banner.png)
 
 # Casse-Noisette
@@ -133,7 +135,7 @@ Pour casser des mots de passe par force brute avec Casse-Noisette, vous devez do
 
 ### Attaque par dictionnaire
 
-L'attaque par dictionnaire est une méthode très simple et très efficace pour casser des mots de passe. Au lieu de générer toutes les combinaisons possibles (ce qui peut être très long), on utilise une liste de mots préétablie et on cherche au travers de la liste de mots jusqu'à ce qu'on trouve un mot qui a le même hash que le ou les mots de passe qu'on tente de casser. La plupart du monde utilise des mots de passe simples, qui faciles à casser avec un dictionnaire (ex: 123password), mais qui prendrait des semaines si on y allait par force brute.
+L'attaque par dictionnaire est une méthode très simple et très efficace pour casser des mots de passe. Au lieu de générer toutes les combinaisons possibles (ce qui peut être très long), on utilise une liste de mots préétablie et on cherche au travers de la liste de mots jusqu'à ce qu'on trouve un mot qui a le même hash que le (ou les) mot de passe qu'on tente de casser. C'est une méthode très efficace, puisque beaucoup d'utilisateurs sur le web utilisent des mots de passe simples, qui sont faciles à casser avec un dictionnaire (ex: 123password), mais qui prendrait des semaines (voir des années) par force brute.
 
 Vous devez évidemment fournir un dictionnaire de mots. C'est tout simplement un fichier texte avec 1 mot par ligne. Il y a plein de dictionnaires disponibles en ligne. Plus d'informations dans l'annexe [Où puis-je me procurer un dictionnaire de mots?](#o%C3%B9-puis-je-me-procurer-un-dictionnaire-de-mots)
 
