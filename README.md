@@ -1,5 +1,3 @@
->Je suis vraiment content et fier de ce qu'on a accompli. Notre application est vraiment professionnelle. Je crois qu'elle est bien structurée, que la plupart des fonctions s'occupent de faire 1 et 1 seule chose (One responsibility principle), que le code est clair et bien documenté... Il n'y a pas de magie dans notre code. Il n'y a pas d'algorithmes super malades. La seule complexité est structurelle, et elle est assez simple une fois qu'on connait le code un petit peu. Très amusant comme projet final. Bonne fin d'année! - Raphaël Doré
-
 ![Casse-Noisette Banner](https://github.com/440-H15/EQ16-TP3/blob/master/Documents/banner.png)
 
 # Casse-Noisette
