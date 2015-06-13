@@ -26,6 +26,7 @@ Table des matières
     * [Annexes](#annexes)
       * [Ressources](#ressources)
       * [Où puis-je me procurer un dictionnaire de mots?](#o%C3%B9-puis-je-me-procurer-un-dictionnaire-de-mots)
+      * [Todo](#todo)
 
 ## Comment compiler
 
@@ -207,3 +208,8 @@ Voici quelques bonnes ressources :
 
 
 \* Cependant ne fonctionnera pas avec Casse-Noisette. Le fichier est beaucoup trop gros. 
+
+### Todo
+
+* Tables arc-en-ciel
+* Possibilité de charger plusieurs dictionnaires à la fois (selectionner plusieurs fichiers pour les combiner en quelques sortes)
