@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "FileRepository.h"
+#include "../Utilities/StringUtilities.h"
 
 using namespace DataLayer;
 using namespace Utilities;
@@ -44,7 +45,11 @@ multimap<string, string> FileRepository::loadPasswordFile(const string & _pwdFil
 
 			if (split(line, _separator, lineSplit) && lineSplit.size() == 2)
 			{
-				pwdLine = make_pair(lineSplit[1], lineSplit[0]);
+				// Un hash doit être en Hexadécimal, donc les seuls caractères permis sont: 0 à 9, et les lettres de A à F.
+				if (!hashContainsValidCharacters(pwdLine.first)) throw runtime_error("Le fichier fournis contient des hashs invalides, ou n'est pas un fichier valide.");
+
+				// Les fonctions de hachages retourne un hash en minuscules. Donc on doit convertir en minuscules.
+				pwdLine = make_pair(StringUtilities::basicToLower(lineSplit[1]), lineSplit[0]);
 			}
 			else
 			{
@@ -127,5 +132,5 @@ bool FileRepository::split(const string& _string, const string& _separator, vect
 
 bool FileRepository::hashContainsValidCharacters(const std::string& _hash)
 {
-	return regex_match(_hash, regex("^[a-f0-9]*$"));
+	return regex_match(_hash, regex("^[a-fA-F0-9]*$"));
 }
