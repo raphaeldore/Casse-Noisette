@@ -89,5 +89,8 @@
     <ClCompile Include="GuessHashTests.cpp">
       <Filter>Fichiers sources\UtilitiesTests</Filter>
     </ClCompile>
+    <ClCompile Include="StringUtilitiesTests.cpp">
+      <Filter>Fichiers sources\UtilitiesTests</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

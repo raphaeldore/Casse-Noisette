@@ -108,6 +108,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="HashFactoryTests.cpp" />
+    <ClCompile Include="StringUtilitiesTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CrackEngine\CrackEngine.vcxproj">

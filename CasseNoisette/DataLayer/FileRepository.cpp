@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "FileRepository.h"
+#include "../Utilities/StringUtilities.h"
 
 using namespace DataLayer;
 using namespace Utilities;
@@ -36,7 +37,7 @@ multimap<string, string> FileRepository::loadPasswordFile(const string & _pwdFil
 		{
 			
 			// Ligne sans séparateur. Donc un password haché non lié à un nom d'utilisateur
-			pwdLine = make_pair(line, default_user);
+			pwdLine = make_pair(StringUtilities::basicToLower(line), default_user);
 		}
 		else
 		{
@@ -44,7 +45,7 @@ multimap<string, string> FileRepository::loadPasswordFile(const string & _pwdFil
 
 			if (split(line, _separator, lineSplit) && lineSplit.size() == 2)
 			{
-				pwdLine = make_pair(lineSplit[1], lineSplit[0]);
+				pwdLine = make_pair(StringUtilities::basicToLower(lineSplit[1]), lineSplit[0]);
 			}
 			else
 			{
@@ -52,7 +53,7 @@ multimap<string, string> FileRepository::loadPasswordFile(const string & _pwdFil
 			}
 		}
 
-		// Un hash doit être en Hexadécimal, donc les seuls caractères permis sont: 0 à 9, et les lettres de A à F.
+		// Un hash doit être en Hexadécimal, donc les seuls caractères permis sont: 0 à 9, et les lettres de a à f.
 		if (!hashContainsValidCharacters(pwdLine.first)) throw runtime_error("Le fichier fournis contient des hashs invalides, ou n'est pas un fichier valide.");
 
 		hashedPasswords.insert(pwdLine);
