@@ -94,5 +94,19 @@ namespace UnitTests
 			Assert::AreEqual(EXPECTED_HASH_FUNCTION, ACTUAL_HASH_FUNCTION);
 		}
 
+		TEST_METHOD(guess_should_correctly_identify_valid_uppercase_hash)
+		{
+			// Arrange
+			string hash = "A09272B53419AB95507CDF127329336D";
+			string EXPECTED_HASH_FUNCTION = "MD5";
+			string ACTUAL_HASH_FUNCTION;
+
+			// Action
+			Utilities::GuessHash::Guess(hash, ACTUAL_HASH_FUNCTION);
+
+			// Assert
+			Assert::AreEqual(EXPECTED_HASH_FUNCTION, ACTUAL_HASH_FUNCTION);
+		}
+
 	};
 }
