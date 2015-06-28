@@ -33,7 +33,7 @@ Table des matières
 Pour compiler, vous avez besoin de 3 choses:
 
 * Une version récente de **Visual Studio** (de préférence 2013, mais 2012 devrait fonctionner aussi... Mais on ne garantit rien)
-* **OpenSSL** : Nécessaire pour compiler le projet Crypto (On a implémenté la fonction de hachage MD5 nous-mêmes, mais pour les fonctions SHA-1, SHA-256 et SHA-512 ont a utilisé OpenSSL). De plus, OpenSSL est nécessaire pour faire des requêtes HTTPS avec QT.
+* **OpenSSL** : Nécessaire pour compiler le projet Crypto (Nous avons implémenté la fonction de hachage MD5 nous-mêmes, mais pour les fonctions SHA-1, SHA-256 et SHA-512 on a utilisé OpenSSL). De plus, OpenSSL est nécessaire pour faire des requêtes HTTPS avec QT.
 * **QT 32bits 5.4.x msvc 2013** : Nécessaire pour l'interface utilisateur (GUI, ou UI).
 
 ### OpenSSL
@@ -186,6 +186,7 @@ Projet assez général qui regroupe sous le namespace `Utilities` des classes pr
 * DictionaryGenerator : Pour générer une liste de mots
 * GuessHash : Pour déterminer la fonction de hachage qui a été utilisée pour hacher un certain mot de passe.
 * FileUtilities :  Petite classe avec une couple de méthodes statiques bien pratique pour faciliter les interactions avec les fichiers, dans le but ultime de réduire la répétition de code.
+* StringUtilities : Une autre petite classe qui contient des petites méthodes statiques pour faciliter le traitement des chaînes de caractères.
 
 ### UnitTests + IntegrationTests
 
